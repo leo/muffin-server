@@ -1,0 +1,144 @@
+body {
+	background: #F1F1F1;
+	margin: 0;
+	color: #000;
+	-webkit-font-smoothing: antialiased;
+	font-family: 'Fira Sans', sans-serif;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+[contenteditable]:focus {
+	outline: none;
+}
+
+.inner {
+	padding: 0 20px;
+}
+
+.inner:after {
+	content: ".";
+    clear: both;
+    display: block;
+    visibility: hidden;
+    height: 0px;
+}
+
+#chest {
+	background: #fff;
+}
+
+#chest nav {
+	display: none;
+	padding: 20px;
+	border-bottom: 1px solid #F1F1F1;
+}
+
+#chest nav a {
+	display: block;
+	font-size: 14.5px;
+	padding: 7px 0;
+	margin: 4px 0;
+}
+
+#chest .inner {
+	padding: 0;
+}
+
+#chest .inner > a {
+	height: 50px;
+	width: 70px;
+	display: block;
+}
+
+#chest .logo {
+	float: left;
+	background: url( logo.svg ) no-repeat center center;
+	background-size: 30px;
+}
+
+#chest .toggle {
+	float: right;
+	text-align: center;
+	line-height: 50px;
+}
+
+#chest .toggle span {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+#chest .toggle b {
+	display: block;
+	background: #000;
+	height: 2px;
+	width: 26px;
+	transition: 0.3s all;
+}
+
+#chest .toggle b:nth-child(2) {
+	margin: 3px 0;
+	transition-duration: 0.2s;
+}
+
+#chest .toggle.on b:nth-child(1) {
+	transform: rotate(45deg);
+	margin-bottom: -5px;
+}
+
+#chest .toggle.on b:nth-child(2) {
+	opacity: 0;
+}
+
+#chest .toggle.on b:nth-child(3) {
+	transform: rotate(-45deg);
+	margin-top: -5px;
+}
+
+#title {
+	background: #EAEAEA;
+}
+
+#title h1 {
+	font-weight: 300;
+	margin: 0;
+	font-size: 20px;
+	padding: 31px 20px;
+}
+
+#title nav {
+	padding: 0 20px;
+	text-align: right;
+	overflow-y: hidden;
+	-webkit-overflow-scrolling: touch;
+	overflow-x: scroll;
+	white-space: nowrap;
+}
+
+#title nav a {
+	background: #E4E4E4;
+	text-align: center;
+	color: #7C7C7C;
+	font-size: 12px;
+	padding: 8px 17px;
+	display: inline-block;
+	margin: 0 6px;
+}
+
+#title nav .current {
+	background: #F1F1F1;
+	color: #000;
+	border-top: 2px solid #E3E3E3;
+	border-left: 2px solid #E3E3E3;
+}
+
+#title nav a:last-child {
+	margin-right: 0;
+}
+
+#title nav a:first-child {
+	margin-left: 0;
+}
