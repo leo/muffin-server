@@ -7,7 +7,7 @@ body {
 	margin: 0;
 	color: #000;
 	-webkit-font-smoothing: antialiased;
-	font-family: 'Fira Sans', sans-serif;
+	font-family: 'Roboto', sans-serif;
 }
 
 a {
@@ -345,7 +345,8 @@ summary:focus {
 		margin: 0;
 		font-size: 14px;
 		color: #282828;
-		padding: 19px 20px;
+		line-height: 55px;
+		padding: 0 20px;
 	}
 
 	#chest nav .current {
