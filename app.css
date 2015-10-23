@@ -179,8 +179,12 @@ input[type="checkbox"]:checked:after {
 	height: 70px;
 }
 
+.list tbody td {
+	color: #5E5E5E;
+}
+
 .list a {
-	color: #5A8DF3;
+	color: #F6815B;
 }
 
 #chest {
