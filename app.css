@@ -15,8 +15,39 @@ a {
 	color: inherit;
 }
 
-summary:focus {
+summary:focus,
+input:focus {
 	outline: none;
+}
+
+input {
+	border: 0;
+	border-radius: 0;
+}
+
+input[type="checkbox"] {
+	width: 20px;
+	height: 20px;
+	background: #F8F8F8;
+	-webkit-appearance: none;
+	padding: 0;
+	margin: 0;
+	position: relative;
+}
+
+input[type="checkbox"]:after {
+	content: "\2713";
+	position: absolute;
+	font-size: 20px;
+	top: -2px;
+	left: 2px;
+	display: block;
+	color: #545454;
+	opacity: 0;
+}
+
+input[type="checkbox"]:checked:after {
+	opacity: 1;
 }
 
 [contenteditable]:focus {
@@ -101,6 +132,56 @@ summary:focus {
 
 .box tr:first-child td:first-child {
 	border-top-color: #EEE;
+}
+
+.box:last-child {
+	margin-bottom: 0;
+}
+
+.list {
+	background: #fff;
+	width: 100%;
+	border-spacing: 0;
+	text-align: left;
+	font-size: 14px;
+}
+
+.list td {
+	display: none;
+	vertical-align: top;
+	padding: 15px 0;
+}
+
+.list td:first-child {
+	padding-left: 15px;
+}
+
+.list td:nth-child(1),
+.list td:nth-child(2) {
+	display: table-cell;
+}
+
+.list tbody tr:nth-child(odd) {
+	background: #F9F9F9;
+}
+
+.list tbody tr:nth-child(odd) input[type="checkbox"] {
+	background: #F1F1F1;
+}
+
+.list thead td,
+.list tfoot td {
+	font-weight: 600;
+	padding: 11px 0;
+	vertical-align: middle;
+}
+
+.list tbody tr {
+	height: 70px;
+}
+
+.list a {
+	color: #5A8DF3;
 }
 
 #chest {
@@ -225,10 +306,57 @@ summary:focus {
 
 #title .inner {
 	padding: 0;
+	position: relative;
+}
+
+#title .inner > a {
+	width: 32px;
+	height: 32px;
+	background: #E2E2E2;
+	color: #B4B4B4;
+	display: block;
+	border-radius: 100%;
+	line-height: 35px;
+	text-align: center;
+	font-size: 25px;
+	position: absolute;
+	right: 20px;
+	top: calc( 50% - 16px );
+}
+
+#belly {
+	min-height: calc( 100vh - 188px );
 }
 
 #content {
 	padding: 40px 20px;
+}
+
+#ass {
+	background: #ECECEC;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	padding: 20px;
+	text-align: center;
+	margin: 0 20px;
+}
+
+#ass .inner {
+	padding: 0;
+}
+
+#ass a {
+	width: 50px;
+	height: 50px;
+	display: inline-block;
+	background: url( logo.svg ) no-repeat center center;
+	background-size: 100% auto;
+	opacity: .1;
+}
+
+#ass p {
+	color: #AFAFAF;
+	font-size: 14px;
 }
 
 @media (min-width: 768px) {
@@ -268,6 +396,15 @@ summary:focus {
 		padding: 20px;
 	}
 
+	.list td:nth-child(3),
+	.list td:nth-child(4) {
+		display: table-cell;
+	}
+
+	.list td:nth-child(4) {
+		width: 160px;
+	}
+
 	#chest .inner > a {
 		height: 60px;
 	}
@@ -280,10 +417,6 @@ summary:focus {
 		font-size: 15.5px;
 		padding: 10px 0;
 		margin: 6px 0;
-	}
-
-	#title .inner {
-		position: relative;
 	}
 
 	#title h1 {
@@ -303,8 +436,26 @@ summary:focus {
 		margin: 0 8px;
 	}
 
+	#belly {
+		min-height: calc( 100vh - 130px );
+	}
+
 	#content {
 		padding-top: 65px;
+		padding-bottom: 65px;
+	}
+
+	#ass a {
+		float: left;
+		width: 37px;
+		height: 30px;
+	}
+
+	#ass p {
+		float: right;
+		text-align: right;
+		margin: 0;
+		line-height: 30px;
 	}
 
 }
@@ -321,6 +472,10 @@ summary:focus {
 
 	.box summary {
 		cursor: move;
+	}
+
+	.list td {
+		display: block;
 	}
 
 	#chest {
@@ -364,6 +519,10 @@ summary:focus {
 		background-size: 34px;
 	}
 
+	#belly {
+		min-height: calc( 100vh - 125px );
+	}
+
 	#content,
 	.inner {
 		width: 940px;
@@ -379,6 +538,31 @@ summary:focus {
 
 	#title nav {
 		padding: 0;
+	}
+
+	#title .inner > a {
+		right: 0;
+		height: 35px;
+		width: 35px;
+		top: calc( 50% - 17.5px );
+		transition: all 0.4s;
+	}
+
+	#title .inner > a:hover {
+		background: #D8D8D8;
+		color: #9E9E9E;
+		transform: rotate(180deg);
+	}
+
+	#ass {
+		width: 940px;
+		margin-left: auto;
+		margin-right: auto;
+		box-sizing: border-box;
+	}
+
+	#ass .inner {
+		width: auto;
 	}
 
 }
