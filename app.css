@@ -2,6 +2,10 @@
 	display: none;
 }
 
+*:focus {
+	outline: none;
+}
+
 body {
 	background: #F1F1F1;
 	margin: 0;
@@ -13,11 +17,6 @@ body {
 a {
 	text-decoration: none;
 	color: inherit;
-}
-
-summary:focus,
-input:focus {
-	outline: none;
 }
 
 input {
@@ -50,6 +49,10 @@ input[type="checkbox"]:checked:after {
 	opacity: 1;
 }
 
+select {
+	font-size: inherit;
+}
+
 [contenteditable]:focus {
 	outline: none;
 }
@@ -74,6 +77,10 @@ input[type="checkbox"]:checked:after {
 	margin-bottom: 25px;
 }
 
+.box:last-child {
+	margin-bottom: 0;
+}
+
 .box summary {
 	font-size: 14px;
 	font-weight: 500;
@@ -89,7 +96,7 @@ input[type="checkbox"]:checked:after {
 	width: 20px;
 	display: inline-block;
 	height: 47px;
-	background: url(down.svg) no-repeat right center;
+	background: url(up.svg) no-repeat left center;
 	transform: rotate(180deg);
 	position: absolute;
 	right: 15px;
@@ -104,7 +111,7 @@ input[type="checkbox"]:checked:after {
 
 .box[open] summary:after {
 	transform: rotate(0deg);
-	background-position: left center;
+	background-position-x: right;
 }
 
 .box p {
@@ -118,23 +125,53 @@ input[type="checkbox"]:checked:after {
 	margin-bottom: 20px;
 }
 
-.box td {
+.box .fields td {
 	display: block;
 	padding: 0 15px;
 }
 
-.box td:first-child {
+.box .fields td:first-child {
 	font-weight: 700;
 	padding: 30px 15px 17px;
 	font-size: 12px;
 }
 
-.box tr:first-child td:first-child {
+.box .fields tr:first-child td:first-child {
 	border-top-color: #EEE;
 }
 
-.box:last-child {
-	margin-bottom: 0;
+.box .filter {
+	width: 100%;
+	padding: 15px;
+	font-size: 14px;
+	margin-bottom: 10px;
+	color: #000;
+}
+
+.box .filter td {
+	padding: 6px 0;
+}
+
+.box .filter td:last-child {
+	text-align: right;
+}
+
+.box .filter select {
+	-webkit-appearance: none;
+	background: none;
+	border: 0;
+	border-radius: 0;
+	color: #949494;
+	direction: rtl;
+	display: inline-block;
+	background: url(down.svg) no-repeat right center;
+	padding-right: 20px;
+	cursor: pointer;
+	background-size: 10px;
+}
+
+.box .filter select:hover {
+	opacity: .6;
 }
 
 .list {
@@ -372,6 +409,45 @@ input[type="checkbox"]:checked:after {
 	padding: 40px 20px;
 }
 
+#files {
+	margin-top: 35px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+#files a {
+	display: block;
+	overflow: hidden;
+	width: 22%;
+	position: relative;
+	margin-bottom: 4%;
+	box-sizing: border-box;
+	border: 1px solid #DADADA;
+}
+
+#files a:before {
+	content: "";
+	display: block;
+	padding-top: 100%;
+}
+
+#files img {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+}
+
+#files a:nth-last-child(-n + 4) {
+	margin-bottom: 0;
+}
+
+#sidebar .box summary:after {
+	display: none;
+}
+
 #ass {
 	background: #ECECEC;
 	border-top-left-radius: 4px;
@@ -405,6 +481,11 @@ input[type="checkbox"]:checked:after {
 		margin-bottom: 35px;
 	}
 
+	.box p {
+		font-size: 14px;
+		padding: 20px;
+	}
+
 	.box[open] summary {
 		background: #fff;
 		border: 0;
@@ -414,13 +495,13 @@ input[type="checkbox"]:checked:after {
 		margin: 0;
 	}
 
-	.box td {
+	.box .fields td {
 		display: table-cell;
 		border-top: 1px solid #F6F6F6;
 		padding: 0;
 	}
 
-	.box td:first-child {
+	.box .fields td:first-child {
 		background: #F6F6F6;
 		color: #919191;
 		font-size: 13px;
@@ -429,11 +510,6 @@ input[type="checkbox"]:checked:after {
 		border-color: #EDEDED;
 		vertical-align: top;
 		text-align: left;
-	}
-
-	.box p {
-		font-size: 14px;
-		padding: 20px;
 	}
 
 	.list td:nth-child(3),
@@ -485,6 +561,19 @@ input[type="checkbox"]:checked:after {
 		padding-bottom: 65px;
 	}
 
+	#files a {
+		width: 18%;
+		margin-bottom: 2.6%;
+	}
+
+	#files a:nth-last-child(-n + 5) {
+		margin-bottom: 0;
+	}
+
+	#sidebar .box summary {
+		background: #F9F9F9;
+	}
+
 	#ass a {
 		float: left;
 		width: 37px;
@@ -534,6 +623,11 @@ input[type="checkbox"]:checked:after {
 		visibility: visible;
 	}
 
+	.columns {
+		display: flex;
+		justify-content: space-between;
+	}
+
 	#chest {
 		position: fixed;
 		width: 100%;
@@ -578,6 +672,32 @@ input[type="checkbox"]:checked:after {
 	#belly {
 		min-height: calc(100vh - 125px);
 		background: #F1F1F1;
+	}
+
+	#files {
+		order: 1;
+		margin-top: 0;
+		width: 590px;
+	}
+
+	#files a {
+		width: 17%;
+		margin-bottom: 3.6%;
+	}
+
+	#sidebar {
+		order: 2;
+		width: 280px;
+	}
+
+	#sidebar .box {
+		position: sticky;
+		position: -webkit-sticky;
+		top: 121px;
+	}
+
+	#sidebar .box summary {
+		cursor: default;
 	}
 
 	#content,
