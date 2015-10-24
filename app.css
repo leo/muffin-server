@@ -88,6 +88,7 @@ select {
 	color: #000;
 	background: #FFF;
 	transition: 0.5s background;
+	-webkit-transition: 0.5s background;
 	position: relative;
 }
 
