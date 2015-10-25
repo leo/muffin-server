@@ -2,10 +2,6 @@
 	display: none;
 }
 
-*:focus {
-	outline: none;
-}
-
 body {
 	background: #F1F1F1;
 	margin: 0;
@@ -53,8 +49,14 @@ select {
 	font-size: inherit;
 }
 
+input, select,
 [contenteditable]:focus {
 	outline: none;
+}
+
+.no-scroll {
+	overflow: hidden;
+	height: 100%;
 }
 
 .inner {
@@ -121,6 +123,12 @@ select {
 	margin: 0;
 }
 
+.box > p {
+	font-size: 14px;
+	color: #919191;
+	padding: 15px;
+}
+
 .box table {
 	border-spacing: 0;
 	margin-bottom: 20px;
@@ -173,6 +181,12 @@ select {
 
 .box .filter select:hover {
 	opacity: .6;
+}
+
+.box .button {
+	margin-bottom: 15px;
+	margin-right: 15px;
+	float: right;
 }
 
 .list {
@@ -260,6 +274,20 @@ select {
 
 .list .delete a {
 	color: #FF4136;
+}
+
+.button {
+	color: #FFF;
+	background: #69D2E7;
+	border-radius: 3px;
+	font-size: 14px;
+	font-weight: 600;
+	padding: 9px 29px;
+	display: inline-block;
+}
+
+.button.warning {
+	background: #E78469;
 }
 
 #chest {
@@ -411,38 +439,45 @@ select {
 }
 
 #files {
-	margin-top: 35px;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
+	margin: 35px -5px 0 -5px;
+	padding: 0;
 }
 
-#files a {
+#files:after {
+	content: "";
+	clear: both;
+	display: block;
+	visibility: hidden;
+}
+
+#files li {
+	width: 25%;
+	float: left;
+	display: block;
+	padding: 5px;
+	box-sizing: border-box
+}
+
+#files li a {
 	display: block;
 	overflow: hidden;
-	width: 22%;
 	position: relative;
-	margin-bottom: 4%;
 	box-sizing: border-box;
 	border: 1px solid #DADADA;
 }
 
-#files a:before {
+#files li a:before {
 	content: "";
 	display: block;
 	padding-top: 100%;
 }
 
-#files img {
+#files li img {
 	position: absolute;
 	left: 0;
 	top: 0;
 	width: 100%;
 	height: 100%;
-}
-
-#files a:nth-last-child(-n + 4) {
-	margin-bottom: 0;
 }
 
 #sidebar .box summary:after {
@@ -474,6 +509,22 @@ select {
 #ass p {
 	color: #AFAFAF;
 	font-size: 14px;
+}
+
+#overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: #F1F1F1;
+	z-index: 2000;
+	overflow: scroll;
+	-webkit-overflow-scrolling: touch;
+}
+
+#overlay section {
+	box-sizing: border-box;
 }
 
 @media (min-width: 768px) {
@@ -562,13 +613,14 @@ select {
 		padding-bottom: 65px;
 	}
 
-	#files a {
-		width: 18%;
-		margin-bottom: 2.6%;
+	#files {
+		margin-left: -10px;
+		margin-right: -10px;
 	}
 
-	#files a:nth-last-child(-n + 5) {
-		margin-bottom: 0;
+	#files li {
+		width: 20%;
+		padding: 10px;
 	}
 
 	#sidebar .box summary {
@@ -610,6 +662,12 @@ select {
 
 	.box summary {
 		cursor: move;
+	}
+
+	.box > p {
+		padding: 15px;
+		font-size: 13px;
+		line-height: 19px;
 	}
 
 	.list td {
@@ -677,13 +735,8 @@ select {
 
 	#files {
 		order: 1;
-		margin-top: 0;
-		width: 590px;
-	}
-
-	#files a {
-		width: 17%;
-		margin-bottom: 3.6%;
+		margin-top: -10px;
+		width: 600px;
 	}
 
 	#sidebar {
@@ -745,6 +798,61 @@ select {
 		border-top-right-radius: 4px;
 		padding: 20px;
 		box-sizing: border-box;
+	}
+
+	#overlay {
+		background: rgba(0, 0, 0, 0.8);
+		padding: 40px;
+		box-sizing: border-box;
+		height: 100vh;
+	}
+
+	#overlay > aside {
+		border-top-left-radius: 5px;
+		border-top-right-radius: 5px;
+	}
+
+	#overlay section {
+		background: #F1F1F1;
+		width: 100%;
+		height: calc(100% - 99px);
+		border-bottom-left-radius: 5px;
+		border-bottom-right-radius: 5px;
+		padding: 65px 35px 0;
+		overflow: scroll;
+	}
+
+	#overlay #sidebar {
+		width: 27%;
+		min-width: 280px;
+		margin-left: 30px;
+		max-width: 350px;
+	}
+
+	#overlay #sidebar .box {
+		position: relative;
+		top: auto;
+	}
+
+	#overlay .inner {
+		width: auto;
+		padding: 0 35px;
+	}
+
+	#overlay #files {
+		width: 100%;
+	}
+
+	#overlay #files:after {
+		height: 65px;
+	}
+
+	#overlay #files li {
+		width: 115px;
+	}
+
+	#overlay #title .inner > a {
+		right: 35px;
 	}
 
 }
