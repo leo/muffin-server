@@ -1,0 +1,158 @@
+body {
+	font-family: 'Roboto', sans-serif;
+	font-size: 14px;
+	margin: 0;
+	-webkit-font-smoothing: antialiased;
+	-webkit-text-size-adjust: 100%;
+	padding-top: 19%;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+}
+
+form {
+	background: #fff url(../vectors/logo.svg) no-repeat center top;
+	background-size: 85px;
+	text-align: center;
+	width: 100%;
+	font-size: 15px;
+	box-sizing: border-box;
+	padding: 130px 11% 0 11%;
+}
+
+form * {
+	border-radius: 4px;
+	border: 0;
+	font-family: inherit;
+	display: block;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+input {
+	background: #F3F3F3;
+	padding: 12px;
+	transition: border-color 0.3s;
+	margin-bottom: 10px;
+	font-size: inherit;
+	border: 2px solid #F3F3F3;
+	text-align: left;
+	-webkit-appearance: none;
+}
+
+input:focus {
+	outline: none;
+	border-color: #69D2E7;
+}
+
+button {
+	background: #69D2E7;
+	margin-top: 10%;
+	color: #fff;
+	font-size: inherit;
+	text-align: center;
+	padding: 19px 0;
+	font-weight: 600;
+}
+
+button:focus {
+	background: #5BB5C7;
+	outline: none;
+}
+
+button:hover {
+	background: #000;
+}
+
+a {
+	background: #DFDFDF;
+	color: #fff;
+	width: 32px;
+	height: 32px;
+	text-align: center;
+	display: block;
+	position: absolute;
+	right: 20px;
+	border-radius: 100%;
+	text-decoration: none;
+	bottom: 20px;
+	font-size: 18px;
+	line-height: 32px;
+}
+
+.shake {
+	animation: shake 1s both;
+}
+
+.error input {
+	border-color: #FF851B;
+}
+
+@media (min-width: 768px) {
+
+	html, body {
+		height: 100%;
+	}
+
+	body {
+		background: #F0F0F0;
+		display: flex;
+		align-items: center;
+		padding: 0;
+		justify-content: center;
+	}
+
+	form {
+		box-shadow: 0px 3px 4px 0px #E6E6E6;
+		border-radius: 5px;
+		padding: 135px 30px 30px;
+		width: 310px;
+		background-size: 75px;
+		background-position-y: 30px;
+		font-size: 14px;
+	}
+
+	input {
+		padding: 11px;
+		margin-bottom: 15px;
+	}
+
+	button {
+		padding-top: 17px;
+		padding-bottom: 17px;
+		margin-top: 40px;
+		cursor: pointer;
+	}
+
+	button, a {
+		transition: background 0.5s;
+	}
+
+	a {
+		right: 30px;
+		bottom: 30px;
+	}
+
+	a:hover {
+		background-color: #B7B7B7;
+	}
+
+}
+
+@keyframes shake {
+
+	from, 100% {
+		transform: translate3d(0, 0, 0);
+	}
+
+	10%, 30%, 50%, 70%, 90% {
+		transform: translate3d(-10px, 0, 0);
+	}
+
+	20%, 40%, 60%, 80% {
+		transform: translate3d(10px, 0, 0);
+	}
+
+}
