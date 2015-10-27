@@ -212,11 +212,12 @@ select {
 
 .box .visits section {
 	height: 200px;
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-end;
-	align-items: flex-end;
+	direction: rtl;
 	padding-right: 15px;
+	white-space: nowrap;
+	overflow-y: hidden;
+	overflow-x: scroll;
+	padding-top: 20px;
 }
 
 .box .visits section b {
@@ -227,6 +228,7 @@ select {
 	background: #9DB4F8;
 	width: 25px;
 	margin: 0 7.5px;
+	display: inline-block;
 }
 
 .box .visits section span:last-child {
@@ -633,6 +635,30 @@ select {
 		text-align: left;
 	}
 
+	.box .visits span {
+		position: relative;
+	}
+
+	.box .visits span b {
+		display: block;
+		background: rgba(0, 0, 0, 0.7);
+		color: #fff;
+		font-size: 11px;
+		text-align: center;
+		font-weight: 100;
+		padding: 5px 15px;
+		border-radius: 4px;
+		position: absolute;
+		top: -28px;
+		z-index: 4000;
+		transition: opacity 0.4s;
+		opacity: 0;
+	}
+
+	.box .visits span:hover b {
+		opacity: 1;
+	}
+
 	.list td:nth-child(3),
 	.list td:nth-child(4) {
 		display: table-cell;
@@ -754,6 +780,14 @@ select {
 	.columns {
 		display: flex;
 		justify-content: space-between;
+	}
+
+	.columns.equal {
+		align-items: flex-start;
+	}
+
+	.columns.equal .box {
+		width: 49%;
 	}
 
 	#chest {
