@@ -520,6 +520,14 @@ select {
 	padding: 40px 20px;
 }
 
+#content > aside {
+	margin-bottom: 25px;
+}
+
+#content > aside:last-child {
+	margin-bottom: 0;
+}
+
 #files {
 	margin: 35px -5px 0 -5px;
 	padding: 0;
@@ -723,6 +731,10 @@ select {
 		padding-bottom: 65px;
 	}
 
+	#content > aside {
+		margin-bottom: 35px;
+	}
+
 	#files {
 		margin-left: -10px;
 		margin-right: -10px;
@@ -798,19 +810,24 @@ select {
 	}
 
 	.columns.equal {
-		display: block;
-		column-count: 2;
-		-moz-column-count: 2;
-		-webkit-column-count: 2;
-		column-gap: 25px;
-		-moz-column-gap: 25px;
-		-webkit-column-gap: 25px;
+		display: flex;
+	}
+
+	.columns.equal > aside {
+		width: 50%;
+		padding: 0 12.5px;
+	}
+
+	.columns.equal > aside:first-child {
+		padding-left: 0;
+	}
+
+	.columns.equal > aside:last-child {
+		padding-right: 0;
 	}
 
 	.columns.equal .box {
 		margin-bottom: 25px;
-		break-inside: avoid-column;
-		-webkit-column-break-inside: avoid;
 	}
 
 	#chest {
@@ -827,7 +844,6 @@ select {
 		border: 0;
 		padding: 0;
 		float: right;
-		margin-right: -20px;
 	}
 
 	#chest nav a {
@@ -850,7 +866,7 @@ select {
 
 	#chest .inner .logo {
 		height: 55px;
-		background-position: left;
+		width: 55px;
 		background-size: 34px;
 	}
 
@@ -886,6 +902,10 @@ select {
 		margin: auto;
 		padding-left: 0;
 		padding-right: 0;
+	}
+
+	#content > aside {
+		margin: 0;
 	}
 
 	#title h1 {
