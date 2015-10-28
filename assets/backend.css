@@ -260,6 +260,17 @@ select {
 	text-align: right;
 }
 
+.box .empty {
+	text-align: center;
+	padding: 50px 55px;
+}
+
+.box .empty p {
+	font-size: 14px;
+	margin: 0;
+	color: #8C8C8C;
+}
+
 .list {
 	background: #FFF;
 	width: 100%;
@@ -659,6 +670,10 @@ select {
 		opacity: 1;
 	}
 
+	.box .empty p {
+		font-size: 15px;
+	}
+
 	.list td:nth-child(3),
 	.list td:nth-child(4) {
 		display: table-cell;
@@ -783,11 +798,19 @@ select {
 	}
 
 	.columns.equal {
-		align-items: flex-start;
+		display: block;
+		column-count: 2;
+		-moz-column-count: 2;
+		-webkit-column-count: 2;
+		column-gap: 25px;
+		-moz-column-gap: 25px;
+		-webkit-column-gap: 25px;
 	}
 
 	.columns.equal .box {
-		width: 49%;
+		margin-bottom: 25px;
+		break-inside: avoid-column;
+		-webkit-column-break-inside: avoid;
 	}
 
 	#chest {
