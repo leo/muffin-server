@@ -1,4 +1,4 @@
-# muffin
+# WTF?!
 
 If you ask a experienced developer what he's thinking about content management systems, he'll probably tell you that he doesn't like them since they're bloated, overkill and slow as fuck. Muffin would like to change that.
 
