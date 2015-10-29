@@ -1,0 +1,31 @@
+{
+  "name": "muffin",
+  "version": "0.1.0",
+  "description": "Sweeten your content",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "keywords": [
+    "content",
+    "management",
+    "system",
+    "chocolate",
+    "yummy"
+  ],
+  "author": "Leonard Lamprecht <lamprechtleonard@gmail.com> (http://leo.im)",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.13.3",
+    "colors": "^1.1.2",
+    "cookie-parser": "^1.3.5",
+    "cookie-session": "^1.2.0",
+    "express": "^4.13.3",
+    "handlebars": "^3.0.3",
+    "mongoose": "^4.1.5",
+    "swag": "^0.7.0"
+  },
+  "engines": {
+    "node": "0.12.7"
+  }
+}
