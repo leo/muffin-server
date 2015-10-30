@@ -7,6 +7,7 @@ var mongo = require( 'mongoose' ),
 	fs = require( 'fs' ),
 	bodyParser = require( 'body-parser' );
 
+require( './generate' );
 mongo.connect( 'mongodb://localhost/muffin' );
 
 var db = mongo.connection;
@@ -81,15 +82,6 @@ handleBars.registerHelper( '_', function( text ) {
 	return text;
 });
 
-handleBars.registerPartial( 'sidebar', function() {
-
-	var base = fs.readFileSync( 'views/sidebar.hbs', 'utf8' ),
-		template = handleBars.compile( base );
-
-	return template();
-
-});
-
 app.get( '/admin/logout', function( req, res ) {
 
 	if( req.session.userName ) {
@@ -162,7 +154,7 @@ function loadView( view, err, content ) {
 		return;
 	}
 
-	var look = fs.readFileSync( 'views/' + view + '.hbs', 'utf8' ),
+	var look = fs.readFileSync( 'templates/' + view + '.hbs', 'utf8' ),
 		template = handleBars.compile( look );
 
 	if( view !== 'edit' ) {
@@ -198,7 +190,7 @@ function loadView( view, err, content ) {
 
 	}
 
-	var base = fs.readFileSync( 'templates/admin.hbs', 'utf8' ),
+	var base = fs.readFileSync( 'views/admin.hbs', 'utf8' ),
 		container = handleBars.compile( base );
 
 	return container( tags );
@@ -213,7 +205,7 @@ app.get( '/admin', function( req, res ) {
 		view = loadView( 'dashboard' );
 	} else {
 
-		var base = fs.readFileSync( 'templates/login.hbs', 'utf8' ),
+		var base = fs.readFileSync( 'views/login.hbs', 'utf8' ),
 			template = handleBars.compile( base );
 
 		var tags = {
