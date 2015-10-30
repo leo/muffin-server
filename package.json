@@ -21,7 +21,7 @@
     "cookie-parser": "^1.3.5",
     "cookie-session": "^1.2.0",
     "ember": "^0.9.8",
-    "ember-template-compiler": "^1.8.0",
+    "ember-compiler": "^2.1.0",
     "express": "^4.13.3",
     "handlebars": "^3.0.3",
     "mongoose": "^4.1.5",
