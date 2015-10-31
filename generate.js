@@ -1,8 +1,12 @@
 var compiler = require( 'ember-compiler' ),
-	fs = require( 'fs' );
+	fs = require( 'fs' ),
+	babel = require( 'babel-core' );
  
 var base = '',
 	templates = fs.readdirSync( 'templates' );
+
+var template = compiler.precompile( '{{outlet}}', false );
+base += 'Ember.TEMPLATES["application"] = Ember.HTMLBars.template(' + template + ');';
 
 for( id in templates ) {
 
@@ -10,11 +14,15 @@ for( id in templates ) {
 		input = fs.readFileSync( 'templates/' + file, { encoding: 'utf8' } ),
 		template = compiler.precompile( input, false );
 
-	base += 'export default Ember.HTMLBars.template(' + template + ');';
+	base += 'Ember.TEMPLATES["' + file.split( '.' )[0] + '"] = Ember.HTMLBars.template(' + template + ');';
 
 }
 
-fs.writeFile( 'all.js', base, function( err ) {
+var transpile = babel.transform( base, {
+	presets: [ 'es2015' ]
+});
+
+fs.writeFile( 'dist/base.js', transpile.code, function( err ) {
 
 	if( err ) {
 		return console.log( err );
