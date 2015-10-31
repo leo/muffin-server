@@ -198,8 +198,8 @@ function loadView( view, err, content ) {
 
 }
 
-app.get( '/admin', function( req, res ) {
-	res.sendfile( 'base.html', {root: __dirname } );
+app.get( '/admin*', function( req, res ) {
+	res.sendFile( 'base.html', {root: __dirname } );
 });
 
 app.get( '/admin/edit/:id', function( req, res ) {
