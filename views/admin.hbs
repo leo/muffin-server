@@ -55,7 +55,7 @@
 			</aside>
 
 			<section id="content"{{#is view "dashboard"}} class="columns equal"{{/is}}>
-				{{{content}}}
+				{{outlet}}
 			</section>
 
 		</main>
@@ -66,9 +66,14 @@
 				<p>You're using Muffin 1.0.0, thank you!</p>
 			</div>
 		</footer>
-
+		<!--
 		<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 		<script src="{{assetPath "app.js"}}"></script>
+		-->
+
+		<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script src="//builds.emberjs.com/release/ember.prod.js"></script>
+		<script src="/admin/dist/base.js"></script>
 	</body>
 
 </html>

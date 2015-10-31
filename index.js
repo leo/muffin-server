@@ -93,6 +93,7 @@ app.get( '/admin/logout', function( req, res ) {
 });
 
 app.use( '/admin/assets', express.static( 'assets' ) );
+app.use( '/admin/dist', express.static( 'dist' ) );
 
 app.listen( process.env.PORT || 3000, function() {
 
@@ -198,28 +199,7 @@ function loadView( view, err, content ) {
 }
 
 app.get( '/admin', function( req, res ) {
-
-	var view;
-
-	if( req.session.userName ) {
-		view = loadView( 'dashboard' );
-	} else {
-
-		var base = fs.readFileSync( 'views/login.hbs', 'utf8' ),
-			template = handleBars.compile( base );
-
-		var tags = {
-			site: {
-				name: 'Volkspark'
-			}
-		}
-
-		view = template( tags );
-
-	}
-
-	res.send( view );
-
+	res.sendfile( 'base.html', {root: __dirname } );
 });
 
 app.get( '/admin/edit/:id', function( req, res ) {
