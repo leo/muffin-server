@@ -2,11 +2,11 @@
 	<div class="inner">
 
 		<nav>
-			<a href="/admin" class="current">Dashboard</a>
-			<a href="/admin/list">Pages</a>
-			<a href="/admin">Posts</a>
-			<a href="/admin/media">Media</a>
-			<a href="/admin/settings">Settings</a>
+			{{#link-to 'login'}}Dashboard{{/link-to}}
+			<a href="#">Pages</a>
+			<a href="#">Posts</a>
+			<a href="#">Media</a>
+			<a href="#">Settings</a>
 		</nav>
 
 		<a href="/admin/logout" class="logo"></a>
@@ -27,13 +27,13 @@
 	<aside id="title">
 
 		<div class="inner">
-			<h1>{{pageTitle}}</h1>
+			<h1>Test</h1>
 		</div>
 
 	</aside>
 
 	<section id="content">
-		{{yield}}
+		{{outlet}}
 	</section>
 
 </main>
