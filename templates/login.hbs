@@ -1,8 +1,10 @@
-<form action="/admin" method="post" name="login">
-	<input type="text" name="username" placeholder="Username" autocomplete="off">
-	<input type="password" name="password" placeholder="Password" autocomplete="off">
+<form {{action "login" on="submit"}}>
+
+	{{input placeholder="Username" autocomplete="off" value=username}}
+	{{input type="password" placeholder="Password" autocomplete="off" value=password}}
 
 	<button type="submit">Login</button>
+
 </form>
 
 <a href="/forgotten">?</a>
