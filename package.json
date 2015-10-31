@@ -4,7 +4,7 @@
   "description": "Sweeten your content",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --ignore 'dist'"
+    "start": "nodemon --ignore 'dist' -e hbs,js,html,css"
   },
   "keywords": [
     "content",
