@@ -93,7 +93,7 @@ app.get( '/admin/logout', function( req, res ) {
 });
 
 app.use( '/admin/assets', express.static( 'assets' ) );
-app.use( '/admin/dist', express.static( 'dist' ) );
+app.use( '/admin/build', express.static( 'build' ) );
 
 app.listen( process.env.PORT || 3000, function() {
 
