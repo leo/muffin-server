@@ -2,12 +2,10 @@ var mongo = require( 'mongoose' ),
 	schemas = require( './schemas' ),
 	handleBars = require( 'handlebars' ),
 	express = require( 'express' ),
-	swag = require( 'swag' ),
 	app = express(),
 	fs = require( 'fs' ),
 	bodyParser = require( 'body-parser' );
 
-require( './generate' );
 mongo.connect( 'mongodb://localhost/muffin' );
 
 var db = mongo.connection;
@@ -66,8 +64,6 @@ for( var module in toUse ) {
 	app.use( item( module == 'session' && session ) );
 
 }
-
-swag.registerHelpers( handleBars );
 
 handleBars.registerHelper( 'assetPath', function( file ) {
 
@@ -199,7 +195,7 @@ function loadView( view, err, content ) {
 }
 
 app.get( '/admin*', function( req, res ) {
-	res.sendFile( 'base.html', {root: __dirname } );
+	res.sendFile( 'index.html', {root: __dirname } );
 });
 
 app.get( '/admin/edit/:id', function( req, res ) {
