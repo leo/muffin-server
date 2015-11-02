@@ -138,11 +138,11 @@ select {
 
 	}
 
-	&.shake {
+	.shake {
 		animation: shake 1s both;
 	}
 
-	&.error input {
+	.error input {
 		border-color: #FF851B;
 	}
 
