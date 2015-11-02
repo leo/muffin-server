@@ -4,9 +4,11 @@ var mongo = require( 'mongoose' ),
 	express = require( 'express' ),
 	app = express(),
 	fs = require( 'fs' ),
-	bodyParser = require( 'body-parser' );
+	bodyParser = require( 'body-parser' ),
+	compression = require( 'compression' );
 
 mongo.connect( 'mongodb://localhost/muffin' );
+app.use( compression() );
 
 var db = mongo.connection;
 
