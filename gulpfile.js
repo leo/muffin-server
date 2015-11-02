@@ -5,19 +5,32 @@ var gulp = require( 'gulp' ),
 	compiler = require( 'gulp-ember-compiler' ),
 	concat = require( 'gulp-concat' ),
 	download = require( 'gulp-download' ),
-	jquery = require( 'gulp-jquery' );
+	jquery = require( 'gulp-jquery' ),
+	sass = require( 'gulp-sass' );
 
 var paths = {
-	vectors: [ 'assets/vectors/*.svg' ],
-	app: [ 'templates/*.hbs', 'assets/app.js' ]
-};
+	app: [ 'templates/*.hbs', 'client/*.js' ],
+	css: [ 'client/*.scss' ],
+	vectors: [ 'client/vectors/*.svg' ]
+}
 
 gulp.task( 'clean', function( cb ) {
 	del( ['build'], cb );
 });
 
-gulp.task( 'vendor', function() {
+gulp.task( 'vectors', function() {
+	return gulp.src( paths.vectors )
+	.pipe( gulp.dest( 'build/vectors' ) );
+});
 
+gulp.task( 'css', function() {
+	return gulp.src( paths.css )
+	.pipe( sass({ outputStyle: 'compressed' }) )
+	.pipe( concat( 'styles.css' ) )
+	.pipe( gulp.dest( 'build' ) );
+});
+
+gulp.task( 'vendor', function() {
 	return jquery.src()
 	.pipe( download( 'http://builds.emberjs.com/release/ember.prod.js' ) )
 	.pipe( concat( 'vendor.js' ) )
@@ -25,11 +38,9 @@ gulp.task( 'vendor', function() {
 	.pipe( uglify() )
 	.pipe( sourcemaps.write( '/' ) )
 	.pipe( gulp.dest( 'build' ) );
-
 });
 
 gulp.task( 'app', function() {
-
 	return gulp.src( paths.app )
 	.pipe( compiler() )
 	.pipe( concat( 'app.js' ) )
@@ -37,7 +48,6 @@ gulp.task( 'app', function() {
 	.pipe( uglify() )
 	.pipe( sourcemaps.write( '/' ) )
 	.pipe( gulp.dest( 'build' ) );
-
 });
 
-gulp.task( 'default', [ 'clean', 'vendor', 'app' ] );
+gulp.task( 'default', [ 'clean', 'vectors', 'css', 'vendor', 'app' ] );
