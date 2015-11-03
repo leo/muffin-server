@@ -6,7 +6,8 @@ var gulp = require( 'gulp' ),
 	concat = require( 'gulp-concat' ),
 	download = require( 'gulp-download' ),
 	jquery = require( 'gulp-jquery' ),
-	sass = require( 'gulp-sass' );
+	sass = require( 'gulp-sass' ),
+	nodemon = require( 'gulp-nodemon' );
 
 var paths = {
 	app: [ 'templates/*.hbs', 'client/*.js' ],
@@ -53,3 +54,18 @@ gulp.task( 'app', function() {
 });
 
 gulp.task( 'default', [ 'clean', 'vectors', 'css', 'vendor', 'app' ] );
+
+gulp.task( 'watch', function() {
+	gulp.watch( paths.app, [ 'app' ] );
+	gulp.watch( paths.css, [ 'css' ] );
+
+	nodemon({
+		script: 'run.js',
+		ext: 'hbs, js, html',
+		ignore: [
+			'client',
+			'templates'
+		]
+	});
+
+});
