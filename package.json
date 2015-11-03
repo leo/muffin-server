@@ -8,12 +8,12 @@
     "install": "gulp",
     "prepublish": "gulp"
   },
-  "files": {
+  "files": [
     "build",
     "index.html",
     "run.js",
     "schemas.js"
-  },
+  ],
   "keywords": [
     "content",
     "management",
