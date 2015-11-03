@@ -4,7 +4,15 @@
   "description": "Sweeten your content",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon run.js --ignore 'build' -e hbs,js,html,css"
+    "start": "gulp watch",
+    "install": "gulp",
+    "prepublish": "gulp"
+  },
+  "files": {
+    "build",
+    "index.html",
+    "run.js",
+    "schemas.js"
   },
   "keywords": [
     "content",
@@ -35,6 +43,7 @@
     "gulp-download": "0.0.1",
     "gulp-ember-compiler": "^0.1.1",
     "gulp-jquery": "^1.1.1",
+    "gulp-nodemon": "^2.0.4",
     "gulp-sass": "^2.1.0",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "^1.4.2"
