@@ -25,8 +25,10 @@ gulp.task( 'vectors', function() {
 
 gulp.task( 'css', function() {
 	return gulp.src( paths.css )
-	.pipe( sass({ outputStyle: 'compressed' }) )
 	.pipe( concat( 'styles.css' ) )
+	.pipe( sourcemaps.init() )
+	.pipe( sass({ outputStyle: 'compressed' }) )
+	.pipe( sourcemaps.write() )
 	.pipe( gulp.dest( 'build' ) );
 });
 
@@ -50,4 +52,4 @@ gulp.task( 'app', function() {
 	.pipe( gulp.dest( 'build' ) );
 });
 
-gulp.task( 'default', [ 'clean', 'vectors', 'css', 'vendor', 'app' ] );
+gulp.task( 'default', [ 'clean', 'css', 'vendor', 'app', 'vectors' ] );
