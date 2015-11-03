@@ -27,7 +27,7 @@ gulp.task( 'css', function() {
 	return gulp.src( paths.css )
 	.pipe( concat( 'styles.css' ) )
 	.pipe( sourcemaps.init() )
-	.pipe( sass({ outputStyle: 'compressed' }) )
+	.pipe( sass({ outputStyle: 'compressed' }).on( 'error', sass.logError ) )
 	.pipe( sourcemaps.write() )
 	.pipe( gulp.dest( 'build' ) );
 });
@@ -52,4 +52,4 @@ gulp.task( 'app', function() {
 	.pipe( gulp.dest( 'build' ) );
 });
 
-gulp.task( 'default', [ 'clean', 'css', 'vendor', 'app', 'vectors' ] );
+gulp.task( 'default', [ 'clean', 'vectors', 'css', 'vendor', 'app' ] );
