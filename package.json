@@ -4,7 +4,7 @@
   "description": "Sweeten your content",
   "main": "index.js",
   "scripts": {
-    "start": "gulp watch",
+    "start": "gulp watch-core",
     "install": "gulp",
     "prepublish": "gulp"
   },
