@@ -2,14 +2,13 @@
   "name": "muffin",
   "version": "0.1.0",
   "description": "Sweeten your content",
-  "main": "index.js",
+  "main": "run.js",
   "scripts": {
     "start": "gulp watch-core",
     "install": "gulp"
   },
   "files": [
     "build",
-    "index.html",
     "run.js",
     "schemas.js"
   ],
@@ -34,7 +33,7 @@
     "mongoose": "^4.1.5"
   },
   "engines": {
-    "node": "0.12.7"
+    "node": "^0.12.7"
   },
   "devDependencies": {
     "gulp": "^3.9.0",
