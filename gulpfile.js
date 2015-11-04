@@ -55,22 +55,21 @@ gulp.task( 'app', function() {
 
 gulp.task( 'default', [ 'clean', 'vectors', 'css', 'vendor', 'app' ] );
 
-gulp.task( 'watch-assets', function() {
-	gulp.watch( paths.app, [ 'app' ] );
-	gulp.watch( paths.css, [ 'css' ] );
-});
-
 gulp.task( 'watch-core', function() {
 
 	var config = {
 		script: 'run.js',
 		ignore: [
 			'client/',
-			'templates/'
+			'templates/',
+			'build/'
 		],
 		ext: 'hbs, js, html'
 	}
 
-	nodemon( config ).on( 'start', [ 'watch-assets' ] );
+	nodemon( config ).on( 'start', function() {
+		gulp.watch( paths.app, [ 'app' ] );
+		gulp.watch( paths.css, [ 'css' ] );
+	});
 
 });
