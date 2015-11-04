@@ -7,21 +7,28 @@ var gulp = require( 'gulp' ),
 	download = require( 'gulp-download' ),
 	jquery = require( 'gulp-jquery' ),
 	sass = require( 'gulp-sass' ),
-	nodemon = require( 'gulp-nodemon' );
+	nodemon = require( 'gulp-nodemon' ),
+	autoReload = require( 'gulp-auto-reload' ),
+	gutil = require( 'gulp-util' );
 
 var paths = {
 	app: [ 'templates/*.hbs', 'client/*.js' ],
 	css: [ 'client/*.scss' ],
-	vectors: [ 'client/vectors/*.svg' ]
+	vectors: [ 'client/vectors/*.svg' ],
+	html: [ 'index.html' ]
+}
+
+var htmlInject = function() {
+	return gutil.noop();
 }
 
 gulp.task( 'clean', function( cb ) {
-	del( ['build'], cb );
+	del( [ 'build' ], cb );
 });
 
 gulp.task( 'vectors', function() {
 	return gulp.src( paths.vectors )
-	.pipe( gulp.dest( 'build/vectors' ) );
+	.pipe( gulp.dest( 'build/assets/vectors' ) );
 });
 
 gulp.task( 'css', function() {
@@ -30,7 +37,7 @@ gulp.task( 'css', function() {
 	.pipe( sourcemaps.init() )
 	.pipe( sass({ outputStyle: 'compressed' }).on( 'error', sass.logError ) )
 	.pipe( sourcemaps.write() )
-	.pipe( gulp.dest( 'build' ) );
+	.pipe( gulp.dest( 'build/assets' ) );
 });
 
 gulp.task( 'vendor', function() {
@@ -40,7 +47,7 @@ gulp.task( 'vendor', function() {
 	.pipe( sourcemaps.init() )
 	.pipe( uglify() )
 	.pipe( sourcemaps.write( '/' ) )
-	.pipe( gulp.dest( 'build' ) );
+	.pipe( gulp.dest( 'build/assets' ) );
 });
 
 gulp.task( 'app', function() {
@@ -50,12 +57,36 @@ gulp.task( 'app', function() {
 	.pipe( sourcemaps.init() )
 	.pipe( uglify() )
 	.pipe( sourcemaps.write( '/' ) )
+	.pipe( gulp.dest( 'build/assets' ) );
+});
+
+gulp.task( 'setup-html', function() {
+	gulp.src( paths.html )
+	.pipe( htmlInject( '/admin/assets/' ) )
 	.pipe( gulp.dest( 'build' ) );
 });
 
-gulp.task( 'default', [ 'clean', 'vectors', 'css', 'vendor', 'app' ] );
+gulp.task( 'html', [ 'setup-html' ], function() {
+	gulp.src( [ 'build/auto-reload.js' ] )
+	.pipe( gulp.dest( 'build/assets' ) );
+});
 
-gulp.task( 'watch-core', function() {
+gulp.task( 'reloader', function() {
+
+	var reloader = autoReload();
+
+	reloader.script()
+	.pipe( gulp.dest( 'build' ) );
+
+	htmlInject = reloader.inject;
+
+	gulp.watch( 'build' + '/**/*', reloader.onChange );
+
+});
+
+gulp.task( 'default', [ 'clean', 'html', 'vectors', 'css', 'vendor', 'app' ] );
+
+gulp.task( 'watch-core', [ 'reloader', 'html' ], function() {
 
 	var config = {
 		script: 'run.js',
@@ -64,12 +95,21 @@ gulp.task( 'watch-core', function() {
 			'templates/',
 			'build/'
 		],
-		ext: 'hbs, js, html'
+		ext: 'js'
 	}
 
-	nodemon( config ).on( 'start', function() {
-		gulp.watch( paths.app, [ 'app' ] );
-		gulp.watch( paths.css, [ 'css' ] );
-	});
+	nodemon( config );
+
+	var toWatch = [
+		'html',
+		'app',
+		'css',
+		'vectors'
+	];
+
+	for( ID in toWatch ) {
+		var type = toWatch[ID];
+		gulp.watch( paths[type], [ type ] );
+	}
 
 });
