@@ -15,7 +15,7 @@ var paths = {
 	app: [ 'templates/*.hbs', 'client/*.js' ],
 	css: [ 'client/*.scss' ],
 	vectors: [ 'client/vectors/*.svg' ],
-	html: [ 'index.html' ]
+	html: [ 'client/*.html' ]
 }
 
 var htmlInject = function() {
