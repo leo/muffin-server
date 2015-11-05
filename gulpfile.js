@@ -23,7 +23,8 @@ gulp.task( 'browser-sync', function() {
 	browserSync.init({
 		proxy: 'http://localhost:3000/admin',
 		files: [ 'build/**/*.*' ],
-		port: 4000
+		port: 4000,
+		ui: false
 	});
 
 });
