@@ -1,14 +1,15 @@
 var gulp = require( 'gulp' ),
-	sourcemaps = require( 'gulp-sourcemaps' ),
 	del = require( 'del' ),
+	browserSync = require( 'browser-sync' ).create();
+
+var sourcemaps = require( 'gulp-sourcemaps' ),
 	uglify = require( 'gulp-uglify' ),
 	compiler = require( 'gulp-ember-compiler' ),
 	concat = require( 'gulp-concat' ),
 	download = require( 'gulp-download' ),
 	jquery = require( 'gulp-jquery' ),
 	sass = require( 'gulp-sass' ),
-	nodemon = require( 'gulp-nodemon' ),
-	browserSync = require( 'browser-sync' ).create();
+	nodemon = require( 'gulp-nodemon' );
 
 var paths = {
 	app: [ 'templates/*.hbs', 'client/*.js' ],
