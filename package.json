@@ -36,6 +36,7 @@
     "node": "^0.12.7"
   },
   "devDependencies": {
+    "browser-sync": "^2.9.12",
     "gulp": "^3.9.0",
     "gulp-concat": "^2.6.0",
     "gulp-download": "0.0.1",

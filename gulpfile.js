@@ -7,7 +7,8 @@ var gulp = require( 'gulp' ),
 	download = require( 'gulp-download' ),
 	jquery = require( 'gulp-jquery' ),
 	sass = require( 'gulp-sass' ),
-	nodemon = require( 'gulp-nodemon' );
+	nodemon = require( 'gulp-nodemon' ),
+	browserSync = require( 'browser-sync' ).create();
 
 var paths = {
 	app: [ 'templates/*.hbs', 'client/*.js' ],
@@ -16,13 +17,24 @@ var paths = {
 	html: [ 'client/*.html' ]
 }
 
+gulp.task( 'browser-sync', function() {
+
+	browserSync.init({
+		proxy: 'http://localhost:3000/admin',
+		files: [ 'build/**/*.*' ],
+		port: 4000
+	});
+
+});
+
 gulp.task( 'clean', function( cb ) {
 	del( [ 'build' ], cb );
 });
 
 gulp.task( 'vectors', function() {
 	return gulp.src( paths.vectors )
-	.pipe( gulp.dest( 'build/assets/vectors' ) );
+	.pipe( gulp.dest( 'build/assets/vectors' ) )
+	.pipe( browserSync.stream() );
 });
 
 gulp.task( 'css', function() {
@@ -31,7 +43,8 @@ gulp.task( 'css', function() {
 	.pipe( sourcemaps.init() )
 	.pipe( sass({ outputStyle: 'compressed' }).on( 'error', sass.logError ) )
 	.pipe( sourcemaps.write() )
-	.pipe( gulp.dest( 'build/assets' ) );
+	.pipe( gulp.dest( 'build/assets' ) )
+	.pipe( browserSync.stream() );
 });
 
 gulp.task( 'vendor', function() {
@@ -51,7 +64,8 @@ gulp.task( 'app', function() {
 	.pipe( sourcemaps.init() )
 	.pipe( uglify() )
 	.pipe( sourcemaps.write( '/' ) )
-	.pipe( gulp.dest( 'build/assets' ) );
+	.pipe( gulp.dest( 'build/assets' ) )
+	.pipe( browserSync.stream() );
 });
 
 gulp.task( 'html', function() {
@@ -61,7 +75,7 @@ gulp.task( 'html', function() {
 
 gulp.task( 'default', [ 'clean', 'html', 'vectors', 'css', 'vendor', 'app' ] );
 
-gulp.task( 'watch-core', function() {
+gulp.task( 'watch-core', [ 'browser-sync' ], function() {
 
 	var config = {
 		script: 'run.js',
@@ -76,7 +90,6 @@ gulp.task( 'watch-core', function() {
 	nodemon( config );
 
 	var toWatch = [
-		'html',
 		'app',
 		'css',
 		'vectors'
@@ -86,5 +99,7 @@ gulp.task( 'watch-core', function() {
 		var type = toWatch[ID];
 		gulp.watch( paths[type], [ type ] );
 	}
+
+	gulp.watch( paths.html ).on( 'change', browserSync.reload );
 
 });
