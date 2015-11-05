@@ -7,19 +7,13 @@ var gulp = require( 'gulp' ),
 	download = require( 'gulp-download' ),
 	jquery = require( 'gulp-jquery' ),
 	sass = require( 'gulp-sass' ),
-	nodemon = require( 'gulp-nodemon' ),
-	autoReload = require( 'gulp-auto-reload' ),
-	gutil = require( 'gulp-util' );
+	nodemon = require( 'gulp-nodemon' );
 
 var paths = {
 	app: [ 'templates/*.hbs', 'client/*.js' ],
 	css: [ 'client/*.scss' ],
 	vectors: [ 'client/vectors/*.svg' ],
 	html: [ 'client/*.html' ]
-}
-
-var htmlInject = function() {
-	return gutil.noop();
 }
 
 gulp.task( 'clean', function( cb ) {
@@ -60,33 +54,14 @@ gulp.task( 'app', function() {
 	.pipe( gulp.dest( 'build/assets' ) );
 });
 
-gulp.task( 'setup-html', function() {
+gulp.task( 'html', function() {
 	gulp.src( paths.html )
-	.pipe( htmlInject( '/admin/assets/' ) )
 	.pipe( gulp.dest( 'build' ) );
-});
-
-gulp.task( 'html', [ 'setup-html' ], function() {
-	gulp.src( [ 'build/auto-reload.js' ] )
-	.pipe( gulp.dest( 'build/assets' ) );
-});
-
-gulp.task( 'reloader', function() {
-
-	var reloader = autoReload();
-
-	reloader.script()
-	.pipe( gulp.dest( 'build' ) );
-
-	htmlInject = reloader.inject;
-
-	gulp.watch( 'build' + '/**/*', reloader.onChange );
-
 });
 
 gulp.task( 'default', [ 'clean', 'html', 'vectors', 'css', 'vendor', 'app' ] );
 
-gulp.task( 'watch-core', [ 'reloader', 'html' ], function() {
+gulp.task( 'watch-core', function() {
 
 	var config = {
 		script: 'run.js',
