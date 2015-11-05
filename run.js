@@ -96,8 +96,11 @@ app.listen( process.env.PORT || 3000, function() {
 
 	require( 'colors' );
 
+	var current = process.cwd(),
+		dir = current.substring( current.lastIndexOf( '/' ) + 1, current.length );
+
 	var host = this.address().address == '::' && 'localhost',
-		port = this.address().port;
+		port = dir == 'muffin' ? 4000 + '/admin' : this.address().port;
 
 	var address = 'http://' + host + ':' + port;
 	process.stdout.write( '\u001b[2J\u001b[0;0H' );
