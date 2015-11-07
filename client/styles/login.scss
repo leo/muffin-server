@@ -1,0 +1,139 @@
+.login {
+	font-size: 14px;
+	background: #fff;
+	-webkit-text-size-adjust: 100%;
+	padding-top: 19%;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+
+	a {
+		background: #DFDFDF;
+		color: #fff;
+		width: 32px;
+		height: 32px;
+		text-align: center;
+		display: block;
+		position: absolute;
+		right: 20px;
+		border-radius: 100%;
+		text-decoration: none;
+		bottom: 20px;
+		font-size: 18px;
+		line-height: 32px;
+
+		@media (min-width: 768px) {
+			right: 30px;
+			bottom: 30px;
+			transition: background 0.5s;
+
+			&:hover {
+				background-color: #B7B7B7;
+			}
+
+		}
+
+	}
+
+	form {
+		background: url(vectors/logo.svg) no-repeat center top;
+		background-size: 85px;
+		text-align: center;
+		width: 100%;
+		font-size: 15px;
+		box-sizing: border-box;
+		padding: 130px 11% 0 11%;
+
+		* {
+			border-radius: 4px;
+			border: 0;
+			font-family: inherit;
+			display: block;
+			width: 100%;
+			box-sizing: border-box;
+		}
+
+		@media (min-width: 768px) {
+			background-color: #fff;
+			box-shadow: 0px 3px 4px 0px #E6E6E6;
+			border-radius: 5px;
+			padding: 135px 30px 30px;
+			width: 310px;
+			background-size: 75px;
+			background-position-y: 30px;
+			font-size: 14px;
+		}
+
+	}
+
+	input {
+		background: #F3F3F3;
+		padding: 12px;
+		transition: border-color 0.3s;
+		margin-bottom: 10px;
+		font-size: inherit;
+		border: 2px solid #F3F3F3;
+		text-align: left;
+		-webkit-appearance: none;
+
+		&:focus {
+			outline: none;
+			border-color: #69D2E7;
+		}
+
+		&.wrong {
+			border-color: #FF851B;
+		}
+
+		@media (min-width: 768px) {
+			padding: 11px;
+			margin-bottom: 15px;
+		}
+
+	}
+
+	button {
+		background: #69D2E7;
+		margin-top: 10%;
+		color: #fff;
+		font-size: inherit;
+		text-align: center;
+		padding: 19px 0;
+		font-weight: 600;
+
+		&:focus {
+			background: #5BB5C7;
+			outline: none;
+		}
+
+		&:hover {
+			background: #000;
+		}
+
+		@media (min-width: 768px) {
+			padding-top: 17px;
+			padding-bottom: 17px;
+			margin-top: 40px;
+			cursor: pointer;
+			transition: background 0.5s;
+		}
+
+	}
+
+	.shake {
+		animation: shake 1s both;
+	}
+
+	@media (min-width: 768px) {
+		height: 100vh;
+		width: 100vw;
+		background: #F0F0F0;
+		display: flex;
+		align-items: center;
+		padding: 0;
+		justify-content: center;
+	}
+
+}
