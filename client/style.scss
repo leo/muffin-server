@@ -57,6 +57,7 @@ select {
 
 .login {
 	font-size: 14px;
+	background: #fff;
 	-webkit-text-size-adjust: 100%;
 	padding-top: 19%;
 	-moz-user-select: none;
@@ -94,7 +95,7 @@ select {
 	}
 
 	form {
-		background: #fff url(vectors/logo.svg) no-repeat center top;
+		background: url(vectors/logo.svg) no-repeat center top;
 		background-size: 85px;
 		text-align: center;
 		width: 100%;
