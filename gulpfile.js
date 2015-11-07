@@ -13,10 +13,10 @@ var sourcemaps = require( 'gulp-sourcemaps' ),
 	babel = require( 'gulp-babel' );
 
 var paths = {
-	app: [ 'templates/*.hbs', 'client/**/*.js' ],
-	css: [ 'client/*.scss' ],
-	vectors: [ 'client/vectors/*.svg' ],
-	html: [ 'client/*.html' ]
+	app: [ 'client/source/templates/*.hbs', 'client/source/*.js' ],
+	css: [ 'client/styles/*.scss' ],
+	vectors: [ 'client/assets/*.svg' ],
+	html: [ 'server/*.html' ]
 }
 
 gulp.task( 'browser-sync', function() {
@@ -36,7 +36,7 @@ gulp.task( 'clean', function( cb ) {
 
 gulp.task( 'vectors', function() {
 	return gulp.src( paths.vectors )
-	.pipe( gulp.dest( 'build/assets/vectors' ) )
+	.pipe( gulp.dest( 'build/vectors' ) )
 	.pipe( browserSync.stream() );
 });
 
@@ -46,7 +46,7 @@ gulp.task( 'css', function() {
 	.pipe( sourcemaps.init() )
 	.pipe( sass({ outputStyle: 'compressed' }).on( 'error', sass.logError ) )
 	.pipe( sourcemaps.write() )
-	.pipe( gulp.dest( 'build/assets' ) )
+	.pipe( gulp.dest( 'build' ) )
 	.pipe( browserSync.stream() );
 });
 
@@ -57,7 +57,7 @@ gulp.task( 'vendor', function() {
 	.pipe( sourcemaps.init() )
 	.pipe( uglify() )
 	.pipe( sourcemaps.write( '/' ) )
-	.pipe( gulp.dest( 'build/assets' ) );
+	.pipe( gulp.dest( 'build' ) );
 });
 
 gulp.task( 'app', function() {
@@ -73,25 +73,19 @@ gulp.task( 'app', function() {
 	.pipe( babel( babelConfig ) )
 	.pipe( uglify() )
 	.pipe( sourcemaps.write( '/' ) )
-	.pipe( gulp.dest( 'build/assets' ) )
+	.pipe( gulp.dest( 'build' ) )
 	.pipe( browserSync.stream() );
 
 });
 
-gulp.task( 'html', function() {
-	gulp.src( paths.html )
-	.pipe( gulp.dest( 'build' ) );
-});
-
-gulp.task( 'default', [ 'clean', 'html', 'vectors', 'css', 'vendor', 'app' ] );
+gulp.task( 'default', [ 'clean', 'vectors', 'css', 'vendor', 'app' ] );
 
 gulp.task( 'watch-core', [ 'browser-sync' ], function() {
 
 	var config = {
-		script: 'run.js',
+		script: './server',
 		ignore: [
 			'client/',
-			'templates/',
 			'build/'
 		],
 		ext: 'js'
