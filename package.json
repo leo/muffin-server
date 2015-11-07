@@ -2,7 +2,7 @@
   "name": "muffin",
   "version": "0.1.0",
   "description": "Sweeten your content",
-  "main": "run.js",
+  "main": "index.js",
   "scripts": {
     "start": "gulp watch-core",
     "install": "gulp"
