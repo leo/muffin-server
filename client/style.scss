@@ -140,6 +140,10 @@ select {
 			border-color: #69D2E7;
 		}
 
+		&.wrong {
+			border-color: #FF851B;
+		}
+
 		@media (min-width: 768px) {
 			padding: 11px;
 			margin-bottom: 15px;
@@ -177,10 +181,6 @@ select {
 
 	.shake {
 		animation: shake 1s both;
-	}
-
-	.error input {
-		border-color: #FF851B;
 	}
 
 	@media (min-width: 768px) {

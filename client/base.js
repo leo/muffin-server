@@ -4,29 +4,18 @@ window.App = Ember.Application.create({
 });
 
 App.Router.reopen({
-	rootURL: '/admin/'
+	rootURL: '/admin'
 });
 
 App.Router.map( function() {
-
-	this.resource( 'login', { path: '/' }, function() {
-		this.route( 'new' );
-	});
-
+	this.route( 'login', { path: '/' } );
 });
 
 App.LoginRoute = Ember.Route.extend({
 
-	activate: function() {
-		$( 'body' ).addClass( 'login' );
-	},
-
 	renderTemplate: function() {
-
-		this.render( 'login', {
-			
-		});
-
+		$( 'body' ).addClass( 'login' );
+		this.render( 'login' );
 	}
 
 });
@@ -51,10 +40,12 @@ var tryLogin = function() {
 		} else {
 
 			clearTimeout( timeout );
-			this.set( 'loginStatus', 'error shake' );
+			this.set( 'loginStatus', 'shake' );
+
+			$( 'input' ).addClass( 'wrong' );
 
 			timeout = setTimeout( function() {
-				this.set( 'loginStatus', 'error' );
+				this.set( 'loginStatus', '' );
 			}.bind( this ), 1000);
 
 		}
@@ -67,6 +58,13 @@ App.LoginController = Ember.Controller.extend({
 
 	actions: {
 		login: tryLogin
-	}
+	},
+
+	checkError: function( top, which ) {
+
+		var type = which == 'password' ? 'password' : 'text';
+		$( 'input[type="' + type + '"]' ).removeClass( 'wrong' );
+
+	}.observes( 'username', 'password' )
 
 });
