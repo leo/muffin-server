@@ -90,7 +90,7 @@ app.get( '/admin/logout', function( req, res ) {
 
 });
 
-app.use( '/admin/assets', express.static( 'build/assets' ) );
+app.use( '/admin/assets', express.static( 'build' ) );
 
 app.listen( process.env.PORT || 3000, function() {
 
@@ -199,7 +199,7 @@ function loadView( view, err, content ) {
 }
 
 app.get( '/admin*', function( req, res ) {
-	res.sendFile( 'build/index.html', {root: __dirname } );
+	res.sendFile( './admin.html', { root: __dirname } );
 });
 
 app.get( '/admin/edit/:id', function( req, res ) {
