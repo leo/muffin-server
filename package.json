@@ -9,8 +9,8 @@
   },
   "files": [
     "build",
-    "run.js",
-    "schemas.js"
+    "server",
+    "index.js"
   ],
   "keywords": [
     "content",
