@@ -9,10 +9,11 @@ var sourcemaps = require( 'gulp-sourcemaps' ),
 	download = require( 'gulp-download' ),
 	jquery = require( 'gulp-jquery' ),
 	sass = require( 'gulp-sass' ),
-	nodemon = require( 'gulp-nodemon' );
+	nodemon = require( 'gulp-nodemon' ),
+	babel = require( 'gulp-babel' );
 
 var paths = {
-	app: [ 'templates/*.hbs', 'client/*.js' ],
+	app: [ 'templates/*.hbs', 'client/**/*.js' ],
 	css: [ 'client/*.scss' ],
 	vectors: [ 'client/vectors/*.svg' ],
 	html: [ 'client/*.html' ]
@@ -51,7 +52,7 @@ gulp.task( 'css', function() {
 
 gulp.task( 'vendor', function() {
 	return jquery.src()
-	.pipe( download( 'http://builds.emberjs.com/release/ember.prod.js' ) )
+	.pipe( download( 'http://builds.emberjs.com/release/ember.debug.js' ) )
 	.pipe( concat( 'vendor.js' ) )
 	.pipe( sourcemaps.init() )
 	.pipe( uglify() )
@@ -60,14 +61,21 @@ gulp.task( 'vendor', function() {
 });
 
 gulp.task( 'app', function() {
+
+	var babelConfig = {
+		presets: [ 'es2015' ]
+	}
+
 	return gulp.src( paths.app )
 	.pipe( compiler() )
 	.pipe( concat( 'app.js' ) )
 	.pipe( sourcemaps.init() )
+	.pipe( babel( babelConfig ) )
 	.pipe( uglify() )
 	.pipe( sourcemaps.write( '/' ) )
 	.pipe( gulp.dest( 'build/assets' ) )
 	.pipe( browserSync.stream() );
+
 });
 
 gulp.task( 'html', function() {
