@@ -1,20 +1,20 @@
-window.App = Ember.Application.create({
-	rootElement: 'body',
-	LOG_TRANSITIONS: true
-});
+window.App = Ember.Application.create();
 
 App.Router.reopen({
-	rootURL: '/admin'
+	rootURL: '/admin/'
 });
 
 App.Router.map( function() {
-	this.route( 'login', { path: '/' } );
+	this.route( 'index', { path: '/' } );
 });
 
-App.LoginRoute = Ember.Route.extend({
+App.IndexRoute = Ember.Route.extend({
+
+	activate: function() {
+		$( 'body' ).addClass( 'login' );
+	},
 
 	renderTemplate: function() {
-		$( 'body' ).addClass( 'login' );
 		this.render( 'login' );
 	}
 
@@ -54,17 +54,21 @@ var tryLogin = function() {
 
 }
 
-App.LoginController = Ember.Controller.extend({
+var setClasses = function( top, which ) {
+	var type = which == 'password' ? 'password' : 'text';
+	$( 'input[type="' + type + '"]' ).removeClass( 'wrong' );
+}
+
+App.LoginController = Ember.Route.extend({
 
 	actions: {
 		login: tryLogin
 	},
 
-	checkError: function( top, which ) {
+	checkError: setClasses.observes( 'username', 'password' )
 
-		var type = which == 'password' ? 'password' : 'text';
-		$( 'input[type="' + type + '"]' ).removeClass( 'wrong' );
+});
 
-	}.observes( 'username', 'password' )
-
+App.DashboardController = Ember.Route.extend({
+	content: 'dashboard'
 });
