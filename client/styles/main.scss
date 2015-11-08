@@ -477,6 +477,17 @@ select {
 
 }
 
+#__bs_notify__ {
+	background: #F54747 !important;
+	font-family: inherit !important;
+	border-bottom-left-radius: 0 !important;
+	border-top-right-radius: 5px !important;
+	top: auto !important;
+	right: auto !important;
+	left: 0 !important;
+	bottom: 0 !important;
+}
+
 #chest {
 	background: #fff;
 

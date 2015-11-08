@@ -126,6 +126,15 @@
 		animation: shake 1s both;
 	}
 
+	#__bs_notify__ {
+		border-top-right-radius: 0 !important;
+		border-bottom-left-radius: 5px !important;
+		top: 0 !important;
+		right: 0 !important;
+		left: auto !important;
+		bottom: auto !important;
+	}
+
 	@media (min-width: 768px) {
 		height: 100vh;
 		width: 100vw;
