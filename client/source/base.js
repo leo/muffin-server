@@ -10,15 +10,18 @@ App.Router.map( function() {
 
 App.IndexRoute = Ember.Route.extend({
 
-	activate: function() {
-		//$( 'body' ).addClass( 'login' );
-	},
-
 	renderTemplate: function() {
 
-		this.render( 'admin', {
-			controller: 'dashboard'
-		});
+		if( Cookies.get( 'muff_sess' ) ) {
+
+			this.render( 'admin', {
+				controller: 'dashboard'
+			});
+
+		} else {
+			$( 'body' ).addClass( 'login' );
+			this.render( 'login' );
+		}
 
 	}
 
@@ -40,7 +43,7 @@ var tryLogin = function() {
 	}, function( response ) {
 
 		if( parseInt( response ) ) {
-			this.get( 'target.router' ).refresh();
+			location.reload();
 		} else {
 
 			clearTimeout( timeout );
