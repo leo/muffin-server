@@ -25,7 +25,8 @@ gulp.task( 'browser-sync', function() {
 		proxy: 'http://localhost:3000/admin',
 		files: [ 'build/**/*.*' ],
 		port: 4000,
-		ui: false
+		ui: false,
+		notify: false
 	});
 
 });
