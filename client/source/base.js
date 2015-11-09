@@ -11,7 +11,7 @@ App.Router.map( function() {
 App.IndexRoute = Ember.Route.extend({
 
 	activate: function() {
-		$( 'body' ).addClass( 'login' );
+		//$( 'body' ).addClass( 'login' );
 	},
 
 	renderTemplate: function() {
