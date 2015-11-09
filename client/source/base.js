@@ -59,7 +59,7 @@ var setClasses = function( top, which ) {
 	$( 'input[type="' + type + '"]' ).removeClass( 'wrong' );
 }
 
-App.LoginController = Ember.Route.extend({
+App.LoginController = Ember.Controller.extend({
 
 	actions: {
 		login: tryLogin
@@ -69,6 +69,6 @@ App.LoginController = Ember.Route.extend({
 
 });
 
-App.DashboardController = Ember.Route.extend({
+App.DashboardController = Ember.Controller.extend({
 	content: 'dashboard'
 });
