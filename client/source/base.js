@@ -15,7 +15,11 @@ App.IndexRoute = Ember.Route.extend({
 	},
 
 	renderTemplate: function() {
-		this.render( 'login' );
+
+		this.render( 'admin', {
+			controller: 'dashboard'
+		});
+
 	}
 
 });
@@ -70,5 +74,6 @@ App.LoginController = Ember.Controller.extend({
 });
 
 App.DashboardController = Ember.Controller.extend({
-	content: 'dashboard'
+	content: 'dashboard',
+	divide: 'columns equal'
 });
