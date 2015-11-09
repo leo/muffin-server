@@ -108,7 +108,7 @@ app.listen( process.env.PORT || 3000, function() {
 	var messages = [
 		'MUFFIN IS RUNNING!'.green + '\n',
 		'You can access your site at ' + address.underline.red + '\n',
-		'Use ' + 'cms'.bgWhite + ' + ' + 'double-click'.bgWhite + ' on the link to open it.' + '\n\n'
+		'Use ' + 'cmd'.bgWhite + ' + ' + 'double-click'.bgWhite + ' on the link to open it.' + '\n\n'
 	];
 
 	for( var i = 0; i < messages.length; i++ ) {
