@@ -5,6 +5,10 @@ var Router = Ember.Router.extend({
 	location: config.locationType
 });
 
+Router.reopen({
+	rootURL: '/admin/'
+});
+
 Router.map(function() {
 
 });
