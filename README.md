@@ -4,7 +4,7 @@ If you ask a experienced developer what he's thinking about content management s
 
 Of course it doesn't yet have those cool features which all the other cool kids on the block are showing off. But it's very ambitious and always has an open ear for feedback from all angles!
 
-### Prerequisites
+## Prerequisites
 
 After installing [Git][1], [node.js][2] and [PhantomJS][3], you just need to execute the following command to globally install [bower][4] and the [ember-cli][5]:
 
@@ -14,33 +14,23 @@ npm install -g ember-cli bower
 
 As soon as those packages are installed, you'll be able to start developing by continuing with the step below this one. But if you want to play it safe and make the process as fast as possible, you should also install [Watchman][6].
 
-### Start developing
+## Setup
 
-* `git clone` this repository
-* change into the new directory
-* `npm install`
-* `bower install`
+* Clone this repository: `git clone https://github.com/leo/muffin.git`
+* Change into the new directory
+* `npm install && bower install`
 
-## Running / Development
+## Start developing
 
 * `ember server`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
+* Muffin will be running here: [http://localhost:4200/admin](http://localhost:4200/admin).
 
-### Code Generators
+**Dont forget** to make use of the many generators for code, try `ember help generate` for more details.
 
-Make use of the many generators for code, try `ember help generate` for more details
-
-### Running Tests
+## Testing
 
 * `ember test`
 * `ember test --server`
-
-### Building
-
-* `ember build` (development)
-* `ember build --environment production` (production)
-
-
 
 [1]: http://git-scm.com/
 [2]: http://nodejs.org/
