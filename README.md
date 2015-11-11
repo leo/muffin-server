@@ -4,17 +4,17 @@ If you ask a experienced developer what he's thinking about content management s
 
 Of course it doesn't yet have those cool features which all the other cool kids on the block are showing off. But it's very ambitious and always has an open ear for feedback from all angles!
 
-## Prerequisites
+### Prerequisites
 
-You will need the following things properly installed on your computer.
+After installing [Git][1], [node.js][2] and [PhantomJS][3], you just need to execute the following command to globally install [bower][4] and the [ember-cli][5]:
 
-* [Git](http://git-scm.com/)
-* [Node.js](http://nodejs.org/) (with NPM)
-* [Bower](http://bower.io/)
-* [Ember CLI](http://www.ember-cli.com/)
-* [PhantomJS](http://phantomjs.org/)
+```
+npm install -g ember-cli bower
+```
 
-## Installation
+As soon as those packages are installed, you'll be able to start developing by continuing with the step below this one. But if you want to play it safe and make the process as fast as possible, you should also install [Watchman][6].
+
+### Start developing
 
 * `git clone` this repository
 * change into the new directory
@@ -39,3 +39,12 @@ Make use of the many generators for code, try `ember help generate` for more det
 
 * `ember build` (development)
 * `ember build --environment production` (production)
+
+
+
+[1]: http://git-scm.com/
+[2]: http://nodejs.org/
+[3]: http://phantomjs.org/
+[4]: http://bower.io
+[5]: http://www.ember-cli.com
+[6]: https://facebook.github.io/watchman/docs/install.html
