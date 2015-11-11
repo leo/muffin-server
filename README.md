@@ -18,14 +18,14 @@ As soon as those packages are installed, you'll be able to start developing by c
 
 * Clone this repository: `git clone https://github.com/leo/muffin.git`
 * Change into the new directory
-* `npm install && bower install`
+* Run `npm install && bower install` to install all dependencies
 
 ## Start developing
 
 * `ember server`
 * Muffin will be running here: [http://localhost:4200/admin](http://localhost:4200/admin).
 
-**Dont forget** to make use of the many generators for code, try `ember help generate` for more details.
+Dont forget to make use of the many generators for code, try `ember help generate` for more details.
 
 ### Testing
 
