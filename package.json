@@ -1,0 +1,28 @@
+{
+  "name": "muffin",
+  "version": "0.1.0",
+  "description": "Sweeten your content",
+  "private": true,
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "author": "Leonard Lamprecht <lamprechtleonard@gmail.com> (http://leo.im)",
+  "keywords": [
+    "content",
+    "management",
+    "system",
+    "chocolate",
+    "yummy"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "colors": "^1.1.2",
+    "compression": "^1.6.0",
+    "cookie-parser": "^1.4.0",
+    "cookie-session": "^1.2.0",
+    "express": "^4.13.3",
+    "handlebars": "^4.0.4",
+    "mongoose": "^4.2.5"
+  }
+}
