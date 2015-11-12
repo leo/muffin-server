@@ -31,7 +31,7 @@ As soon as those packages are installed, you'll be able to start developing by c
 ### Start developing
 
 * `ember server`
-* The app will be running here: [http://localhost:4200/admin](http://localhost:4200/admin).
+* The app will be running here: [http://localhost:4200/admin/](http://localhost:4200/admin/).
 
 Dont forget to make use of the many generators for code, try `ember help generate` for more details. If you want to test your code, simply use `ember test` and `ember test --server`.
 
