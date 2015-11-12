@@ -6,11 +6,11 @@ var Router = Ember.Router.extend({
 });
 
 Router.reopen({
-	rootURL: '/admin/'
+	
 });
 
 Router.map(function() {
-
+	this.route( 'index', { path: '/' } );
 });
 
 export default Router;
