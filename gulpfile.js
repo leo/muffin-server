@@ -1,11 +1,7 @@
 var gulp = require( 'gulp' ),
 	shell = require( 'gulp-shell' );
 
-gulp.task( 'setup', shell.task([
-	'npm install'
-]));
-
-gulp.task( 'default', [ 'setup' ], shell.task([
+gulp.task( 'default', shell.task([
 	'npm install',
 	'bower install'
 ], {
