@@ -6,7 +6,7 @@ Of course it doesn't yet have those cool features which all the other cool kids 
 
 ## Use me
 
-If you'd like to use muffin in production, install it by executing this command:
+If you'd like to use muffin for your next project, simply install our neat command line interface and generate a new boilerplate within the current directory.
 
 ```
 npm install -g muffin-cli
