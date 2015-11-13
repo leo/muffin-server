@@ -4,7 +4,7 @@
   "description": "Sweeten your content",
   "private": true,
   "scripts": {
-    "start": "node index"
+    "start": "gulp watch"
   },
   "engines": {
     "node": ">= 0.10.0"
@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "gulp": "^3.9.0",
+    "gulp-nodemon": "^2.0.4",
     "gulp-shell": "^0.5.1"
   }
 }
