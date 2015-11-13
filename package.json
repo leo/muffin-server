@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "description": "Sweeten your content",
   "private": true,
+  "scripts": {
+    "start": "node index"
+  },
   "engines": {
     "node": ">= 0.10.0"
   },
