@@ -91,7 +91,11 @@ app.get( '/admin/logout', function( req, res ) {
 
 });
 
-app.use( '/admin/assets', express.static( 'build' ) );
+app.use( '/admin/assets', express.static( 'client/dist/assets' ) );
+
+app.get( '/admin*', function( req, res ) {
+	res.sendFile( 'client/dist/index.html', { root: __dirname + '/..' } );
+});
 
 app.listen( process.env.PORT || 3000, function() {
 
@@ -101,7 +105,7 @@ app.listen( process.env.PORT || 3000, function() {
 		dir = current.substring( current.lastIndexOf( '/' ) + 1, current.length );
 
 	var host = this.address().address == '::' && 'localhost',
-		port = dir == 'muffin' ? 4000 + '/admin' : this.address().port;
+		port = this.address().port + '/admin';
 
 	var address = 'http://' + host + ':' + port;
 	process.stdout.write( '\u001b[2J\u001b[0;0H' );
@@ -198,10 +202,6 @@ function loadView( view, err, content ) {
 	return container( tags );
 
 }
-
-app.get( '/admin*', function( req, res ) {
-	res.sendFile( './admin.html', { root: __dirname } );
-});
 
 app.get( '/admin/edit/:id', function( req, res ) {
 
