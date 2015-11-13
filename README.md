@@ -22,7 +22,7 @@ $ git clone git://github.com/leo/muffin.git
 $ cd muffin
 ```
 
-Load muffin's task manager
+Setup muffin's task manager
 
 ```bash
 $ npm install -g gulp
