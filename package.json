@@ -27,5 +27,9 @@
     "express": "^4.13.3",
     "handlebars": "^4.0.4",
     "mongoose": "^4.2.5"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-shell": "^0.5.1"
   }
 }
