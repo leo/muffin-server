@@ -31,6 +31,7 @@ $ npm install -g gulp
 Install all other dependencies and build the assets
 
 ```bash
+$ npm install
 $ gulp 
 ```
 
