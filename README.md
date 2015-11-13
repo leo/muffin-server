@@ -9,7 +9,8 @@ Of course it doesn't yet have those cool features which all the other cool kids 
 If you'd like to use muffin in production, install it by executing this command:
 
 ```
-npm install muffin
+npm install -g muffin-cli
+muffin init
 ```
 
 ## Develop me
