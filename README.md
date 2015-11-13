@@ -15,20 +15,20 @@ $ muffin init
 
 ## Develop me
 
-1. Clone this repo
+Clone this repo
 
 ```bash
 $ git clone git://github.com/leo/muffin.git
 $ cd muffin
 ```
 
-2. Load muffin's task manager
+Load muffin's task manager
 
 ```bash
 $ npm install -g gulp
 ```
 
-3. Install all other dependencies and build the assets
+Install all other dependencies and build the assets
 
 ```bash
 $ gulp 
@@ -42,4 +42,4 @@ You've made it! Now you only need to start the app and it will be running here: 
 $ npm start
 ```
 
-Dont forget to make use of the many generators for code, try `ember help generate` for more details. If you want to test your code, simply use `ember test` and `ember test --server`.
+Dont forget to make use of the many generators for the development within `/client` and try `ember help generate` for more details. If you want to test your code, simply use `ember test` and `ember test --server`.
