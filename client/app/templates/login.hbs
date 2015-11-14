@@ -1,7 +1,3 @@
-{{#if session.isAuthenticated }}
-I'm in!
-{{/if}}
-
 <form {{action "authenticate" on="submit"}} class={{loginStatus}}>
 
 	{{input placeholder="Username" autocomplete="off" value=username autofocus="true"}}
