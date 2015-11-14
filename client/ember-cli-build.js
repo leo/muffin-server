@@ -16,6 +16,10 @@ module.exports = function( defaults ) {
 				}
 			}
 
+		},
+
+		minifyJS: {
+			enabled: true
 		}
 
 	});
