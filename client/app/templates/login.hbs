@@ -1,4 +1,8 @@
-<form {{action "login" on="submit"}} class={{loginStatus}}>
+{{#if session.isAuthenticated }}
+I'm in!
+{{/if}}
+
+<form {{action "authenticate" on="submit"}} class={{loginStatus}}>
 
 	{{input placeholder="Username" autocomplete="off" value=username autofocus="true"}}
 	{{input type="password" placeholder="Password" autocomplete="off" value=password}}

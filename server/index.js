@@ -128,8 +128,22 @@ app.use( bodyParser.urlencoded({
   extended: false
 }) );
 
-app.post( '/admin', function( req, res ) {
+app.post( '/token', function( req, res ) {
 
+	if( req.body.grant_type === 'password' ) {
+
+		if( req.body.username === 'letme' && req.body.password === 'in' ) {
+			res.status( 200 ).send( '{ "access_token": "secret token!" }' );
+		} else {
+			res.status( 400 ).send( '{ "error": "invalid_grant" }' );
+		}
+
+	} else {
+		res.status( 400 ).send( '{ "error": "unsupported_grant_type" }' );
+	}
+
+
+	/*
 	var query = User.findOne({
 		'_id': req.body.username
 	});
@@ -149,7 +163,7 @@ app.post( '/admin', function( req, res ) {
 			res.send( '0' );
 		}
 
-	});
+	});*/
 
 });
 
