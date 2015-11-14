@@ -1,1 +1,60 @@
-{{outlet}}
+{{#if session.isAuthenticated }}
+
+<header id="chest">
+	<div class="inner">
+
+		<nav>
+			<a href="#">Dashboard</a>
+			<a href="#">Pages</a>
+			<a href="#">Posts</a>
+			<a href="#">Media</a>
+			<a href="#">Settings</a>
+		</nav>
+
+		<a href="/admin/logout" class="logo"></a>
+
+		<a href="#menu" class="toggle">
+			<span>
+				<b></b>
+				<b></b>
+				<b></b>
+			</span>
+		</a>
+
+	</div>
+</header>
+
+{{/if}}
+
+<main id="belly">
+
+	{{#if session.isAuthenticated }}
+
+	<aside id="title">
+
+		<div class="inner">
+			<h1>Test</h1>
+		</div>
+
+	</aside>
+
+	{{/if}}
+
+	<section id="content" class="columns equal">
+		{{outlet}}
+	</section>
+
+</main>
+
+{{#if session.isAuthenticated }}
+
+<footer id="ass">
+
+	<div class="inner">
+		<a href="http://muff.in" target="_blank"></a>
+		<p>You're using Muffin 1.0.0, thank you!</p>
+	</div>
+
+</footer>
+
+{{/if}}
