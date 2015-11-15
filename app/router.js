@@ -10,8 +10,8 @@ Router.reopen({
 });
 
 Router.map(function() {
-  this.route( 'login', { path: '/' } );
-  this.route( 'dashboard' );
+	this.route( 'login', { path: '/' } );
+	this.route( 'dashboard' );
 });
 
 export default Router;
