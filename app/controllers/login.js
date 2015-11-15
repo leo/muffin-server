@@ -26,13 +26,12 @@ export default Ember.Controller.extend({
 			});
 
 			this.get( 'session' ).on( 'authenticationSucceeded', function() {
-				//this.transitionToRoute( 'dashboard' );
+				this.transitionToRoute( 'dashboard' );
 			}.bind(this));
 
 		},
 
 		checkError: function( top, which ) {
-			console.log("test")
 			var type = which === 'password' ? 'password' : 'text';
 			$( 'input[type="' + type + '"]' ).removeClass( 'wrong' );
 		}.observes( 'username', 'password' )
