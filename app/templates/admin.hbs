@@ -1,5 +1,3 @@
-{{#if session.isAuthenticated }}
-
 <header id="chest">
 	<div class="inner">
 
@@ -24,11 +22,7 @@
 	</div>
 </header>
 
-{{/if}}
-
 <main id="belly">
-
-	{{#if session.isAuthenticated }}
 
 	<aside id="title">
 
@@ -38,15 +32,11 @@
 
 	</aside>
 
-	{{/if}}
-
 	<section id="content" class="columns equal">
-		{{outlet}}
+		{{partial content}}
 	</section>
 
 </main>
-
-{{#if session.isAuthenticated }}
 
 <footer id="ass">
 
@@ -56,5 +46,3 @@
 	</div>
 
 </footer>
-
-{{/if}}
