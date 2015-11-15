@@ -6,6 +6,10 @@ export default Ember.Controller.extend({
 	actions: {
 		authenticate() {
 
+			if( $( 'form' ).hasClass( 'shake' ) ) {
+				return;
+			}
+
 			let { username, password } = this.getProperties( 'username', 'password' );
 
 			this.get( 'session' ).authenticate( 'authenticator:oauth2', username, password ).catch( (reason) => {
