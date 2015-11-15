@@ -1,7 +1,7 @@
 var gulp = require( 'gulp' ),
 	shell = require( 'gulp-shell' ),
 	nodemon = require( 'gulp-nodemon' );
-
+/*
 gulp.task( 'core', function() {
 
 	nodemon({
@@ -23,4 +23,4 @@ gulp.task( 'default', shell.task([
 	'bower install'
 ], {
 	cwd: process.cwd() + '/client'
-}));
+}));*/

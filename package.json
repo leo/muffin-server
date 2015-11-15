@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "ember build",
-    "start": "ember server",
+    "start": "gulp",
     "test": "ember test"
   },
   "engines": {
