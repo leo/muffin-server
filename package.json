@@ -35,9 +35,6 @@
     "mongoose": "^4.2.5"
   },
   "devDependencies": {
-    "gulp": "^3.9.0",
-    "gulp-nodemon": "^2.0.4",
-    "gulp-shell": "^0.5.1",
     "broccoli-asset-rev": "^2.2.0",
     "ember-cli": "^1.13.12",
     "ember-cli-app-version": "^1.0.0",
