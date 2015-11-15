@@ -4,7 +4,6 @@
   "description": "Sweeten your content",
   "private": true,
   "directories": {
-    "doc": "doc",
     "test": "tests"
   },
   "scripts": {
@@ -13,7 +12,7 @@
     "test": "ember test"
   },
   "engines": {
-    "node": ">= 0.10.0"
+    "node": ">= 4.2.2"
   },
   "author": "Leonard Lamprecht <lamprechtleonard@gmail.com> (http://leo.im)",
   "keywords": [
