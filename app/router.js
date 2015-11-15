@@ -11,7 +11,6 @@ Router.reopen({
 
 Router.map(function() {
   this.route( 'index', { path: '/' } );
-  this.route( 'dashboard' );
 });
 
 export default Router;
