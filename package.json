@@ -1,7 +1,7 @@
 {
   "name": "muffin",
   "version": "0.1.0",
-  "description": "Sweeten your content",
+  "description": "Sweetening your experience with content",
   "private": true,
   "directories": {
     "test": "tests"
