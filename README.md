@@ -22,17 +22,16 @@ $ git clone git://github.com/leo/muffin.git
 $ cd muffin
 ```
 
-Setup muffin's task manager
+Load ember's CLI - one of the best frameworks around
 
 ```bash
-$ npm install -g gulp
+$ npm install -g ember-cli
 ```
 
-Install all other dependencies and build the assets
+Install all other dependencies
 
 ```bash
 $ npm install
-$ gulp 
 ```
 
 ### Start developing
