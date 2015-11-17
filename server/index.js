@@ -4,7 +4,6 @@ var mongo = require( 'mongoose' ),
 	models = require( './models' ),
 	express = require( 'express' ),
 	apiRouter = express.Router(),
-	fs = require( 'fs' ),
 	bodyParser = require( 'body-parser' ),
 	globSync = require( 'glob' ).sync;
 
