@@ -62,9 +62,9 @@ module.exports = function( app, options ) {
 
 		function denyAccess() {
 
-			res.status( 400 ).send(JSON.stringify({
+			res.status( 400 ).json({
 				error: 'invalid_grant'
-			}));
+			});
 
 		}
 
@@ -82,9 +82,9 @@ module.exports = function( app, options ) {
 					denyAccess();
 				} else if( user.password == req.body.password ) {
 
-					res.status( 200 ).send(JSON.stringify({
+					res.status( 200 ).json({
 						access_token: 'secret token!'
-					}));
+					});
 
 				} else {
 					denyAccess();
@@ -92,9 +92,9 @@ module.exports = function( app, options ) {
 
 			} else {
 
-				res.status( 400 ).send(JSON.stringify({
+				res.status( 400 ).json({
 					error: 'unsupported_grant_type'
-				}));
+				});
 
 			}
 
