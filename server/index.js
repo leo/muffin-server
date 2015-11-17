@@ -102,6 +102,16 @@ module.exports = function( app, options ) {
 
 	});
 
+	app.get( '/muffin', function( req, res, next ) {
+
+		if( req.path != '/muffin/' ) {
+			res.redirect( '/muffin/' );
+		} else {
+			next();
+		}
+
+	});
+
 	options.httpServer.on( 'listening', function() {
 
 		require( 'colors' );
