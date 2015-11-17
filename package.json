@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build": "ember build",
-    "start": "gulp",
+    "start": "ember server",
     "test": "ember test"
   },
   "engines": {
