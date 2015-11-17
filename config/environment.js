@@ -5,7 +5,7 @@ module.exports = function( environment ) {
 	var ENV = {
 		modulePrefix: 'muffin',
 		environment: environment,
-		baseURL: '/muffin',
+		baseURL: '/muffin/',
 		locationType: 'auto',
 
 		EmberENV: {
@@ -40,7 +40,7 @@ module.exports = function( environment ) {
 	if( environment === 'test' ) {
 
 		// Testem prefers this...
-		ENV.baseURL = '/muffin';
+		ENV.baseURL = '/muffin/';
 		ENV.locationType = 'none';
 
 		// keep test console output quieter
