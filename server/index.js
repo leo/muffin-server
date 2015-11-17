@@ -34,24 +34,6 @@ module.exports = function( app, options ) {
 
 	});
 
-	var toUse = {
-		parser: require( 'cookie-parser' ),
-		session: require( 'cookie-session' )
-	}
-
-	for( var module in toUse ) {
-
-		var item = toUse[module],
-			session = {
-				secret: 'w,]8vVjgibJn+)v7d4zE9P>LXVQ6b',
-				name: 'muff_sess',
-				httpOnly: false
-			};
-
-		app.use( item( module == 'session' && session ) );
-
-	}
-
 	app.use( bodyParser.json() );
 
 	app.use( bodyParser.urlencoded({
