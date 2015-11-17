@@ -1,15 +1,12 @@
 var mongo = require( 'mongoose' ),
 	compression = require( 'compression' ),
 	mongo = require( 'mongoose' ),
-	models = require( './models' ),
 	express = require( 'express' ),
-	apiRouter = express.Router(),
 	bodyParser = require( 'body-parser' ),
-	globSync = require( 'glob' ).sync;
+	globSync = require( 'glob' ).sync,
+	morgan = require( 'morgan' );
 
 module.exports = function( app, options ) {
-
-	var User = models( 'user' );
 
 	mongo.createConnection( 'mongodb://localhost/muffin' );
 	app.use( compression() );
@@ -38,50 +35,6 @@ module.exports = function( app, options ) {
 	app.use( bodyParser.urlencoded({
 		extended: false
 	}));
-
-	apiRouter.post( '/token', function( req, res ) {
-
-		function denyAccess() {
-
-			res.status( 400 ).json({
-				error: 'invalid_grant'
-			});
-
-		}
-
-		var query = User.findOne({
-			'_id': req.body.username
-		});
-
-		query.select( 'password' );
-
-		query.exec( function( err, user ) {
-
-			if( req.body.grant_type === 'password' ) {
-
-				if( !user ) {
-					denyAccess();
-				} else if( user.password == req.body.password ) {
-
-					res.status( 200 ).json({
-						access_token: 'secret token!'
-					});
-
-				} else {
-					denyAccess();
-				}
-
-			} else {
-
-				res.status( 400 ).json({
-					error: 'unsupported_grant_type'
-				});
-
-			}
-
-		});
-
-	});
 
 	app.get( '/muffin', function( req, res, next ) {
 
@@ -118,6 +71,11 @@ module.exports = function( app, options ) {
 
 	});
 
-	app.use( '/muffin', apiRouter );
+	var routes = globSync( './routes/*.js', { cwd: __dirname } ).map( require );
+	app.use( morgan( 'dev' ) );
+
+	routes.forEach( function( route ) {
+		route( app );
+	});
 
 }
