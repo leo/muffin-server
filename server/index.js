@@ -3,7 +3,7 @@ var mongo = require( 'mongoose' ),
 	mongo = require( 'mongoose' ),
 	models = require( './models' ),
 	express = require( 'express' ),
-	app = express(),
+	apiRouter = express.Router(),
 	fs = require( 'fs' ),
 	bodyParser = require( 'body-parser' ),
 	globSync = require( 'glob' ).sync;
@@ -58,7 +58,7 @@ module.exports = function( app, options ) {
 		extended: false
 	}));
 
-	app.post( '/muffin/token', function( req, res ) {
+	apiRouter.post( '/token', function( req, res ) {
 
 		function denyAccess() {
 
@@ -136,5 +136,7 @@ module.exports = function( app, options ) {
 		}
 
 	});
+
+	app.use( '/muffin', apiRouter );
 
 }
