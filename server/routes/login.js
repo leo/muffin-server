@@ -10,7 +10,7 @@ module.exports = function( app ) {
 
 		function denyAccess() {
 
-			res.status( 400 ).json({
+			res.status( 403 ).json({
 				error: 'invalid_grant'
 			});
 
@@ -30,7 +30,7 @@ module.exports = function( app ) {
 					denyAccess();
 				} else if( user.password == req.body.password ) {
 
-					res.status( 200 ).json({
+					res.json({
 						access_token: 'secret token!'
 					});
 
