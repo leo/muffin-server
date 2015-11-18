@@ -16,6 +16,10 @@ module.exports = function( defaults ) {
 				}
 			}
 
+		},
+
+		sourcemaps: {
+			enabled: false
 		}
 
 	});
