@@ -4,6 +4,7 @@ export default Ember.Controller.extend({
 	session: Ember.inject.service( 'session' ),
 
 	actions: {
+
 		authenticate() {
 
 			if( $( 'form' ).hasClass( 'shake' ) ) {
