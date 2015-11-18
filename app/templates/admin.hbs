@@ -9,7 +9,7 @@
 			<a href="#">Settings</a>
 		</nav>
 
-		<a href="/admin/logout" class="logo"></a>
+		<a href="#" class="logo" {{action "logout"}}></a>
 
 		{{#toggle-nav}}
 			<span>
@@ -33,7 +33,7 @@
 	</aside>
 
 	<section id="content" class="columns equal">
-		{{partial content}}
+		{{partial base}}
 	</section>
 
 </main>
