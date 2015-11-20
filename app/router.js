@@ -13,6 +13,7 @@ Router.map(function() {
 	this.route( 'login', { path: '/' } );
 	this.route( 'dashboard' );
 	this.route( 'list' );
+	this.route( 'media' );
 });
 
 export default Router;
