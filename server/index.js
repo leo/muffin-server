@@ -8,7 +8,10 @@ var mongo = require( 'mongoose' ),
 
 module.exports = function( app, options ) {
 
-	mongo.connect( 'mongodb://localhost/muffin' );
+	if( !mongo.connection.readyState ) {
+		mongo.connect( 'mongodb://localhost/muffin' );
+	}
+
 	app.use( compression() );
 
 	var db = mongo.connection;
