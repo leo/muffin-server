@@ -1,20 +1,30 @@
-module.exports = function( app ) {
+var express = require( 'express' ),
+	loginRouter = express.Router(),
+	models = require( '../models' );
 
-	var express = require( 'express' ),
-		loginRouter = express.Router(),
-		models = require( '../models' );
+var User = models( 'user' );
 
-	var User = models( 'user' );
+function generateToken() {
+
+	var n = Math.floor( Math.random() * 11 ),
+		k = Math.floor( Math.random() * 1000000 ),
+		m = String.fromCharCode( n ) + k;
+
+	return m;
+
+}
+
+function denyAccess( res ) {
+
+	res.status( 403 ).json({
+		error: 'invalid_grant'
+	});
+
+}
+
+function loginRoute( app ) {
 
 	loginRouter.post( '/token', function( req, res ) {
-
-		function denyAccess() {
-
-			res.status( 403 ).json({
-				error: 'invalid_grant'
-			});
-
-		}
 
 		var query = User.findOne({
 			'_id': req.body.username
@@ -27,15 +37,15 @@ module.exports = function( app ) {
 			if( req.body.grant_type === 'password' ) {
 
 				if( !user ) {
-					denyAccess();
+					denyAccess( res );
 				} else if( user.password == req.body.password ) {
 
 					res.json({
-						access_token: 'secret token!'
+						access_token: generateToken()
 					});
 
 				} else {
-					denyAccess();
+					denyAccess( res );
 				}
 
 			} else {
@@ -53,3 +63,5 @@ module.exports = function( app ) {
 	app.use( '/muffin', loginRouter );
 
 }
+
+module.exports = loginRoute;
