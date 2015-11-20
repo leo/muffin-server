@@ -10,7 +10,7 @@ function generateToken() {
 		k = Math.floor( Math.random() * 1000000 ),
 		m = String.fromCharCode( n ) + k;
 
-	return m;
+	return m.trim();
 
 }
 
