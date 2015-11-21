@@ -10,6 +10,10 @@ export default Ember.Route.extend({
 			controller: 'media'
 		});
 
+	},
+
+	model() {
+		console.log( this.store.query( 'file' ) );
 	}
 
 });
