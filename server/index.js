@@ -74,10 +74,16 @@ module.exports = function( app, options ) {
 
 	});
 
-	var routes = globSync( './routes/*.js', { cwd: __dirname } ).map( require );
+	var routes = globSync( './routes/*.js', { cwd: __dirname } ).map( require ),
+		mocks = globSync( './mocks/**/*.js', { cwd: __dirname } ).map( require );
+
 	app.use( morgan( 'dev' ) );
 
 	routes.forEach( function( route ) {
+		route( app );
+	});
+
+	mocks.forEach( function( route ) {
 		route( app );
 	});
 
