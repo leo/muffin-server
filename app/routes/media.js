@@ -13,7 +13,7 @@ export default Ember.Route.extend({
 	},
 
 	model() {
-		console.log( this.store.query( 'file' ) );
+		return this.store.findAll( 'file' );
 	}
 
 });
