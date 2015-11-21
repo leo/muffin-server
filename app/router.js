@@ -10,10 +10,14 @@ Router.reopen({
 });
 
 Router.map(function() {
-	this.route( 'login', { path: '/' } );
-	this.route( 'dashboard' );
-	this.route( 'list' );
-	this.route( 'media' );
+
+	this.route( 'login' );
+
+	this.route( 'admin', { path: '/' }, function() {
+		this.route( 'list' );
+		this.route( 'media' );
+	});
+
 });
 
 export default Router;

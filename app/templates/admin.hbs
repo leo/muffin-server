@@ -2,9 +2,9 @@
 	<div class="inner">
 
 		<nav>
-			{{#link-to "dashboard"}}Dashboard{{/link-to}}
-			{{#link-to "list"}}Pages{{/link-to}}
-			{{#link-to "media"}}Media{{/link-to}}
+			{{#link-to "admin.index"}}Dashboard{{/link-to}}
+			{{#link-to "admin.list"}}Pages{{/link-to}}
+			{{#link-to "admin.media"}}Media{{/link-to}}
 			<a href="#">Settings</a>
 		</nav>
 
@@ -32,7 +32,7 @@
 	</aside>
 
 	<section id="content" class="columns equal">
-		{{partial base}}
+		{{outlet}}
 	</section>
 
 </main>
