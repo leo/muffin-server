@@ -37,16 +37,6 @@ var getModel = function( name ) {
 			versionKey: false
 		});
 
-	var virtualID = me.virtual( 'id' );
-
-	virtualID.get( function() {
-		return this._id;
-	});
-
-	virtualID.set( function( value ) {
-		this._id = value;
-	});
-
 	return checkModel( name, me );
 
 }

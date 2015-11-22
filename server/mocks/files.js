@@ -10,7 +10,7 @@ module.exports = function(app) {
 		for( var i = 0; i < 42; ++i ) {
 
 			list.push({
-				id: i,
+				_id: i,
 				url: 'assets/sample.png'
 			});
 
