@@ -11,22 +11,22 @@
 
 	<tbody>
 
-		{{#each items}}
+		{{#each model as |page|}}
 
 		<tr>
 			<td><input type="checkbox"></td>
 			<td>
 
-				<a href="/admin/edit/{{id}}" class="title">{{title}}</a>
+				<a href="/admin/edit/{{page.id}}" class="title">{{page.title}}</a>
 
 				<ul>
-					<li class="edit"><a href="/admin/edit/{{id}}">Edit</a></li>
+					<li class="edit"><a href="/admin/edit/{{page.id}}">Edit</a></li>
 					<li class="delete"><a href="#">Delete</a></li>
 					<li class="view"><a href="#">View</a></li>
 				</ul>
 
 			</td>
-			<td><a href="#" class="author">{{author}}</a></td>
+			<td><a href="#" class="author">{{page.author}}</a></td>
 			<td>August 28, 2015</td>
 		</tr>
 
