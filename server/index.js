@@ -23,6 +23,7 @@ module.exports = function( app, options ) {
 
 	db.on( 'disconnected', function() {
 		console.log( 'Muffin stopped running (DB error)' );
+		process.exit();
 	});
 
 	process.on( 'SIGINT', function() {
