@@ -14,8 +14,8 @@ Router.map(function() {
 	this.route( 'login' );
 
 	this.route( 'admin', { path: '/' }, function() {
-		this.route( 'list' );
 		this.route( 'media' );
+		this.route( 'pages' );
 	});
 
 });
