@@ -22,12 +22,14 @@ module.exports = function( app ) {
 
 	pagesRouter.get( '/:id', function( req, res ) {
 
-		res.send({
-			'files': {
-				id: req.params.id,
-				title: 'test',
-				author: 'Leonard'
-			}
+		var which = {
+			_id: req.params.id
+		}
+
+		Page.findOne( which, 'title author', function( err, result ) {
+			res.send({
+				'pages': result
+			});
 		});
 
 	});
@@ -35,7 +37,7 @@ module.exports = function( app ) {
 	pagesRouter.put( '/:id', function( req, res ) {
 
 		res.send({
-			'files': {
+			'pages': {
 				id: req.params.id
 			}
 		});
