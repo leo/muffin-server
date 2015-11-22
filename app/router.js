@@ -15,7 +15,9 @@ Router.map(function() {
 
 	this.route( 'admin', { path: '/' }, function() {
 		this.route( 'media' );
-		this.route( 'pages' );
+		this.route( 'pages', function() {
+			this.route( 'edit', { path: '/:id' } );
+		});
 	});
 
 });

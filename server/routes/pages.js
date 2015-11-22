@@ -24,7 +24,9 @@ module.exports = function( app ) {
 
 		res.send({
 			'files': {
-				id: req.params.id
+				id: req.params.id,
+				title: 'test',
+				author: 'Leonard'
 			}
 		});
 
