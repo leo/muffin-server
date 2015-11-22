@@ -22,7 +22,7 @@ function denyAccess( res ) {
 
 }
 
-function loginRoute( app ) {
+module.exports = function( app ) {
 
 	loginRouter.post( '/token', function( req, res ) {
 
@@ -63,5 +63,3 @@ function loginRoute( app ) {
 	app.use( '/muffin', loginRouter );
 
 }
-
-module.exports = loginRoute;
