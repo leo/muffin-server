@@ -868,30 +868,40 @@ select {
 		visibility: visible;
 	}
 
-	.columns {
-		display: flex;
-		justify-content: space-between;
+	.index, .media {
+
+		#content {
+			display: flex;
+			justify-content: space-between;
+		}
+
 	}
 
-	.columns.equal {
-		display: flex;
-	}
+	.index {
 
-	.columns.equal > aside {
-		width: 50%;
-		padding: 0 12.5px;
-	}
+		#content {
+			display: flex;
 
-	.columns.equal > aside:first-child {
-		padding-left: 0;
-	}
+			> aside {
+				width: 50%;
+				padding: 0 12.5px;
 
-	.columns.equal > aside:last-child {
-		padding-right: 0;
-	}
+				&:first-child {
+					padding-left: 0;
+				}
 
-	.columns.equal .box {
-		margin-bottom: 25px;
+				&:last-child {
+					padding-right: 0;
+				}
+
+			}
+
+			.box {
+				margin-bottom: 25px;
+			}
+
+		}
+
 	}
 
 	#chest {
