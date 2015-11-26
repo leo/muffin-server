@@ -386,6 +386,19 @@ select {
 			display: table-cell;
 		}
 
+		@media (min-width: 768px) {
+
+			&:nth-child(3),
+			&:nth-child(4) {
+				display: table-cell;
+			}
+
+			&:nth-child(4) {
+				width: 160px;
+			}
+
+		}
+
 	}
 
 	tbody {
@@ -498,6 +511,16 @@ select {
 			color: #A0A0A0;
 		}
 
+		@media (min-width: 768px) {
+
+			a {
+				font-size: 15.5px;
+				padding: 10px 0;
+				margin: 6px 0;
+			}
+
+		}
+
 	}
 
 	.inner {
@@ -507,6 +530,14 @@ select {
 			height: 50px;
 			width: 70px;
 			display: block;
+		}
+
+		@media (min-width: 768px) {
+
+			> a {
+				height: 60px;
+			}
+
 		}
 
 	}
@@ -559,6 +590,10 @@ select {
 
 		}
 
+		@media (min-width: 768px) {
+			line-height: 60px;
+		}
+
 	}
 
 }
@@ -571,6 +606,12 @@ select {
 		margin: 0;
 		font-size: 20px;
 		padding: 31px 20px;
+
+		@media (min-width: 768px) {
+			padding-top: 38px;
+			padding-bottom: 38px;
+		}
+
 	}
 
 	nav {
@@ -607,6 +648,19 @@ select {
 			border-left: 2px solid #E3E3E3;
 		}
 
+		@media (min-width: 768px) {
+			position: absolute;
+			right: 0;
+			bottom: 0;
+
+			a {
+				padding: 10px 19px;
+				font-size: 13px;
+				margin: 0 8px;
+			}
+
+		}
+
 	}
 
 	.inner {
@@ -634,6 +688,11 @@ select {
 
 #belly {
 	min-height: calc(100vh - 188px);
+
+	@media (min-width: 768px) {
+		min-height: calc(100vh - 130px);
+	}
+
 }
 
 #content {
@@ -644,6 +703,16 @@ select {
 
 		&:last-child {
 			margin-bottom: 0;
+		}
+
+	}
+
+	@media (min-width: 768px) {
+		padding-top: 65px;
+		padding-bottom: 65px;
+
+		> aside {
+			margin-bottom: 35px;
 		}
 
 	}
@@ -693,10 +762,33 @@ select {
 
 	}
 
+	@media (min-width: 768px) {
+		margin-left: -10px;
+		margin-right: -10px;
+
+		li {
+			width: 20%;
+			padding: 10px;
+		}
+
+	}
+
 }
 
 #sidebar .box summary:after {
 	display: none;
+}
+
+#sidebar .box summary {
+
+	&:after {
+		display: none;
+	}
+
+	@media (min-width: 768px) {
+		background: #F9F9F9;
+	}
+
 }
 
 #ass {
@@ -725,6 +817,23 @@ select {
 		padding: 0;
 	}
 
+	@media (min-width: 768px) {
+
+		a {
+			float: left;
+			width: 37px;
+			height: 30px;
+		}
+
+		p {
+			float: right;
+			text-align: right;
+			margin: 0;
+			line-height: 30px;
+		}
+
+	}
+
 }
 
 #overlay {
@@ -740,90 +849,6 @@ select {
 
 	section {
 		box-sizing: border-box;
-	}
-
-}
-
-@media (min-width: 768px) {
-
-	.list td:nth-child(3),
-	.list td:nth-child(4) {
-		display: table-cell;
-	}
-
-	.list td:nth-child(4) {
-		width: 160px;
-	}
-
-	#chest .inner > a {
-		height: 60px;
-	}
-
-	#chest .toggle {
-		line-height: 60px;
-	}
-
-	#chest nav a {
-		font-size: 15.5px;
-		padding: 10px 0;
-		margin: 6px 0;
-	}
-
-	#title h1 {
-		padding-top: 38px;
-		padding-bottom: 38px;
-	}
-
-	#title nav {
-		position: absolute;
-		right: 0;
-		bottom: 0;
-	}
-
-	#title nav a {
-		padding: 10px 19px;
-		font-size: 13px;
-		margin: 0 8px;
-	}
-
-	#belly {
-		min-height: calc(100vh - 130px);
-	}
-
-	#content {
-		padding-top: 65px;
-		padding-bottom: 65px;
-	}
-
-	#content > aside {
-		margin-bottom: 35px;
-	}
-
-	#files {
-		margin-left: -10px;
-		margin-right: -10px;
-	}
-
-	#files li {
-		width: 20%;
-		padding: 10px;
-	}
-
-	#sidebar .box summary {
-		background: #F9F9F9;
-	}
-
-	#ass a {
-		float: left;
-		width: 37px;
-		height: 30px;
-	}
-
-	#ass p {
-		float: right;
-		text-align: right;
-		margin: 0;
-		line-height: 30px;
 	}
 
 }
