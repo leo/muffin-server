@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import modalLayout from '../templates/components/media-modal';
+import modalLayout from '../templates/components/modal-dialog';
 
 export default Ember.Component.extend({
 
