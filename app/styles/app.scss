@@ -529,9 +529,15 @@ select {
 	font-weight: 600;
 	padding: 9px 29px;
 	display: inline-block;
+	transition: 0.4s background;
 
 	&.warning {
 		background: #E78469;
+
+		&:hover {
+			background: #a25d4a;
+		}
+
 	}
 
 }
