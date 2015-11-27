@@ -1,20 +1,12 @@
-{{#if enabled}}
+<aside id="title">
 
-	<div id="overlay" {{action 'toggleModal'}} class="media">
-
-		<aside id="title">
-
-			<div class="inner">
-				<h1>{{title}}</h1>
-				<a href="#">&plus;</a>
-			</div>
-
-		</aside>
-
-		<section id="content">
-			{{partial 'admin/media'}}
-		</section>
-
+	<div class="inner">
+		<h1>{{title}}</h1>
+		<a href="#">&plus;</a>
 	</div>
 
-{{/if}}
+</aside>
+
+<section id="content">
+	{{partial "admin/media"}}
+</section>

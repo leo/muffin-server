@@ -3,9 +3,18 @@ import modalLayout from '../templates/components/modal-dialog';
 
 export default Ember.Component.extend({
 
+	classNames: [ 'media' ],
+	classNameBindings: [ 'isOpen:open' ],
+	attributeBindings: [ 'id' ],
+	id: 'modal-dialog',
+
+	isOpen: function() {
+		return this.get( 'visibility' );
+	}.property( 'visibility' ),
+
 	expose: function() {
 		var appController = this.get( 'targetObject' ),
-			exposedName = 'comp-' + this.get( 'id' );
+			exposedName = 'modal-' + this.get( 'type' );
 		appController.set( exposedName, this );
 	}.on( 'init' ),
 
@@ -18,7 +27,7 @@ export default Ember.Component.extend({
 
 	actions: {
 		toggleModal: function() {
-			this.toggleProperty( 'enabled' );
+			this.toggleProperty( 'visibility' );
 		}
 	},
 

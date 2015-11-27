@@ -1046,7 +1046,7 @@ select {
 
 }
 
-#overlay {
+#modal-dialog {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -1055,7 +1055,12 @@ select {
 	background: #F1F1F1;
 	z-index: 2000;
 	overflow: scroll;
+	display: none;
 	-webkit-overflow-scrolling: touch;
+
+	&.open {
+		display: block;
+	}
 
 	section {
 		box-sizing: border-box;
