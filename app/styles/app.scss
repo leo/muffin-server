@@ -942,14 +942,22 @@ select {
 
 #sidebar {
 
-	.box summary {
+	.box {
 
-		&:after {
-			display: none;
+		p {
+			margin: 0;
 		}
 
-		@media (min-width: 768px) {
-			background: #F9F9F9;
+		summary {
+
+			&:after {
+				display: none;
+			}
+
+			@media (min-width: 768px) {
+				background: #F9F9F9;
+			}
+
 		}
 
 	}
@@ -965,6 +973,10 @@ select {
 
 			summary {
 				cursor: default;
+			}
+
+			&:nth-child(2) {
+				top: 234px;
 			}
 
 		}

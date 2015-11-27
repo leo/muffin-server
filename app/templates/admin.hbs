@@ -1,3 +1,5 @@
+{{media-modal enabled=false title="Choose an item" id="modal-main"}}
+
 <header id="chest">
 	<div class="inner">
 
@@ -8,8 +10,7 @@
 			<a href="#">Settings</a>
 		</nav>
 
-
-		{{#link-to "admin.index" class="logo"}}{{/link-to}}
+		<a href="#" {{action 'openModal' 'modal-main'}} class="logo"></a>
 
 		{{#toggle-nav}}
 			<span>

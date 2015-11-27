@@ -1,5 +1,11 @@
 <aside id="sidebar">
 
+	{{#if inModal}}
+		<div class="box">
+			<p>You're allowed to choose multiple items, if you want.</p>
+		</div>
+	{{/if}}
+
 	<details class="box" open>
 		<summary>Filter</summary>
 		<table class="filter">
@@ -29,6 +35,11 @@
 			</tr>
 
 		</table>
+
+		{{#if inModal}}
+			<a href="#" class="button warning">Close</a>
+		{{/if}}
+
 	</details>
 
 </aside>
