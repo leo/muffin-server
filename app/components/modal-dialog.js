@@ -28,7 +28,7 @@ export default Ember.Component.extend({
 	actions: {
 		toggleModal: function() {
 			this.toggleProperty( 'visibility' );
-			$( 'body' ).toggleClass( 'no-scroll' );
+			$( document.body ).toggleClass( 'no-scroll' );
 		}
 	},
 
