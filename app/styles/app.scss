@@ -9,7 +9,7 @@
 }
 
 body {
-	background: #F1F1F1;
+	background-color: #F1F1F1;
 	margin: 0;
 	color: #000;
 	-webkit-font-smoothing: antialiased;
@@ -17,13 +17,16 @@ body {
 
 	@media (min-width: 992px) {
 		padding-top: 55px;
-		background-color: #F1F1F1;
-		background-image: linear-gradient(#ECECEC, #ECECEC), linear-gradient(#EAEAEA, #EAEAEA);
-		background-image: -webkit-linear-gradient(#ECECEC, #ECECEC), -webkit-linear-gradient(#EAEAEA, #EAEAEA);
-		background-size: 940px 50%, 100% 50%;
-		background-repeat: no-repeat;
-		background-position: center bottom, left top;
-		background-attachment: fixed;
+
+		&.admin {
+			background-image: linear-gradient(#ECECEC, #ECECEC), linear-gradient(#EAEAEA, #EAEAEA);
+			background-image: -webkit-linear-gradient(#ECECEC, #ECECEC), -webkit-linear-gradient(#EAEAEA, #EAEAEA);
+			background-size: 940px 50%, 100% 50%;
+			background-repeat: no-repeat;
+			background-position: center bottom, left top;
+			background-attachment: fixed;
+		}
+
 	}
 
 }
