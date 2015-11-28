@@ -5,10 +5,6 @@ export default Ember.Controller.extend({
 
 	actions: {
 
-		redirect() {
-
-		},
-
 		authenticate() {
 
 			if( $( 'form' ).hasClass( 'shake' ) ) {
