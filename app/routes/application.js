@@ -7,6 +7,12 @@ export default Ember.Route.extend( ApplicationRouteMixin, BodyClassMixin, {
 
 	title: function( tokens ) {
 		return tokens.join( ' ― ' ) + ' ― Muffin';
+	},
+
+	redirect: function() {
+		if( !this.get( 'session.isAuthenticated' ) ) {
+			this.transitionTo( 'login' );
+		}
 	}
 
 });
