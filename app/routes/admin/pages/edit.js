@@ -5,6 +5,6 @@ export default Ember.Route.extend({
 		return model.get( 'title' );
 	},
 	model: function( params ) {
-		return this.store.findRecord( 'page', params.id );
+		return this.store.findRecord( 'page', params.page_id );
 	}
 });
