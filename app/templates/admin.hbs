@@ -28,11 +28,17 @@
 		<div class="inner">
 			<h1>{{title}}</h1>
 
-			<nav>
-				<a href="#" class="current">Content</a>
-				<a href="#">Sidebar</a>
-				<a href="#">Options</a>
-			</nav>
+			{{#if tabs}}
+
+				<nav>
+					<a href="#" class="current">Content</a>
+					<a href="#">Sidebar</a>
+					<a href="#">Options</a>
+				</nav>
+
+			{{else}}
+				<a href="#">&plus;</a>
+			{{/if}}
 
 		</div>
 
