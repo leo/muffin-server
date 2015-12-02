@@ -14,6 +14,8 @@ body {
 	color: #000;
 	-webkit-font-smoothing: antialiased;
 	font-family: 'Roboto', sans-serif;
+    user-select: none;
+    -webkit-touch-callout: none;
 
 	@media (min-width: 992px) {
 		padding-top: 55px;
@@ -70,6 +72,10 @@ input {
 
 select {
 	font-size: inherit;
+}
+
+[contenteditable] {
+	user-select: text;
 }
 
 .no-scroll {
@@ -701,6 +707,8 @@ select {
 	background: #EAEAEA;
 
 	h1 {
+		@extend [contenteditable];
+
 		font-weight: 300;
 		margin: 0;
 		font-size: 20px;
