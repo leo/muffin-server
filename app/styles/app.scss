@@ -1,5 +1,13 @@
 @import 'login';
 
+::selection {
+	background: #4FC8E7;
+}
+
+::-moz-selection {
+	background: #4FC8E7;
+}
+
 ::-webkit-details-marker {
 	display: none;
 }
