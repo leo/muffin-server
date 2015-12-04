@@ -3,53 +3,53 @@ var express = require( 'express' ),
 
 module.exports = function( app ) {
 
-	filesRouter.get( '/', function( req, res ) {
+  filesRouter.get( '/', function( req, res ) {
 
-		var list = [];
+    var list = [];
 
-		for( var i = 0; i < 42; ++i ) {
+    for( var i = 0; i < 42; ++i ) {
 
-			list.push({
-				_id: i,
-				url: 'assets/sample.png'
-			});
+      list.push({
+        _id: i,
+        url: 'assets/sample.png'
+      });
 
-		}
+    }
 
-		res.send({
-			'file': list
-		});
+    res.send({
+      'file': list
+    });
 
-	});
+  });
 
-	filesRouter.post( '/', function( req, res ) {
-		res.status( 201 ).end();
-	});
+  filesRouter.post( '/', function( req, res ) {
+    res.status( 201 ).end();
+  });
 
-	filesRouter.get( '/:id', function( req, res ) {
+  filesRouter.get( '/:id', function( req, res ) {
 
-		res.send({
-			'files': {
-				id: req.params.id
-			}
-		});
+    res.send({
+      'files': {
+        id: req.params.id
+      }
+    });
 
-	});
+  });
 
-	filesRouter.put( '/:id', function( req, res ) {
+  filesRouter.put( '/:id', function( req, res ) {
 
-		res.send({
-			'files': {
-				id: req.params.id
-			}
-		});
+    res.send({
+      'files': {
+        id: req.params.id
+      }
+    });
 
-	});
+  });
 
-	filesRouter.delete( '/:id', function( req, res ) {
-		res.status( 204 ).end();
-	});
+  filesRouter.delete( '/:id', function( req, res ) {
+    res.status( 204 ).end();
+  });
 
-	app.use( '/api/files', filesRouter );
+  app.use( '/api/files', filesRouter );
 
 }

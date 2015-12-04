@@ -6,60 +6,60 @@ var User = models( 'user' );
 
 function generateToken() {
 
-	var n = Math.floor( Math.random() * 11 ),
-	    k = Math.floor( Math.random() * 1000000 ),
-	    m = String.fromCharCode( n ) + k;
+  var n = Math.floor( Math.random() * 11 ),
+      k = Math.floor( Math.random() * 1000000 ),
+      m = String.fromCharCode( n ) + k;
 
-	return m.trim();
+  return m.trim();
 
 }
 
 function denyAccess( res ) {
 
-	res.status( 403 ).json({
-		error: 'invalid_grant'
-	});
+  res.status( 403 ).json({
+    error: 'invalid_grant'
+  });
 
 }
 
 module.exports = function( app ) {
 
-	loginRouter.post( '/token', function( req, res ) {
+  loginRouter.post( '/token', function( req, res ) {
 
-		var query = User.findOne({
-			'_id': req.body.username
-		});
+    var query = User.findOne({
+      '_id': req.body.username
+    });
 
-		query.select( 'password' );
+    query.select( 'password' );
 
-		query.exec( function( err, user ) {
+    query.exec( function( err, user ) {
 
-			if( req.body.grant_type === 'password' ) {
+      if( req.body.grant_type === 'password' ) {
 
-				if( !user ) {
-					denyAccess( res );
-				} else if( user.password == req.body.password ) {
+        if( !user ) {
+          denyAccess( res );
+        } else if( user.password == req.body.password ) {
 
-					res.json({
-						access_token: generateToken()
-					});
+          res.json({
+            access_token: generateToken()
+          });
 
-				} else {
-					denyAccess( res );
-				}
+        } else {
+          denyAccess( res );
+        }
 
-			} else {
+      } else {
 
-				res.status( 400 ).json({
-					error: 'unsupported_grant_type'
-				});
+        res.status( 400 ).json({
+          error: 'unsupported_grant_type'
+        });
 
-			}
+      }
 
-		});
+    });
 
-	});
+  });
 
-	app.use( '/muffin', loginRouter );
+  app.use( '/muffin', loginRouter );
 
 }

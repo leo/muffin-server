@@ -5,30 +5,30 @@ var EmberApp = require( 'ember-cli/lib/broccoli/ember-app' );
 
 module.exports = function( defaults ) {
 
-	var app = new EmberApp( defaults, {
+  var app = new EmberApp( defaults, {
 
-		outputPaths: {
+    outputPaths: {
 
-			app: {
-				js: '/assets/app.js',
-				css: {
-					'app': '/assets/styles.css'
-				}
-			}
+      app: {
+        js: '/assets/app.js',
+        css: {
+          'app': '/assets/styles.css'
+        }
+      }
 
-		},
+    },
 
-		sourcemaps: {
-			enabled: false
-		},
+    sourcemaps: {
+      enabled: false
+    },
 
-		sassOptions: {
-			outputStyle: 'expanded'
-		}
+    sassOptions: {
+      outputStyle: 'expanded'
+    }
 
-	});
+  });
 
-	// Use `app.import` to add additional libraries to the generated output files.
-	return app.toTree();
+  // Use `app.import` to add additional libraries to the generated output files.
+  return app.toTree();
 
 }

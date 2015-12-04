@@ -1,42 +1,42 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-	session: Ember.inject.service( 'session' ),
+  session: Ember.inject.service( 'session' ),
 
-	actions: {
+  actions: {
 
-		authenticate() {
+    authenticate() {
 
-			if( $( 'form' ).hasClass( 'shake' ) ) {
-				return;
-			}
+      if( $( 'form' ).hasClass( 'shake' ) ) {
+        return;
+      }
 
-			let { username, password } = this.getProperties( 'username', 'password' );
+      let { username, password } = this.getProperties( 'username', 'password' );
 
-			this.get( 'session' ).authenticate( 'authenticator:oauth2', username, password ).catch( (reason) => {
+      this.get( 'session' ).authenticate( 'authenticator:oauth2', username, password ).catch( (reason) => {
 
-				var timeout;
+        var timeout;
 
-				clearTimeout( timeout );
-				this.set( 'loginStatus', 'shake' );
+        clearTimeout( timeout );
+        this.set( 'loginStatus', 'shake' );
 
-				$( 'input' ).addClass( 'wrong' );
+        $( 'input' ).addClass( 'wrong' );
 
-				timeout = setTimeout( function() {
-					this.set( 'loginStatus', '' );
-				}.bind( this ), 1000);
+        timeout = setTimeout( function() {
+          this.set( 'loginStatus', '' );
+        }.bind( this ), 1000);
 
-				this.set( 'errorMessage', reason.error );
+        this.set( 'errorMessage', reason.error );
 
-			});
+      });
 
-		}
+    }
 
-	},
+  },
 
-	checkError: function( top, which ) {
-		var type = which === 'password' ? 'password' : 'text';
-		$( 'input[type="' + type + '"]' ).removeClass( 'wrong' );
-	}.observes( 'username', 'password' )
+  checkError: function( top, which ) {
+    var type = which === 'password' ? 'password' : 'text';
+    $( 'input[type="' + type + '"]' ).removeClass( 'wrong' );
+  }.observes( 'username', 'password' )
 
 });

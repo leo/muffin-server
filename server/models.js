@@ -3,42 +3,42 @@ var mongoose = require( 'mongoose' ),
 
 var schemas = {
 
-	user: {
-		_id: String,
-		password: String,
-	},
+  user: {
+    _id: String,
+    password: String,
+  },
 
-	page: {
-		_id: Number,
-		title: String,
-		author: String,
-		dates: {
-			created: Date,
-			updated: Date
-		}
-	}
+  page: {
+    _id: Number,
+    title: String,
+    author: String,
+    dates: {
+      created: Date,
+      updated: Date
+    }
+  }
 
 }
 
 var checkModel = function( name, schema ) {
 
-	if( mongoose.models[name] ) {
-		return mongoose.model( name );
-	} else {
-		return mongoose.model( name, schema );
-	}
+  if( mongoose.models[name] ) {
+    return mongoose.model( name );
+  } else {
+    return mongoose.model( name, schema );
+  }
 
 }
 
 var getModel = function( name ) {
 
-	var fields = schemas[name];
+  var fields = schemas[name];
 
-	var me = new Schema( fields, {
-		versionKey: false
-	});
+  var me = new Schema( fields, {
+    versionKey: false
+  });
 
-	return checkModel( name, me );
+  return checkModel( name, me );
 
 }
 

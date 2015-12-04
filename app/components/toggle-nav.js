@@ -2,18 +2,18 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
-	tagName: 'a',
-	classNames: [ 'toggle' ],
-	attributeBindings: [ 'href' ],
-	href: '#',
+  tagName: 'a',
+  classNames: [ 'toggle' ],
+  attributeBindings: [ 'href' ],
+  href: '#',
 
-	click: function( event ) {
-		var button = $( event.target ).closest( '.toggle' );
+  click: function( event ) {
+    var button = $( event.target ).closest( '.toggle' );
 
-		$( button ).prevAll( 'nav' ).slideToggle( 300 );
-		$( button ).toggleClass( 'on' );
+    $( button ).prevAll( 'nav' ).slideToggle( 300 );
+    $( button ).toggleClass( 'on' );
 
-		event.preventDefault();
-	}
+    event.preventDefault();
+  }
 
 });

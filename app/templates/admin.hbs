@@ -1,61 +1,61 @@
 <header id="chest">
-	<div class="inner">
+  <div class="inner">
 
-		<nav>
-			{{#link-to "admin.index"}}Dashboard{{/link-to}}
-			{{#link-to "admin.pages"}}Pages{{/link-to}}
-			{{#link-to "admin.media"}}Media{{/link-to}}
-			<a href="#">Settings</a>
-		</nav>
+    <nav>
+      {{#link-to "admin.index"}}Dashboard{{/link-to}}
+      {{#link-to "admin.pages"}}Pages{{/link-to}}
+      {{#link-to "admin.media"}}Media{{/link-to}}
+      <a href="#">Settings</a>
+    </nav>
 
-		<a href="#" {{action "openModal" "media-modal"}} class="logo"></a>
+    <a href="#" {{action "openModal" "media-modal"}} class="logo"></a>
 
-		{{#toggle-nav}}
-			<span>
-				<b></b>
-				<b></b>
-				<b></b>
-			</span>
-		{{/toggle-nav}}
+    {{#toggle-nav}}
+      <span>
+        <b></b>
+        <b></b>
+        <b></b>
+      </span>
+    {{/toggle-nav}}
 
-	</div>
+  </div>
 </header>
 
 <main id="belly">
 
-	<aside id="title">
+  <aside id="title">
 
-		<div class="inner">
-			<h1>{{title}}</h1>
+    <div class="inner">
+      <h1>{{title}}</h1>
 
-			{{#if tabs}}
+      {{#if tabs}}
 
-				<nav>
-					<a href="#" class="current">Content</a>
-					<a href="#">Sidebar</a>
-					<a href="#">Options</a>
-				</nav>
+        <nav>
+          <a href="#" class="current">Content</a>
+          <a href="#">Sidebar</a>
+          <a href="#">Options</a>
+        </nav>
 
-			{{else}}
-				<a href="#">&plus;</a>
-			{{/if}}
+      {{else}}
+        <a href="#">&plus;</a>
+      {{/if}}
 
-		</div>
+    </div>
 
-	</aside>
+  </aside>
 
-	<section id="content">
-		{{outlet}}
-	</section>
+  <section id="content">
+    {{outlet}}
+  </section>
 
 </main>
 
 <footer id="ass">
 
-	<div class="inner">
-		<a href="http://muff.in" target="_blank"></a>
-		<p>You're using Muffin {{app-version}}, thank you!</p>
-	</div>
+  <div class="inner">
+    <a href="http://muff.in" target="_blank"></a>
+    <p>You're using Muffin {{app-version}}, thank you!</p>
+  </div>
 
 </footer>
 

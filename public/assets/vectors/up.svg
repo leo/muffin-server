@@ -1,5 +1,5 @@
 <svg width="12px" height="8px" viewBox="0 0 12 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
-    <g id="Arrow" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
-        <path d="M6,0.685 L11.309602,7.685 L0.690398,7.685 L6,0.685 Z" id="Up" fill="#D7D7D7" sketch:type="MSShapeGroup"></path>
-    </g>
+  <g id="Arrow" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+    <path d="M6,0.685 L11.309602,7.685 L0.690398,7.685 L6,0.685 Z" id="Up" fill="#D7D7D7" sketch:type="MSShapeGroup"></path>
+  </g>
 </svg>

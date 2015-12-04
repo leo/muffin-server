@@ -2,63 +2,63 @@
 
 module.exports = function( environment ) {
 
-	var ENV = {
-		modulePrefix: 'muffin',
-		environment: environment,
-		baseURL: '/muffin/',
-		locationType: 'auto',
+  var ENV = {
+    modulePrefix: 'muffin',
+    environment: environment,
+    baseURL: '/muffin/',
+    locationType: 'auto',
 
-		EmberENV: {
-			FEATURES: {
-				// Here you can enable experimental features on an ember canary build
-				// e.g. 'with-controller': true
-			}
-		},
+    EmberENV: {
+      FEATURES: {
+        // Here you can enable experimental features on an ember canary build
+        // e.g. 'with-controller': true
+      }
+    },
 
-		APP: {
-			version: process.env.npm_package_version
-		},
+    APP: {
+      version: process.env.npm_package_version
+    },
 
-		contentSecurityPolicy: {
-			'default-src': "'none'",
-			'style-src': "'self' 'unsafe-inline' http://fonts.googleapis.com",
-			'font-src': "'self' http://fonts.gstatic.com",
-			'script-src': "'self' http://rawgit.com"
-		}
+    contentSecurityPolicy: {
+      'default-src': "'none'",
+      'style-src': "'self' 'unsafe-inline' http://fonts.googleapis.com",
+      'font-src': "'self' http://fonts.gstatic.com",
+      'script-src': "'self' http://rawgit.com"
+    }
 
-	}
+  }
 
-	if( environment === 'development' ) {
-		//ENV.APP.LOG_RESOLVER = true;
-		//ENV.APP.LOG_ACTIVE_GENERATION = true;
-		ENV.APP.LOG_TRANSITIONS = true;
-		ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
-		ENV.APP.LOG_VIEW_LOOKUPS = true;
-	}
+  if( environment === 'development' ) {
+    //ENV.APP.LOG_RESOLVER = true;
+    //ENV.APP.LOG_ACTIVE_GENERATION = true;
+    ENV.APP.LOG_TRANSITIONS = true;
+    ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
+    ENV.APP.LOG_VIEW_LOOKUPS = true;
+  }
 
-	if( environment === 'test' ) {
+  if( environment === 'test' ) {
 
-		// Testem prefers this...
-		ENV.baseURL = '/muffin/';
-		ENV.locationType = 'none';
+    // Testem prefers this...
+    ENV.baseURL = '/muffin/';
+    ENV.locationType = 'none';
 
-		// keep test console output quieter
-		ENV.APP.LOG_ACTIVE_GENERATION = false;
-		ENV.APP.LOG_VIEW_LOOKUPS = false;
+    // keep test console output quieter
+    ENV.APP.LOG_ACTIVE_GENERATION = false;
+    ENV.APP.LOG_VIEW_LOOKUPS = false;
 
-		ENV.APP.rootElement = '#ember-testing';
+    ENV.APP.rootElement = '#ember-testing';
 
-	}
+  }
 
-	if( environment === 'production' ) {
+  if( environment === 'production' ) {
 
-	}
+  }
 
-	ENV['ember-simple-auth'] = {
-		routeIfAlreadyAuthenticated: 'admin',
-		routeAfterAuthentication: 'admin.index'
-	}
+  ENV['ember-simple-auth'] = {
+    routeIfAlreadyAuthenticated: 'admin',
+    routeAfterAuthentication: 'admin.index'
+  }
 
-	return ENV;
+  return ENV;
 
 }

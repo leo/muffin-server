@@ -8,59 +8,59 @@ var mongo = require( 'mongoose' ),
 
 module.exports = function( app, options ) {
 
-	if( !mongo.connection.readyState ) {
-		mongo.connect( 'mongodb://localhost/muffin' );
-	}
+  if( !mongo.connection.readyState ) {
+    mongo.connect( 'mongodb://localhost/muffin' );
+  }
 
-	app.use( compression() );
+  app.use( compression() );
 
-	var db = mongo.connection;
+  var db = mongo.connection;
 
-	db.on( 'error', function( err ) {
-		console.log( 'Can\'t connect to the DB: ' + err );
-		process.exit();
-	});
+  db.on( 'error', function( err ) {
+    console.log( 'Can\'t connect to the DB: ' + err );
+    process.exit();
+  });
 
-	db.on( 'disconnected', function() {
-		console.log( 'Muffin stopped running (DB error)' );
-		process.exit();
-	});
+  db.on( 'disconnected', function() {
+    console.log( 'Muffin stopped running (DB error)' );
+    process.exit();
+  });
 
-	process.on( 'SIGINT', function() {
+  process.on( 'SIGINT', function() {
 
-		db.close( function() {
-			process.exit();
-		});
+    db.close( function() {
+      process.exit();
+    });
 
-	});
+  });
 
-	app.use( bodyParser.json() );
+  app.use( bodyParser.json() );
 
-	app.use( bodyParser.urlencoded({
-		extended: false
-	}));
+  app.use( bodyParser.urlencoded({
+    extended: false
+  }));
 
-	app.get( '/muffin', function( req, res, next ) {
+  app.get( '/muffin', function( req, res, next ) {
 
-		if( req.path != '/muffin/' ) {
-			res.redirect( '/muffin/' );
-		} else {
-			next();
-		}
+    if( req.path != '/muffin/' ) {
+      res.redirect( '/muffin/' );
+    } else {
+      next();
+    }
 
-	});
+  });
 
-	var routes = globSync( './routes/*.js', { cwd: __dirname } ).map( require ),
-	    mocks = globSync( './mocks/**/*.js', { cwd: __dirname } ).map( require );
+  var routes = globSync( './routes/*.js', { cwd: __dirname } ).map( require ),
+      mocks = globSync( './mocks/**/*.js', { cwd: __dirname } ).map( require );
 
-	app.use( morgan( 'dev' ) );
+  app.use( morgan( 'dev' ) );
 
-	routes.forEach( function( route ) {
-		route( app );
-	});
+  routes.forEach( function( route ) {
+    route( app );
+  });
 
-	mocks.forEach( function( route ) {
-		route( app );
-	});
+  mocks.forEach( function( route ) {
+    route( app );
+  });
 
 }

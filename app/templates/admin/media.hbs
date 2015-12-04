@@ -1,59 +1,59 @@
 <aside id="sidebar">
 
-	{{#if inModal}}
-		<div class="box">
-			<p>You're allowed to choose multiple items, if you want.</p>
-		</div>
-	{{/if}}
+  {{#if inModal}}
+    <div class="box">
+      <p>You're allowed to choose multiple items, if you want.</p>
+    </div>
+  {{/if}}
 
-	<details class="box" open>
-		<summary>Filter</summary>
-		<table class="filter">
+  <details class="box" open>
+    <summary>Filter</summary>
+    <table class="filter">
 
-			<tr>
-				<td>Dates:</td>
-				<td>
-					<select>
-						<option selected>All</option>
-						<option>September 2015</option>
-						<option>October 2015</option>
-					</select>
-				</td>
-			</tr>
+      <tr>
+        <td>Dates:</td>
+        <td>
+          <select>
+            <option selected>All</option>
+            <option>September 2015</option>
+            <option>October 2015</option>
+          </select>
+        </td>
+      </tr>
 
-			<tr>
-				<td>File type:</td>
-				<td>
-					<select>
-						<option selected>All</option>
-						<option>Image</option>
-						<option>Video</option>
-						<option>Document</option>
-						<option>Audio</option>
-					</select>
-				</td>
-			</tr>
+      <tr>
+        <td>File type:</td>
+        <td>
+          <select>
+            <option selected>All</option>
+            <option>Image</option>
+            <option>Video</option>
+            <option>Document</option>
+            <option>Audio</option>
+          </select>
+        </td>
+      </tr>
 
-		</table>
+    </table>
 
-		{{#if inModal}}
-			<a href="#" class="button warning" {{action "toggleModal"}}>Close</a>
-		{{/if}}
+    {{#if inModal}}
+      <a href="#" class="button warning" {{action "toggleModal"}}>Close</a>
+    {{/if}}
 
-	</details>
+  </details>
 
 </aside>
 
 <ul id="files">
 
-	{{#each model as |file|}}
+  {{#each model as |file|}}
 
-	<li>
-		<a href="#">
-			<img src={{file.url}}>
-		</a>
-	</li>
+  <li>
+    <a href="#">
+      <img src={{file.url}}>
+    </a>
+  </li>
 
-	{{/each}}
+  {{/each}}
 
 </ul>
