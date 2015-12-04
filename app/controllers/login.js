@@ -30,13 +30,13 @@ export default Ember.Controller.extend({
 
 			});
 
-		},
+		}
 
-		checkError: function( top, which ) {
-			var type = which === 'password' ? 'password' : 'text';
-			$( 'input[type="' + type + '"]' ).removeClass( 'wrong' );
-		}.observes( 'username', 'password' )
+	},
 
-	}
+	checkError: function( top, which ) {
+		var type = which === 'password' ? 'password' : 'text';
+		$( 'input[type="' + type + '"]' ).removeClass( 'wrong' );
+	}.observes( 'username', 'password' )
 
 });
