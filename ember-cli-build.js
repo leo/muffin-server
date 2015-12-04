@@ -20,6 +20,10 @@ module.exports = function( defaults ) {
 
 		sourcemaps: {
 			enabled: false
+		},
+
+		sassOptions: {
+			outputStyle: 'expanded'
 		}
 
 	});
