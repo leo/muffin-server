@@ -1,5 +1,5 @@
 var express = require( 'express' ),
-	filesRouter = express.Router();
+    filesRouter = express.Router();
 
 module.exports = function( app ) {
 

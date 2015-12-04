@@ -1,5 +1,5 @@
 var mongoose = require( 'mongoose' ),
-	Schema = mongoose.Schema;
+    Schema = mongoose.Schema;
 
 var schemas = {
 
@@ -32,10 +32,11 @@ var checkModel = function( name, schema ) {
 
 var getModel = function( name ) {
 
-	var fields = schemas[name],
-		me = new Schema( fields, {
-			versionKey: false
-		});
+	var fields = schemas[name];
+
+	var me = new Schema( fields, {
+		versionKey: false
+	});
 
 	return checkModel( name, me );
 

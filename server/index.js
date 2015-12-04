@@ -1,10 +1,10 @@
 var mongo = require( 'mongoose' ),
-	compression = require( 'compression' ),
-	mongo = require( 'mongoose' ),
-	express = require( 'express' ),
-	bodyParser = require( 'body-parser' ),
-	globSync = require( 'glob' ).sync,
-	morgan = require( 'morgan' );
+    compression = require( 'compression' ),
+    mongo = require( 'mongoose' ),
+    express = require( 'express' ),
+    bodyParser = require( 'body-parser' ),
+    globSync = require( 'glob' ).sync,
+    morgan = require( 'morgan' );
 
 module.exports = function( app, options ) {
 
@@ -51,7 +51,7 @@ module.exports = function( app, options ) {
 	});
 
 	var routes = globSync( './routes/*.js', { cwd: __dirname } ).map( require ),
-		mocks = globSync( './mocks/**/*.js', { cwd: __dirname } ).map( require );
+	    mocks = globSync( './mocks/**/*.js', { cwd: __dirname } ).map( require );
 
 	app.use( morgan( 'dev' ) );
 

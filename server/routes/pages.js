@@ -1,6 +1,6 @@
 var express = require( 'express' ),
-	pagesRouter = express.Router(),
-	models = require( '../models' );
+    pagesRouter = express.Router(),
+    models = require( '../models' );
 
 var Page = models( 'page' );
 

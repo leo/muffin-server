@@ -1,7 +1,7 @@
 var express = require( 'express' ),
-	http = require( 'http' ),
-	app = express(),
-	server = require( './server' );
+    http = require( 'http' ),
+    app = express(),
+    server = require( './server' );
 
 app.use( '/muffin', express.static( 'dist' ) );
 app.server = http.createServer( app );
@@ -15,10 +15,10 @@ app.server.on( 'listening', function() {
 	require( 'colors' );
 
 	var current = process.cwd(),
-		dir = current.substring( current.lastIndexOf( '/' ) + 1, current.length );
+	    dir = current.substring( current.lastIndexOf( '/' ) + 1, current.length );
 
 	var host = this.address().address == '::' && 'localhost',
-		port = this.address().port + '/muffin';
+	    port = this.address().port + '/muffin';
 
 	var address = 'http://' + host + ':' + port;
 	process.stdout.write( '\u001b[2J\u001b[0;0H' );

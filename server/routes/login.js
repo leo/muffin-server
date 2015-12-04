@@ -1,14 +1,14 @@
 var express = require( 'express' ),
-	loginRouter = express.Router(),
-	models = require( '../models' );
+    loginRouter = express.Router(),
+    models = require( '../models' );
 
 var User = models( 'user' );
 
 function generateToken() {
 
 	var n = Math.floor( Math.random() * 11 ),
-		k = Math.floor( Math.random() * 1000000 ),
-		m = String.fromCharCode( n ) + k;
+	    k = Math.floor( Math.random() * 1000000 ),
+	    m = String.fromCharCode( n ) + k;
 
 	return m.trim();
 
