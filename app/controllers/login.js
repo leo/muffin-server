@@ -24,7 +24,7 @@ export default Ember.Controller.extend({
 
       let { username, password } = this.getProperties( 'username', 'password' );
 
-      this.get( 'session' ).authenticate( 'authenticator:oauth2', username, password ).catch( (reason) => {
+      this.get( 'session' ).authenticate( 'authenticator:pouch', username, password ).catch( (reason) => {
 
         var timeout;
 
