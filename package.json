@@ -15,6 +15,10 @@
     "node": ">= 4.2.2"
   },
   "author": "Leonard Lamprecht <lamprechtleonard@gmail.com> (http://leo.im)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/leo/muffin.git"
+  },
   "keywords": [
     "content",
     "management",
