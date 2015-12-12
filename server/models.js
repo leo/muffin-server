@@ -6,16 +6,6 @@ var schemas = {
   user: {
     _id: String,
     password: String,
-  },
-
-  page: {
-    _id: Number,
-    title: String,
-    author: String,
-    dates: {
-      created: Date,
-      updated: Date
-    }
   }
 
 }
