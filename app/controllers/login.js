@@ -7,6 +7,17 @@ export default Ember.Controller.extend({
 
     authenticate() {
 
+      /*
+
+      var sampleUser = this.store.createRecord( 'user', {
+        id: 'admin',
+        password: 1234
+      });
+
+      sampleUser.save();
+
+      */
+
       if( $( 'form' ).hasClass( 'shake' ) ) {
         return;
       }
