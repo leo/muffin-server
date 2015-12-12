@@ -1,5 +1,16 @@
-import DS from 'ember-data';
+import PouchDB from 'pouchdb';
+import { Adapter } from 'ember-pouch';
 
-export default DS.RESTAdapter.extend({
-  namespace: 'api'
+PouchDB.debug.enable( '*' );
+
+var remote = new PouchDB( 'http://localhost:5984/muffin' );
+var db = new PouchDB( 'muffin' );
+
+db.sync(remote, {
+  live: true,
+  retry: true
+});
+
+export default Adapter.extend({
+  db: db
 });

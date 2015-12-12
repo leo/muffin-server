@@ -23,7 +23,8 @@ module.exports = function( environment ) {
       'default-src': "'none'",
       'style-src': "'self' 'unsafe-inline' http://fonts.googleapis.com",
       'font-src': "'self' http://fonts.gstatic.com",
-      'script-src': "'self' http://rawgit.com"
+      'script-src': "'self' http://rawgit.com",
+      'connect-src': "'self' http://localhost:5984"
     }
 
   }
