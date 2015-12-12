@@ -4,13 +4,13 @@ import { Adapter } from 'ember-pouch';
 PouchDB.debug.enable( '*' );
 
 var remote = new PouchDB( 'http://localhost:5984/muffin' );
-var db = new PouchDB( 'muffin' );
+var localDB = new PouchDB( 'muffin' );
 
-db.sync(remote, {
+localDB.sync(remote, {
   live: true,
   retry: true
 });
 
 export default Adapter.extend({
-  db: db
+  db: localDB
 });
