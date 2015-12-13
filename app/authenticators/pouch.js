@@ -19,7 +19,11 @@ export default Base.extend({
         reject('Wrong username or password!');
       } else {
         resolve();
-        this.store.queryRecord( 'user', { filter: { id: 'admin' } }).then(function(tomster) {});
+
+        this.store.queryRecord( 'user', { filter: { id: 'admin' } }).then(function(user) {
+          console.log(user);
+        });
+
       }
 
     });
