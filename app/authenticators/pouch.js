@@ -13,14 +13,13 @@ export default Base.extend({
 
   authenticate(identification, password) {
 
-    var users = this.get('store').findAll('user');
-
     return new RSVP.Promise((resolve, reject) => {
 
       if (!identification || !password) {
         reject('Wrong username or password!');
       } else {
         resolve();
+        this.store.queryRecord( 'user', { filter: { id: 'admin' } }).then(function(tomster) {});
       }
 
     });
