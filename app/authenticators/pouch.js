@@ -5,19 +5,23 @@ const { RSVP } = Ember;
 
 export default Base.extend({
 
+  store: Ember.inject.service(),
+
   restore(data) {
     console.log(data);
   },
 
   authenticate(identification, password) {
 
+    var users = this.get('store').findAll('user');
+
     return new RSVP.Promise((resolve, reject) => {
 
       if (!identification || !password) {
         reject('Wrong username or password!');
+      } else {
+        resolve();
       }
-
-      resolve();
 
     });
 
