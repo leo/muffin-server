@@ -36,7 +36,7 @@ npm install
 
 ### Start developing
 
-You've made it! Now you only need to start the app and it will be running here: [http://localhost:4200/admin/](http://localhost:4200/admin/).
+You've made it! Now you only need to start the app and it will be running here: [http://localhost:2000/muffin](http://localhost:2000/muffin).
 
 ```shell
 npm start
