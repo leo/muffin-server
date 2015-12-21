@@ -7,10 +7,14 @@
     "express": "^4.13.3"
   },
   "devDependencies": {
-    "gulp": "^3.9.0"
+    "babel-preset-es2015": "^6.3.13",
+    "gulp": "^3.9.0",
+    "gulp-babel": "^6.1.1",
+    "gulp-sass": "^2.1.1",
+    "gulp-sourcemaps": "^1.6.0"
   },
   "scripts": {
-    "test": "gulp test"
+    "start": "gulp"
   },
   "repository": {
     "type": "git",
