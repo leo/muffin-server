@@ -17,20 +17,20 @@ muffin init
 
 Clone this repo
 
-```bash
+```shell
 git clone git://github.com/leo/muffin.git
 cd muffin
 ```
 
-Load ember's CLI - one of the best frameworks around
+Install gulp, muffin's build tool
 
-```bash
-npm install -g ember-cli
+```shell
+npm install -g gulp
 ```
 
 Install all other dependencies
 
-```bash
+```shell
 npm install
 ```
 
@@ -38,8 +38,6 @@ npm install
 
 You've made it! Now you only need to start the app and it will be running here: [http://localhost:4200/admin/](http://localhost:4200/admin/).
 
-```bash
+```shell
 npm start
 ```
-
-Dont forget to make use of the many generators for the development within `/client` and try `ember help generate` for more details. If you want to test your code, simply use `ember test` and `ember test --server`.
