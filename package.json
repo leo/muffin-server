@@ -4,7 +4,8 @@
   "description": "Who doesn't like chocolate?",
   "main": "index.js",
   "dependencies": {
-    "express": "^4.13.3"
+    "express": "^4.13.3",
+    "nano": "^6.1.5"
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.3.13",
