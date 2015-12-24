@@ -1,4 +1,5 @@
 node_modules
 .editorconfig
-client
+.gitignore
+public
 gulpfile.js
