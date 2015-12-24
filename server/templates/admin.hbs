@@ -1,62 +1,73 @@
-<header id="chest">
-  <div class="inner">
+<!DOCTYPE html>
+<html>
 
-    <nav>
-      {{#link-to "admin.index"}}Dashboard{{/link-to}}
-      {{#link-to "admin.pages"}}Pages{{/link-to}}
-      {{#link-to "admin.media"}}Media{{/link-to}}
-      <a href="#">Settings</a>
-    </nav>
+  <head>
 
-    <a href="#" {{action "openModal" "media-modal"}} class="logo"></a>
+    <title>Muffin</title>
 
-    {{#toggle-nav}}
-      <span>
-        <b></b>
-        <b></b>
-        <b></b>
-      </span>
-    {{/toggle-nav}}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-  </div>
-</header>
+    <link rel="stylesheet" href="/admin/assets/styles.css">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,700italic,300italic,300">
 
-<main id="belly">
+  </head>
 
-  <aside id="title">
+  <body>
 
-    <div class="inner">
-      <h1>{{title}}</h1>
-
-      {{#if tabs}}
+    <header id="chest">
+      <div class="inner">
 
         <nav>
-          <a href="#" class="current">Content</a>
-          <a href="#">Sidebar</a>
-          <a href="#">Options</a>
+          <a href="#">Dashboard</a>
+          <a href="#">Pages</a>
+          <a href="#">Posts</a>
+          <a href="#">Media</a>
+          <a href="#">Settings</a>
         </nav>
 
-      {{else}}
-        <a href="#">&plus;</a>
-      {{/if}}
+        <a href="/admin/logout" class="logo"></a>
 
-    </div>
+        <a href="#menu" class="toggle">
+          <span>
+            <b></b>
+            <b></b>
+            <b></b>
+          </span>
+        </a>
 
-  </aside>
+      </div>
+    </header>
 
-  <section id="content">
-    {{outlet}}
-  </section>
+    <main id="belly">
 
-</main>
+      <aside id="title">
 
-<footer id="ass">
+        <div class="inner">
+          <h1>{{pageTitle}}</h1>
+        </div>
 
-  <div class="inner">
-    <a href="http://muff.in" target="_blank"></a>
-    <p>You're using Muffin {{app-version}}, thank you!</p>
-  </div>
+      </aside>
 
-</footer>
+      <section id="content" class={{divide}}>
+        {{{content}}}
+      </section>
 
-{{modal-dialog title="Choose an item" type="media-modal"}}
+    </main>
+
+    <footer id="ass">
+
+      <div class="inner">
+        <a href="http://muff.in" target="_blank"></a>
+        <p>You're using Muffin 1.0.0, thank you!</p>
+      </div>
+
+    </footer>
+
+    <script src="/admin/assets/vendor.js"></script>
+    <script src="/admin/assets/app.js"></script>
+
+  </body>
+
+</html>

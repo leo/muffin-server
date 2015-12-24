@@ -1,10 +1,31 @@
-<form {{action "authenticate" on="submit"}} class={{loginStatus}}>
+<!DOCTYPE html>
+<html lang="en">
 
-  {{input placeholder="Username" autocomplete="off" value=username autofocus="true"}}
-  {{input type="password" placeholder="Password" autocomplete="off" value=password}}
+  <head>
 
-  <button type="submit">Login</button>
+    <title>Muffin — Login</title>
 
-</form>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 
-<a href="/forgotten">?</a>
+    <link href="/admin/assets/styles.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,700italic,300italic,300">
+
+  </head>
+
+  <body class="login">
+
+    <form action="/admin" method="post" name="login">
+      <input type="text" name="username" placeholder="Username" autocomplete="off" autofocus="true">
+      <input type="password" name="password" placeholder="Password" autocomplete="off">
+
+      <button type="submit">Login</button>
+    </form>
+
+    <a href="/forgotten">?</a>
+
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="/admin/assets/app.js"></script>
+  </body>
+
+</html>
