@@ -11,15 +11,13 @@
     "nano": "^6.1.5"
   },
   "devDependencies": {
-    "babel-preset-es2015": "^6.3.13",
-    "gulp": "^3.9.0",
-    "gulp-babel": "^6.1.1",
-    "gulp-concat": "^2.6.0",
-    "gulp-sass": "^2.1.1",
-    "gulp-sourcemaps": "^1.6.0"
+    "broccoli": "^0.16.9",
+    "broccoli-babel-transpiler": "^5.5.0",
+    "broccoli-merge-trees": "^1.1.0",
+    "broccoli-sass": "^0.7.0"
   },
   "scripts": {
-    "start": "gulp"
+    "start": "broccoli build dist"
   },
   "repository": {
     "type": "git",
