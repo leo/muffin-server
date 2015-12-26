@@ -17,7 +17,8 @@ nano.db.create('muffin', function(err, body) {
     var cookies = {};
 
     if (err) {
-      return console.log(err);
+      //return console.log(err);
+      return;
     }
 
     if (headers && headers['set-cookie']) {

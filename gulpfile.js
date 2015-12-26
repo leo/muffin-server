@@ -2,6 +2,7 @@ const gulp = require('gulp');
 const babel = require('gulp-babel');
 const sass = require('gulp-sass');
 const concat = require('gulp-concat');
+const nodemon = require('gulp-nodemon');
 
 const dirs = {
   sass: 'public/styles/*.scss',
@@ -33,10 +34,18 @@ gulp.task('vectors', () => {
   .pipe(gulp.dest('dist/vectors'));
 });
 
-gulp.task('watch', () => {
+gulp.task('server', () => {
+  nodemon({
+    script: 'index.js',
+    ignore: ['public/', 'dist/'],
+    ext: 'js'
+  });
+});
+
+gulp.task('watch', ['server'], () => {
   gulp.watch(dirs.sass, ['styles']);
   gulp.watch(dirs.js, ['scripts']);
   gulp.watch(dirs.vectors, ['vectors']);
 });
 
-gulp.task('default', ['styles', 'scripts', 'vectors', 'watch'] );
+gulp.task('default', ['styles', 'scripts', 'vectors', 'watch']);
