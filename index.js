@@ -2,7 +2,10 @@ var express = require('express'),
     app = express(),
     nano = require('nano')('http://localhost:5984'),
     handlebars = require('handlebars'),
-    fs = require('fs');
+    fs = require('fs'),
+    compression = require('compression');
+
+app.use(compression());
 
 nano.db.create('muffin', function(err, body) {
 
