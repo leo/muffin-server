@@ -1,10 +1,10 @@
-var express = require('express'),
-    app = express(),
-    nano = require('nano')('http://localhost:5984'),
-    handlebars = require('handlebars'),
-    fs = require('fs'),
-    compression = require('compression'),
-    bodyParser = require('body-parser');
+const express = require('express'),
+      app = express(),
+      nano = require('nano')('http://localhost:5984'),
+      handlebars = require('handlebars'),
+      fs = require('fs'),
+      compression = require('compression'),
+      bodyParser = require('body-parser');
 
 app.use(compression());
 
