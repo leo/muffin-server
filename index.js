@@ -3,7 +3,8 @@ var express = require('express'),
     nano = require('nano')('http://localhost:5984'),
     handlebars = require('handlebars'),
     fs = require('fs'),
-    compression = require('compression');
+    compression = require('compression'),
+    bodyParser = require('body-parser');
 
 app.use(compression());
 
@@ -103,6 +104,16 @@ app.get( '/admin', function(req, res) {
 
   res.send(view);
 
+});
+
+app.use(bodyParser.json());
+
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+
+app.post('/api/login', function(req, res) {
+  res.sendStatus(401);
 });
 
 var server = app.listen(2000, function() {
