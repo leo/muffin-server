@@ -22,10 +22,11 @@ gulp.task('styles', () => {
 
 gulp.task('scripts', () => {
   return gulp.src(dirs.js)
-    .pipe(babel({
-      presets: ['es2015']
-    }))
     .pipe(concat('app.js'))
+    .pipe(babel({
+      presets: ['es2015'],
+      compact: true
+    }))
     .pipe(gulp.dest('dist'));
 });
 
