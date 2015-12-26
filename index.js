@@ -7,6 +7,11 @@ var express = require('express'),
 
 app.use(compression());
 
+app.use(function(req, res, next) {
+  res.header('x-powered-by', 'Muffin CMS');
+  next();
+});
+
 nano.db.create('muffin', function(err, body) {
 
   if (!err) {
