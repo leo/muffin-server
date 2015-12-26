@@ -13,6 +13,7 @@
   "devDependencies": {
     "broccoli": "^0.16.9",
     "broccoli-babel-transpiler": "^5.5.0",
+    "broccoli-funnel": "^1.0.1",
     "broccoli-merge-trees": "^1.1.0",
     "broccoli-sass": "^0.7.0"
   },
