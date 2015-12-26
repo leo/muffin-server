@@ -2,7 +2,7 @@ var express = require('express'),
     app = express(),
     nano = require('nano')('http://localhost:5984'),
     handlebars = require('handlebars'),
-    fs = require('fs')
+    fs = require('fs');
 
 nano.db.create('muffin', function(err, body) {
 
@@ -97,7 +97,7 @@ app.get( '/admin', function(req, res) {
 
 });
 
-app.listen(3000, function() {
+var server = app.listen(2000, function() {
   var port = this.address().port;
   console.log('Muffin is running at http://localhost:' + port + '/admin');
 });
