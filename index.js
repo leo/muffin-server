@@ -8,10 +8,23 @@ const express = require('express'),
       handlebars = require('express-handlebars'),
       db = nano.use('muffin');
 
+const viewHelpers = {
+  nav: function(context, options) {
+    var wrap = '<nav>';
+
+    for (var i = 0; i < context.length; i++) {
+      wrap += options.fn(context[i]);
+    }
+
+    return wrap + '</nav>';
+  }
+}
+
 app.engine('hbs', handlebars({
   defaultLayout: 'main',
   extname: '.hbs',
-  layoutsDir: 'server/views/layouts'
+  layoutsDir: 'server/views/layouts',
+  helpers: viewHelpers
 }));
 
 app.set('view engine', 'hbs');
@@ -34,6 +47,25 @@ nano.db.create('muffin', function(err, body) {
 app.use( '/admin/assets', express.static('dist') );
 
 app.get('/admin', function(req, res) {
+
+  const nav = [
+    {
+      url: '/',
+      title: 'Dashboard'
+    },
+    {
+      url: '/pages',
+      title: 'Pages'
+    },
+    {
+      url: '/media',
+      title: 'Media'
+    },
+    {
+      url: '/settings',
+      title: 'Settings'
+    }
+  ];
 
   const cookie = req.cookies.AuthSession;
 
@@ -59,6 +91,7 @@ app.get('/admin', function(req, res) {
 
       res.render('dashboard', {
         pageTitle: 'Dashboard',
+        menuItems: nav
       });
 
       console.log('user is %s and has these roles: %j', session.userCtx.name, session.userCtx.roles);

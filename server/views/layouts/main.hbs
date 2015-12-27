@@ -19,14 +19,7 @@
     <header id="chest">
       <div class="inner">
 
-        <nav>
-          <a href="/admin">Dashboard</a>
-          <a href="/admin/pages">Pages</a>
-          <a href="/admin/media">Media</a>
-          <a href="/admin/settings">Settings</a>
-        </nav>
-
-        {{#nav}}
+        {{#nav menuItems}}
           <a href="{{url}}">{{title}}</a>
         {{/nav}}
 
