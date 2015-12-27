@@ -14,18 +14,21 @@
 
   </head>
 
-  <body>
+  <body class="{{view}}">
 
     <header id="chest">
       <div class="inner">
 
         <nav>
-          <a href="#">Dashboard</a>
-          <a href="#">Pages</a>
-          <a href="#">Posts</a>
-          <a href="#">Media</a>
-          <a href="#">Settings</a>
+          <a href="/admin">Dashboard</a>
+          <a href="/admin/pages">Pages</a>
+          <a href="/admin/media">Media</a>
+          <a href="/admin/settings">Settings</a>
         </nav>
+
+        {{#nav}}
+          <a href="{{url}}">{{title}}</a>
+        {{/nav}}
 
         <a href="/admin/logout" class="logo"></a>
 
@@ -51,7 +54,7 @@
       </aside>
 
       <section id="content" class={{divide}}>
-        {{{content}}}
+        {{{body}}}
       </section>
 
     </main>

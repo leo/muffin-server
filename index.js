@@ -1,12 +1,21 @@
 const express = require('express'),
       app = express(),
       nano = require('nano')('http://localhost:5984'),
-      handlebars = require('handlebars'),
       fs = require('fs'),
       compression = require('compression'),
       bodyParser = require('body-parser'),
       cookieParser = require('cookie-parser'),
+      handlebars = require('express-handlebars'),
       db = nano.use('muffin');
+
+app.engine('hbs', handlebars({
+  defaultLayout: 'main',
+  extname: '.hbs',
+  layoutsDir: 'server/views/layouts'
+}));
+
+app.set('view engine', 'hbs');
+app.set('views', 'server/views');
 
 app.use(compression());
 app.use(cookieParser());
@@ -24,65 +33,16 @@ nano.db.create('muffin', function(err, body) {
 
 app.use( '/admin/assets', express.static('dist') );
 
-function loadView(view, err, content) {
-
-  if (err) {
-    console.log(err);
-    return;
-  }
-
-  var look = fs.readFileSync('server/views/' + view + '.hbs', 'utf8'),
-    template = handlebars.compile(look);
-
-  if (view !== 'edit') {
-    var other = {
-      items: content
-    }
-  }
-
-  var tags = {
-    pageTitle: function() {
-      switch(view) {
-        case 'dashboard':
-          return 'Dashboard';
-
-        case 'edit':
-          return content.title;
-
-        case 'list':
-          return 'Pages';
-
-        default:
-          return 'Error 404';
-      }
-    },
-    content: template(view == 'edit' ? content : other),
-    view: view
-  }
-
-  var base = fs.readFileSync('server/templates/admin.hbs', 'utf8'),
-    container = handlebars.compile(base);
-
-  return container(tags);
-}
-
-app.get( '/admin', function(req, res) {
+app.get('/admin', function(req, res) {
 
   const cookie = req.cookies.AuthSession;
 
-  const getLogin = function() {
-
-    var base = fs.readFileSync('server/templates/login.hbs', 'utf8'),
-        template = handlebars.compile(base);
-
-    var tags = {
-      site: {
-        name: 'Volkspark'
-      }
-    }
-
-    return template(tags);
-  }
+  const loginTags = {
+    site: {
+      name: 'Volkspark'
+    },
+    layout: false
+  };
 
   if (cookie) {
 
@@ -94,16 +54,19 @@ app.get( '/admin', function(req, res) {
     nano.session(function(err, session) {
 
       if (err) {
-        return res.send(getLogin());
+        return res.render('login', loginTags);
       }
 
-      res.send(loadView('dashboard'));
+      res.render('dashboard', {
+        pageTitle: 'Dashboard',
+      });
+
       console.log('user is %s and has these roles: %j', session.userCtx.name, session.userCtx.roles);
 
     });
 
   } else {
-    res.send(getLogin());
+    res.render('login', loginTags);
   }
 
 });
@@ -143,7 +106,7 @@ app.post('/api/login', function(req, res) {
 
 });
 
-var server = app.listen(2000, function() {
+app.listen(2000, function() {
   var port = this.address().port;
   console.log('Muffin is running at http://localhost:' + port + '/admin');
 });
