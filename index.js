@@ -4,9 +4,12 @@ const express = require('express'),
       handlebars = require('handlebars'),
       fs = require('fs'),
       compression = require('compression'),
-      bodyParser = require('body-parser');
+      bodyParser = require('body-parser'),
+      cookieParser = require('cookie-parser'),
+      db = nano.use('muffin');
 
 app.use(compression());
+app.use(cookieParser());
 
 app.use(function(req, res, next) {
   res.header('x-powered-by', 'Muffin CMS');
@@ -14,29 +17,9 @@ app.use(function(req, res, next) {
 });
 
 nano.db.create('muffin', function(err, body) {
-
   if (!err) {
     console.log('DB created!');
   }
-
-  var db = nano.use('muffin');
-
-  nano.auth('ABBA', 'dancing-queen', function(err, body, headers) {
-
-    var cookies = {};
-
-    if (err) {
-      //return console.log(err);
-      return;
-    }
-
-    if (headers && headers['set-cookie']) {
-      cookies['ABBAs'] = headers['set-cookie'];
-    }
-
-    console.log(null, 'You\'re an admin!');
-  });
-
 });
 
 app.use( '/admin/assets', express.static('dist') );
@@ -85,11 +68,10 @@ function loadView(view, err, content) {
 
 app.get( '/admin', function(req, res) {
 
-  var view;
+  const cookie = req.cookies.AuthSession;
 
-  if (false) {
-    view = loadView('dashboard');
-  } else {
+  const getLogin = function() {
+
     var base = fs.readFileSync('server/templates/login.hbs', 'utf8'),
         template = handlebars.compile(base);
 
@@ -99,10 +81,30 @@ app.get( '/admin', function(req, res) {
       }
     }
 
-    view = template(tags);
+    return template(tags);
   }
 
-  res.send(view);
+  if (cookie) {
+
+    const nano = require('nano')({
+      url: 'http://localhost:5984',
+      cookie: 'AuthSession=' + cookie
+    });
+
+    nano.session(function(err, session) {
+
+      if (err) {
+        return res.send(getLogin());
+      }
+
+      res.send(loadView('dashboard'));
+      console.log('user is %s and has these roles: %j', session.userCtx.name, session.userCtx.roles);
+
+    });
+
+  } else {
+    res.send(getLogin());
+  }
 
 });
 
@@ -119,9 +121,23 @@ app.post('/api/login', function(req, res) {
 
   if (!username || !password) {
     res.sendStatus(401);
-  } else {
-    res.sendStatus(200);
+    return;
   }
+
+  nano.auth(username, password, function(err, body, headers) {
+
+    if (err) {
+      res.sendStatus(401);
+      return;
+    }
+
+    if (headers && headers['set-cookie']) {
+      res.cookie(headers['set-cookie']);
+    }
+
+    res.sendStatus(200);
+
+  });
 
   console.log(req.body);
 
