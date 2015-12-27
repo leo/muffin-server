@@ -5,16 +5,16 @@ const concat = require('gulp-concat');
 const nodemon = require('gulp-nodemon');
 
 const dirs = {
-  sass: 'public/styles/*.scss',
-  js: 'public/scripts/*.js',
-  vectors: 'public/vectors/*'
+  sass: 'client/styles/*.scss',
+  js: 'client/scripts/*.js',
+  vectors: 'client/vectors/*'
 }
 
 gulp.task('styles', () => {
   return gulp.src(dirs.sass)
     .pipe(sass({
       outputStyle: 'compressed',
-      includePaths: ['client/style']
+      includePaths: ['client/styles']
     }).on('error', sass.logError))
     .pipe(concat('styles.css'))
     .pipe(gulp.dest('dist'));
@@ -38,7 +38,7 @@ gulp.task('vectors', () => {
 gulp.task('server', () => {
   nodemon({
     script: 'index.js',
-    ignore: ['public/', 'dist/'],
+    ignore: ['client/', 'dist/'],
     ext: 'js'
   });
 });
