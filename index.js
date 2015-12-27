@@ -113,7 +113,18 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.post('/api/login', function(req, res) {
-  res.sendStatus(401);
+
+  const username = req.body.username,
+        password = req.body.password;
+
+  if (!username || !password) {
+    res.sendStatus(401);
+  } else {
+    res.sendStatus(200);
+  }
+
+  console.log(req.body);
+
 });
 
 var server = app.listen(2000, function() {
