@@ -1,8 +1,8 @@
-const gulp = require('gulp');
-const babel = require('gulp-babel');
-const sass = require('gulp-sass');
-const concat = require('gulp-concat');
-const nodemon = require('gulp-nodemon');
+const gulp = require('gulp'),
+      babel = require('gulp-babel'),
+      sass = require('gulp-sass'),
+      concat = require('gulp-concat'),
+      nodemon = require('gulp-nodemon');
 
 const dirs = {
   sass: 'client/styles/*.scss',
