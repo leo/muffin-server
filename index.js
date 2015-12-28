@@ -33,7 +33,6 @@ nano.db.create('muffin', function(err, body) {
 });
 
 app.use('/admin/assets', express.static('./dist'));
-app.use('/admin', require('./routes'));
 
 app.use(bodyParser.json());
 
@@ -41,6 +40,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
+app.use('/admin', require('./routes/dashboard'));
 app.use('/admin/login', require('./routes/login'));
 
 app.listen(2000, function() {
