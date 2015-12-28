@@ -1,5 +1,6 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express'),
+      session = require('../lib/auth'),
+      router = express.Router();
 
 router.get('/', function(req, res) {
 
@@ -22,41 +23,19 @@ router.get('/', function(req, res) {
     }
   ];
 
-  const cookie = req.cookies.AuthSession;
+  session.isAuthenticated(req.cookies).then(function() {
 
-  if (cookie) {
+    var pjson = require('../package.json');
 
-    const nano = require('nano')({
-      url: 'http://localhost:5984',
-      cookie: 'AuthSession=' + cookie
+    res.render('dashboard', {
+      pageTitle: 'Dashboard',
+      menuItems: nav,
+      appVersion: pjson.version
     });
 
-    nano.session(function(err, session) {
-
-      const user = session.userCtx.name,
-            roles = session.userCtx.roles;
-
-      if (err || !user) {
-        res.clearCookie('AuthSession');
-        res.redirect('/admin/login');
-        return;
-      }
-
-      var pjson = require('./package.json');
-
-      res.render('dashboard', {
-        pageTitle: 'Dashboard',
-        menuItems: nav,
-        appVersion: pjson.version
-      });
-
-      console.log('user is %s and has these roles: %j', user, roles);
-
-    });
-
-  } else {
+  }, function(reason) {
     res.redirect('/admin/login');
-  }
+  });
 
 });
 

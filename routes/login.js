@@ -1,12 +1,9 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express'),
+      session = require('../lib/auth'),
+      nano = require('nano')('http://localhost:5984'),
+      router = express.Router();
 
 router.get('/', function(req, res, next) {
-
-  if (false) {
-    res.redirect('/admin');
-    return;
-  }
 
   const tags = {
     site: {
@@ -15,7 +12,11 @@ router.get('/', function(req, res, next) {
     layout: false
   };
 
-  res.render('login', tags);
+  session.isAuthenticated(req.cookies).then(function() {
+    res.redirect('/admin');
+  }, function() {
+    res.render('login', tags);
+  });
 
 });
 
