@@ -7,6 +7,7 @@ const express = require('express'),
       cookieParser = require('cookie-parser'),
       handlebars = require('express-handlebars'),
       logger = require('morgan'),
+      session = require('./lib/session'),
       db = nano.use('muffin');
 
 app.engine('hbs', handlebars({
@@ -30,6 +31,23 @@ nano.db.create('muffin', function(err, body) {
   if (!err) {
     console.log('DB created!');
   }
+});
+
+app.get('/admin*', function(req, res, next) {
+
+  const url = req.url;
+
+  // Check if request wants a file or the login. If so, let it through
+  if (url.match(/[^\\/]+\.[^\\/]+$/) || url == '/admin/login') {
+    return next();
+  }
+
+  session.isAuthenticated(req.cookies).then(function() {
+    next();
+  }, function() {
+    res.redirect('/admin/login');
+  });
+
 });
 
 app.use('/admin/assets', express.static('./dist'));

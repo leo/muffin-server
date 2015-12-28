@@ -1,5 +1,4 @@
 const express = require('express'),
-      session = require('../lib/session'),
       router = express.Router();
 
 router.get('/', function(req, res) {
@@ -23,18 +22,12 @@ router.get('/', function(req, res) {
     }
   ];
 
-  session.isAuthenticated(req.cookies).then(function() {
+  const pjson = require('../package.json');
 
-    var pjson = require('../package.json');
-
-    res.render('dashboard', {
-      pageTitle: 'Dashboard',
-      menuItems: nav,
-      appVersion: pjson.version
-    });
-
-  }, function(reason) {
-    res.redirect('/admin/login');
+  res.render('dashboard', {
+    pageTitle: 'Dashboard',
+    menuItems: nav,
+    appVersion: pjson.version
   });
 
 });

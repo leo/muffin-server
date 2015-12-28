@@ -1,7 +1,15 @@
 const express = require('express'),
-      session = require('../lib/session'),
       nano = require('nano')('http://localhost:5984'),
+      session = require('../lib/session'),
       router = express.Router();
+
+router.use(function(req, res, next) {
+  session.isAuthenticated(req.cookies).then(function() {
+    res.redirect('/admin');
+  }, function() {
+    next();
+  });
+});
 
 router.get('/', function(req, res, next) {
 
@@ -12,11 +20,7 @@ router.get('/', function(req, res, next) {
     layout: false
   };
 
-  session.isAuthenticated(req.cookies).then(function() {
-    res.redirect('/admin');
-  }, function() {
-    res.render('login', tags);
-  });
+  res.render('login', tags);
 
 });
 
