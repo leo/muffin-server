@@ -6,6 +6,7 @@ const express = require('express'),
       bodyParser = require('body-parser'),
       cookieParser = require('cookie-parser'),
       handlebars = require('express-handlebars'),
+      logger = require('morgan'),
       db = nano.use('muffin');
 
 const viewHelpers = {
@@ -37,6 +38,7 @@ app.set('view engine', 'hbs');
 
 app.use(compression());
 app.use(cookieParser());
+app.use(logger('dev'));
 
 app.use(function(req, res, next) {
   res.header('x-powered-by', 'Muffin CMS');
