@@ -9,29 +9,10 @@ const express = require('express'),
       logger = require('morgan'),
       db = nano.use('muffin');
 
-const viewHelpers = {
-  nav: function(context, options) {
-    var wrap = '<nav>';
-
-    for (var i = 0; i < context.length; i++) {
-      var item = context[i];
-
-      if (item.title.toLowerCase() == options.data.exphbs.view) {
-        item.status = 'active';
-      }
-
-      item.url = '/admin/' + item.url;
-      wrap += options.fn(item);
-    }
-
-    return wrap + '</nav>';
-  }
-}
-
 app.engine('hbs', handlebars({
   defaultLayout: 'main',
   extname: '.hbs',
-  helpers: viewHelpers
+  helpers: require('./lib/helpers')
 }));
 
 app.set('view engine', 'hbs');
@@ -51,7 +32,7 @@ nano.db.create('muffin', function(err, body) {
   }
 });
 
-app.use( '/admin/assets', express.static('dist') );
+app.use('/admin/assets', express.static('./dist'));
 app.use('/admin', require('./routes'));
 
 app.use(bodyParser.json());
