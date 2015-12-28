@@ -14,8 +14,12 @@ const viewHelpers = {
 
     for (var i = 0; i < context.length; i++) {
       var item = context[i];
-      item.url = '/admin/' + item.url;
 
+      if (item.title.toLowerCase() == options.data.exphbs.view) {
+        item.status = 'active';
+      }
+
+      item.url = '/admin/' + item.url;
       wrap += options.fn(item);
     }
 
