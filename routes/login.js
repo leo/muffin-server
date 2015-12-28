@@ -20,6 +20,7 @@ router.get('/', function(req, res, next) {
     layout: false
   };
 
+  res.clearCookie('AuthSession');
   res.render('login', tags);
 
 });
