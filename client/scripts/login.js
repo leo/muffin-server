@@ -26,6 +26,12 @@ $('form').submit(function(event) {
 
 });
 
-$('input').keyup(function() {
+$('input').keyup(function(event) {
+  var code = event.which;
+
+  if (event.which == 13 || event.which == 9) {
+    return;
+  }
+
   $(this).removeClass('wrong');
 });
