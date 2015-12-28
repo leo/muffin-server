@@ -13,7 +13,10 @@ const viewHelpers = {
     var wrap = '<nav>';
 
     for (var i = 0; i < context.length; i++) {
-      wrap += options.fn(context[i]);
+      var item = context[i];
+      item.url = '/admin/' + item.url;
+
+      wrap += options.fn(item);
     }
 
     return wrap + '</nav>';
@@ -50,19 +53,19 @@ app.get('/admin', function(req, res) {
 
   const nav = [
     {
-      url: '/',
+      url: '.',
       title: 'Dashboard'
     },
     {
-      url: '/pages',
+      url: 'pages',
       title: 'Pages'
     },
     {
-      url: '/media',
+      url: 'media',
       title: 'Media'
     },
     {
-      url: '/settings',
+      url: 'settings',
       title: 'Settings'
     }
   ];
