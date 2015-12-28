@@ -30,12 +30,10 @@ const viewHelpers = {
 app.engine('hbs', handlebars({
   defaultLayout: 'main',
   extname: '.hbs',
-  layoutsDir: 'server/views/layouts',
   helpers: viewHelpers
 }));
 
 app.set('view engine', 'hbs');
-app.set('views', 'server/views');
 
 app.use(compression());
 app.use(cookieParser());
