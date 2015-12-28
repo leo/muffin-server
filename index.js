@@ -88,8 +88,13 @@ app.get('/admin', function(req, res) {
 
     nano.session(function(err, session) {
 
-      if (err) {
-        return res.render('login', loginTags);
+      const user = session.userCtx.name,
+            roles = session.userCtx.roles;
+
+      if (err || !user) {
+        res.clearCookie('AuthSession');
+        res.render('login', loginTags);
+        return;
       }
 
       res.render('dashboard', {
@@ -97,7 +102,7 @@ app.get('/admin', function(req, res) {
         menuItems: nav
       });
 
-      console.log('user is %s and has these roles: %j', session.userCtx.name, session.userCtx.roles);
+      console.log('user is %s and has these roles: %j', user, roles);
 
     });
 
