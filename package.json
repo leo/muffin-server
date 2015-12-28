@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Who doesn't like chocolate?",
   "main": "index.js",
+  "private": true,
   "dependencies": {
     "body-parser": "^1.14.2",
     "compression": "^1.6.0",
