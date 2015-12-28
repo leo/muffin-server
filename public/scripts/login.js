@@ -6,7 +6,7 @@ $('form').submit(function(event) {
     return;
   }
 
-  $.post('/api/login', $(this).serialize(), function(response) {
+  $.post(document.URL, $(this).serialize(), function(response) {
     location.reload();
   }).error(function() {
 
