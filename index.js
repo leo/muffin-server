@@ -97,9 +97,12 @@ app.get('/admin', function(req, res) {
         return;
       }
 
+      var pjson = require('./package.json');
+
       res.render('dashboard', {
         pageTitle: 'Dashboard',
-        menuItems: nav
+        menuItems: nav,
+        appVersion: pjson.version
       });
 
       console.log('user is %s and has these roles: %j', user, roles);
