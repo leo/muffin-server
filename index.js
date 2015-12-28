@@ -37,15 +37,15 @@ app.get('/admin*', function(req, res, next) {
 
   const url = req.url;
 
-  // Check if request wants a file or the login. If so, let it through
-  if (url.match(/[^\\/]+\.[^\\/]+$/) || url.substring(0, 12) == '/admin/login') {
+  // Check if request wants a file. If so, let it through.
+  if (url.match(/[^\\/]+\.[^\\/]+$/)) {
     return next();
   }
 
   session.isAuthenticated(req.cookies).then(function() {
     next();
   }, function() {
-    res.redirect('/admin/login');
+    res.redirect('/login');
   });
 
 });
@@ -59,7 +59,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use('/admin', require('./routes/dashboard'));
-app.use('/admin/login', require('./routes/login'));
+app.use('/login', require('./routes/login'));
 
 app.listen(2000, function() {
   var port = this.address().port;
