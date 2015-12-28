@@ -52,72 +52,7 @@ nano.db.create('muffin', function(err, body) {
 });
 
 app.use( '/admin/assets', express.static('dist') );
-
-app.get('/admin', function(req, res) {
-
-  const nav = [
-    {
-      url: '.',
-      title: 'Dashboard'
-    },
-    {
-      url: 'pages',
-      title: 'Pages'
-    },
-    {
-      url: 'media',
-      title: 'Media'
-    },
-    {
-      url: 'settings',
-      title: 'Settings'
-    }
-  ];
-
-  const cookie = req.cookies.AuthSession;
-
-  const loginTags = {
-    site: {
-      name: 'Volkspark'
-    },
-    layout: false
-  };
-
-  if (cookie) {
-
-    const nano = require('nano')({
-      url: 'http://localhost:5984',
-      cookie: 'AuthSession=' + cookie
-    });
-
-    nano.session(function(err, session) {
-
-      const user = session.userCtx.name,
-            roles = session.userCtx.roles;
-
-      if (err || !user) {
-        res.clearCookie('AuthSession');
-        res.render('login', loginTags);
-        return;
-      }
-
-      var pjson = require('./package.json');
-
-      res.render('dashboard', {
-        pageTitle: 'Dashboard',
-        menuItems: nav,
-        appVersion: pjson.version
-      });
-
-      console.log('user is %s and has these roles: %j', user, roles);
-
-    });
-
-  } else {
-    res.render('login', loginTags);
-  }
-
-});
+app.use('/admin', require('./routes'));
 
 app.use(bodyParser.json());
 
@@ -125,34 +60,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-app.post('/api/login', function(req, res) {
-
-  const username = req.body.username,
-        password = req.body.password;
-
-  if (!username || !password) {
-    res.sendStatus(401);
-    return;
-  }
-
-  nano.auth(username, password, function(err, body, headers) {
-
-    if (err) {
-      res.sendStatus(401);
-      return;
-    }
-
-    if (headers && headers['set-cookie']) {
-      res.cookie(headers['set-cookie']);
-    }
-
-    res.sendStatus(200);
-
-  });
-
-  console.log(req.body);
-
-});
+app.use('/admin/login', require('./routes/login'));
 
 app.listen(2000, function() {
   var port = this.address().port;
