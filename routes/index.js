@@ -1,5 +1,5 @@
 const express = require('express'),
-      session = require('../lib/auth'),
+      session = require('../lib/session'),
       router = express.Router();
 
 router.get('/', function(req, res) {
