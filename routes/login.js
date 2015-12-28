@@ -4,11 +4,13 @@ const express = require('express'),
       router = express.Router();
 
 router.use(function(req, res, next) {
+
   session.isAuthenticated(req.cookies).then(function() {
     res.redirect('/admin');
   }, function() {
     next();
   });
+
 });
 
 router.get('/', function(req, res, next) {

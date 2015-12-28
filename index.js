@@ -38,7 +38,7 @@ app.get('/admin*', function(req, res, next) {
   const url = req.url;
 
   // Check if request wants a file or the login. If so, let it through
-  if (url.match(/[^\\/]+\.[^\\/]+$/) || url == '/admin/login') {
+  if (url.match(/[^\\/]+\.[^\\/]+$/) || url.substring(0, 12) == '/admin/login') {
     return next();
   }
 
