@@ -27,6 +27,10 @@ router.get('/', function(req, res, next) {
 
 });
 
+router.get('/reset-password', function(req, res) {
+  res.send('You\'re such a bad boy!');
+});
+
 router.post('/', function(req, res) {
 
   const username = req.body.username,
