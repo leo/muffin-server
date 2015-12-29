@@ -40,11 +40,15 @@
     <main id="belly">
 
       <aside id="title">
-
         <div class="inner">
-          <h1>{{pageTitle}}</h1>
-        </div>
 
+          {{#if editableTitle}}
+            <h1 contenteditable="true">{{pageTitle}}</h1>
+          {{else}}
+            <h1>{{pageTitle}}</h1>
+          {{/if}}
+
+        </div>
       </aside>
 
       <section id="content" class={{divide}}>
