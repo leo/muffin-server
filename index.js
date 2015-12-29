@@ -16,6 +16,26 @@ app.engine('hbs', handlebars({
   helpers: require('./lib/helpers')
 }));
 
+app.locals.menuItems = [
+  {
+    url: '.',
+    title: 'Dashboard'
+  },
+  {
+    url: 'pages',
+    title: 'Pages'
+  },
+  {
+    url: 'media',
+    title: 'Media'
+  },
+  {
+    url: 'settings',
+    title: 'Settings'
+  }
+];
+
+app.locals.appVersion = require('./package.json').version;
 app.set('view engine', 'hbs');
 
 app.use(compression());
