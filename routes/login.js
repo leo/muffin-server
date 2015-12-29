@@ -5,6 +5,10 @@ const express = require('express'),
 
 router.use(function(req, res, next) {
 
+  if (req.url == '/bye') {
+    return next();
+  }
+
   session.isAuthenticated(req.cookies).then(function() {
     res.redirect('/admin');
   }, function() {
@@ -29,6 +33,11 @@ router.get('/', function(req, res, next) {
 
 router.get('/reset-password', function(req, res) {
   res.send('You\'re such a bad boy!');
+});
+
+router.get('/bye', function(req, res) {
+  res.clearCookie('AuthSession');
+  res.redirect('/login');
 });
 
 router.post('/', function(req, res) {
