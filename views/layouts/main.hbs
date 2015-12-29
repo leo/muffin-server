@@ -15,7 +15,7 @@
 
   </head>
 
-  <body class="{{@exphbs.view}}">
+  <body class="{{#unless path}}{{@exphbs.view}}{{/unless}}">
 
     <header id="chest">
       <div class="inner">
