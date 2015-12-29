@@ -4,7 +4,8 @@ const express = require('express'),
 router.get('/', function(req, res) {
 
   res.render('list', {
-    pageTitle: 'Pages'
+    pageTitle: 'Pages',
+    path: req.originalUrl
   });
 
 });
