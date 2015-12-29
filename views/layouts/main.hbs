@@ -43,7 +43,15 @@
         <div class="inner">
 
           {{#if editableTitle}}
+
             <h1 contenteditable="true">{{pageTitle}}</h1>
+
+            <nav>
+              <a href="#" class="current">Content</a>
+              <a href="#">Sidebar</a>
+              <a href="#">Options</a>
+            </nav>
+
           {{else}}
             <h1>{{pageTitle}}</h1>
           {{/if}}
