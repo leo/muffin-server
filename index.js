@@ -58,8 +58,10 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-app.use('/admin', require('./routes/dashboard'));
 app.use('/login', require('./routes/login'));
+
+app.use('/admin', require('./routes/dashboard'));
+app.use('/admin/pages', require('./routes/pages'));
 
 app.listen(2000, function() {
   var port = this.address().port;
