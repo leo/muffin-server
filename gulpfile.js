@@ -49,4 +49,4 @@ gulp.task('watch', ['server'], () => {
   gulp.watch(dirs.vectors, ['vectors']);
 });
 
-gulp.task('default', ['styles', 'scripts', 'vectors', 'watch']);
+gulp.task('default', ['styles', 'scripts', 'vectors']);

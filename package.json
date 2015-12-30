@@ -22,7 +22,8 @@
     "morgan": "^1.6.1"
   },
   "scripts": {
-    "start": "gulp"
+    "start": "gulp watch",
+    "install": "gulp"
   },
   "repository": {
     "type": "git",
