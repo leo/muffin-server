@@ -5,7 +5,7 @@ const express = require('express'),
 
 router.get('/', function(req, res) {
 
-  db.list({ type: 'page', include_docs: true }, function(err, body) {
+  function listPages(err, body) {
 
     if (err) {
       return console.log(err);
@@ -35,7 +35,12 @@ router.get('/', function(req, res) {
       items: list
     });
 
-  });
+  };
+
+  db.list({
+    type: 'page',
+    include_docs: true
+  }, listPages);
 
 });
 
