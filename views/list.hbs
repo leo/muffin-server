@@ -11,22 +11,26 @@
 
   <tbody>
 
+    {{#each items}}
+
     <tr>
       <td><input type="checkbox"></td>
       <td>
 
-        <a href="/admin/pages/3242" class="title">LOL - what?</a>
+        <a href="/admin/pages/{{_id}}" class="title">{{title}}</a>
 
         <ul>
-          <li class="edit"><a href="/admin/pages/3242">Edit</a></li>
+          <li class="edit"><a href="/admin/pages/{{_id}}">Edit</a></li>
           <li class="delete"><a href="#">Delete</a></li>
           <li class="view"><a href="#">View</a></li>
         </ul>
 
       </td>
-      <td><a href="#" class="author">admin</a></td>
-      <td>August 28, 2015</td>
+      <td><a href="#" class="author">{{author}}</a></td>
+      <td>{{dates.updated}}</td>
     </tr>
+
+    {{/each}}
 
   </tbody>
 
