@@ -18,14 +18,12 @@ router.get('/', function(req, res) {
       const dates = page.doc.dates;
 
       for (var type in dates) {
-
         if (!dates.hasOwnProperty(type)) {
           continue;
         }
 
         var date = new Date(parseInt(dates[type]));
         page.doc.dates[type] = date.toLocaleDateString();
-
       }
 
       list.push(page.doc);
@@ -43,11 +41,21 @@ router.get('/', function(req, res) {
 
 router.get('/:id', function(req, res) {
 
-  res.render('edit', {
-    pageTitle: 'LOL - what?',
-    editableTitle: true,
-    path: req.originalUrl
-  });
+  function loadPage(err, page) {
+
+    if (err) {
+      return console.log(body);
+    }
+
+    res.render('edit', {
+      pageTitle: page.title,
+      editableTitle: true,
+      path: req.originalUrl
+    });
+
+  }
+
+  db.get(req.params.id, loadPage);
 
 });
 
