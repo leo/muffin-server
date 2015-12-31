@@ -14,7 +14,21 @@ router.get('/', function(req, res) {
     var list = [];
 
     body.rows.forEach(function(page) {
-      list.push(page.doc)
+
+      const dates = page.doc.dates;
+
+      for (var type in dates) {
+
+        if (!dates.hasOwnProperty(type)) {
+          continue;
+        }
+
+        var date = new Date(parseInt(dates[type]));
+        page.doc.dates[type] = date.toLocaleDateString();
+
+      }
+
+      list.push(page.doc);
     });
 
     res.render('list', {
