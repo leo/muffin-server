@@ -39,7 +39,7 @@ gulp.task('server', () => {
   nodemon({
     script: 'index.js',
     ignore: ['public/', 'dist/'],
-    ext: 'js'
+    ext: 'js hbs'
   });
 });
 
