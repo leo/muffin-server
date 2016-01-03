@@ -1,6 +1,7 @@
 const express = require('express'),
       nano = require('nano')('http://localhost:5984'),
       session = require('../lib/session'),
+      User = require('../lib/db').User,
       router = express.Router();
 
 router.use(function(req, res, next) {
@@ -9,11 +10,11 @@ router.use(function(req, res, next) {
     return next();
   }
 
-  session.isAuthenticated(req.cookies).then(function() {
+  if (req.session.loggedIn) {
     res.redirect('/admin');
-  }, function() {
+  } else {
     next();
-  });
+  }
 
 });
 
@@ -26,7 +27,7 @@ router.get('/', function(req, res, next) {
     layout: false
   };
 
-  res.clearCookie('AuthSession');
+  req.session.loggedIn = false;
   res.render('login', tags);
 
 });
@@ -36,7 +37,7 @@ router.get('/reset-password', function(req, res) {
 });
 
 router.get('/bye', function(req, res) {
-  res.clearCookie('AuthSession');
+  req.session.loggedIn = false;
   res.redirect('/login');
 });
 
@@ -50,18 +51,21 @@ router.post('/', function(req, res) {
     return;
   }
 
-  nano.auth(username, password, function(err, body, headers) {
+  const query = User.where({ _id: req.body.username });
 
-    if (err) {
+  query.findOne(function(err, user) {
+
+    if (!user) {
       res.sendStatus(401);
       return;
     }
 
-    if (headers && headers['set-cookie']) {
-      res.cookie(headers['set-cookie']);
+    if (user.password == req.body.password) {
+      req.session.loggedIn = true;
+      res.sendStatus(200);
+    } else {
+      res.sendStatus(401);
     }
-
-    res.sendStatus(200);
 
   });
 

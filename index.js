@@ -7,8 +7,20 @@ const express = require('express'),
       cookieParser = require('cookie-parser'),
       handlebars = require('express-handlebars'),
       logger = require('morgan'),
-      session = require('./lib/session'),
-      db = nano.use('muffin');
+      session = require('express-session'),
+      MongoStore = require('connect-mongo')(session),
+      running = require('./lib/db').connection;
+
+app.use(cookieParser());
+
+app.use(session({
+    secret: 'foo',
+    store: new MongoStore({
+      mongooseConnection: running
+    }),
+    resave: false,
+    saveUninitialized: true
+}));
 
 app.engine('hbs', handlebars({
   defaultLayout: 'main',
@@ -39,18 +51,11 @@ app.locals.appVersion = require('./package.json').version;
 app.set('view engine', 'hbs');
 
 app.use(compression());
-app.use(cookieParser());
 app.use(logger('dev'));
 
 app.use(function(req, res, next) {
   res.header('x-powered-by', 'Muffin CMS');
   next();
-});
-
-nano.db.create('muffin', function(err, body) {
-  if (!err) {
-    console.log('DB created!');
-  }
 });
 
 app.get('/admin*', function(req, res, next) {
@@ -62,11 +67,11 @@ app.get('/admin*', function(req, res, next) {
     return next();
   }
 
-  session.isAuthenticated(req.cookies).then(function() {
+  if (req.session.loggedIn) {
     next();
-  }, function() {
+  } else {
     res.redirect('/login');
-  });
+  }
 
 });
 
