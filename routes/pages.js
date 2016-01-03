@@ -12,6 +12,10 @@ router.get('/', function(req, res) {
       throw err;
     }
 
+    for (var page in pages) {
+      pages[page] = pages[page].toObject()
+    }
+
     res.render('list', {
       pageTitle: 'Pages',
       path: req.originalUrl,
