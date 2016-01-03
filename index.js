@@ -1,6 +1,5 @@
 const express = require('express'),
       app = express(),
-      fs = require('fs'),
       compression = require('compression'),
       bodyParser = require('body-parser'),
       cookieParser = require('cookie-parser'),
