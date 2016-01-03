@@ -1,5 +1,4 @@
 const express = require('express'),
-      nano = require('nano')('http://localhost:5984'),
       session = require('../lib/session'),
       User = require('../lib/db').User,
       router = express.Router();

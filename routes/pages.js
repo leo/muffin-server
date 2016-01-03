@@ -1,46 +1,26 @@
 const express = require('express'),
       router = express.Router(),
       nano = require('nano')('http://localhost:5984'),
+      Page = require('../lib/db').Page,
       db = nano.use('muffin');
 
 router.get('/', function(req, res) {
 
-  function listPages(err, body) {
+  function listPages(err, pages) {
 
     if (err) {
-      return console.log(err);
+      throw err;
     }
-
-    var list = [];
-
-    body.rows.forEach(function(page) {
-
-      const dates = page.doc.dates;
-
-      for (var type in dates) {
-        if (!dates.hasOwnProperty(type)) {
-          continue;
-        }
-
-        var date = new Date(parseInt(dates[type]));
-        page.doc.dates[type] = date.toLocaleDateString();
-      }
-
-      list.push(page.doc);
-    });
 
     res.render('list', {
       pageTitle: 'Pages',
       path: req.originalUrl,
-      items: list
+      items: pages
     });
 
-  };
+  }
 
-  db.list({
-    type: 'page',
-    include_docs: true
-  }, listPages);
+  Page.find({}, listPages);
 
 });
 

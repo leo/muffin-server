@@ -1,6 +1,5 @@
 const express = require('express'),
       app = express(),
-      nano = require('nano')('http://localhost:5984'),
       fs = require('fs'),
       compression = require('compression'),
       bodyParser = require('body-parser'),
