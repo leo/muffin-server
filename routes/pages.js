@@ -30,10 +30,12 @@ router.get('/', function(req, res) {
 
 router.get('/:id', function(req, res) {
 
+  const query = Page.where({ _id: req.params.id });
+
   function loadPage(err, page) {
 
     if (err) {
-      return console.log(body);
+      throw err;
     }
 
     res.render('edit', {
@@ -44,7 +46,7 @@ router.get('/:id', function(req, res) {
 
   }
 
-  db.get(req.params.id, loadPage);
+  query.findOne(loadPage);
 
 });
 
