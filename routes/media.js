@@ -1,11 +1,23 @@
 const express = require('express'),
-      router = express.Router();
+      router = express.Router(),
+      File = require('../lib/db').File;
 
 router.get('/', function(req, res) {
 
-  res.render('media', {
-    pageTitle: 'Media'
-  });
+  function loadFiles(err, results) {
+
+    if (err) {
+      throw err;
+    }
+
+    res.render('media', {
+      pageTitle: 'Media',
+      files: results
+    });
+
+  }
+
+  File.find({}, loadFiles);
 
 });
 
