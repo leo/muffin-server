@@ -12,12 +12,12 @@ const express = require('express'),
 app.use(cookieParser());
 
 app.use(session({
-    secret: 'foo',
-    store: new MongoStore({
-      mongooseConnection: running
-    }),
-    resave: false,
-    saveUninitialized: true
+  secret: 'foo',
+  store: new MongoStore({
+    mongooseConnection: running
+  }),
+  resave: false,
+  saveUninitialized: true
 }));
 
 app.engine('hbs', handlebars({
