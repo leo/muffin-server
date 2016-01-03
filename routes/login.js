@@ -1,5 +1,5 @@
 const express = require('express'),
-      User = require('../lib/db').User,
+      User = require('../lib/models/user'),
       router = express.Router();
 
 router.use(function(req, res, next) {

@@ -1,6 +1,6 @@
 const express = require('express'),
       router = express.Router(),
-      File = require('../lib/db').File;
+      File = require('../lib/models/file');
 
 router.get('/', function(req, res) {
 

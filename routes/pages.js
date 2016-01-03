@@ -1,6 +1,6 @@
 const express = require('express'),
       router = express.Router(),
-      Page = require('../lib/db').Page;
+      Page = require('../lib/models/page');
 
 router.get('/', function(req, res) {
 

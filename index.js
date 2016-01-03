@@ -7,7 +7,7 @@ const express = require('express'),
       logger = require('morgan'),
       session = require('express-session'),
       MongoStore = require('connect-mongo')(session),
-      rope = require('./lib/db').connection;
+      rope = require('./lib/db');
 
 process.on('SIGINT', function() {
   rope.close(function() {
