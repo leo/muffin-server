@@ -7,14 +7,20 @@ const express = require('express'),
       logger = require('morgan'),
       session = require('express-session'),
       MongoStore = require('connect-mongo')(session),
-      running = require('./lib/db').connection;
+      rope = require('./lib/db').connection;
+
+process.on('SIGINT', function() {
+  rope.close(function() {
+    process.exit(0);
+  });
+});
 
 app.use(cookieParser());
 
 app.use(session({
   secret: 'foo',
   store: new MongoStore({
-    mongooseConnection: running
+    mongooseConnection: rope
   }),
   resave: false,
   saveUninitialized: true
