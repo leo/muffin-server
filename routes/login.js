@@ -1,5 +1,4 @@
 const express = require('express'),
-      session = require('../lib/session'),
       User = require('../lib/db').User,
       router = express.Router();
 

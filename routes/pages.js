@@ -1,8 +1,6 @@
 const express = require('express'),
       router = express.Router(),
-      nano = require('nano')('http://localhost:5984'),
-      Page = require('../lib/db').Page,
-      db = nano.use('muffin');
+      Page = require('../lib/db').Page;
 
 router.get('/', function(req, res) {
 

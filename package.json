@@ -12,8 +12,7 @@
     "express": "^4.13.3",
     "express-handlebars": "^2.0.1",
     "express-session": "^1.12.1",
-    "mongoose": "^4.3.4",
-    "nano": "^6.1.5"
+    "mongoose": "^4.3.4"
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.3.13",
