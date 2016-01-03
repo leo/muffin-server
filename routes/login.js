@@ -58,12 +58,21 @@ router.post('/', function(req, res) {
       return;
     }
 
-    if (user.password == req.body.password) {
-      req.session.loggedIn = true;
-      res.sendStatus(200);
-    } else {
+    user.tryPassword(req.body.password, function(err, isMatch) {
+
+      if (err) {
+        throw err;
+      }
+
+      if (isMatch) {
+        req.session.loggedIn = true;
+        res.sendStatus(200);
+        return;
+      }
+
       res.sendStatus(401);
-    }
+
+    });
 
   });
 

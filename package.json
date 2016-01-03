@@ -5,6 +5,7 @@
   "main": "index.js",
   "private": true,
   "dependencies": {
+    "bcryptjs": "^2.3.0",
     "body-parser": "^1.14.2",
     "compression": "^1.6.0",
     "connect-mongo": "^1.1.0",
