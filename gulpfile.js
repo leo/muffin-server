@@ -10,7 +10,7 @@ const dirs = {
   vectors: 'public/vectors/*'
 }
 
-gulp.task('styles', () => {
+gulp.task('styles', function() {
   return gulp.src(dirs.sass)
     .pipe(sass({
       outputStyle: 'compressed',
@@ -20,7 +20,7 @@ gulp.task('styles', () => {
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('scripts', () => {
+gulp.task('scripts', function() {
   return gulp.src(dirs.js)
     .pipe(concat('app.js'))
     .pipe(babel({
@@ -30,12 +30,12 @@ gulp.task('scripts', () => {
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('vectors', () => {
+gulp.task('vectors', function() {
   return gulp.src(dirs.vectors)
   .pipe(gulp.dest('dist/vectors'));
 });
 
-gulp.task('server', () => {
+gulp.task('server', function() {
   nodemon({
     script: 'index.js',
     ignore: ['public/', 'dist/'],
@@ -43,7 +43,7 @@ gulp.task('server', () => {
   });
 });
 
-gulp.task('watch', ['server'], () => {
+gulp.task('watch', ['server'], function() {
   gulp.watch(dirs.sass, ['styles']);
   gulp.watch(dirs.js, ['scripts']);
   gulp.watch(dirs.vectors, ['vectors']);
