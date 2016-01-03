@@ -19,6 +19,7 @@ app.use(cookieParser());
 
 app.use(session({
   secret: 'foo',
+  name: 'muffin.session',
   store: new MongoStore({
     mongooseConnection: rope
   }),
