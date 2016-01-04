@@ -21,13 +21,23 @@ router.get('/', function(req, res) {
   }
 
   function sendFile() {
+
     const stream = gfs.createReadStream(query);
 
-    res.writeHead(200, {
-        'Content-Type': 'image/png'
+    gfs.findOne(query, function(err, meta) {
+
+      if (err) {
+        throw err;
+      }
+
+      res.writeHead(200, {
+          'Content-Type': meta.contentType,
+          'Content-Length': meta.length
+      });
+
+      stream.pipe(res);
     });
 
-    stream.pipe(res);
   }
 
   gfs.exist(query, function(err, found) {
