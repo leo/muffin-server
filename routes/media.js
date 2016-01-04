@@ -26,4 +26,14 @@ router.get('/', function(req, res) {
 
 });
 
+router.post('/upload', function(req, res) {
+
+  req.busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
+    console.log(filename);
+  });
+
+  res.send('ok');
+
+});
+
 module.exports = router;

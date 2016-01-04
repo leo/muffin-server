@@ -7,6 +7,7 @@ const express = require('express'),
       logger = require('morgan'),
       session = require('express-session'),
       MongoStore = require('connect-mongo')(session),
+      busboy = require('connect-busboy'),
       rope = require('./lib/db').rope;
 
 process.on('SIGINT', function() {
@@ -16,6 +17,7 @@ process.on('SIGINT', function() {
 });
 
 app.use(cookieParser());
+app.use(busboy());
 
 app.use(session({
   secret: 'foo',
