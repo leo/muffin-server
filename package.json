@@ -7,12 +7,14 @@
   "dependencies": {
     "bcryptjs": "^2.3.0",
     "body-parser": "^1.14.2",
+    "combined-stream": "^1.0.5",
     "compression": "^1.6.0",
     "connect-mongo": "^1.1.0",
     "cookie-parser": "^1.4.0",
     "express": "^4.13.3",
     "express-handlebars": "^2.0.1",
     "express-session": "^1.12.1",
+    "file-type": "^3.4.0",
     "gridfs-stream": "^1.1.1",
     "mongoose": "^4.3.4"
   },
