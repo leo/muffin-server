@@ -13,8 +13,8 @@
     "express": "^4.13.3",
     "express-handlebars": "^2.0.1",
     "express-session": "^1.12.1",
-    "mongoose": "^4.3.4",
-    "mongoose-fs": "^0.2.7"
+    "gridfs-stream": "^1.1.1",
+    "mongoose": "^4.3.4"
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.3.13",
