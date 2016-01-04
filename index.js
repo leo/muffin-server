@@ -9,6 +9,8 @@ const express = require('express'),
       MongoStore = require('connect-mongo')(session),
       rope = require('./lib/db').rope;
 
+const test = require('./lib/files');
+
 process.on('SIGINT', function() {
   rope.close(function() {
     process.exit(0);
@@ -89,7 +91,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use('/login', require('./routes/login'));
-app.use('/files*', require('./routes/files'));
+app.use('/uploads*', require('./routes/uploads'));
 
 app.use('/admin', require('./routes/dashboard'));
 app.use('/admin/pages', require('./routes/pages'));
