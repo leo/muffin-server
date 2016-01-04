@@ -9,8 +9,6 @@ const express = require('express'),
       MongoStore = require('connect-mongo')(session),
       rope = require('./lib/db').rope;
 
-const test = require('./lib/files');
-
 process.on('SIGINT', function() {
   rope.close(function() {
     process.exit(0);

@@ -2,18 +2,11 @@ const express = require('express'),
       router = express.Router(),
       fs = require('fs'),
       path = require('path'),
-      grid = require('gridfs-stream');
-
-const db = require('../lib/db'),
-      mongoose = db.goose,
-      conn = db.rope;
-
-grid.mongo = mongoose.mongo;
+      gfs = require('../lib/db').fs;
 
 router.get('/', function(req, res) {
 
-  const name = path.basename(req.originalUrl),
-        gfs = grid(conn.db);
+  const name = path.basename(req.originalUrl);
 
   const query = {
     filename: name,
@@ -31,11 +24,12 @@ router.get('/', function(req, res) {
       }
 
       res.writeHead(200, {
-          'Content-Type': meta.contentType,
-          'Content-Length': meta.length
+        'Content-Type': meta.contentType,
+        'Content-Length': meta.length
       });
 
       stream.pipe(res);
+
     });
 
   }
