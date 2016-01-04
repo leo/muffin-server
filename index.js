@@ -89,6 +89,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use('/login', require('./routes/login'));
+app.use('/files*', require('./routes/files'));
 
 app.use('/admin', require('./routes/dashboard'));
 app.use('/admin/pages', require('./routes/pages'));
