@@ -16,6 +16,7 @@ router.get('/', function(req, res) {
 
     res.render('media', {
       pageTitle: 'Media',
+      list: true,
       files: results
     });
 
