@@ -1,6 +1,5 @@
 const express = require('express'),
       router = express.Router(),
-      fs = require('fs'),
       path = require('path'),
       gfs = require('../lib/db').fs;
 
