@@ -17,7 +17,7 @@
 
     const httpRequest = new XMLHttpRequest();
 
-    httpRequest.onreadystatechange = function(data) {
+    httpRequest.addEventListener('readystatechange', function(data) {
 
       if (this.readyState !== 4) {
         return;
@@ -45,7 +45,7 @@
 
       }
 
-    }
+    });
 
     const fields = {
       username: this[0].value,
