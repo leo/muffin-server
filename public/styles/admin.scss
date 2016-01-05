@@ -595,10 +595,11 @@ select {
     }
 
     @media (min-width: 992px) {
-      display: block !important;
+      max-height: none;
       border: 0;
       padding: 0;
       float: right;
+      transition: none;
 
       a {
         display: inline-block;
