@@ -77,7 +77,19 @@ app.get('/admin*', function(req, res, next) {
   if (req.session.loggedIn) {
     next();
   } else {
-    res.redirect('/login');
+
+    switch (req.originalUrl) {
+      case '/admin':
+      case '/admin/':
+        var to = '';
+        break;
+
+      default:
+        var to = '/?to=' + encodeURIComponent(req.originalUrl.replace('/admin/', ''))
+    }
+
+    res.redirect('/login' + to);
+
   }
 
 });

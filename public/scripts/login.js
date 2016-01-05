@@ -20,7 +20,12 @@ form.addEventListener('submit', function(event) {
     const response = JSON.parse(this.responseText);
 
     if (this.status === 200 && response.success) {
-      window.location.replace('/admin');
+
+      const query = queryVariable('to'),
+            target = query ? '/' + decodeURIComponent(query) : '';
+
+      window.location.replace('/admin' + target);
+
     } else {
 
       var timeout;
