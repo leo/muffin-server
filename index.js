@@ -17,7 +17,9 @@ process.on('SIGINT', function() {
 });
 
 app.use(cookieParser());
-app.use(busboy());
+app.use(busboy({
+  immediate: true
+}));
 
 app.use(session({
   secret: 'foo',
