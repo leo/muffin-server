@@ -1,12 +1,25 @@
-(function() {
+function $(selector) {
 
-  if (document.body.classList.contains('login')) {
-    return;
+  const amount = document.querySelectorAll(selector).length;
+
+  if (amount <= 0) {
+    return document.createElement('aside');
   }
 
-  const chest = document.querySelector('#chest'),
-        toggler = chest.querySelector('.toggle'),
-        nav = chest.querySelector('nav');
+  switch (amount) {
+    case 1:
+      return document.querySelector(selector);
+      break;
+    default:
+      return document.querySelectorAll(selector);
+  }
+
+}
+
+const chest = $('#chest'),
+      nav = chest.querySelector('nav');
+
+if (chest.tagName != 'ASIDE') {
 
   chest.querySelector('.toggle').addEventListener('click', function(event) {
 
@@ -17,4 +30,4 @@
 
   });
 
-})();
+}
