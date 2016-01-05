@@ -1,69 +1,77 @@
-const form = document.querySelector('form'),
-      inputs = form.querySelectorAll('input');
+(function() {
 
-form.addEventListener('submit', function(event) {
-
-  event.preventDefault();
-
-  if (this.classList.contains('shake')) {
+  if (!document.body.classList.contains('login')) {
     return;
   }
 
-  const httpRequest = new XMLHttpRequest();
+  const form = document.querySelector('form'),
+        inputs = form.querySelectorAll('input');
 
-  httpRequest.onreadystatechange = function(data) {
+  form.addEventListener('submit', function(event) {
 
-    if (this.readyState !== 4) {
+    event.preventDefault();
+
+    if (this.classList.contains('shake')) {
       return;
     }
 
-    const response = JSON.parse(this.responseText);
+    const httpRequest = new XMLHttpRequest();
 
-    if (this.status === 200 && response.success) {
-      location.reload();
-    } else {
+    httpRequest.onreadystatechange = function(data) {
 
-      var timeout;
+      if (this.readyState !== 4) {
+        return;
+      }
 
-      clearTimeout(timeout);
+      const response = JSON.parse(this.responseText);
 
-      [].forEach.call(inputs, function(input) {
-        input.classList.add('wrong');
-      });
+      if (this.status === 200 && response.success) {
+        location.reload();
+      } else {
 
-      form.classList.add('shake');
+        var timeout;
 
-      timeout = setTimeout(function() {
-        form.classList.remove('shake');
-      }, 1000);
+        clearTimeout(timeout);
+
+        [].forEach.call(inputs, function(input) {
+          input.classList.add('wrong');
+        });
+
+        form.classList.add('shake');
+
+        timeout = setTimeout(function() {
+          form.classList.remove('shake');
+        }, 1000);
+
+      }
 
     }
 
+    const fields = {
+      username: this[0].value,
+      password: this[1].value
+    }
+
+    httpRequest.open('POST', document.URL);
+    httpRequest.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    httpRequest.send(JSON.stringify(fields));
+
+  });
+
+  function adjustBorder(event) {
+
+    const code = event.which;
+
+    if (event.which == 13 || event.which == 9) {
+      return;
+    }
+
+    this.classList.remove('wrong');
+
   }
 
-  const fields = {
-    username: this[0].value,
-    password: this[1].value
+  for (var i = 0; i < inputs.length; i++) {
+    inputs[i].addEventListener('keyup', adjustBorder);
   }
 
-  httpRequest.open('POST', document.URL);
-  httpRequest.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-  httpRequest.send(JSON.stringify(fields));
-
-});
-
-function adjustBorder(event) {
-
-  const code = event.which;
-
-  if (event.which == 13 || event.which == 9) {
-    return;
-  }
-
-  this.classList.remove('wrong');
-
-}
-
-for (var i = 0; i < inputs.length; i++) {
-  inputs[i].addEventListener('keyup', adjustBorder);
-}
+})();
