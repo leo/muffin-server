@@ -45,7 +45,12 @@ router.post('/', function(req, res) {
         password = req.body.password;
 
   if (!username || !password) {
-    res.sendStatus(401);
+
+    res.send({
+      success: false,
+      message: 'User and/or password empty'
+    });
+
     return;
   }
 
@@ -54,7 +59,12 @@ router.post('/', function(req, res) {
   query.findOne(function(err, user) {
 
     if (!user) {
-      res.sendStatus(401);
+
+      res.send({
+        success: false,
+        message: 'User not existing'
+      });
+
       return;
     }
 
@@ -66,11 +76,18 @@ router.post('/', function(req, res) {
 
       if (isMatch) {
         req.session.loggedIn = true;
-        res.sendStatus(200);
+
+        res.send({
+          success: true
+        });
+
         return;
       }
 
-      res.sendStatus(401);
+      res.send({
+        success: false,
+        message: 'Wrong password'
+      });
 
     });
 
