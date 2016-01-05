@@ -20,7 +20,7 @@ form.addEventListener('submit', function(event) {
     const response = JSON.parse(this.responseText);
 
     if (this.status === 200 && response.success) {
-      location.reload();
+      window.location.replace('/admin');
     } else {
 
       var timeout;
