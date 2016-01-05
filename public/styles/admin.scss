@@ -561,9 +561,17 @@ select {
   background: #fff;
 
   nav {
-    display: none;
-    padding: 20px;
+    padding: 0 20px;
+    max-height: 0;
+    transition: all 0.3s ease;
+    overflow: hidden;
     border-bottom: 1px solid #F1F1F1;
+
+    &.open {
+      max-height: 100vh;
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
 
     a {
       display: block;
