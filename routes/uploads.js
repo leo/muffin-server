@@ -24,7 +24,8 @@ router.get('/', function(req, res) {
 
       res.writeHead(200, {
         'Content-Type': meta.contentType,
-        'Content-Length': meta.length
+        'Content-Length': meta.length,
+        'Cache-Control': 'max-age=31536000'
       });
 
       stream.pipe(res);
