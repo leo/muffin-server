@@ -67,7 +67,15 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.get('/admin*', function(req, res, next) {
+app.route('/admin*').all(function(req, res, next) {
+
+  if (req.session.loggedIn || req.method == 'GET') {
+    next();
+  } else {
+    res.send('Sorry, but I can\'t let you in.');
+  }
+
+}).get(function(req, res, next) {
 
   const url = req.url;
 
@@ -92,16 +100,6 @@ app.get('/admin*', function(req, res, next) {
 
     res.redirect('/login' + to);
 
-  }
-
-});
-
-app.all('/admin*', function(req, res, next) {
-
-  if (req.session.loggedIn || req.method == 'GET') {
-    next();
-  } else {
-    res.send('Sorry, but I can\'t let you in.');
   }
 
 });
