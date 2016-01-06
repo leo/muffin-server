@@ -28,7 +28,6 @@
     "gulp-nodemon": "^2.0.4",
     "gulp-rollup": "^1.6.0",
     "gulp-sass": "^2.1.1",
-    "gulp-util": "^3.0.7",
     "morgan": "^1.6.1"
   },
   "scripts": {

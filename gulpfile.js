@@ -24,7 +24,7 @@ gulp.task('styles', function() {
 
 gulp.task('scripts', function() {
   return gulp.src(dirs.js, { read: false })
-    .pipe(rollup()).on('error', gutil.log)
+    .pipe(rollup()).on('error', console.error)
     .pipe(babel({
       presets: ['es2015']
     }))
