@@ -96,6 +96,16 @@ app.get('/admin*', function(req, res, next) {
 
 });
 
+app.all('/admin*', function(req, res, next) {
+
+  if (req.session.loggedIn || req.method == 'GET') {
+    next();
+  } else {
+    res.send('Sorry, but I can\'t let you in.');
+  }
+
+});
+
 app.use('/admin/assets', express.static('./dist'));
 
 app.use(bodyParser.json());
