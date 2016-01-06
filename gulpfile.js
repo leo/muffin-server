@@ -2,11 +2,13 @@ const gulp = require('gulp'),
       babel = require('gulp-babel'),
       sass = require('gulp-sass'),
       concat = require('gulp-concat'),
-      nodemon = require('gulp-nodemon');
+      nodemon = require('gulp-nodemon'),
+      gutil = require('gulp-util'),
+      rollup = require('gulp-rollup');
 
 const dirs = {
   sass: 'public/styles/*.scss',
-  js: 'public/scripts/*.js',
+  js: 'public/scripts/app.js',
   vectors: 'public/vectors/*'
 }
 
@@ -21,11 +23,10 @@ gulp.task('styles', function() {
 });
 
 gulp.task('scripts', function() {
-  return gulp.src(dirs.js)
-    .pipe(concat('app.js'))
+  return gulp.src(dirs.js, { read: false })
+    .pipe(rollup()).on('error', gutil.log)
     .pipe(babel({
-      presets: ['es2015'],
-      compact: true
+      presets: ['es2015']
     }))
     .pipe(gulp.dest('dist'));
 });
