@@ -3,8 +3,8 @@ const gulp = require('gulp'),
       sass = require('gulp-sass'),
       concat = require('gulp-concat'),
       nodemon = require('gulp-nodemon'),
-      gutil = require('gulp-util'),
-      rollup = require('gulp-rollup');
+      rollup = require('gulp-rollup'),
+      uglify = require('gulp-uglify');
 
 const dirs = {
   sass: 'public/styles/*.scss',
@@ -14,11 +14,11 @@ const dirs = {
 
 gulp.task('styles', function() {
   return gulp.src(dirs.sass)
+    .pipe(concat('styles.scss'))
     .pipe(sass({
       outputStyle: 'compressed',
       includePaths: ['public/styles']
     }).on('error', sass.logError))
-    .pipe(concat('styles.css'))
     .pipe(gulp.dest('dist'));
 });
 
@@ -28,6 +28,7 @@ gulp.task('scripts', function() {
     .pipe(babel({
       presets: ['es2015']
     }))
+    .pipe(uglify())
     .pipe(gulp.dest('dist'));
 });
 
