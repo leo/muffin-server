@@ -2,7 +2,6 @@ const express = require('express')
 const app = express()
 const compression = require('compression')
 const bodyParser = require('body-parser')
-const cookieParser = require('cookie-parser')
 const handlebars = require('express-handlebars')
 const logger = require('morgan')
 const session = require('express-session')
@@ -16,7 +15,6 @@ process.on('SIGINT', function () {
   })
 })
 
-app.use(cookieParser())
 app.use(busboy({
   immediate: true
 }))
