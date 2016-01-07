@@ -4,6 +4,9 @@
   "description": "Who doesn't like chocolate?",
   "main": "index.js",
   "private": true,
+  "standard": {
+    "globals": [ "FormData", "XMLHttpRequest" ]
+  },
   "dependencies": {
     "bcryptjs": "^2.3.0",
     "body-parser": "^1.14.2",

@@ -1,25 +1,25 @@
-const express = require('express'),
-      app = express(),
-      compression = require('compression'),
-      bodyParser = require('body-parser'),
-      cookieParser = require('cookie-parser'),
-      handlebars = require('express-handlebars'),
-      logger = require('morgan'),
-      session = require('express-session'),
-      MongoStore = require('connect-mongo')(session),
-      busboy = require('connect-busboy'),
-      rope = require('./lib/db').rope;
+const express = require('express')
+const app = express()
+const compression = require('compression')
+const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
+const handlebars = require('express-handlebars')
+const logger = require('morgan')
+const session = require('express-session')
+const MongoStore = require('connect-mongo')(session)
+const busboy = require('connect-busboy')
+const rope = require('./lib/db').rope
 
-process.on('SIGINT', function() {
-  rope.close(function() {
-    process.exit(0);
-  });
-});
+process.on('SIGINT', function () {
+  rope.close(function () {
+    process.exit(0)
+  })
+})
 
-app.use(cookieParser());
+app.use(cookieParser())
 app.use(busboy({
   immediate: true
-}));
+}))
 
 app.use(session({
   secret: 'foo',
@@ -29,13 +29,13 @@ app.use(session({
   }),
   resave: false,
   saveUninitialized: true
-}));
+}))
 
 app.engine('hbs', handlebars({
   defaultLayout: 'main',
   extname: '.hbs',
   helpers: require('./lib/helpers')
-}));
+}))
 
 app.locals.menuItems = [
   {
@@ -54,72 +54,67 @@ app.locals.menuItems = [
     url: 'settings',
     title: 'Settings'
   }
-];
+]
 
-app.locals.appVersion = require('./package.json').version;
-app.set('view engine', 'hbs');
+app.locals.appVersion = require('./package.json').version
+app.set('view engine', 'hbs')
 
-app.use(compression());
-app.use(logger('dev'));
+app.use(compression())
+app.use(logger('dev'))
 
-app.use(function(req, res, next) {
-  res.header('x-powered-by', 'Muffin CMS');
-  next();
-});
+app.use(function (req, res, next) {
+  res.header('x-powered-by', 'Muffin CMS')
+  next()
+})
 
-app.route('/admin*').all(function(req, res, next) {
-
-  if (req.session.loggedIn || req.method == 'GET') {
-    next();
+app.route('/admin*').all(function (req, res, next) {
+  if (req.session.loggedIn || req.method === 'GET') {
+    next()
   } else {
-    res.send('Sorry, but I can\'t let you in.');
+    res.send('Sorry, but I can\'t let you in.')
   }
-
-}).get(function(req, res, next) {
-
-  const url = req.url;
+}).get(function (req, res, next) {
+  const url = req.url
+  var to
 
   // Check if request wants a file. If so, let it through.
   if (url.match(/[^\\/]+\.[^\\/]+$/)) {
-    return next();
+    return next()
   }
 
   if (req.session.loggedIn) {
-    next();
+    next()
   } else {
-
     switch (req.originalUrl) {
       case '/admin':
       case '/admin/':
-        var to = '';
-        break;
+        to = ''
+        break
 
       default:
-        var to = '/?to=' + encodeURIComponent(req.originalUrl.replace('/admin/', ''))
+        to = '/?to=' + encodeURIComponent(req.originalUrl.replace('/admin/', ''))
     }
 
-    res.redirect('/login' + to);
-
+    res.redirect('/login' + to)
   }
+})
 
-});
+app.use('/admin/assets', express.static('./dist'))
 
-app.use('/admin/assets', express.static('./dist'));
-
-app.use(bodyParser.json());
+app.use(bodyParser.json())
 
 app.use(bodyParser.urlencoded({
   extended: true
-}));
+}))
 
-app.use('/login', require('./routes/login'));
-app.use('/uploads*', require('./routes/uploads'));
+app.use('/login', require('./routes/login'))
+app.use('/uploads*', require('./routes/uploads'))
 
-app.use('/admin', require('./routes/dashboard'));
-app.use('/admin/pages', require('./routes/pages'));
-app.use('/admin/media', require('./routes/media'));
+app.use('/admin', require('./routes/dashboard'))
+app.use('/admin/pages', require('./routes/pages'))
+app.use('/admin/media', require('./routes/media'))
 
-app.listen(2000, function() {
-  var port = this.address().port;
-  console.log('Muffin is running at http://localhost:' + port + '/admin');
-});
+app.listen(2000, function () {
+  var port = this.address().port
+  console.log('Muffin is running at http://localhost:' + port + '/admin')
+})

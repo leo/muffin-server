@@ -1,127 +1,110 @@
-import $ from './etc/select';
-import queryVariable from './etc/query';
+import $ from './etc/select'
+import queryVariable from './etc/query'
 
-const form = $('form'),
-      inputs = $('input');
+const form = $('form')
+const inputs = $('input')
 
-form.addEventListener('submit', function(event) {
-
-  event.preventDefault();
+form.addEventListener('submit', function (event) {
+  event.preventDefault()
 
   if (this.classList.contains('shake')) {
-    return;
+    return
   }
 
-  const httpRequest = new XMLHttpRequest();
+  const httpRequest = new XMLHttpRequest()
 
-  httpRequest.addEventListener('readystatechange', function(data) {
-
+  httpRequest.addEventListener('readystatechange', function (data) {
     if (this.readyState !== 4) {
-      return;
+      return
     }
 
-    const response = JSON.parse(this.responseText);
+    const response = JSON.parse(this.responseText)
 
     if (this.status === 200 && response.success) {
+      const query = queryVariable('to')
+      const target = query ? '/' + decodeURIComponent(query) : ''
 
-      const query = queryVariable('to'),
-            target = query ? '/' + decodeURIComponent(query) : '';
-
-      window.location.replace('/admin' + target);
-
+      window.location.replace('/admin' + target)
     } else {
+      var timeout
+      var arr = []
 
-      var timeout;
+      clearTimeout(timeout)
 
-      clearTimeout(timeout);
+      arr.forEach.call(inputs, function (input) {
+        input.classList.add('wrong')
+      })
 
-      [].forEach.call(inputs, function(input) {
-        input.classList.add('wrong');
-      });
+      form.classList.add('shake')
 
-      form.classList.add('shake');
-
-      timeout = setTimeout(function() {
-        form.classList.remove('shake');
-      }, 1000);
-
+      timeout = setTimeout(function () {
+        form.classList.remove('shake')
+      }, 1000)
     }
-
-  });
+  })
 
   const fields = {
     username: this[0].value,
     password: this[1].value
   }
 
-  httpRequest.open('POST', document.URL);
-  httpRequest.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-  httpRequest.send(JSON.stringify(fields));
+  httpRequest.open('POST', document.URL)
+  httpRequest.setRequestHeader('Content-Type', 'application/json;charset=UTF-8')
+  httpRequest.send(JSON.stringify(fields))
+})
 
-});
+function adjustBorder (event) {
+  const code = event.which
 
-function adjustBorder(event) {
-
-  const code = event.which;
-
-  if (event.which == 13 || event.which == 9) {
-    return;
+  if (code === 13 || code === 9) {
+    return
   }
 
-  this.classList.remove('wrong');
-
+  this.classList.remove('wrong')
 }
 
 for (var i = 0; i < inputs.length; i++) {
-  inputs[i].addEventListener('keyup', adjustBorder);
+  inputs[i].addEventListener('keyup', adjustBorder)
 }
 
-const chest = $('#chest'),
-      nav = chest.querySelector('nav');
+const chest = $('#chest')
+const nav = chest.querySelector('nav')
 
-if (chest.tagName != 'ASIDE') {
+if (chest.tagName !== 'ASIDE') {
+  chest.querySelector('.toggle').addEventListener('click', function (event) {
+    nav.classList.toggle('open')
+    this.classList.toggle('on')
 
-  chest.querySelector('.toggle').addEventListener('click', function(event) {
-
-    nav.classList.toggle('open');
-    this.classList.toggle('on');
-
-    event.preventDefault();
-
-  });
-
+    event.preventDefault()
+  })
 }
 
-const fileSelector = $('#selectMedia input'),
-      button = $('#title .add');
+const fileSelector = $('#selectMedia input')
+const button = $('#title .add')
 
-function sendFile() {
-  this.closest('form').submit();
-  this.removeEventListener('change', sendFile);
+function sendFile () {
+  this.closest('form').submit()
+  this.removeEventListener('change', sendFile)
 }
 
-button.addEventListener('click', function(event) {
+button.addEventListener('click', function (event) {
+  fileSelector.click()
+  fileSelector.addEventListener('change', sendFile)
 
-  fileSelector.click();
-  fileSelector.addEventListener('change', sendFile);
+  event.preventDefault()
+})
 
-  event.preventDefault();
+$('#selectMedia').addEventListener('submit', function (event) {
+  event.preventDefault()
 
-});
+  const form = event.target
+  const data = new FormData(form)
+  const request = new XMLHttpRequest()
 
-$('#selectMedia').addEventListener('submit', function(event) {
+  request.addEventListener('readystatechange', function () {
+    console.log(request.responseText)
+  })
 
-  event.preventDefault();
-
-  const form = event.target,
-        data = new FormData(form),
-        request = new XMLHttpRequest();
-
-  request.addEventListener('readystatechange', function() {
-    console.log(request.responseText);
-  });
-
-  request.open('POST', '/admin/media/upload');
-  request.send(data);
-
-});
+  request.open('POST', '/admin/media/upload')
+  request.send(data)
+})

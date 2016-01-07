@@ -1,12 +1,10 @@
-const express = require('express'),
-      router = express.Router();
+const express = require('express')
+const router = express.Router()
 
-router.get('/', function(req, res) {
-
+router.get('/', function (req, res) {
   res.render('dashboard', {
     pageTitle: 'Dashboard'
-  });
+  })
+})
 
-});
-
-module.exports = router;
+module.exports = router

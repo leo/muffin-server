@@ -1,46 +1,40 @@
-const express = require('express'),
-      router = express.Router(),
-      path = require('path'),
-      gfs = require('../lib/db').fs;
+const express = require('express')
+const router = express.Router()
+const path = require('path')
+const gfs = require('../lib/db').fs
 
-router.get('/', function(req, res) {
-
-  const name = path.basename(req.originalUrl);
+router.get('/', function (req, res) {
+  const name = path.basename(req.originalUrl)
 
   const query = {
     filename: name,
     root: 'media'
   }
 
-  function sendFile() {
+  function sendFile () {
+    const stream = gfs.createReadStream(query)
 
-    const stream = gfs.createReadStream(query);
-
-    gfs.findOne(query, function(err, meta) {
-
+    gfs.findOne(query, function (err, meta) {
       if (err) {
-        throw err;
+        throw err
       }
 
       res.writeHead(200, {
         'Content-Type': meta.contentType,
         'Content-Length': meta.length,
         'Cache-Control': 'max-age=31536000'
-      });
+      })
 
-      stream.pipe(res);
-
-    });
-
+      stream.pipe(res)
+    })
   }
 
-  gfs.exist(query, function(err, found) {
+  gfs.exist(query, function (err, found) {
     if (err) {
-      throw err;
+      throw err
     }
-    found ? sendFile() : res.send('File doesn\'t exist!');
-  });
+    found ? sendFile() : res.send('File doesn\'t exist!')
+  })
+})
 
-});
-
-module.exports = router;
+module.exports = router

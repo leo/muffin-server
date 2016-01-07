@@ -1,13 +1,11 @@
-const express = require('express'),
-      router = express.Router(),
-      Page = require('../lib/models/page');
+const express = require('express')
+const router = express.Router()
+const Page = require('../lib/models/page')
 
-router.get('/', function(req, res) {
-
-  function listPages(err, pages) {
-
+router.get('/', function (req, res) {
+  function listPages (err, pages) {
     if (err) {
-      throw err;
+      throw err
     }
 
     for (var page in pages) {
@@ -19,34 +17,28 @@ router.get('/', function(req, res) {
       path: req.originalUrl,
       list: true,
       items: pages
-    });
-
+    })
   }
 
-  Page.find({}, listPages);
+  Page.find({}, listPages)
+})
 
-});
+router.get('/:id', function (req, res) {
+  const query = Page.where({ _id: req.params.id })
 
-router.get('/:id', function(req, res) {
-
-  const query = Page.where({ _id: req.params.id });
-
-  function loadPage(err, page) {
-
+  function loadPage (err, page) {
     if (err) {
-      throw err;
+      throw err
     }
 
     res.render('edit', {
       pageTitle: page.title,
       editableTitle: true,
       path: req.originalUrl
-    });
-
+    })
   }
 
-  query.findOne(loadPage);
+  query.findOne(loadPage)
+})
 
-});
-
-module.exports = router;
+module.exports = router

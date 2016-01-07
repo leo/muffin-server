@@ -1,100 +1,92 @@
-const express = require('express'),
-      User = require('../lib/models/user'),
-      router = express.Router();
+const express = require('express')
+const User = require('../lib/models/user')
+const router = express.Router()
 
-router.use(function(req, res, next) {
-
-  if (req.url == '/bye') {
-    return next();
+router.use(function (req, res, next) {
+  if (req.url === '/bye') {
+    return next()
   }
 
   if (req.session.loggedIn) {
-    res.redirect('/admin');
+    res.redirect('/admin')
   } else {
-    next();
+    next()
   }
+})
 
-});
-
-router.get('/', function(req, res, next) {
-
+router.get('/', function (req, res, next) {
   const tags = {
     site: {
       name: 'Volkspark'
     },
     layout: false
-  };
+  }
 
-  req.session.loggedIn = false;
-  res.render('login', tags);
+  req.session.loggedIn = false
+  res.render('login', tags)
+})
 
-});
+router.get('/reset-password', function (req, res) {
+  res.send("You're such a bad boy!")
+})
 
-router.get('/reset-password', function(req, res) {
-  res.send('You\'re such a bad boy!');
-});
+router.get('/bye', function (req, res) {
+  req.session.loggedIn = false
+  res.redirect('/login')
+})
 
-router.get('/bye', function(req, res) {
-  req.session.loggedIn = false;
-  res.redirect('/login');
-});
-
-router.post('/', function(req, res) {
-
-  const username = req.body.username,
-        password = req.body.password;
+router.post('/', function (req, res) {
+  const username = req.body.username
+  const password = req.body.password
 
   if (!username || !password) {
-
     res.send({
       success: false,
       message: 'User and/or password empty'
-    });
+    })
 
-    return;
+    return
   }
 
-  const query = User.where({ _id: req.body.username });
+  const query = User.where({ _id: req.body.username })
 
-  query.findOne(function(err, user) {
+  query.findOne(function (err, user) {
+    if (err) {
+      throw err
+    }
 
     if (!user) {
-
       res.send({
         success: false,
         message: 'User not existing'
-      });
+      })
 
-      return;
+      return
     }
 
-    user.tryPassword(req.body.password, function(err, isMatch) {
-
+    user.tryPassword(req.body.password, function (err, isMatch) {
       if (err) {
-        throw err;
+        throw err
       }
 
       if (isMatch) {
-        req.session.loggedIn = true;
+        req.session.loggedIn = true
 
         res.send({
           success: true
-        });
+        })
 
-        return;
+        return
       }
 
       res.send({
         success: false,
         message: 'Wrong password'
-      });
+      })
+    })
+  })
 
-    });
+  console.log(req.body)
+})
 
-  });
-
-  console.log(req.body);
-
-});
-
-module.exports = router;
+module.exports = router
