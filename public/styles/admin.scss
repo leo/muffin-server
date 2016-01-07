@@ -113,6 +113,23 @@ select {
     margin-bottom: 0;
   }
 
+  &[open] summary {
+    border-bottom: 1px solid #EEE;
+    box-sizing: border-box;
+    background: #F9F9F9;
+
+    &:after {
+      transform: rotate(0deg);
+      background-position-x: right;
+    }
+
+    @media (min-width: 768px) {
+      background: #fff;
+      border: 0;
+    }
+
+  }
+
   > p {
     font-size: 14px;
     color: #919191;
@@ -146,23 +163,6 @@ select {
       position: absolute;
       right: 15px;
       top: 0;
-    }
-
-    [open] & {
-      border-bottom: 1px solid #EEE;
-      box-sizing: border-box;
-      background: #F9F9F9;
-
-      &:after {
-        transform: rotate(0deg);
-        background-position-x: right;
-      }
-
-      @media (min-width: 768px) {
-        background: #fff;
-        border: 0;
-      }
-
     }
 
     p {
