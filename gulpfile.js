@@ -1,10 +1,11 @@
 const gulp = require('gulp')
-const babel = require('gulp-babel')
 const sass = require('gulp-sass')
 const concat = require('gulp-concat')
 const nodemon = require('gulp-nodemon')
 const rollup = require('gulp-rollup')
 const uglify = require('gulp-uglify')
+
+const babel = require('rollup-plugin-babel')
 
 const dirs = {
   sass: 'public/styles/*.scss',
@@ -24,10 +25,13 @@ gulp.task('styles', function () {
 
 gulp.task('scripts', function () {
   return gulp.src(dirs.js, { read: false })
-    .pipe(rollup()).on('error', console.error)
-    .pipe(babel({
-      presets: ['es2015']
-    }))
+    .pipe(rollup({
+      plugins: [
+        babel({
+          presets: ['es2015-rollup']
+        })
+      ]
+    })).on('error', console.error)
     .pipe(uglify())
     .pipe(gulp.dest('dist'))
 })
