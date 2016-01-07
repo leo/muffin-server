@@ -1,67 +1,9 @@
-import $ from './etc/select'
-import queryVariable from './etc/query'
+import $ from './select'
+import { tryCreditals, adjustBorder } from './login'
 
-const form = $('form')
 const inputs = $('input')
 
-form.addEventListener('submit', function (event) {
-  event.preventDefault()
-
-  if (this.classList.contains('shake')) {
-    return
-  }
-
-  const httpRequest = new XMLHttpRequest()
-
-  httpRequest.addEventListener('readystatechange', function (data) {
-    if (this.readyState !== 4) {
-      return
-    }
-
-    const response = JSON.parse(this.responseText)
-
-    if (this.status === 200 && response.success) {
-      const query = queryVariable('to')
-      const target = query ? '/' + decodeURIComponent(query) : ''
-
-      window.location.replace('/admin' + target)
-    } else {
-      var timeout
-      var arr = []
-
-      clearTimeout(timeout)
-
-      arr.forEach.call(inputs, function (input) {
-        input.classList.add('wrong')
-      })
-
-      form.classList.add('shake')
-
-      timeout = setTimeout(function () {
-        form.classList.remove('shake')
-      }, 1000)
-    }
-  })
-
-  const fields = {
-    username: this[0].value,
-    password: this[1].value
-  }
-
-  httpRequest.open('POST', document.URL)
-  httpRequest.setRequestHeader('Content-Type', 'application/json;charset=UTF-8')
-  httpRequest.send(JSON.stringify(fields))
-})
-
-function adjustBorder (event) {
-  const code = event.which
-
-  if (code === 13 || code === 9) {
-    return
-  }
-
-  this.classList.remove('wrong')
-}
+$('form').addEventListener('submit', tryCreditals)
 
 for (var i = 0; i < inputs.length; i++) {
   inputs[i].addEventListener('keyup', adjustBorder)
