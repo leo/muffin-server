@@ -1,9 +1,9 @@
 const gulp = require('gulp')
 const sass = require('gulp-sass')
 const concat = require('gulp-concat')
-const nodemon = require('gulp-nodemon')
 const rollup = require('gulp-rollup')
 const uglify = require('gulp-uglify')
+const gls = require('gulp-live-server')
 
 const babel = require('rollup-plugin-babel')
 
@@ -42,11 +42,8 @@ gulp.task('vectors', function () {
 })
 
 gulp.task('server', function () {
-  nodemon({
-    script: 'index.js',
-    ignore: ['public/', 'dist/'],
-    ext: 'js hbs'
-  })
+  const server = gls.new('index.js')
+  server.start()
 })
 
 gulp.task('watch', ['server'], function () {
