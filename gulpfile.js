@@ -9,7 +9,7 @@ const babel = require('rollup-plugin-babel')
 
 const dirs = {
   sass: 'public/styles/*.scss',
-  js: 'public/scripts/app.js',
+  js: 'public/scripts/**/*.js',
   vectors: 'public/vectors/*'
 }
 
@@ -24,7 +24,7 @@ gulp.task('styles', function () {
 })
 
 gulp.task('scripts', function () {
-  return gulp.src(dirs.js, { read: false })
+  return gulp.src('public/scripts/app.js', { read: false })
     .pipe(rollup({
       plugins: [
         babel({
