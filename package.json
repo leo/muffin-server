@@ -49,6 +49,7 @@
     "node": ">=4.2.4"
   },
   "keywords": [
+    "cms",
     "content",
     "management",
     "system",
