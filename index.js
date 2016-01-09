@@ -7,6 +7,7 @@ const compression = require('compression')
 const bodyParser = require('body-parser')
 const logger = require('morgan')
 const rope = require('./lib/db').rope
+const open = require('open')
 
 const MongoStore = require('connect-mongo')(session)
 const busboy = require('connect-busboy')
@@ -120,6 +121,13 @@ app.use('/admin/pages', require('./routes/pages'))
 app.use('/admin/media', require('./routes/media'))
 
 app.listen(2000, function () {
-  var port = this.address().port
-  console.log('Muffin is running at http://localhost:' + port + '/admin')
+  const port = this.address().port
+  const url = 'http://localhost:' + port + '/admin'
+
+  console.log('Muffin is running at ' + url)
+
+  if (!process.env.restarted) {
+    open(url)
+    process.env.restarted = false
+  }
 })

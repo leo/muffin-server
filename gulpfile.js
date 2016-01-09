@@ -1,10 +1,10 @@
 const gulp = require('gulp')
 const sass = require('gulp-sass')
+const livereload = require('gulp-livereload')
 const concat = require('gulp-concat')
 const rollup = require('gulp-rollup')
 const uglify = require('gulp-uglify')
 const nodemon = require('gulp-nodemon')
-const livereload = require('gulp-livereload')
 
 const babel = require('rollup-plugin-babel')
 
@@ -50,6 +50,8 @@ gulp.task('server', function () {
     script: 'index.js',
     ignore: ['public/', 'dist/'],
     ext: 'js hbs'
+  }).on('restart', function () {
+    process.env.restarted = true
   })
 })
 
