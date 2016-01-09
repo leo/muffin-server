@@ -42,6 +42,7 @@ gulp.task('scripts', function () {
 gulp.task('vectors', function () {
   return gulp.src(dirs.vectors)
     .pipe(gulp.dest('dist/vectors'))
+    .pipe(livereload())
 })
 
 gulp.task('server', function () {
