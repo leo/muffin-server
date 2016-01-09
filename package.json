@@ -22,7 +22,8 @@
     "express-session": "^1.12.1",
     "file-type": "^3.4.0",
     "gridfs-stream": "^1.1.1",
-    "mongoose": "^4.3.4"
+    "kerberos": "0.0.17",
+    "mongoose": "^4.3.5"
   },
   "devDependencies": {
     "babel-preset-es2015-rollup": "^1.0.0",
