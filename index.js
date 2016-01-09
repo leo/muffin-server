@@ -7,6 +7,7 @@ const logger = require('morgan')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
 const busboy = require('connect-busboy')
+const livereload = require('connect-livereload')
 const rope = require('./lib/db').rope
 
 process.on('SIGINT', function () {
@@ -14,6 +15,10 @@ process.on('SIGINT', function () {
     process.exit(0)
   })
 })
+
+app.use(livereload({
+  port: 35729
+}))
 
 app.use(busboy({
   immediate: true

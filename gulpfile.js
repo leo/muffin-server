@@ -3,7 +3,8 @@ const sass = require('gulp-sass')
 const concat = require('gulp-concat')
 const rollup = require('gulp-rollup')
 const uglify = require('gulp-uglify')
-const gls = require('gulp-live-server')
+const nodemon = require('gulp-nodemon')
+const livereload = require('gulp-livereload')
 
 const babel = require('rollup-plugin-babel')
 
@@ -21,6 +22,7 @@ gulp.task('styles', function () {
       includePaths: ['public/styles']
     }).on('error', sass.logError))
     .pipe(gulp.dest('dist'))
+    .pipe(livereload())
 })
 
 gulp.task('scripts', function () {
@@ -34,6 +36,7 @@ gulp.task('scripts', function () {
     })).on('error', console.error)
     .pipe(uglify())
     .pipe(gulp.dest('dist'))
+    .pipe(livereload())
 })
 
 gulp.task('vectors', function () {
@@ -42,11 +45,16 @@ gulp.task('vectors', function () {
 })
 
 gulp.task('server', function () {
-  const server = gls.new('index.js')
-  server.start()
+  nodemon({
+    script: 'index.js',
+    ignore: ['public/', 'dist/'],
+    ext: 'js hbs'
+  })
 })
 
 gulp.task('watch', ['server'], function () {
+  livereload.listen()
+
   gulp.watch(dirs.sass, ['styles'])
   gulp.watch(dirs.js, ['scripts'])
   gulp.watch(dirs.vectors, ['vectors'])
