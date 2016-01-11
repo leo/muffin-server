@@ -106,6 +106,7 @@ app.route('/admin*').all(function (req, res, next) {
 })
 
 app.use('/admin/assets', express.static('./dist'))
+app.use('/admin', express.static('./public'))
 
 app.use(bodyParser.json())
 

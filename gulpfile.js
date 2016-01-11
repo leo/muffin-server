@@ -9,9 +9,9 @@ const nodemon = require('gulp-nodemon')
 const babel = require('rollup-plugin-babel')
 
 const dirs = {
-  sass: 'public/styles/*.scss',
-  js: 'public/scripts/**/*.js',
-  vectors: 'public/vectors/*'
+  sass: 'assets/styles/*.scss',
+  js: 'assets/scripts/**/*.js',
+  vectors: 'assets/vectors/*'
 }
 
 gulp.task('styles', function () {
@@ -19,14 +19,14 @@ gulp.task('styles', function () {
     .pipe(concat('styles.scss'))
     .pipe(sass({
       outputStyle: 'compressed',
-      includePaths: ['public/styles']
+      includePaths: ['assets/styles']
     }).on('error', sass.logError))
     .pipe(gulp.dest('dist'))
     .pipe(livereload())
 })
 
 gulp.task('scripts', function () {
-  return gulp.src('public/scripts/app.js', { read: false })
+  return gulp.src('assets/scripts/app.js', { read: false })
     .pipe(rollup({
       plugins: [
         babel({
@@ -39,16 +39,10 @@ gulp.task('scripts', function () {
     .pipe(livereload())
 })
 
-gulp.task('vectors', function () {
-  return gulp.src(dirs.vectors)
-    .pipe(gulp.dest('dist/vectors'))
-    .pipe(livereload())
-})
-
 gulp.task('server', function () {
   nodemon({
     script: 'index.js',
-    ignore: ['public/', 'dist/'],
+    ignore: ['assets/', 'dist/'],
     ext: 'js hbs'
   }).on('restart', function () {
     process.env.restarted = true
@@ -60,7 +54,6 @@ gulp.task('watch', ['server'], function () {
 
   gulp.watch(dirs.sass, ['styles'])
   gulp.watch(dirs.js, ['scripts'])
-  gulp.watch(dirs.vectors, ['vectors'])
 })
 
-gulp.task('default', ['styles', 'scripts', 'vectors'])
+gulp.task('default', ['styles', 'scripts'])

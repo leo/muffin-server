@@ -158,7 +158,7 @@ select {
       width: 20px;
       display: inline-block;
       height: 47px;
-      background: url(vectors/up.svg) no-repeat left center;
+      background: url(../vectors/up.svg) no-repeat left center;
       transform: rotate(180deg);
       position: absolute;
       right: 15px;
@@ -249,7 +249,7 @@ select {
       color: #949494;
       direction: rtl;
       display: inline-block;
-      background: url(vectors/down.svg) no-repeat right center;
+      background: url(../vectors/down.svg) no-repeat right center;
       padding-right: 20px;
       cursor: pointer;
       background-size: 10px;
@@ -354,7 +354,7 @@ select {
 
     a {
       display: inline-block;
-      background: url(vectors/file.svg) no-repeat left center;
+      background: url(../vectors/file.svg) no-repeat left center;
       padding-left: 35px;
       background-size: 13px;
     }
@@ -655,7 +655,7 @@ select {
 
   .logo {
     float: left;
-    background: url(vectors/logo.svg) no-repeat center center;
+    background: url(../vectors/logo.svg) no-repeat center center;
     background-size: 30px;
   }
 
@@ -1029,7 +1029,7 @@ select {
     width: 50px;
     height: 50px;
     display: inline-block;
-    background: url(vectors/logo.svg) no-repeat center center;
+    background: url(../vectors/logo.svg) no-repeat center center;
     background-size: 100% auto;
     opacity: .1;
   }
