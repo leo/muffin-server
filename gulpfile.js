@@ -9,9 +9,9 @@ const nodemon = require('gulp-nodemon')
 const babel = require('rollup-plugin-babel')
 
 const dirs = {
-  sass: 'assets/styles/*.scss',
-  js: 'assets/scripts/**/*.js',
-  vectors: 'assets/vectors/*'
+  sass: 'build/styles/*.scss',
+  js: 'build/scripts/**/*.js',
+  vectors: 'build/vectors/*'
 }
 
 gulp.task('styles', function () {
@@ -19,14 +19,14 @@ gulp.task('styles', function () {
     .pipe(concat('styles.scss'))
     .pipe(sass({
       outputStyle: 'compressed',
-      includePaths: ['assets/styles']
+      includePaths: ['build/styles']
     }).on('error', sass.logError))
     .pipe(gulp.dest('dist'))
     .pipe(livereload())
 })
 
 gulp.task('scripts', function () {
-  return gulp.src('assets/scripts/app.js', { read: false })
+  return gulp.src('build/scripts/app.js', { read: false })
     .pipe(rollup({
       plugins: [
         babel({
@@ -42,7 +42,7 @@ gulp.task('scripts', function () {
 gulp.task('server', function () {
   nodemon({
     script: 'index.js',
-    ignore: ['assets/', 'dist/'],
+    ignore: ['build/', 'dist/'],
     ext: 'js hbs'
   }).on('restart', function () {
     process.env.restarted = true
