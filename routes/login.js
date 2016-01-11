@@ -16,10 +16,8 @@ router.use(function (req, res, next) {
 
 router.get('/', function (req, res, next) {
   const tags = {
-    site: {
-      name: 'Volkspark'
-    },
-    layout: false
+    outer: true,
+    pageTitle: 'Login'
   }
 
   req.session.loggedIn = false

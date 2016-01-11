@@ -19,66 +19,72 @@
 
   <body class="{{#unless path}}{{@exphbs.view}}{{/unless}}">
 
-    <header id="chest">
-      <div class="inner">
+    {{#unless outer}}
 
-        {{#nav menuItems}}
-          <a href="{{url}}" class="{{status}}">{{title}}</a>
-        {{/nav}}
-
-        <a href="/login/bye" class="logo"></a>
-
-        <a href="#menu" class="toggle">
-          <span>
-            <b></b>
-            <b></b>
-            <b></b>
-          </span>
-        </a>
-
-      </div>
-    </header>
-
-    <main id="belly">
-
-      <aside id="title">
+      <header id="chest">
         <div class="inner">
 
-          {{#if editableTitle}}
+          {{#nav menuItems}}
+            <a href="{{url}}" class="{{status}}">{{title}}</a>
+          {{/nav}}
 
-            <h1 contenteditable="true">{{pageTitle}}</h1>
+          <a href="/login/bye" class="logo"></a>
 
-            <nav>
-              <a href="#" class="current">Content</a>
-              <a href="#">Sidebar</a>
-              <a href="#">Options</a>
-            </nav>
-
-          {{else}}
-            <h1>{{pageTitle}}</h1>
-          {{/if}}
-
-          {{#if list}}
-            <a href="#" class="add">&plus;</a>
-          {{/if}}
+          <a href="#menu" class="toggle">
+            <span>
+              <b></b>
+              <b></b>
+              <b></b>
+            </span>
+          </a>
 
         </div>
-      </aside>
+      </header>
 
-      <section id="content" class={{divide}}>
-        {{{body}}}
-      </section>
+      <main id="belly">
 
-    </main>
+        <aside id="title">
+          <div class="inner">
 
-    <footer id="ass">
+            {{#if editableTitle}}
 
-      <div class="inner">
-        <a href="http://muff.in" target="_blank"></a>
-        <p>You're using Muffin {{appVersion}}, thank you!</p>
-      </div>
+              <h1 contenteditable="true">{{pageTitle}}</h1>
 
-    </footer>
+              <nav>
+                <a href="#" class="current">Content</a>
+                <a href="#">Sidebar</a>
+                <a href="#">Options</a>
+              </nav>
+
+            {{else}}
+              <h1>{{pageTitle}}</h1>
+            {{/if}}
+
+            {{#if list}}
+              <a href="#" class="add">&plus;</a>
+            {{/if}}
+
+          </div>
+        </aside>
+
+        <section id="content" class={{divide}}>
+          {{{body}}}
+        </section>
+
+      </main>
+
+      <footer id="ass">
+
+        <div class="inner">
+          <a href="http://muff.in" target="_blank"></a>
+          <p>You're using Muffin {{appVersion}}, thank you!</p>
+        </div>
+
+      </footer>
+
+    {{else}}
+      {{{body}}}
+    {{/unless}}
 
     <script src="/admin/assets/app.js"></script>
   </body>

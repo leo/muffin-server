@@ -1,33 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+<form method="post">
+  <input type="text" name="username" placeholder="Username" autocomplete="off" autofocus="true" autocapitalize="none">
+  <input type="password" name="password" placeholder="Password" autocomplete="off">
 
-  <head>
+  <button type="submit">Login</button>
+</form>
 
-    <title>Login &mdash; Muffin</title>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <meta name="robots" content="noindex">
-
-    <link href="/admin/assets/styles.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,700italic,300italic,300">
-    <link rel="apple-touch-icon" href="/admin/touch-icon.png">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-
-  </head>
-
-  <body class="login">
-
-    <form method="post">
-      <input type="text" name="username" placeholder="Username" autocomplete="off" autofocus="true" autocapitalize="none">
-      <input type="password" name="password" placeholder="Password" autocomplete="off">
-
-      <button type="submit">Login</button>
-    </form>
-
-    <a href="/login/reset-password">?</a>
-
-    <script src="/admin/assets/app.js"></script>
-  </body>
-
-</html>
+<a href="/login/reset-password">?</a>
