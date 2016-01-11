@@ -19,6 +19,8 @@ process.on('SIGINT', function () {
   })
 })
 
+app.disable('view cache')
+
 app.use(livereload({
   port: 35729
 }))
