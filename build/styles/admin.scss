@@ -1173,3 +1173,21 @@ select {
   }
 
 }
+
+#selectMedia.drag {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2000;
+  background: yellow;
+
+  input {
+    width: inherit;
+    height: inherit;
+    opacity: 0;
+  }
+
+}

@@ -21,17 +21,17 @@ chest.find('.toggle').click(function (event) {
 const fileSelector = $('#selectMedia [type="file"]')
 const button = $('#title .add')
 
-function sendFile () {
+fileSelector.on('change', function () {
   $(this).closest('form').submit()
-  $(this).unbind('change', sendFile)
-}
+})
 
 button.click(function (event) {
   fileSelector.click()
-  fileSelector.on('change', sendFile)
-
   event.preventDefault()
 })
+
+const form = $('#selectMedia')
+var dragTimer
 
 $('#selectMedia').submit(function (event) {
   $.ajax({
@@ -41,10 +41,24 @@ $('#selectMedia').submit(function (event) {
     processData: false,
     contentType: false
   }).done(function (data) {
-    alert(data)
+    form.removeClass('drag')
+    window.clearTimeout(dragTimer)
+
+    location.reload()
   }).fail(function () {
     console.log('Failed!')
   })
 
   event.preventDefault()
+})
+
+$(document).on('dragover', function () {
+  form.addClass('drag')
+  window.clearTimeout(dragTimer)
+})
+
+$(document).on('dragleave', function () {
+  dragTimer = window.setTimeout(function () {
+    form.removeClass('drag')
+  }, 25)
 })

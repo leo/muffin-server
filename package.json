@@ -7,7 +7,6 @@
   "dependencies": {
     "bcryptjs": "^2.3.0",
     "body-parser": "^1.14.2",
-    "combined-stream": "^1.0.5",
     "compression": "^1.6.0",
     "connect-busboy": "0.0.2",
     "connect-mongo": "^1.1.0",
@@ -58,7 +57,8 @@
       "FormData",
       "XMLHttpRequest",
       "$",
-      "alert"
+      "alert",
+      "location"
     ]
   },
   "author": "Leonard Lamprecht <mindrun@icloud.com> (https://leo.im)",

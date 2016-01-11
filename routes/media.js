@@ -1,13 +1,11 @@
-const express = require('express')
-const router = express.Router()
-const File = require('../lib/models/file')
-
-const grid = require('gridfs-stream')
-const combinedStream = require('combined-stream').create()
-
 const db = require('../lib/db')
 const mongoose = db.goose
 const conn = db.rope
+
+const express = require('express')
+const router = express.Router()
+const File = require('../lib/models/file')
+const grid = require('gridfs-stream')
 
 const gfs = grid(conn.db, mongoose.mongo)
 
@@ -39,8 +37,7 @@ router.post('/upload', function (req, res) {
       content_type: mimetype
     })
 
-    combinedStream.append(file)
-    combinedStream.pipe(writestream)
+    file.pipe(writestream)
 
     writestream.on('close', function (file) {
       console.log('Yeah!')
