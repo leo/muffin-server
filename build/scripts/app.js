@@ -1,52 +1,50 @@
-import $ from './select'
 import { tryCreditals, adjustBorder } from './login'
 
 const inputs = $('.login input')
 
-$('.login form').addEventListener('submit', tryCreditals)
+$('.login form').submit(tryCreditals)
 
 for (var i = 0; i < inputs.length; i++) {
   inputs[i].addEventListener('keyup', adjustBorder)
 }
 
 const chest = $('#chest')
-const nav = chest.querySelector('nav')
+const nav = chest.find('nav')
 
-if (chest.tagName !== 'ASIDE') {
-  chest.querySelector('.toggle').addEventListener('click', function (event) {
-    nav.classList.toggle('open')
-    this.classList.toggle('on')
+chest.find('.toggle').click(function (event) {
+  nav.toggleClass('open')
+  $(this).toggleClass('on')
 
-    event.preventDefault()
-  })
-}
+  event.preventDefault()
+})
 
 const fileSelector = $('#selectMedia [type="file"]')
 const button = $('#title .add')
 
 function sendFile () {
-  this.closest('form').submit()
-  this.removeEventListener('change', sendFile)
+  $(this).closest('form').submit()
+  $(this).unbind('change', sendFile)
 }
 
-button.addEventListener('click', function (event) {
+button.click(function (event) {
   fileSelector.click()
-  fileSelector.addEventListener('change', sendFile)
+  fileSelector.on('change', sendFile)
 
   event.preventDefault()
 })
 
-$('#selectMedia').addEventListener('submit', function (event) {
-  const form = event.target
-  const data = new FormData(form)
-  const request = new XMLHttpRequest()
-
-  request.addEventListener('readystatechange', function () {
-    console.log(request.responseText)
+$('#selectMedia').submit(function (event) {
+  $.ajax({
+    url: '/admin/media/upload',
+    type: 'POST',
+    data: new FormData(this),
+    processData: false,
+    contentType: false
+  }).done(function (data) {
+    alert(data)
+  }).fail(function () {
+    console.log('Failed!')
   })
-
-  request.open('POST', '/admin/media/upload')
-  request.send(data)
 
   event.preventDefault()
 })

@@ -4,12 +4,6 @@
   "description": "Who doesn't like chocolate?",
   "main": "index.js",
   "private": true,
-  "standard": {
-    "globals": [
-      "FormData",
-      "XMLHttpRequest"
-    ]
-  },
   "dependencies": {
     "bcryptjs": "^2.3.0",
     "body-parser": "^1.14.2",
@@ -59,6 +53,14 @@
     "chocolate",
     "yummy"
   ],
+  "standard": {
+    "globals": [
+      "FormData",
+      "XMLHttpRequest",
+      "$",
+      "alert"
+    ]
+  },
   "author": "Leonard Lamprecht <mindrun@icloud.com> (https://leo.im)",
   "license": "MIT",
   "bugs": {
