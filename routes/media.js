@@ -9,9 +9,7 @@ const db = require('../lib/db')
 const mongoose = db.goose
 const conn = db.rope
 
-grid.mongo = mongoose.mongo
-
-const gfs = grid(conn.db)
+const gfs = grid(conn.db, mongoose.mongo)
 
 router.get('/', function (req, res) {
   function listFiles (err, results) {
