@@ -20,7 +20,6 @@
     "express": "^4.13.3",
     "express-handlebars": "^2.0.1",
     "express-session": "^1.12.1",
-    "file-type": "^3.4.0",
     "gridfs-stream": "^1.1.1",
     "kerberos": "0.0.17",
     "mongoose": "^4.3.5"
