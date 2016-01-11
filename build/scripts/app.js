@@ -1,9 +1,9 @@
 import $ from './select'
 import { tryCreditals, adjustBorder } from './login'
 
-const inputs = $('input')
+const inputs = $('.login input')
 
-$('form').addEventListener('submit', tryCreditals)
+$('.login form').addEventListener('submit', tryCreditals)
 
 for (var i = 0; i < inputs.length; i++) {
   inputs[i].addEventListener('keyup', adjustBorder)
@@ -21,7 +21,7 @@ if (chest.tagName !== 'ASIDE') {
   })
 }
 
-const fileSelector = $('#selectMedia input')
+const fileSelector = $('#selectMedia [type="file"]')
 const button = $('#title .add')
 
 function sendFile () {
@@ -37,8 +37,6 @@ button.addEventListener('click', function (event) {
 })
 
 $('#selectMedia').addEventListener('submit', function (event) {
-  event.preventDefault()
-
   const form = event.target
   const data = new FormData(form)
   const request = new XMLHttpRequest()
@@ -49,4 +47,6 @@ $('#selectMedia').addEventListener('submit', function (event) {
 
   request.open('POST', '/admin/media/upload')
   request.send(data)
+
+  event.preventDefault()
 })

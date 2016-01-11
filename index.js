@@ -25,9 +25,7 @@ app.use(livereload({
   disableCompression: true
 }))
 
-app.use(busboy({
-  immediate: true
-}))
+app.use(busboy())
 
 app.use(session({
   secret: 'foo',

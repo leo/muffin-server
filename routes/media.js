@@ -27,6 +27,8 @@ router.post('/upload', function (req, res) {
     console.log(filename)
   })
 
+  req.pipe(req.busboy)
+
   res.send('ok')
 })
 
