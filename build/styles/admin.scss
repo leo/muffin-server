@@ -23,6 +23,10 @@ body {
   user-select: none;
   -webkit-touch-callout: none;
 
+  &.dz-drag-hover {
+    overflow: hidden;
+  }
+
   @media (min-width: 992px) {
     padding-top: 55px;
 
@@ -1175,6 +1179,34 @@ select {
     margin: auto;
     padding-left: 0;
     padding-right: 0;
+  }
+
+}
+
+#drop-zone {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background: #4FC8E7;
+  display: none;
+  z-index: 2000;
+
+  section {
+    border: 2px dashed white;
+    height: calc(100vh - 50px);
+    width: calc(100vw - 50px);
+    margin: 25px;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+  }
+
+  h1 {
+    color: #fff;
+    font-size: 32px;
   }
 
 }

@@ -18,11 +18,19 @@ chest.find('.toggle').click(function (event) {
   event.preventDefault()
 })
 
-$('body').dropzone({
+const drop = $('body.media').dropzone({
   clickable: '#title .add',
   url: '/admin/media/upload',
   previewsContainer: '#files',
   previewTemplate: $('#preview-template').html(),
   thumbnailWidth: 360,
   thumbnailHeight: 360
+})
+
+drop.on('dragenter', function () {
+  $('#drop-zone').show()
+})
+
+drop.on('drop', function () {
+  $('#drop-zone').hide()
 })
