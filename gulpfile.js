@@ -7,6 +7,8 @@ const uglify = require('gulp-uglify')
 const nodemon = require('gulp-nodemon')
 
 const babel = require('rollup-plugin-babel')
+const npm = require('rollup-plugin-npm')
+const commonjs = require('rollup-plugin-commonjs')
 
 const dirs = {
   sass: 'build/styles/*.scss',
@@ -31,6 +33,14 @@ gulp.task('scripts', function () {
       plugins: [
         babel({
           presets: ['es2015-rollup']
+        }),
+        npm({
+          main: true,
+          jsnext: true
+        }),
+        commonjs({
+          include: 'node_modules/**',
+          exclude: '**/*.css'
         })
       ]
     })).on('error', console.error)

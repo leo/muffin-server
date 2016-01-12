@@ -1,3 +1,6 @@
+import $ from 'jquery'
+import 'dropzone'
+
 import { tryCreditals, adjustBorder } from './login'
 
 const inputs = $('.login input')
