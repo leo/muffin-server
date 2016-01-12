@@ -18,47 +18,9 @@ chest.find('.toggle').click(function (event) {
   event.preventDefault()
 })
 
-const fileSelector = $('#selectMedia [type="file"]')
-const button = $('#title .add')
-
-fileSelector.on('change', function () {
-  $(this).closest('form').submit()
-})
-
-button.click(function (event) {
-  fileSelector.click()
-  event.preventDefault()
-})
-
-const form = $('#selectMedia')
-var dragTimer
-
-$('#selectMedia').submit(function (event) {
-  $.ajax({
-    url: '/admin/media/upload',
-    type: 'POST',
-    data: new FormData(this),
-    processData: false,
-    contentType: false
-  }).done(function (data) {
-    form.removeClass('drag')
-    window.clearTimeout(dragTimer)
-
-    location.reload()
-  }).fail(function () {
-    console.log('Failed!')
-  })
-
-  event.preventDefault()
-})
-
-$(document).on('dragover', function () {
-  form.addClass('drag')
-  window.clearTimeout(dragTimer)
-})
-
-$(document).on('dragleave', function () {
-  dragTimer = window.setTimeout(function () {
-    form.removeClass('drag')
-  }, 25)
+$('body').dropzone({
+  clickable: '#title .add',
+  url: '/admin/media/upload',
+  previewsContainer: '#files',
+  previewTemplate: $('#preview-template').html()
 })

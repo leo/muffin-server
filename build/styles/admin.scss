@@ -928,11 +928,12 @@ select {
     padding: 5px;
     box-sizing: border-box;
 
-    a {
+    figure {
       display: block;
       overflow: hidden;
       position: relative;
       box-sizing: border-box;
+      margin: 0;
       border: 1px solid #DADADA;
 
       &:before {
@@ -1170,24 +1171,6 @@ select {
     margin: auto;
     padding-left: 0;
     padding-right: 0;
-  }
-
-}
-
-#selectMedia.drag {
-  display: block;
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 2000;
-  background: yellow;
-
-  input {
-    width: inherit;
-    height: inherit;
-    opacity: 0;
   }
 
 }

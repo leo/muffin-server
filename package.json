@@ -58,7 +58,8 @@
       "XMLHttpRequest",
       "$",
       "alert",
-      "location"
+      "location",
+      "Dropzone"
     ]
   },
   "author": "Leonard Lamprecht <mindrun@icloud.com> (https://leo.im)",

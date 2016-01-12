@@ -33,20 +33,28 @@
 
 </aside>
 
-<ul id="files">
+<ul id="files" class="dropzone-previews">
 
   {{#each files}}
 
     <li>
-      <a href="#">
-        <img src="/uploads/{{filename}}">
-      </a>
+      <figure>
+        <img data-dz-thumbnail src="/uploads/{{filename}}">
+        <figcaption data-dz-name></figcaption>
+      </figure>
     </li>
 
   {{/each}}
 
 </ul>
 
-<form id="selectMedia" enctype="multipart/form-data" hidden>
-  <input type="file" name="media">
-</form>
+<div id="preview-template" hidden>
+
+  <li>
+    <figure>
+      <img data-dz-thumbnail>
+      <figcaption data-dz-name></figcaption>
+    </figure>
+  </li>
+
+</div>
