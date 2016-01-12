@@ -1,6 +1,4 @@
-import $ from 'jquery'
-import 'dropzone'
-
+import Dropzone from 'dropzone'
 import { tryCreditals, adjustBorder } from './login'
 
 const inputs = $('.login input')
@@ -21,19 +19,21 @@ chest.find('.toggle').click(function (event) {
   event.preventDefault()
 })
 
-const drop = $('body.media').dropzone({
+const drop = new Dropzone(document.body, {
   clickable: '#title .add',
   url: '/admin/media/upload',
   previewsContainer: '#files',
-  previewTemplate: $('#preview-template').html(),
+  previewTemplate: document.getElementById('preview-template').innerHTML,
   thumbnailWidth: 360,
   thumbnailHeight: 360
 })
 
+const zone = document.querySelector('#drop-zone')
+
 drop.on('dragenter', function () {
-  $('#drop-zone').show()
+  zone.classList.add('shown')
 })
 
 drop.on('drop', function () {
-  $('#drop-zone').hide()
+  zone.classList.remove('shown')
 })

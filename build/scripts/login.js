@@ -1,5 +1,3 @@
-import $ from 'jquery'
-
 function queryVariable (name) {
   const query = window.location.search.substring(1)
   const vars = query.split('&')
