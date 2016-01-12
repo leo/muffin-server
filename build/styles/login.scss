@@ -1,4 +1,5 @@
-.login {
+.login,
+.reset-password {
   font-size: 14px;
   background: #fff;
   -webkit-text-size-adjust: 100%;
@@ -152,4 +153,8 @@
     transform: translate3d(10px, 0, 0);
   }
 
+}
+
+.reset-password button {
+  background: #FF7550;
 }

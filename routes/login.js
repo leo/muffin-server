@@ -25,7 +25,12 @@ router.get('/', function (req, res, next) {
 })
 
 router.get('/reset-password', function (req, res) {
-  res.send("You're such a bad boy!")
+  const tags = {
+    pageTitle: 'Reset password',
+    outer: true
+  }
+
+  res.render('reset-password', tags)
 })
 
 router.get('/bye', function (req, res) {
