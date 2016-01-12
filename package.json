@@ -18,7 +18,7 @@
     "mongoose": "^4.3.5"
   },
   "devDependencies": {
-    "babel-preset-es2015-rollup": "^1.0.0",
+    "babel-preset-es2015-rollup": "^1.1.1",
     "connect-livereload": "^0.5.4",
     "gulp": "^3.9.0",
     "gulp-concat": "^2.6.0",
