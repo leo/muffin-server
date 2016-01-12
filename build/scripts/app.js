@@ -22,5 +22,7 @@ $('body').dropzone({
   clickable: '#title .add',
   url: '/admin/media/upload',
   previewsContainer: '#files',
-  previewTemplate: $('#preview-template').html()
+  previewTemplate: $('#preview-template').html(),
+  thumbnailWidth: 360,
+  thumbnailHeight: 360
 })
