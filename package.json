@@ -60,8 +60,7 @@
       "FormData",
       "XMLHttpRequest",
       "alert",
-      "location",
-      "$"
+      "location"
     ]
   },
   "author": "Leonard Lamprecht <mindrun@icloud.com> (https://leo.im)",

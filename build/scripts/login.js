@@ -31,7 +31,7 @@ export function tryCreditals (event) {
 
   const httpRequest = new XMLHttpRequest()
   const form = this
-  const inputs = $('.login input')
+  const inputs = document.querySelectorAll('.login input')
 
   httpRequest.addEventListener('readystatechange', function (data) {
     if (this.readyState !== 4) {

@@ -1,39 +1,47 @@
 import Dropzone from 'dropzone'
 import { tryCreditals, adjustBorder } from './login'
 
-const inputs = $('.login input')
+const inputs = document.querySelectorAll('.login input')
+const form = document.querySelector('.login form')
 
-$('.login form').submit(tryCreditals)
+if (form) {
+  form.addEventListener('submit', tryCreditals)
+}
 
 for (var i = 0; i < inputs.length; i++) {
   inputs[i].addEventListener('keyup', adjustBorder)
 }
 
-const chest = $('#chest')
-const nav = chest.find('nav')
+const chest = document.querySelector('#chest')
 
-chest.find('.toggle').click(function (event) {
-  nav.toggleClass('open')
-  $(this).toggleClass('on')
+if (chest) {
+  const nav = chest.querySelector('nav')
 
-  event.preventDefault()
-})
+  chest.querySelector('.toggle').addEventListener('click', function (event) {
+    nav.classList.toggle('open')
+    this.classList.toggle('on')
 
-const drop = new Dropzone(document.body, {
-  clickable: '#title .add',
-  url: '/admin/media/upload',
-  previewsContainer: '#files',
-  previewTemplate: document.getElementById('preview-template').innerHTML,
-  thumbnailWidth: 360,
-  thumbnailHeight: 360
-})
+    event.preventDefault()
+  })
+}
 
-const zone = document.querySelector('#drop-zone')
+if (document.body.classList.contains('media')) {
+  const drop = new Dropzone(document.body, {
+    clickable: '#title .add',
+    url: '/admin/media/upload',
+    previewsContainer: '#files',
+    previewTemplate: document.getElementById('preview-template').innerHTML,
+    thumbnailWidth: 360,
+    thumbnailHeight: 360
+  })
 
-drop.on('dragenter', function () {
-  zone.classList.add('shown')
-})
+  const zone = document.querySelector('#drop-zone')
 
-drop.on('drop', function () {
-  zone.classList.remove('shown')
-})
+  drop.on('dragenter', function () {
+    zone.classList.add('shown')
+  })
+
+  drop.on('drop', function () {
+    zone.classList.remove('shown')
+  })
+}
