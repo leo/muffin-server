@@ -4,8 +4,15 @@
     <tr>
       <td><input type="checkbox"></td>
       <td>Title</td>
-      <td>Author</td>
-      <td>Date</td>
+
+      {{#ifRow 'author'}}
+        <td>Author</td>
+      {{/ifRow}}
+
+      {{#ifRow 'dates'}}
+        <td>Date</td>
+      {{/ifRow}}
+
     </tr>
   </thead>
 
@@ -45,8 +52,15 @@
     <tr>
       <td><input type="checkbox"></td>
       <td>Title</td>
-      <td>Author</td>
-      <td>Date</td>
+
+      {{#ifRow 'author'}}
+        <td>Author</td>
+      {{/ifRow}}
+
+      {{#ifRow 'dates'}}
+        <td>Date</td>
+      {{/ifRow}}
+
     </tr>
   </tfoot>
 
