@@ -1226,6 +1226,10 @@ select {
   display: none;
   z-index: 2000;
 
+  &.shown {
+    display: block;
+  }
+
   section {
     border: 2px dashed white;
     height: calc(100vh - 50px);

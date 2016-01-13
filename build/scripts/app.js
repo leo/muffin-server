@@ -39,6 +39,15 @@ if (document.body.classList.contains('media')) {
 
   drop.on('dragenter', function () {
     zone.classList.add('shown')
+
+    const interval = setInterval(function () {
+      if (document.body.classList.contains('dz-drag-hover')) {
+        return
+      }
+
+      zone.classList.remove('shown')
+      clearInterval(interval)
+    }, 20)
   })
 
   drop.on('drop', function () {
