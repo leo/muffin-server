@@ -37,10 +37,9 @@
 
   {{#each files}}
 
-    <li>
+    <li class="dz-image-preview">
       <figure>
         <img data-dz-thumbnail src="/uploads/{{filename}}">
-        <figcaption data-dz-name></figcaption>
       </figure>
     </li>
 
@@ -53,7 +52,11 @@
   <li>
     <figure>
       <img data-dz-thumbnail>
-      <figcaption data-dz-name></figcaption>
+
+      <figcaption>
+        <span data-dz-uploadprogress></span>
+      </figcaption>
+
     </figure>
   </li>
 

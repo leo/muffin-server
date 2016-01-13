@@ -932,13 +932,30 @@ select {
     padding: 5px;
     box-sizing: border-box;
 
+    &.dz-image-preview {
+
+      figure {
+        border: 1px solid #DADADA;
+
+        img {
+          opacity: 1;
+        }
+
+      }
+
+      figcaption {
+        opacity: 0;
+      }
+
+    }
+
     figure {
       display: block;
       overflow: hidden;
       position: relative;
       box-sizing: border-box;
       margin: 0;
-      border: 1px solid #DADADA;
+      border: 2px dashed #FF4136;
 
       &:before {
         content: '';
@@ -947,7 +964,21 @@ select {
       }
 
       figcaption {
-        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        opacity: 1;
+        transition: opacity 1s ease;
+
+        span {
+          background: #FF4136;
+          display: block;
+          height: 10px;
+          transition: width 0.4s ease;
+        }
+
       }
 
     }
@@ -956,8 +987,10 @@ select {
       position: absolute;
       left: 0;
       top: 0;
+      transition: opacity 1s ease;
       width: 100%;
       height: 100%;
+      opacity: 0;
     }
 
   }
