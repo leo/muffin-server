@@ -21,7 +21,7 @@ npm install -g muffin-cli
 muffin init
 ```
 
-## Develop me
+## Contribute
 
 Clone this repo
 
