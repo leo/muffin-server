@@ -41,6 +41,7 @@ app.set('views', __dirname + '/views')
 
 app.engine('hbs', handlebars({
   defaultLayout: 'main',
+  extname: '.hbs',
   helpers: require('./lib/helpers'),
   layoutsDir: __dirname + '/views/layouts',
   partialsDir: __dirname + '/views/partials'
