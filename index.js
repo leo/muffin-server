@@ -13,6 +13,10 @@ const MongoStore = require('connect-mongo')(session)
 const busboy = require('connect-busboy')
 const livereload = require('connect-livereload')
 
+require('dotenv').config({
+  path: './.env'
+})
+
 process.on('SIGINT', function () {
   rope.close(function () {
     process.exit(0)
@@ -28,7 +32,7 @@ app.use(livereload({
 app.use(busboy())
 
 app.use(session({
-  secret: 'foo',
+  secret: process.env.SESSION_SECRET,
   name: 'muffin.session',
   store: new MongoStore({
     mongooseConnection: rope
