@@ -37,10 +37,14 @@ app.use(session({
   saveUninitialized: true
 }))
 
+app.set('views', __dirname + '/views')
+
 app.engine('hbs', handlebars({
   defaultLayout: 'main',
   extname: '.hbs',
-  helpers: require('./lib/helpers')
+  helpers: require('./lib/helpers'),
+  layoutsDir: __dirname + '/views/layouts',
+  partialsDir: __dirname + '/views/partials'
 }))
 
 app.locals.menuItems = [
@@ -109,8 +113,8 @@ app.route('/admin*').all(function (req, res, next) {
   }
 })
 
-app.use('/admin/assets', express.static('./dist'))
-app.use('/admin', express.static('./public'))
+app.use('/admin/assets', express.static(__dirname + '/dist'))
+app.use('/admin', express.static(__dirname + '/public'))
 
 app.use(bodyParser.json())
 
