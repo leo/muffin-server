@@ -16,7 +16,7 @@
     "express-session": "^1.13.0",
     "gridfs-stream": "^1.1.1",
     "kerberos": "0.0.17",
-    "mongoose": "^4.3.5"
+    "mongoose": "^4.3.6"
   },
   "devDependencies": {
     "babel-preset-es2015-rollup": "^1.1.1",
