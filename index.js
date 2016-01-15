@@ -132,7 +132,7 @@ app.use('/admin/media', require('./routes/media'))
 
 app.listen(2000, function () {
   const port = this.address().port
-  const url = 'http://localhost:' + port + '/admin'
+  const url = 'http://localhost:' + port
 
   console.log('Muffin is running at ' + url)
 
@@ -141,3 +141,9 @@ app.listen(2000, function () {
     process.env.restarted = false
   }
 })
+
+app.get('/', function (req, res) {
+  res.send('test')
+})
+
+exports.app = app
