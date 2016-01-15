@@ -1,4 +1,4 @@
-const express = require('express')
+const express = require('../express')
 const app = express()
 const handlebars = require('express-handlebars')
 const session = require('express-session')
@@ -143,7 +143,10 @@ app.listen(2000, function () {
 })
 
 app.get('/', function (req, res) {
-  res.send('test')
+  res.render('index', {
+    layout: false,
+    viewRoot: './views'
+  })
 })
 
 exports.app = app
