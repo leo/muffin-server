@@ -3,19 +3,19 @@ const app = express()
 const handlebars = require('express-handlebars')
 const session = require('express-session')
 
-const compression = require('compression')
-const bodyParser = require('body-parser')
-const logger = require('morgan')
-const rope = require('./lib/db').rope
-const open = require('open')
+require('dotenv').config({
+  path: './.env'
+})
 
 const MongoStore = require('connect-mongo')(session)
 const busboy = require('connect-busboy')
 const livereload = require('connect-livereload')
 
-require('dotenv').config({
-  path: './.env'
-})
+const logger = require('morgan')
+const rope = require('./lib/db').rope
+const open = require('open')
+const compression = require('compression')
+const bodyParser = require('body-parser')
 
 process.on('SIGINT', function () {
   rope.close(function () {
