@@ -14,11 +14,11 @@ Of course it doesn't yet have those cool features which all the other cool kids 
 
 ## Use me
 
-If you'd like to use muffin for your next project, simply install our neat command line interface and generate a new boilerplate within the current directory.
+If you'd like to use muffin for your next project, simply install our neat [Yeoman](http://yeoman.io) generator and set up a new boilerplate within the current directory.
 
 ```bash
-npm install -g muffin-cli
-muffin init
+npm install -g generator-muffin
+yo muffin
 ```
 
 ## Contribute
