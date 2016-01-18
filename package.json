@@ -16,6 +16,10 @@
     "express-session": "^1.13.0",
     "gridfs-stream": "^1.1.1",
     "kerberos": "0.0.17",
+    "koa": "^1.1.2",
+    "koa-bodyparser": "^2.0.1",
+    "koa-handlebars": "^0.5.7",
+    "koa-session": "^3.3.1",
     "mongoose": "^4.3.6"
   },
   "devDependencies": {
