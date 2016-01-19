@@ -50,6 +50,10 @@ router.post('/upload', function *(next) {
 
   this.body = file.name + ' was written to DB'
   yield next
+
+  fs.unlink(file.path, function (err) {
+    if (err) throw err
+  })
 })
 
 module.exports = router
