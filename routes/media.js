@@ -2,6 +2,7 @@ const db = require('../lib/db')
 const mongoose = db.goose
 const conn = db.rope
 
+const fs = require('fs')
 const router = require('koa-router')()
 const File = require('../lib/models/file')
 const grid = require('gridfs-stream')
@@ -26,25 +27,29 @@ router.get('/', function *() {
   })
 })
 
-router.post('/upload', function *() {
-  /*
-  req.busboy.on('file', function (fieldname, file, filename, encoding, mimetype) {
-    const writestream = gfs.createWriteStream({
-      filename: filename,
-      root: 'media',
-      content_type: mimetype
-    })
+router.post('/upload', function *(next) {
+  const file = this.request.body.files.file
 
-    file.pipe(writestream)
-
-    writestream.on('close', function (file) {
-      console.log('Yeah!')
-      res.send(filename + ' was written to DB')
-    })
+  const writestream = gfs.createWriteStream({
+    filename: file.name,
+    root: 'media',
+    content_type: file.type
   })
 
-  req.pipe(req.busboy)
-  */
+  const content = fs.createReadStream(file.path)
+
+  content.pipe(writestream)
+
+  try {
+    yield new Promise(function (resolve) {
+      writestream.on('close', () => resolve())
+    })
+  } catch (err) {
+    throw err
+  }
+
+  this.body = file.name + ' was written to DB'
+  yield next
 })
 
 module.exports = router

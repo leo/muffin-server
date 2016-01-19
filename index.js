@@ -35,6 +35,10 @@ app.use(livereload({
   port: 35729
 }))
 
+router.use(bodyParser({
+  multipart: true
+}))
+
 var globals = {}
 
 globals.menuItems = [
@@ -116,8 +120,6 @@ router.get('/admin*', function *(next) {
 
 app.use(mount('/admin', serve(__dirname + '/public')))
 app.use(mount('/admin/assets', serve(__dirname + '/dist')))
-
-app.use(bodyParser())
 
 function getRoutes (path) {
   return require('./routes/' + path).routes()
