@@ -1,95 +1,90 @@
-const express = require('express')
+const router = require('koa-router')()
 const User = require('../lib/models/user')
-const router = express.Router()
 
-router.use(function (req, res, next) {
-  if (req.url === '/bye') {
-    return next()
+router.use(function *(next) {
+  if (this.request.url === '/login/bye') {
+    yield next
+    return
   }
 
-  if (req.session.loggedIn) {
-    res.redirect('/admin')
+  if (this.session.loggedIn) {
+    this.response.redirect('/admin')
   } else {
-    next()
+    yield next
   }
 })
 
-router.get('/', function (req, res, next) {
+router.get('/bye', function *() {
+  this.session = null
+  this.response.redirect('/login')
+})
+
+router.get('/', function *() {
   const tags = {
     outer: true,
     pageTitle: 'Login'
   }
 
-  req.session.loggedIn = false
-  res.render('login', tags)
+  this.session = null
+  yield this.render('login', tags)
 })
 
-router.get('/reset-password', function (req, res) {
+router.get('/reset-password', function *() {
   const tags = {
     pageTitle: 'Reset password',
     outer: true
   }
 
-  res.render('reset-password', tags)
+  yield this.render('reset-password', tags)
 })
 
-router.get('/bye', function (req, res) {
-  req.session.loggedIn = false
-  res.redirect('/login')
-})
+router.post('/', function *(next) {
+  const body = this.request.body
 
-router.post('/', function (req, res) {
-  const username = req.body.username
-  const password = req.body.password
-
-  if (!username || !password) {
-    res.send({
+  if (!body.username || !body.password) {
+    this.body = {
       success: false,
       message: 'User and/or password empty'
-    })
+    }
 
     return
   }
 
-  const query = User.where({ _id: req.body.username })
+  const query = User.where({ _id: body.username })
 
-  query.findOne(function (err, user) {
-    if (err) {
-      throw err
+  try {
+    var user = yield query.findOne()
+  } catch (err) {
+    throw err
+  }
+
+  if (!user) {
+    this.body = {
+      success: false,
+      message: 'User not existing'
     }
 
-    if (!user) {
-      res.send({
-        success: false,
-        message: 'User not existing'
-      })
+    return
+  }
 
-      return
+  const isMatch = user.tryPassword(body.password)
+
+  if (isMatch) {
+    this.session.loggedIn = true
+
+    this.body = {
+      success: true
     }
 
-    user.tryPassword(req.body.password, function (err, isMatch) {
-      if (err) {
-        throw err
-      }
+    return
+  }
 
-      if (isMatch) {
-        req.session.loggedIn = true
+  this.body = {
+    success: false,
+    message: 'Wrong password'
+  }
 
-        res.send({
-          success: true
-        })
-
-        return
-      }
-
-      res.send({
-        success: false,
-        message: 'Wrong password'
-      })
-    })
-  })
-
-  console.log(req.body)
+  yield next
 })
 
 module.exports = router

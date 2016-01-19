@@ -1,8 +1,7 @@
-const express = require('express')
-const router = express.Router()
+const router = require('koa-router')()
 
-router.get('/', function (req, res) {
-  res.render('dashboard', {
+router.get('/', function *() {
+  yield this.render('dashboard', {
     pageTitle: 'Dashboard'
   })
 })

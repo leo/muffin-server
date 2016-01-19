@@ -2,34 +2,32 @@ const db = require('../lib/db')
 const mongoose = db.goose
 const conn = db.rope
 
-const express = require('express')
-const router = express.Router()
+const router = require('koa-router')()
 const File = require('../lib/models/file')
 const grid = require('gridfs-stream')
 
 const gfs = grid(conn.db, mongoose.mongo)
 
-router.get('/', function (req, res) {
-  function listFiles (err, results) {
-    if (err) {
-      throw err
-    }
-
-    for (var file in results) {
-      results[file] = results[file].toObject()
-    }
-
-    res.render('media', {
-      pageTitle: 'Media',
-      list: true,
-      files: results
-    })
+router.get('/', function *() {
+  try {
+    var results = yield File.find()
+  } catch (err) {
+    throw err
   }
 
-  File.find(listFiles)
+  for (var file in results) {
+    results[file] = results[file].toObject()
+  }
+
+  yield this.render('media', {
+    pageTitle: 'Media',
+    list: true,
+    files: results
+  })
 })
 
-router.post('/upload', function (req, res) {
+router.post('/upload', function *() {
+  /*
   req.busboy.on('file', function (fieldname, file, filename, encoding, mimetype) {
     const writestream = gfs.createWriteStream({
       filename: filename,
@@ -46,6 +44,7 @@ router.post('/upload', function (req, res) {
   })
 
   req.pipe(req.busboy)
+  */
 })
 
 module.exports = router

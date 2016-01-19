@@ -1,46 +1,41 @@
-const express = require('express')
-const router = express.Router()
+const router = require('koa-router')()
 const User = require('../lib/models/user')
 
-router.get('/', function (req, res) {
-  const url = req.originalUrl
+router.get('/', function *() {
+  const url = this.request.originalUrl
 
-  function listUsers (err, users) {
-    if (err) {
-      throw err
-    }
-
-    for (var user in users) {
-      users[user].title = users[user]._id
-    }
-
-    res.render('list', {
-      pageTitle: 'Users',
-      path: url,
-      slug: url.split('/')[2],
-      list: true,
-      items: users
-    })
+  try {
+    var users = yield User.find()
+  } catch (err) {
+    throw err
   }
 
-  User.find({}, listUsers)
+  for (var user in users) {
+    users[user].title = users[user]._id
+  }
+
+  yield this.render('list', {
+    pageTitle: 'Users',
+    path: url,
+    slug: url.split('/')[2],
+    list: true,
+    items: users
+  })
 })
 
-router.get('/:id', function (req, res) {
-  const query = User.where({ _id: req.params.id })
+router.get('/:id', function *() {
+  const query = User.where({ _id: this.params.id })
 
-  function loadUser (err, user) {
-    if (err) {
-      throw err
-    }
-
-    res.render('edit', {
-      pageTitle: user._id,
-      path: req.originalUrl
-    })
+  try {
+    var user = yield query.findOne()
+  } catch (err) {
+    throw err
   }
 
-  query.findOne(loadUser)
+  yield this.render('edit', {
+    pageTitle: user._id,
+    path: this.request.originalUrl
+  })
 })
 
 module.exports = router

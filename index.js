@@ -1,21 +1,22 @@
-const express = require('../express')
-const app = express()
-const handlebars = require('express-handlebars')
-const session = require('express-session')
+const koa = require('koa')
+const app = koa()
+
+const handlebars = require('koa-handlebars')
+const session = require('koa-generic-session')
+const mongoStore = require('koa-session-mongoose')
+const bodyParser = require('koa-body')
+const livereload = require('koa-livereload')
+// const compression = require('koa-compress')
+const router = require('koa-router')()
+const serve = require('koa-static')
+const mount = require('koa-mount')
 
 require('dotenv').config({
   path: './.env'
 })
 
-const MongoStore = require('connect-mongo')(session)
-const busboy = require('connect-busboy')
-const livereload = require('connect-livereload')
-
-const logger = require('morgan')
 const rope = require('./lib/db').rope
 const open = require('open')
-const compression = require('compression')
-const bodyParser = require('body-parser')
 
 process.on('SIGINT', function () {
   rope.close(function () {
@@ -23,35 +24,20 @@ process.on('SIGINT', function () {
   })
 })
 
-app.disable('view cache')
-
-app.use(livereload({
-  disableCompression: true
-}))
-
-app.use(busboy())
+app.keys = [ process.env.SESSION_SECRET ]
 
 app.use(session({
-  secret: process.env.SESSION_SECRET,
-  name: 'muffin.session',
-  store: new MongoStore({
-    mongooseConnection: rope
-  }),
-  resave: false,
-  saveUninitialized: true
+  store: mongoStore.create(),
+  connection: rope
 }))
 
-app.set('views', __dirname + '/views')
-
-app.engine('hbs', handlebars({
-  defaultLayout: 'main',
-  extname: '.hbs',
-  helpers: require('./lib/helpers'),
-  layoutsDir: __dirname + '/views/layouts',
-  partialsDir: __dirname + '/views/partials'
+app.use(livereload({
+  port: 35729
 }))
 
-app.locals.menuItems = [
+var globals = {}
+
+globals.menuItems = [
   {
     url: '.',
     title: 'Dashboard'
@@ -74,65 +60,76 @@ app.locals.menuItems = [
   }
 ]
 
-app.locals.appVersion = require('./package.json').version
-app.set('view engine', 'hbs')
+globals.appVersion = require('./package.json').version
 
-app.use(compression())
-app.use(logger('dev'))
+app.use(handlebars({
+  defaultLayout: 'main',
+  cache: false,
+  helpers: require('./lib/helpers'),
+  root: __dirname + '/views',
+  viewsDir: '/',
+  data: globals
+}))
 
-app.use(function (req, res, next) {
-  res.header('x-powered-by', 'Muffin CMS')
-  next()
+// app.use(compression())
+
+app.use(function *(next) {
+  this.set('x-powered-by', 'Muffin CMS')
+  yield next
 })
 
-app.route('/admin*').all(function (req, res, next) {
-  if (req.session.loggedIn || req.method === 'GET') {
-    next()
+router.all('/admin*', function *(next) {
+  if (this.session.loggedIn || this.request.method === 'GET') {
+    yield next
   } else {
-    res.send('Sorry, but I can\'t let you in.')
+    this.response.body('Sorry, but I can\'t let you in.')
   }
-}).get(function (req, res, next) {
-  const url = req.url
+})
+
+router.get('/admin*', function *(next) {
+  const url = this.request.url
   var to
 
   // Check if request wants a file. If so, let it through.
   if (url.match(/[^\\/]+\.[^\\/]+$/)) {
-    return next()
+    yield next
   }
 
-  if (req.session.loggedIn) {
-    next()
+  if (this.session.loggedIn) {
+    yield next
   } else {
-    switch (req.originalUrl) {
+    const original = this.request.originalUrl
+
+    switch (original) {
       case '/admin':
       case '/admin/':
         to = ''
         break
 
       default:
-        to = '/?to=' + encodeURIComponent(req.originalUrl.replace('/admin/', ''))
+        to = '/?to=' + encodeURIComponent(original.replace('/admin/', ''))
     }
 
-    res.redirect('/login' + to)
+    this.response.redirect('/login' + to)
   }
 })
 
-app.use('/admin/assets', express.static(__dirname + '/dist'))
-app.use('/admin', express.static(__dirname + '/public'))
+app.use(mount('/admin', serve(__dirname + '/public')))
+app.use(mount('/admin/assets', serve(__dirname + '/dist')))
 
-app.use(bodyParser.json())
+app.use(bodyParser())
 
-app.use(bodyParser.urlencoded({
-  extended: true
-}))
+function getRoutes (path) {
+  return require('./routes/' + path).routes()
+}
 
-app.use('/login', require('./routes/login'))
-app.use('/uploads*', require('./routes/uploads'))
+router.use('/login', getRoutes('login'))
+router.use('/uploads*', getRoutes('uploads'))
 
-app.use('/admin', require('./routes/dashboard'))
-app.use('/admin/pages', require('./routes/pages'))
-app.use('/admin/users', require('./routes/users'))
-app.use('/admin/media', require('./routes/media'))
+router.use('/admin', getRoutes('dashboard'))
+router.use('/admin/pages', getRoutes('pages'))
+router.use('/admin/users', getRoutes('users'))
+router.use('/admin/media', getRoutes('media'))
 
 app.listen(2000, function () {
   const port = this.address().port
@@ -146,11 +143,16 @@ app.listen(2000, function () {
   }
 })
 
-app.get('/', function (req, res) {
-  res.render('index', {
+router.get('/', function *() {
+  /*
+  this.render('index', {
     layout: false,
     viewRoot: './views'
   })
+  */
 })
+
+app.use(router.routes())
+app.use(router.allowedMethods())
 
 exports.app = app

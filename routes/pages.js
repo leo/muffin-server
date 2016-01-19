@@ -1,47 +1,42 @@
-const express = require('express')
-const router = express.Router()
+const router = require('koa-router')()
 const Page = require('../lib/models/page')
 
-router.get('/', function (req, res) {
-  const url = req.originalUrl
+router.get('/', function *() {
+  const url = this.request.originalUrl
 
-  function listPages (err, pages) {
-    if (err) {
-      throw err
-    }
-
-    for (var page in pages) {
-      pages[page] = pages[page].toObject()
-    }
-
-    res.render('list', {
-      pageTitle: 'Pages',
-      path: url,
-      slug: url.split('/')[2],
-      list: true,
-      items: pages
-    })
+  try {
+    var pages = yield Page.find()
+  } catch (err) {
+    throw err
   }
 
-  Page.find({}, listPages)
+  for (var page in pages) {
+    pages[page] = pages[page].toObject()
+  }
+
+  yield this.render('list', {
+    pageTitle: 'Pages',
+    path: url,
+    slug: url.split('/')[2],
+    list: true,
+    items: pages
+  })
 })
 
-router.get('/:id', function (req, res) {
-  const query = Page.where({ _id: req.params.id })
+router.get('/:id', function *() {
+  const query = Page.where({ _id: this.params.id })
 
-  function loadPage (err, page) {
-    if (err) {
-      throw err
-    }
-
-    res.render('edit', {
-      pageTitle: page.title,
-      editableTitle: true,
-      path: req.originalUrl
-    })
+  try {
+    var page = yield query.findOne()
+  } catch (err) {
+    throw err
   }
 
-  query.findOne(loadPage)
+  yield this.render('edit', {
+    pageTitle: page.title,
+    editableTitle: true,
+    path: this.request.originalUrl
+  })
 })
 
 module.exports = router

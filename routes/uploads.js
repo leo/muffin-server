@@ -1,40 +1,49 @@
-const express = require('express')
-const router = express.Router()
+const router = require('koa-router')()
 const path = require('path')
 const gfs = require('../lib/db').fs
 
-router.get('/', function (req, res) {
-  const name = path.basename(req.originalUrl)
-
+router.get('/', function *(next) {
   const query = {
-    filename: name,
+    filename: path.basename(this.request.originalUrl),
     root: 'media'
   }
 
-  function sendFile () {
-    const stream = gfs.createReadStream(query)
+  try {
+    var isAvailable = yield gfs.exist(query)
+  } catch (err) {
+    throw err
+  }
 
-    gfs.findOne(query, function (err, meta) {
-      if (err) {
-        throw err
-      }
+  if (!isAvailable) {
+    this.body = 'File doesn\'t exist!'
+    return
+  }
 
-      res.writeHead(200, {
-        'Content-Type': meta.contentType,
-        'Content-Length': meta.length,
-        'Cache-Control': 'max-age=31536000'
+  const stream = gfs.createReadStream(query)
+
+  function getMeta () {
+    return new Promise(function (resolve, reject) {
+      gfs.findOne(query, function (err, meta) {
+        if (err) reject(err)
+        else resolve(meta)
       })
-
-      stream.pipe(res)
     })
   }
 
-  gfs.exist(query, function (err, found) {
-    if (err) {
-      throw err
-    }
-    found ? sendFile() : res.send('File doesn\'t exist!')
+  try {
+    var meta = yield getMeta()
+  } catch (err) {
+    throw err
+  }
+
+  this.set({
+    'Content-Type': meta.contentType,
+    'Content-Length': meta.length,
+    'Cache-Control': 'max-age=31536000'
   })
+
+  this.body = stream
+  yield next
 })
 
 module.exports = router
