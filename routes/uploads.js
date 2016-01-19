@@ -21,17 +21,15 @@ router.get('/', function *(next) {
 
   const stream = gfs.createReadStream(query)
 
-  function getMeta () {
-    return new Promise(function (resolve, reject) {
-      gfs.findOne(query, function (err, meta) {
-        if (err) reject(err)
-        else resolve(meta)
-      })
+  const metaData = new Promise(function (resolve, reject) {
+    gfs.findOne(query, function (err, meta) {
+      if (err) reject(err)
+      else resolve(meta)
     })
-  }
+  })
 
   try {
-    var meta = yield getMeta()
+    var meta = yield metaData
   } catch (err) {
     throw err
   }
