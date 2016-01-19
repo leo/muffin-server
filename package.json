@@ -58,6 +58,9 @@
     "chocolate",
     "yummy"
   ],
+  "greenkeeper": {
+    "emails": false
+  },
   "standard": {
     "globals": [
       "FormData",
