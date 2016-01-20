@@ -19,8 +19,10 @@ router.get('/', function *(next) {
     return
   }
 
+  // Read the requested file from the DB
   const stream = gfs.createReadStream(query)
 
+  // Try to get the file's meta data and give back an error if one appears
   const metaData = new Promise(function (resolve, reject) {
     gfs.findOne(query, function (err, meta) {
       if (err) reject(err)
@@ -29,18 +31,22 @@ router.get('/', function *(next) {
   })
 
   try {
+    // Assign metadata to variable or throw error
     var meta = yield metaData
   } catch (err) {
     throw err
   }
 
+  // Tell the client how to treat the data
   this.set({
     'Content-Type': meta.contentType,
     'Content-Length': meta.length,
     'Cache-Control': 'max-age=31536000'
   })
 
+  // Send filestream to client
   this.body = stream
+
   yield next
 })
 

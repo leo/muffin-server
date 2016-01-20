@@ -36,8 +36,8 @@ router.post('/upload', function *(next) {
     content_type: file.type
   })
 
+  // Get file from disk and pipe it to gfs's writestream
   const content = fs.createReadStream(file.path)
-
   content.pipe(writestream)
 
   try {
@@ -51,6 +51,7 @@ router.post('/upload', function *(next) {
   this.body = file.name + ' was written to DB'
   yield next
 
+  // Remove temporary file after response
   fs.unlink(file.path, function (err) {
     if (err) throw err
   })

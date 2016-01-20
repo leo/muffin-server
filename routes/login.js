@@ -67,6 +67,7 @@ router.post('/', function *(next) {
     return
   }
 
+  // Compare password with the one within the DB
   const isMatch = user.tryPassword(body.password)
 
   if (isMatch) {
