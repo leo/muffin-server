@@ -49,3 +49,12 @@ You made it! Now you only need to start the app and it will be running here: [ht
 ```shell
 npm start
 ```
+
+## Test
+
+To run the unit tests, install [mocha](https://mochajs.org) and run it:
+
+```shell
+npm install -g mocha
+mocha
+```
