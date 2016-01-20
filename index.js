@@ -77,11 +77,6 @@ app.use(handlebars({
   data: globals
 }))
 
-app.use(function *(next) {
-  this.set('x-powered-by', 'Muffin CMS')
-  yield next
-})
-
 router.all('/admin*', function *(next) {
   if (this.session.loggedIn || this.request.method === 'GET') {
     yield next
