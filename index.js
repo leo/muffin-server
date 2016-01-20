@@ -12,7 +12,7 @@ const serve = require('koa-static')
 const mount = require('koa-mount')
 
 require('dotenv').config({
-  path: './.env'
+  path: process.cwd() + '/.env'
 })
 
 const rope = require('./lib/db').rope
