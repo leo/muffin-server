@@ -133,6 +133,8 @@ router.use('/admin/pages', getRoutes('pages'))
 router.use('/admin/users', getRoutes('users'))
 router.use('/admin/media', getRoutes('media'))
 
+router.use('/', getRoutes('front'))
+
 app.listen(2000, function () {
   const port = this.address().port
   const url = 'http://localhost:' + port
@@ -143,15 +145,6 @@ app.listen(2000, function () {
     open(url)
     process.env.restarted = false
   }
-})
-
-router.get('/', function *() {
-  /*
-  this.render('index', {
-    layout: false,
-    viewRoot: './views'
-  })
-  */
 })
 
 app.use(router.routes())
