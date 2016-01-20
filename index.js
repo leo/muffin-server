@@ -6,7 +6,7 @@ const session = require('koa-generic-session')
 const mongoStore = require('koa-session-mongoose')
 const bodyParser = require('koa-body')
 const livereload = require('koa-livereload')
-// const compression = require('koa-compress')
+const compress = require('koa-compress')
 const router = require('koa-router')()
 const serve = require('koa-static')
 const mount = require('koa-mount')
@@ -23,6 +23,8 @@ process.on('SIGINT', function () {
     process.exit(0)
   })
 })
+
+app.use(compress())
 
 app.keys = [ process.env.SESSION_SECRET ]
 
@@ -74,8 +76,6 @@ app.use(handlebars({
   viewsDir: '/',
   data: globals
 }))
-
-// app.use(compression())
 
 app.use(function *(next) {
   this.set('x-powered-by', 'Muffin CMS')
