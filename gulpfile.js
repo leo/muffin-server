@@ -49,7 +49,7 @@ gulp.task('scripts', function () {
     .pipe(livereload())
 })
 
-gulp.task('server', function () {
+gulp.task('server', ['watch'], function () {
   nodemon({
     script: 'index.js',
     ignore: ['build/', 'dist/'],
@@ -59,7 +59,7 @@ gulp.task('server', function () {
   })
 })
 
-gulp.task('watch', ['server'], function () {
+gulp.task('watch', function () {
   livereload.listen()
 
   gulp.watch(dirs.sass, ['styles'])
