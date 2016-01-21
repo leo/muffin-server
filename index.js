@@ -1,22 +1,27 @@
-const koa = require('koa')
-const app = koa()
+const app = require('koa')()
+const open = require('open')
 
 const handlebars = require('koa-handlebars')
 const session = require('koa-generic-session')
 const mongoStore = require('koa-session-mongoose')
 const bodyParser = require('koa-body')
-const livereload = require('koa-livereload')
+
 const compress = require('koa-compress')
 const router = require('koa-router')()
 const serve = require('koa-static')
 const mount = require('koa-mount')
 
-require('dotenv').config({
-  path: process.cwd() + '/.env'
-})
+if (module.parent) {
+  require('dotenv').config({
+    path: process.cwd() + '/.env'
+  })
+
+  app.use(require('koa-livereload')({
+    port: 35729
+  }))
+}
 
 const rope = require('./lib/db').rope
-const open = require('open')
 
 process.on('SIGINT', function () {
   rope.close(function () {
@@ -31,10 +36,6 @@ app.keys = [ process.env.SESSION_SECRET ]
 app.use(session({
   store: mongoStore.create(),
   connection: rope
-}))
-
-app.use(livereload({
-  port: 35729
 }))
 
 router.use(bodyParser({
@@ -128,11 +129,14 @@ router.use('/admin/pages', getRoutes('pages'))
 router.use('/admin/users', getRoutes('users'))
 router.use('/admin/media', getRoutes('media'))
 
-router.use('/', getRoutes('front'))
+if (module.parent) {
+  router.use('/', getRoutes('front'))
+}
 
 app.listen(2000, function () {
   const port = this.address().port
-  const url = 'http://localhost:' + port
+  const path = module.parent ? '' : '/admin'
+  const url = 'http://localhost:' + port + path
 
   console.log('Muffin is running at ' + url)
 
