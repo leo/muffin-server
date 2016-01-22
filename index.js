@@ -37,7 +37,7 @@ app.use(compress())
 app.keys = [ process.env.SESSION_SECRET ]
 
 app.use(session({
-  key: 'muffin.sid',
+  key: 'muffin.sess',
   store: mongoStore.create(),
   connection: rope
 }))
