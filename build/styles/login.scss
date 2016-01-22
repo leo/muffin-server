@@ -13,8 +13,8 @@
   a {
     background: #DFDFDF;
     color: #fff;
-    width: 32px;
-    height: 32px;
+    width: 50px;
+    height: 50px;
     text-align: center;
     display: block;
     position: absolute;
@@ -22,12 +22,16 @@
     border-radius: 100%;
     text-decoration: none;
     bottom: 20px;
-    font-size: 18px;
-    line-height: 32px;
+    font-size: 22px;
+    line-height: 50px;
 
     @media (min-width: 768px) {
       right: 30px;
       bottom: 30px;
+      width: 32px;
+      height: 32px;
+      line-height: 32px;
+      font-size: 18px;
       transition: background 0.5s;
 
       &:hover {
