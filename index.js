@@ -136,6 +136,13 @@ router.use('/admin/media', getRoutes('media'))
 
 if (module.parent) {
   router.use('/', getRoutes('front'))
+} else {
+  router.get('/', function *(next) {
+    this.type = 'html'
+    this.body = 'The backend is located <a href="/admin">here</a>'
+
+    yield next
+  })
 }
 
 app.listen(2000, function () {
