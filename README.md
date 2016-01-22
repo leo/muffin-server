@@ -32,7 +32,7 @@ git clone git://github.com/leo/muffin.git
 cd muffin
 ```
 
-Install gulp, muffin's build tool and all other dependencies
+Install gulp (muffin's build tool) and all other dependencies
 
 ```shell
 npm install -g gulp
