@@ -1,21 +1,15 @@
 import Dropzone from 'dropzone'
-import { tryCreditals, resetPassword, adjustBorder } from './login'
+import { tryFields, adjustBorder } from './login'
 
-const inputs = document.querySelectorAll('.login input, .reset-password input')
-
-const loginForm = document.querySelector('.login form')
-const resetForm = document.querySelector('.reset-password form')
+const loginForm = document.querySelector('.login form, .reset-password form')
 
 if (loginForm) {
-  loginForm.addEventListener('submit', tryCreditals)
-}
+  loginForm.addEventListener('submit', tryFields)
+  const inputs = loginForm.querySelectorAll('input')
 
-if (resetForm) {
-  resetForm.addEventListener('submit', resetPassword)
-}
-
-for (var i = 0; i < inputs.length; i++) {
-  inputs[i].addEventListener('keyup', adjustBorder)
+  for (var i = 0; i < inputs.length; i++) {
+    inputs[i].addEventListener('keyup', adjustBorder)
+  }
 }
 
 const chest = document.querySelector('#chest')

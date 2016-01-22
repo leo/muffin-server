@@ -22,16 +22,19 @@ export function adjustBorder (event) {
   this.classList.remove('wrong')
 }
 
-export function tryCreditals (event) {
+export function tryFields (event) {
   event.preventDefault()
+
+  var arr = []
 
   if (this.classList.contains('shake')) {
     return
   }
 
   const httpRequest = new XMLHttpRequest()
+  const inputs = this.querySelectorAll('input')
   const form = this
-  const inputs = document.querySelectorAll('.login input')
+  const isLogin = document.body.classList.contains('login')
 
   httpRequest.addEventListener('readystatechange', function (data) {
     if (this.readyState !== 4) {
@@ -41,13 +44,16 @@ export function tryCreditals (event) {
     const response = JSON.parse(this.responseText)
 
     if (this.status === 200 && response.success) {
-      const query = queryVariable('to')
-      const target = query ? '/' + decodeURIComponent(query) : ''
+      if (isLogin) {
+        const query = queryVariable('to')
+        const target = query ? '/' + decodeURIComponent(query) : ''
 
-      window.location.replace('/admin' + target)
+        window.location.replace('/admin' + target)
+      } else {
+        alert('Yeah')
+      }
     } else {
       var timeout
-      var arr = []
 
       clearTimeout(timeout)
 
@@ -63,57 +69,13 @@ export function tryCreditals (event) {
     }
   })
 
-  const fields = {
-    username: this[0].value,
-    password: this[1].value
-  }
+  var fields = {}
 
-  httpRequest.open('POST', document.URL)
-  httpRequest.setRequestHeader('Content-Type', 'application/json;charset=UTF-8')
-  httpRequest.send(JSON.stringify(fields))
-}
-
-export function resetPassword (event) {
-  const httpRequest = new XMLHttpRequest()
-  const form = this
-  const inputs = document.querySelectorAll('.reset-password input')
-
-  const fields = {
-    username: this[0].value
-  }
-
-  httpRequest.addEventListener('readystatechange', function (data) {
-    if (this.readyState !== 4) {
-      return
-    }
-
-    const response = JSON.parse(this.responseText)
-
-    if (this.status === 200 && response.success) {
-      alert('Yeah')
-    } else {
-      var timeout
-      var arr = []
-
-      clearTimeout(timeout)
-
-      arr.forEach.call(inputs, function (input) {
-        input.classList.add('wrong')
-      })
-
-      form.classList.add('shake')
-
-      timeout = setTimeout(function () {
-        form.classList.remove('shake')
-      }, 1000)
-    }
-
-    console.log(response)
+  arr.forEach.call(inputs, function (input) {
+    fields[input.name] = input.value
   })
 
   httpRequest.open('POST', document.URL)
   httpRequest.setRequestHeader('Content-Type', 'application/json;charset=UTF-8')
   httpRequest.send(JSON.stringify(fields))
-
-  event.preventDefault()
 }
