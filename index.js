@@ -19,6 +19,9 @@ if (module.parent) {
   app.use(require('koa-livereload')({
     port: 35729
   }))
+} else {
+  // This is fine since it's only being used in the development env
+  process.env.SESSION_SECRET = 'random'
 }
 
 const rope = require('./lib/db').rope
