@@ -45,7 +45,7 @@ You made it! Now you only need to start the app and it will be running here: [ht
 npm start
 ```
 
-## Test
+## Testing
 
 To run the unit tests, install [mocha](https://mochajs.org) and run it:
 
