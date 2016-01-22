@@ -12,6 +12,14 @@ If you ask a experienced developer what he's thinking about content management s
 
 Of course it doesn't yet have those cool features which all the other cool kids on the block are showing off, but it's very ambitious and always has an open ear for feedback from all angles!
 
+## Requirements
+
+To be able to contribute to muffin (or even just to use it), you'll need those things:
+
+- [Node.js](https://nodejs.org/en/)
+- [Gulp.js](http://gulpjs.com)
+- [Yeoman](http://yeoman.io)
+
 ## Use me
 
 If you'd like to use muffin for your next project, simply install our neat [Yeoman](http://yeoman.io) generator and set up a new boilerplate within the current directory.
@@ -32,10 +40,9 @@ git clone git://github.com/leo/muffin.git
 cd muffin
 ```
 
-Install gulp (muffin's build tool) and all other dependencies
+Install all dependencies
 
 ```shell
-npm install -g gulp
 npm install
 ```
 
