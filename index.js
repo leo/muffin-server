@@ -38,6 +38,7 @@ app.keys = [ process.env.SESSION_SECRET ]
 
 app.use(session({
   key: 'muffin.sess',
+  prefix: 'muffin:sess:',
   store: mongoStore.create(),
   connection: rope
 }))
