@@ -19,7 +19,9 @@
     "koa-router": "^7.0.1",
     "koa-session-mongoose": "^0.5.2",
     "koa-static": "^2.0.0",
-    "mongoose": "^4.3.6"
+    "mongoose": "^4.3.6",
+    "nodemailer": "^2.0.0",
+    "nodemailer-sendmail-transport": "^1.0.0"
   },
   "devDependencies": {
     "babel-preset-es2015-rollup": "^1.1.1",

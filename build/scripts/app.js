@@ -1,11 +1,17 @@
 import Dropzone from 'dropzone'
-import { tryCreditals, adjustBorder } from './login'
+import { tryCreditals, resetPassword, adjustBorder } from './login'
 
 const inputs = document.querySelectorAll('.login input')
-const form = document.querySelector('.login form')
 
-if (form) {
-  form.addEventListener('submit', tryCreditals)
+const loginForm = document.querySelector('.login form')
+const resetForm = document.querySelector('.reset-password form')
+
+if (loginForm) {
+  loginForm.addEventListener('submit', tryCreditals)
+}
+
+if (resetForm) {
+  resetForm.addEventListener('submit', resetPassword)
 }
 
 for (var i = 0; i < inputs.length; i++) {

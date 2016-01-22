@@ -1,4 +1,5 @@
 const router = require('koa-router')()
+const resetPassword = require('../lib/mail').resetPassword
 const User = require('../lib/models/user')
 
 router.use(function *(next) {
@@ -36,6 +37,44 @@ router.get('/reset-password', function *() {
   }
 
   yield this.render('reset-password', tags)
+})
+
+router.post('/reset-password', function *(next) {
+  const body = this.request.body
+
+  if (!body.username) {
+    this.body = {
+      success: false,
+      message: 'User and/or password empty'
+    }
+
+    return
+  }
+
+  const query = User.where({ _id: body.username })
+
+  try {
+    var user = yield query.findOne()
+  } catch (err) {
+    throw err
+  }
+
+  if (!user) {
+    this.body = {
+      success: false,
+      message: 'User not existing'
+    }
+
+    return
+  }
+
+  resetPassword(user.email)
+
+  this.body = {
+    success: true
+  }
+
+  yield next
 })
 
 router.post('/', function *(next) {

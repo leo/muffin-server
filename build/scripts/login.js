@@ -72,3 +72,27 @@ export function tryCreditals (event) {
   httpRequest.setRequestHeader('Content-Type', 'application/json;charset=UTF-8')
   httpRequest.send(JSON.stringify(fields))
 }
+
+export function resetPassword (event) {
+  const httpRequest = new XMLHttpRequest()
+
+  const fields = {
+    username: this[0].value
+  }
+
+  httpRequest.addEventListener('readystatechange', function (data) {
+    if (this.readyState !== 4) {
+      return
+    }
+
+    const response = JSON.parse(this.responseText)
+
+    console.log(response)
+  })
+
+  httpRequest.open('POST', document.URL)
+  httpRequest.setRequestHeader('Content-Type', 'application/json;charset=UTF-8')
+  httpRequest.send(JSON.stringify(fields))
+
+  event.preventDefault()
+}
