@@ -14,7 +14,7 @@ Of course it doesn't yet have those cool features which all the other cool kids 
 
 ## Requirements
 
-To be able to contribute to muffin (or even just to use it), you'll need those things:
+To be able to use muffin, you'll need **the latest version** of those things:
 
 - [Node.js](https://nodejs.org/en/)
 - [Gulp.js](http://gulpjs.com)
