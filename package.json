@@ -49,7 +49,7 @@
     "url": "git+https://github.com/leo/muffin.git"
   },
   "engines": {
-    "node": ">=4.2.4"
+    "node": "latest"
   },
   "keywords": [
     "cms",
