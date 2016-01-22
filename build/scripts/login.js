@@ -75,6 +75,8 @@ export function tryCreditals (event) {
 
 export function resetPassword (event) {
   const httpRequest = new XMLHttpRequest()
+  const form = this
+  const inputs = document.querySelectorAll('.reset-password input')
 
   const fields = {
     username: this[0].value
@@ -86,6 +88,25 @@ export function resetPassword (event) {
     }
 
     const response = JSON.parse(this.responseText)
+
+    if (this.status === 200 && response.success) {
+      alert('Yeah')
+    } else {
+      var timeout
+      var arr = []
+
+      clearTimeout(timeout)
+
+      arr.forEach.call(inputs, function (input) {
+        input.classList.add('wrong')
+      })
+
+      form.classList.add('shake')
+
+      timeout = setTimeout(function () {
+        form.classList.remove('shake')
+      }, 1000)
+    }
 
     console.log(response)
   })

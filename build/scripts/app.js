@@ -1,7 +1,7 @@
 import Dropzone from 'dropzone'
 import { tryCreditals, resetPassword, adjustBorder } from './login'
 
-const inputs = document.querySelectorAll('.login input')
+const inputs = document.querySelectorAll('.login input, .reset-password input')
 
 const loginForm = document.querySelector('.login form')
 const resetForm = document.querySelector('.reset-password form')
