@@ -34,7 +34,7 @@ process.on('SIGINT', function () {
 
 app.use(compress())
 
-app.keys = [ process.env.SESSION_SECRET ]
+app.keys = [process.env.SESSION_SECRET]
 
 app.use(session({
   key: 'muffin.sess',
