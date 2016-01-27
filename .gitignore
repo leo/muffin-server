@@ -1,4 +1,6 @@
 # compiled output
+_site
+.sass-cache
 dist
 
 # dependencies
