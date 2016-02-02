@@ -2,6 +2,7 @@
 _site
 .sass-cache
 dist
+assets
 
 # dependencies
 node_modules
