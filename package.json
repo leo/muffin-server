@@ -31,7 +31,7 @@
     "gulp-livereload": "^3.8.1",
     "gulp-nodemon": "^2.0.6",
     "gulp-rollup": "^1.6.0",
-    "gulp-sass": "^2.1.1",
+    "gulp-sass": "^2.2.0",
     "gulp-uglify": "^1.5.1",
     "koa-livereload": "^0.1.23",
     "open": "0.0.5",
