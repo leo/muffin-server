@@ -19,7 +19,7 @@
     "koa-router": "^5.3.0",
     "koa-session-mongoose": "^0.5.2",
     "koa-static": "^2.0.0",
-    "mongoose": "^4.4.1",
+    "mongoose": "^4.4.2",
     "nodemailer": "^2.1.0",
     "nodemailer-sendmail-transport": "^1.0.0"
   },
