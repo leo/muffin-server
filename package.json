@@ -32,7 +32,7 @@
     "gulp-nodemon": "^2.0.6",
     "gulp-rollup": "^1.6.0",
     "gulp-sass": "^2.2.0",
-    "gulp-uglify": "^1.5.1",
+    "gulp-uglify": "^1.5.2",
     "koa-livereload": "^0.1.23",
     "open": "0.0.5",
     "rollup-plugin-babel": "^2.3.9",
