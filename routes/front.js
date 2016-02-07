@@ -5,12 +5,13 @@ const handlebars = require('koa-handlebars')
 router.use(handlebars({
   cache: false,
   root: process.cwd() + '/views',
-  viewsDir: '/'
+  layoutsDir: '../layouts',
+  viewsDir: '/',
+  defaultLayout: 'default'
 }))
 
 router.get('/', function *() {
   yield this.render('index', {
-    layout: false
   })
 })
 
