@@ -11,6 +11,8 @@ const router = require('koa-router')()
 const serve = require('koa-static')
 const mount = require('koa-mount')
 
+app.use(compress())
+
 if (module.parent) {
   require('dotenv').config({
     path: process.cwd() + '/.env'
@@ -31,8 +33,6 @@ process.on('SIGINT', function () {
     process.exit(0)
   })
 })
-
-app.use(compress())
 
 app.keys = [process.env.SESSION_SECRET]
 
