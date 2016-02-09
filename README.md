@@ -15,7 +15,6 @@ Of course it doesn't yet have those cool features which all the other cool kids 
 To be able to use muffin, you'll need **the latest version** of those things:
 
 - [Node.js](https://nodejs.org/en/)
-- [Gulp.js](http://gulpjs.com)
 - [Yeoman](http://yeoman.io)
 
 ## Use me
