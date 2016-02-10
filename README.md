@@ -29,4 +29,4 @@ yo muffin
 
 ## Contribute
 
-To help us with development, please read [this](https://github.com/leo/muffin/wiki/Contribute).
+To help us with development, please read [this](https://github.com/small-cake/app/wiki/Contribute).
