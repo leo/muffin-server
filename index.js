@@ -139,8 +139,7 @@ app.router = require('./lib/routes/front')
 
 function listening() {
   const port = this.address().port
-  const path = module.parent ? '' : '/admin'
-  const url = 'http://localhost:' + port + path
+  const url = 'http://localhost:' + port
 
   console.log('Muffin is running at ' + url)
 
@@ -151,7 +150,9 @@ function listening() {
 }
 
 app.run = (front) => {
-  router.use('/', front.routes())
+  if (front) {
+    router.use('/', front.routes())
+  }
 
   app.use(router.routes())
   app.use(router.allowedMethods())
@@ -159,4 +160,5 @@ app.run = (front) => {
   app.listen(2000, listening)
 }
 
+if (!module.parent) app.run()
 module.exports = app
