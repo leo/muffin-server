@@ -29,12 +29,3 @@ yo muffin
 ## Contribute
 
 To help us with development, please read [this](https://github.com/leo/muffin/wiki/Contribute).
-
-## Testing
-
-To run the unit tests, install [mocha](https://mochajs.org) and run it:
-
-```shell
-npm install -g mocha
-mocha
-```
