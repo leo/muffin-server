@@ -11,6 +11,8 @@ const router = require('koa-router')()
 const serve = require('koa-static')
 const mount = require('koa-mount')
 
+const db = require('./lib/db')
+
 app.use(compress())
 
 if (module.parent) {
@@ -26,7 +28,7 @@ if (module.parent) {
   process.env.SESSION_SECRET = 'random'
 }
 
-const rope = require('./lib/db').rope
+const rope = db.rope
 
 process.on('SIGINT', function () {
   rope.close(function () {
@@ -133,18 +135,9 @@ router.use('/admin/pages', getRoutes('pages'))
 router.use('/admin/users', getRoutes('users'))
 router.use('/admin/media', getRoutes('media'))
 
-if (module.parent) {
-  router.use('/', getRoutes('front'))
-} else {
-  router.get('/', function *(next) {
-    this.type = 'html'
-    this.body = 'The backend is located <a href="/admin">here</a>'
+app.router = require('./lib/routes/front')
 
-    yield next
-  })
-}
-
-app.listen(2000, function () {
+function listening() {
   const port = this.address().port
   const path = module.parent ? '' : '/admin'
   const url = 'http://localhost:' + port + path
@@ -155,9 +148,15 @@ app.listen(2000, function () {
     open(url)
     process.env.restarted = false
   }
-})
+}
 
-app.use(router.routes())
-app.use(router.allowedMethods())
+app.run = (front) => {
+  router.use('/', front.routes())
 
-exports.app = app
+  app.use(router.routes())
+  app.use(router.allowedMethods())
+
+  app.listen(2000, listening)
+}
+
+module.exports = app
