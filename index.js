@@ -119,11 +119,10 @@ router.get('/admin*', function *(next) {
   }
 })
 
-app.use(mount('/admin', serve(__dirname + '/public')))
 app.use(mount('/admin/assets', serve(__dirname + '/dist')))
 
 function getRoutes (path) {
-  return require('./routes/' + path).routes()
+  return require('./lib/routes/' + path).routes()
 }
 
 router.use('/login', getRoutes('login'))
