@@ -135,6 +135,7 @@ router.use('/admin/pages', getRoutes('pages'))
 router.use('/admin/users', getRoutes('users'))
 router.use('/admin/media', getRoutes('media'))
 
+// Tell kit where to find router for outer routes
 app.router = require('./lib/routes/front')
 
 function listening() {
@@ -149,8 +150,23 @@ function listening() {
   }
 }
 
-app.run = (front) => {
+var hbsConfig = {
+  cache: false,
+  root: process.cwd() + '/views',
+  layoutsDir: '../layouts',
+  viewsDir: '/',
+  defaultLayout: 'default'
+}
+
+app.run = (front, config) => {
+  // Allow kit to overwrite template options
+  if (config && config.render) {
+    Object.assign(hbsConfig, config.render)
+  }
+
+  // Require outer routes if run from kit
   if (front) {
+    router.use(handlebars(hbsConfig))
     router.use('/', front.routes())
   }
 
