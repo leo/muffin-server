@@ -11,24 +11,26 @@ const npm = require('rollup-plugin-npm')
 const commonjs = require('rollup-plugin-commonjs')
 
 const dirs = {
-  sass: 'build/styles/*.scss',
-  js: 'build/scripts/**/*.js',
-  vectors: 'build/vectors/*'
+  scss: 'assets/scss/**/*.scss',
+  js: 'assets/js/**/*.js',
+  images: 'assets/images/**/*'
 }
 
-gulp.task('styles', function () {
-  return gulp.src(dirs.sass)
+gulp.task('styles', () => {
+  return gulp
+    .src(dirs.scss)
     .pipe(concat('styles.scss'))
     .pipe(sass({
       outputStyle: 'compressed',
-      includePaths: ['build/styles']
+      includePaths: ['assets/scss']
     }).on('error', sass.logError))
     .pipe(gulp.dest('dist'))
     .pipe(livereload())
 })
 
-gulp.task('scripts', function () {
-  return gulp.src('build/scripts/app.js', { read: false })
+gulp.task('scripts', () => {
+  return gulp
+    .src('assets/js/app.js', { read: false })
     .pipe(rollup({
       plugins: [
         babel({
@@ -49,21 +51,28 @@ gulp.task('scripts', function () {
     .pipe(livereload())
 })
 
-gulp.task('server', ['watch'], function () {
+gulp.task('images', () => {
+  return gulp
+    .src(dirs.images)
+    .pipe(gulp.dest('dist/images'))
+})
+
+gulp.task('server', ['watch'], () => {
   nodemon({
     script: 'index.js',
-    ignore: ['build/', 'dist/'],
+    ignore: ['assets/', 'dist/'],
     ext: 'js hbs'
   }).on('restart', function () {
     process.env.restarted = true
   })
 })
 
-gulp.task('watch', function () {
+gulp.task('watch', () => {
   livereload.listen()
 
-  gulp.watch(dirs.sass, ['styles'])
+  gulp.watch(dirs.scss, ['styles'])
   gulp.watch(dirs.js, ['scripts'])
+  gulp.watch(dirs.images, ['images'])
 })
 
-gulp.task('default', ['styles', 'scripts'])
+gulp.task('default', ['styles', 'scripts', 'images'])
