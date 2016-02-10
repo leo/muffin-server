@@ -1,8 +1,5 @@
 # compiled output
-_site
-.sass-cache
 dist
-assets
 
 # dependencies
 node_modules
