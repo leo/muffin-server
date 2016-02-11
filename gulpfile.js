@@ -10,7 +10,7 @@ const babel = require('rollup-plugin-babel')
 const npm = require('rollup-plugin-npm')
 const commonjs = require('rollup-plugin-commonjs')
 
-const dirs = {
+const paths = {
   scss: 'assets/scss/**/*.scss',
   js: 'assets/js/**/*.js',
   images: 'assets/images/**/*'
@@ -18,7 +18,7 @@ const dirs = {
 
 gulp.task('styles', () => {
   return gulp
-    .src(dirs.scss)
+    .src(paths.scss)
     .pipe(concat('styles.scss'))
     .pipe(sass({
       outputStyle: 'compressed',
@@ -53,7 +53,7 @@ gulp.task('scripts', () => {
 
 gulp.task('images', () => {
   return gulp
-    .src(dirs.images)
+    .src(paths.images)
     .pipe(gulp.dest('dist/images'))
 })
 
@@ -70,9 +70,9 @@ gulp.task('server', ['watch'], () => {
 gulp.task('watch', () => {
   livereload.listen()
 
-  gulp.watch(dirs.scss, ['styles'])
-  gulp.watch(dirs.js, ['scripts'])
-  gulp.watch(dirs.images, ['images'])
+  gulp.watch(paths.scss, ['styles'])
+  gulp.watch(paths.js, ['scripts'])
+  gulp.watch(paths.images, ['images'])
 })
 
 gulp.task('default', ['styles', 'scripts', 'images'])
