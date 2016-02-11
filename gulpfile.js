@@ -7,7 +7,7 @@ const uglify = require('gulp-uglify')
 const nodemon = require('gulp-nodemon')
 
 const babel = require('rollup-plugin-babel')
-const npm = require('rollup-plugin-npm')
+const nodeResolve = require('rollup-plugin-node-resolve')
 const commonjs = require('rollup-plugin-commonjs')
 
 const paths = {
@@ -36,7 +36,7 @@ gulp.task('scripts', () => {
         babel({
           presets: ['es2015-rollup']
         }),
-        npm({
+        nodeResolve({
           main: true,
           jsnext: true
         }),
