@@ -1,6 +1,6 @@
 <p align="center">
-  <a href="http://muff.in">
-    <img src="http://i.imgur.com/buhMCWz.png" width="200">
+  <a href="http://muffin.cafe">
+    <img src="http://i.imgur.com/buhMCWz.png" width="170">
   </a>
 </p>
 
