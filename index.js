@@ -166,7 +166,7 @@ app.run = (front, config) => {
 
   // Require outer routes if run from kit
   if (front) {
-    router.use(handlebars(hbsConfig))
+    front.use(handlebars(hbsConfig))
     router.use('/', front.routes())
   }
 
