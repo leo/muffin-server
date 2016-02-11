@@ -121,6 +121,7 @@ router.get('/admin*', function *(next) {
   }
 })
 
+app.use(mount('/assets', serve('./dist')))
 app.use(mount('/admin/assets', serve(__dirname + '/dist')))
 
 function getRoutes (path) {
