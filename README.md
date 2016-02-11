@@ -16,8 +16,8 @@ To be able to use muffin, you'll need **the latest version** of those things. So
 
 - [Node.js](https://nodejs.org/en/)
 - [MongoDB](https://www.mongodb.org)
-- [Yeoman](http://yeoman.io)
 - [Gulp](http://gulpjs.com)
+- [Yeoman](http://yeoman.io)
 
 ## Use me
 
