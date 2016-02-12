@@ -1,7 +1,7 @@
 const app = require('koa')()
 const open = require('open')
 
-const hbs = require('koa-hbs')
+const handlebars = require('koa-handlebars')
 const session = require('koa-generic-session')
 const mongoStore = require('koa-session-mongoose')
 const bodyParser = require('koa-body')
@@ -77,14 +77,13 @@ globals.menuItems = [
 
 globals.appVersion = require('./package.json').version
 
-app.use(hbs.middleware({
+app.use(handlebars({
   defaultLayout: 'main',
-  disableCache: true,
-  templateOptions: {
-    data: globals,
-    helpers: helpers.admin
-  },
-  viewPath: __dirname + '/views'
+  cache: false,
+  helpers: helpers.admin,
+  root: __dirname + '/views',
+  viewsDir: '/',
+  data: globals
 }))
 
 router.all('/admin*', function *(next) {
@@ -154,13 +153,12 @@ function listening() {
 }
 
 var hbsConfig = {
+  cache: false,
+  root: process.cwd() + '/views',
+  layoutsDir: '../layouts',
+  viewsDir: '/',
   defaultLayout: 'default',
-  disableCache: true,
-  templateOptions: {
-    helpers: helpers.front
-  },
-  viewPath: process.cwd() + '/views',
-  layoutsPath: process.cwd() + '/layouts'
+  helpers: helpers.front
 }
 
 app.run = (front, config) => {
@@ -171,7 +169,7 @@ app.run = (front, config) => {
 
   // Require outer routes if run from kit
   if (front) {
-    front.use(hbs.middleware(hbsConfig))
+    front.use(handlebars(hbsConfig))
     router.use('/', front.routes())
   }
 
