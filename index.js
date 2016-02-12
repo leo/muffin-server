@@ -12,6 +12,7 @@ const serve = require('koa-static')
 const mount = require('koa-mount')
 
 const db = require('./lib/db')
+const helpers = require('./lib/helpers')
 
 app.use(compress())
 
@@ -79,7 +80,7 @@ globals.appVersion = require('./package.json').version
 app.use(handlebars({
   defaultLayout: 'main',
   cache: false,
-  helpers: require('./lib/helpers'),
+  helpers: helpers.admin,
   root: __dirname + '/views',
   viewsDir: '/',
   data: globals
@@ -156,7 +157,8 @@ var hbsConfig = {
   root: process.cwd() + '/views',
   layoutsDir: '../layouts',
   viewsDir: '/',
-  defaultLayout: 'default'
+  defaultLayout: 'default',
+  helpers: helpers.front
 }
 
 app.run = (front, config) => {
