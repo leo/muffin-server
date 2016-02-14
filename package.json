@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "babel-preset-es2015-rollup": "^1.1.1",
-    "dropzone": "^4.2.0",
+    "dropzone": "^4.3.0",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.0",
     "gulp-livereload": "^3.8.1",
