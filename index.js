@@ -140,7 +140,7 @@ router.use('/admin/media', getRoutes('media'))
 // Tell kit where to find router for outer routes
 app.router = require('./lib/routes/front')
 
-function listening() {
+function listening () {
   const port = this.address().port
   const url = 'http://localhost:' + port
 
