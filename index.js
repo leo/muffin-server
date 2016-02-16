@@ -79,7 +79,7 @@ globals.appVersion = require('./package.json').version
 
 app.use(handlebars({
   defaultLayout: 'main',
-  cache: false,
+  cache: app.env !== 'development',
   helpers: helpers.admin,
   root: __dirname + '/views',
   viewsDir: '/',
@@ -153,7 +153,7 @@ function listening () {
 }
 
 var hbsConfig = {
-  cache: false,
+  cache: app.env !== 'development',
   root: process.cwd() + '/views',
   layoutsDir: '../layouts',
   viewsDir: '/',
