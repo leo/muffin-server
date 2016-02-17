@@ -144,7 +144,8 @@ app.router = require('./lib/routes/front')
 
 function listening () {
   const port = this.address().port
-  const url = 'http://localhost:' + port
+  const path = module.parent ? '' : '/admin'
+  const url = 'http://localhost:' + port + path
 
   console.log('Muffin is running at ' + url)
 
