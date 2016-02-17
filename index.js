@@ -16,14 +16,16 @@ const helpers = require('./lib/helpers')
 
 app.use(compress())
 
+if (app.env === 'development') {
+  app.use(require('koa-livereload')({
+    port: 35729
+  }))
+}
+
 if (module.parent) {
   require('dotenv').config({
     path: process.cwd() + '/.env'
   })
-
-  app.use(require('koa-livereload')({
-    port: 35729
-  }))
 } else {
   // This is fine since it's only being used in the development env
   process.env.SESSION_SECRET = 'random'
