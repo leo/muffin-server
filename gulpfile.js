@@ -1,6 +1,6 @@
 const gulp = require('gulp')
 const sass = require('gulp-sass')
-const livereload = require('gulp-livereload')
+const livereload = require('gulp-refresh')
 const concat = require('gulp-concat')
 const rollup = require('gulp-rollup')
 const uglify = require('gulp-uglify')
