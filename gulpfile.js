@@ -1,6 +1,6 @@
 const gulp = require('gulp')
 const sass = require('gulp-sass')
-const livereload = require('gulp-refresh')
+const refresh = require('gulp-refresh')
 const concat = require('gulp-concat')
 const rollup = require('gulp-rollup')
 const uglify = require('gulp-uglify')
@@ -25,7 +25,7 @@ gulp.task('styles', () => {
       includePaths: ['assets/scss']
     }).on('error', sass.logError))
     .pipe(gulp.dest('dist'))
-    .pipe(livereload())
+    .pipe(refresh())
 })
 
 gulp.task('scripts', () => {
@@ -48,7 +48,7 @@ gulp.task('scripts', () => {
     })).on('error', console.error)
     .pipe(uglify())
     .pipe(gulp.dest('dist'))
-    .pipe(livereload())
+    .pipe(refresh())
 })
 
 gulp.task('images', () => {
@@ -68,7 +68,7 @@ gulp.task('server', ['watch'], () => {
 })
 
 gulp.task('watch', () => {
-  livereload.listen()
+  refresh.listen()
 
   gulp.watch(paths.scss, ['styles'])
   gulp.watch(paths.js, ['scripts'])
