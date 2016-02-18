@@ -7,9 +7,9 @@ if (loginForm) {
   loginForm.addEventListener('submit', tryFields)
   const inputs = loginForm.querySelectorAll('input')
 
-  for (var i = 0; i < inputs.length; i++) {
-    inputs[i].addEventListener('keyup', adjustBorder)
-  }
+  Array.prototype.forEach.call(inputs, input => {
+    input.addEventListener('keyup', adjustBorder)
+  })
 }
 
 const chest = document.querySelector('#chest')
@@ -65,7 +65,7 @@ function openMedia (event) {
 }
 
 if (files) {
-  for (var i = 0; i < files.length; i++) {
-    files[i].addEventListener('click', openMedia)
-  }
+  Array.prototype.forEach.call(files, file => {
+    file.addEventListener('click', openMedia)
+  })
 }

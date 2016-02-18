@@ -2,8 +2,8 @@ function queryVariable (name) {
   const query = window.location.search.substring(1)
   const vars = query.split('&')
 
-  for (var i = 0; i < vars.length; i++) {
-    var pair = vars[i].split('=')
+  for (var variable of vars) {
+    var pair = variable.split('=')
     if (pair[0] === name) {
       return pair[1]
     }
@@ -57,7 +57,7 @@ export function tryFields (event) {
 
       clearTimeout(timeout)
 
-      arr.forEach.call(inputs, function (input) {
+      arr.forEach.call(inputs, input => {
         input.classList.add('wrong')
       })
 
@@ -71,7 +71,7 @@ export function tryFields (event) {
 
   var fields = {}
 
-  arr.forEach.call(inputs, function (input) {
+  arr.forEach.call(inputs, input => {
     fields[input.name] = input.value
   })
 
