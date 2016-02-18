@@ -54,3 +54,18 @@ if (document.body.classList.contains('media')) {
     zone.classList.remove('shown')
   })
 }
+
+const files = document.querySelectorAll('#files figure')
+
+function openMedia (event) {
+  const image = this.querySelector('img').src
+  window.open(image)
+
+  event.preventDefault()
+}
+
+if (files) {
+  for (var i = 0; i < files.length; i++) {
+    files[i].addEventListener('click', openMedia)
+  }
+}
