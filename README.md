@@ -35,7 +35,9 @@ yo muffin
 # yo muffin <path>
 ```
 
-You'll then be asked to enter a few details about your site and the database connection. After you've answered all questions, your new site will be prepared. As soon as the setup is finished, use the following command to run muffin:
+You'll then be asked to enter a few details about your site and the database connection. After you've answered all questions, your new site will be prepared.
+
+As soon as the setup is finished, use the following command to run muffin:
 
 ```bash
 npm start
