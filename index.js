@@ -3,10 +3,10 @@ const open = require('open')
 
 const handlebars = require('koa-handlebars')
 const session = require('koa-generic-session')
-const mongoStore = require('koa-session-mongoose')
 const bodyParser = require('koa-body')
 const compress = require('koa-compress')
 const router = require('koa-router')()
+const mongoStore = require('koa-session-mongoose')
 const serve = require('koa-static')
 const mount = require('koa-mount')
 
