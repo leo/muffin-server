@@ -5,7 +5,6 @@ const handlebars = require('koa-handlebars')
 const session = require('koa-generic-session')
 const mongoStore = require('koa-session-mongoose')
 const bodyParser = require('koa-body')
-
 const compress = require('koa-compress')
 const router = require('koa-router')()
 const serve = require('koa-static')
@@ -68,28 +67,29 @@ router.use(bodyParser({
 
 var globals = {}
 
-globals.menuItems = [
-  {
-    url: '.',
-    title: 'Dashboard'
-  },
-  {
-    url: 'pages',
-    title: 'Pages'
-  },
-  {
-    url: 'users',
-    title: 'Users'
-  },
-  {
-    url: 'media',
-    title: 'Media'
-  },
-  {
-    url: '../login/bye',
-    title: 'Logout'
-  }
+const menuItems = [
+  'Dashboard',
+  'Pages',
+  'Users',
+  'Media',
+  'Logout'
 ]
+
+const specialURLs = {
+  'logout': '../login/bye',
+  'dashboard': '.'
+}
+
+globals.menuItems = []
+
+for (var handle of menuItems) {
+  var slug = handle.toLowerCase()
+
+  globals.menuItems.push({
+    url: specialURLs[slug] || slug,
+    title: handle
+  })
+}
 
 globals.appVersion = require('./package.json').version
 
