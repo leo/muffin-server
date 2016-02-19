@@ -17,10 +17,7 @@ const helpers = require('./lib/helpers')
 app.use(compress())
 
 if (app.env === 'development') {
-  app.use(require('koa-livereload')({
-    port: 35729,
-    src: '//localhost:9090'
-  }))
+  app.use(require('koa-livereload')())
 }
 
 process.on('uncaughtException', err => {
