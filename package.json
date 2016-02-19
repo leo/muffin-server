@@ -40,7 +40,7 @@
   },
   "scripts": {
     "start": "gulp server",
-    "install": "gulp -s",
+    "install": "gulp --silent",
     "watch": "gulp watch"
   },
   "repository": {
