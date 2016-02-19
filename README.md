@@ -42,4 +42,4 @@ That's all! :loudspeaker: :turtle:
 
 ## Contribute
 
-To help us with development, please read [this](https://github.com/small-cake/app/wiki/Contribute).
+To help us with development, please read [this](CONTRIBUTING.md).
