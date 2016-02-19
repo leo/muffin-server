@@ -26,7 +26,6 @@
     "babel-preset-es2015-rollup": "^1.1.1",
     "concurrently": "^2.0.0",
     "dropzone": "^4.3.0",
-    "gulp-rollup": "^1.6.0",
     "koa-livereload": "^0.1.23",
     "node-sass": "^3.4.2",
     "nodemon": "^1.9.0",
@@ -39,7 +38,7 @@
   },
   "scripts": {
     "install": "npm run build",
-    "start": "concurrently 'livereload dist' 'nodemon index -w views/ -i assets/'",
+    "start": "concurrently 'livereload dist' 'nodemon index -w views/ -e hbs,js -i assets/'",
     "build:js": "rollup assets/js/app.js > dist/app.js",
     "build:scss": "node-sass assets/scss -o dist --output-style compressed",
     "build:images": "cp -r assets/images/* dist/images",
