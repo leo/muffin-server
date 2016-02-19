@@ -26,7 +26,7 @@ Please firstly make sure that your database is available. On your local machine,
 mongod
 ```
 
-After that, simply use our neat Yeoman generator (which you've already installed previously) to generate a new boilerplate within the current directory.
+After that, simply use our neat Yeoman generator (which you've already installed previously) to generate a new boilerplate within the current directory:
 
 ```bash
 yo muffin
