@@ -2,13 +2,13 @@ const gulp = require('gulp')
 const sass = require('gulp-sass')
 const refresh = require('gulp-refresh')
 const concat = require('gulp-concat')
-const rollup = require('gulp-rollup')
-const uglify = require('gulp-uglify')
 const nodemon = require('gulp-nodemon')
 
+const rollup = require('rollup').rollup
 const babel = require('rollup-plugin-babel')
 const nodeResolve = require('rollup-plugin-node-resolve')
 const commonjs = require('rollup-plugin-commonjs')
+const uglify = require('rollup-plugin-uglify')
 
 const paths = {
   scss: 'assets/scss/**/*.scss',
@@ -29,26 +29,27 @@ gulp.task('styles', () => {
 })
 
 gulp.task('scripts', () => {
-  return gulp
-    .src('assets/js/app.js', { read: false })
-    .pipe(rollup({
-      plugins: [
-        babel({
-          presets: ['es2015-rollup']
-        }),
-        nodeResolve({
-          main: true,
-          jsnext: true
-        }),
-        commonjs({
-          include: 'node_modules/**',
-          exclude: '**/*.css'
-        })
-      ]
-    })).on('error', console.error)
-    .pipe(uglify())
-    .pipe(gulp.dest('dist'))
-    .pipe(refresh())
+  return rollup({
+    entry: 'assets/js/app.js',
+    plugins: [
+      babel({
+        presets: ['es2015-rollup']
+      }),
+      nodeResolve({
+        main: true,
+        jsnext: true
+      }),
+      commonjs({
+        include: 'node_modules/**',
+        exclude: '**/*.css'
+      }),
+      uglify()
+    ]
+  }).then(bundle => {
+    return bundle.write({
+      dest: 'dist/app.js'
+    })
+  })
 })
 
 gulp.task('images', () => {
