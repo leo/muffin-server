@@ -76,7 +76,7 @@ const menuItems = [
 ]
 
 const specialURLs = {
-  'logout': '../login/bye',
+  'logout': '../logout',
   'dashboard': '.'
 }
 
@@ -144,6 +144,13 @@ app.use(mount('/admin/assets', serve(__dirname + '/dist')))
 function getRoutes (path) {
   return require('./lib/routes/' + path).routes()
 }
+
+router.get('/logout', function *(next) {
+  this.session = null
+  this.response.redirect('/login')
+
+  yield next
+})
 
 router.use('/login', getRoutes('login'))
 router.use('/uploads*', getRoutes('uploads'))
