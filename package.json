@@ -45,7 +45,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/leo/muffin.git"
+    "url": "git+https://github.com/small-cake/app.git"
   },
   "engines": {
     "node": "latest"
@@ -64,7 +64,7 @@
   "author": "Leonard Lamprecht <mindrun@icloud.com> (http://leo.im)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/leo/muffin/issues"
+    "url": "https://github.com/small-cake/app/issues"
   },
-  "homepage": "https://github.com/leo/muffin#readme"
+  "homepage": "http://muffin.cafe"
 }
