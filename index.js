@@ -39,8 +39,8 @@ if (module.parent) {
 
 const rope = db.rope
 
-process.on('SIGINT', function () {
-  rope.close(function () {
+process.on('SIGINT', () => {
+  rope.close(() => {
     process.exit(0)
   })
 })
