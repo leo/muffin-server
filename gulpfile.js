@@ -36,13 +36,9 @@ gulp.task('scripts', () => {
         presets: ['es2015-rollup']
       }),
       nodeResolve({
-        main: true,
         jsnext: true
       }),
-      commonjs({
-        include: 'node_modules/**',
-        exclude: '**/*.css'
-      }),
+      commonjs(),
       uglify()
     ]
   }).then(bundle => {
