@@ -12,6 +12,7 @@ const mount = require('koa-mount')
 
 const db = require('./lib/db')
 const helpers = require('./lib/helpers')
+const log = require('./lib/etc').log
 
 app.use(compress())
 
@@ -21,11 +22,10 @@ if (app.env === 'development') {
 
 process.on('uncaughtException', err => {
   if (err.errno === 'EADDRINUSE') {
-    console.error('Port already in use!')
-    return
+    return log('Port already in use')
   }
 
-  console.error(err)
+  log(err)
 })
 
 if (module.parent) {
