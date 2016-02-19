@@ -31,7 +31,7 @@ After that, simply use our neat Yeoman generator (which you've already installed
 ```bash
 yo muffin
 
-# If you want, you can also specify the destination folder:
+# If you want, you can also specify the destination:
 # yo muffin <path>
 ```
 
