@@ -28,6 +28,7 @@
     "gulp-rollup": "^1.6.0",
     "koa-livereload": "^0.1.23",
     "node-sass": "^3.4.2",
+    "nodemon": "^1.9.0",
     "open": "0.0.5",
     "rollup": "^0.25.4",
     "rollup-plugin-babel": "^2.3.9",
@@ -37,6 +38,7 @@
   },
   "scripts": {
     "install": "npm run build",
+    "start": "nodemon index",
     "build:js": "rollup assets/js/app.js > dist/app.js",
     "build:scss": "node-sass assets/scss -o dist --output-style compressed",
     "build:images": "cp -r assets/images/* dist/images",
