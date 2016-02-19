@@ -51,8 +51,15 @@ app.keys = [process.env.SESSION_SECRET]
 app.use(session({
   key: 'muffin.sess',
   prefix: 'muffin:sess:',
+  cookie: {
+    // Kill client part of session when user closes browser
+    maxage: null
+  },
   store: mongoStore.create(),
-  connection: rope
+  connection: rope,
+  // Kill DB part of session after one day if not updated
+  rolling: true,
+  ttl: 86400000
 }))
 
 router.use(bodyParser({
