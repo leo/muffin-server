@@ -16,14 +16,19 @@ To be able to use muffin, you'll need **the latest version** of those things. So
 
 - [Node.js](https://nodejs.org/en/)
 - [MongoDB](https://www.mongodb.org)
-- [Yeoman](http://yeoman.io)
+- [Yeoman](http://yeoman.io) and [Muffin's generator](https://www.npmjs.com/package/generator-muffin)
 
 ## Use me
 
-If you'd like to use muffin for your next project, simply install our neat [Yeoman](http://yeoman.io) generator and set up a new boilerplate within the current directory.
+Please firstly make sure that your database is available. On your local machine, the easiest way to start MongoDB is by running the following command:
 
 ```bash
-npm install -g generator-muffin
+mongod
+```
+
+After that, simply use our neat Yeoman generator (which you've already installed previously) and set up a new boilerplate within the current directory:
+
+```bash
 yo muffin
 ```
 
