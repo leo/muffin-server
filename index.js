@@ -22,6 +22,15 @@ if (app.env === 'development') {
   }))
 }
 
+process.on('uncaughtException', err => {
+  if (err.errno === 'EADDRINUSE') {
+    console.error('Port already in use!')
+    return
+  }
+
+  console.error(err)
+})
+
 if (module.parent) {
   require('dotenv').config({
     path: process.cwd() + '/.env'
