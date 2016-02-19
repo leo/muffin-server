@@ -54,7 +54,7 @@ gulp.task('images', () => {
     .pipe(gulp.dest('dist/images'))
 })
 
-gulp.task('server', ['watch'], () => {
+gulp.task('serve', ['watch'], () => {
   nodemon({
     script: 'index.js',
     ignore: ['assets/', 'dist/'],

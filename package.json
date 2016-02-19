@@ -39,7 +39,7 @@
     "rollup-plugin-uglify": "^0.2.0"
   },
   "scripts": {
-    "start": "gulp server",
+    "start": "gulp serve",
     "install": "gulp --silent"
   },
   "repository": {
