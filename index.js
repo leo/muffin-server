@@ -79,8 +79,8 @@ globals.menuItems = [
     title: 'Media'
   },
   {
-    url: 'settings',
-    title: 'Settings'
+    url: '../login/bye',
+    title: 'Logout'
   }
 ]
 
