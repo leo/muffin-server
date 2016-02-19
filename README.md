@@ -26,11 +26,19 @@ Please firstly make sure that your database is available. On your local machine,
 mongod
 ```
 
-After that, simply use our neat Yeoman generator (which you've already installed previously) and set up a new boilerplate within the current directory:
+After that, simply use our neat Yeoman generator (which you've already installed previously) to generate a new boilerplate within the current directory:
 
 ```bash
 yo muffin
 ```
+
+You'll then be asked to enter a few details about your site and the database connection. After you've answered all questions, your new site will be prepared. As soon as the setup is finished, use the following command to run muffin:
+
+```bash
+npm start
+```
+
+That's all! :loudspeaker: :turtle:
 
 ## Contribute
 
