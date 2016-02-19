@@ -7,7 +7,7 @@ const nodemon = require('gulp-nodemon')
 const rollup = require('rollup').rollup
 const babel = require('rollup-plugin-babel')
 const nodeResolve = require('rollup-plugin-node-resolve')
-const commonjs = require('rollup-plugin-commonjs')
+const commonJS = require('rollup-plugin-commonjs')
 const uglify = require('rollup-plugin-uglify')
 
 const paths = {
@@ -38,7 +38,7 @@ gulp.task('scripts', () => {
       nodeResolve({
         jsnext: true
       }),
-      commonjs(),
+      commonJS(),
       uglify()
     ]
   }).then(bundle => {
@@ -59,9 +59,7 @@ gulp.task('server', ['watch'], () => {
     script: 'index.js',
     ignore: ['assets/', 'dist/'],
     ext: 'js hbs'
-  }).on('restart', function () {
-    process.env.restarted = true
-  })
+  }).on('restart', () => process.env.restarted = true)
 })
 
 gulp.task('watch', () => {
