@@ -1,7 +1,7 @@
 {
   "name": "muffin",
   "version": "0.1.0",
-  "description": "Who doesn't like chocolate?",
+  "description": "The 21st century way of building websites",
   "main": "index.js",
   "private": true,
   "dependencies": {
