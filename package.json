@@ -38,7 +38,7 @@
   },
   "scripts": {
     "install": "npm run build",
-    "start": "nodemon index",
+    "start": "nodemon index -w views/ -i assets/",
     "build:js": "rollup assets/js/app.js > dist/app.js",
     "build:scss": "node-sass assets/scss -o dist --output-style compressed",
     "build:images": "cp -r assets/images/* dist/images",
