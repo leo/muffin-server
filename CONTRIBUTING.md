@@ -6,6 +6,11 @@ If you just want to fix a misspelling or something equally small, you can also j
 
 And yeah, all those steps below might seem like a huge leap. However you only need to follow them once!
 
+## Rules
+
+- Don't do this
+- Don't do that
+
 ## Setup
 
 Okay, then let's go on. Firstly, make sure that you've forked and cloned the core system:
