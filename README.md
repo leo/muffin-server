@@ -30,9 +30,6 @@ After that, simply use our neat Yeoman generator (which you've already installed
 
 ```bash
 yo muffin
-
-# If you want, you can also specify the destination:
-# yo muffin <path>
 ```
 
 You'll then be asked to enter a few details about your site and the database connection. After you've answered all questions, your new site will be prepared.
