@@ -4,6 +4,8 @@ The application currently consists of two parts: The [kit](https://github.com/sm
 
 If you just want to fix a misspelling or something equally small, you can also just click "Edit" (the small pencil) on the affected file and GitHub will automatically prepare a working copy for you.
 
+And yeah, all those steps below might seem like a huge leap. However you only need to follow them once!
+
 ## Setup
 
 Okay, then let's go on. Firstly, make sure that you've forked and cloned the core system:
@@ -38,7 +40,7 @@ And link it to the global module directory, too:
 npm link
 ```
 
-## Run muffin
+## Run
 
 Awesome! Now you can use the `yo muffin` command to generate a new boilerplate whereever you want. Within the generated directory, the only thing you need to do now is link your local working copy of muffin to the dependencies:
 
