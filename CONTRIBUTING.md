@@ -1,6 +1,6 @@
 ## Intro
 
-The application currently consists of two parts: The [kit](https://github.com/small-cake/generator) and the [core system](https://github.com/small-cake/app). The following guideline will show you how to set up both on your local machine to be able to start contributing code. Before you do anything, please make sure that your npm permissions are [fixed](https://docs.npmjs.com/getting-started/fixing-npm-permissions).
+The application currently consists of two parts: The [generator](https://github.com/small-cake/generator) and the [core system](https://github.com/small-cake/app). The following guideline will show you how to set up both on your local machine to be able to start contributing code. Before you do anything, please make sure that your npm permissions are [fixed](https://docs.npmjs.com/getting-started/fixing-npm-permissions).
 
 If you just want to fix a misspelling or something equally small, you can also just click "Edit" (the small pencil) on the affected file and GitHub will automatically prepare a working copy for you.
 
@@ -26,7 +26,7 @@ After that, link it to the global module directory on your device (this will als
 npm link
 ```
 
-Now we need to set up the generator (kit). To do this, firstly uninstall it:
+Now we need to set up the generator. To do this, firstly uninstall it:
 
 ```shell
 npm uninstall -g generator-muffin
