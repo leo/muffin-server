@@ -1,10 +1,10 @@
 ## Intro
 
-The application currently consists of two parts: The [generator](https://github.com/small-cake/generator) and the [core system](https://github.com/small-cake/app). The following guideline will show you how to set up both on your local machine to be able to start contributing code. Before you do anything, please make sure that your npm permissions are [fixed](https://docs.npmjs.com/getting-started/fixing-npm-permissions).
+Muffin currently consists of two parts: The [generator](https://github.com/small-cake/generator) and the [core system](https://github.com/small-cake/app). The following guideline will show you how to set up both on your local machine to be able to start contributing code. Before you do anything, please make sure that your npm permissions are [fixed](https://docs.npmjs.com/getting-started/fixing-npm-permissions).
 
-If you just want to fix a misspelling or something equally small, you can also just click "Edit" (the small pencil) on the affected file and GitHub will automatically prepare a working copy for you.
+If you just want to fix a misspelling or something equally small, simply click "Edit" (the small pencil) on the affected file and GitHub will automatically prepare a working copy for you.
 
-And yeah, all those steps below might seem like a huge leap. However you only need to follow them once!
+All those steps below might seem like a huge leap. However you only need to follow them once!
 
 ## Rules
 
@@ -20,7 +20,7 @@ git clone git://github.com/small-cake/app.git
 cd app
 ```
 
-After that, link it to the global module directory on your device (this will also automatically install all dependencies):
+After that, [link](https://docs.npmjs.com/cli/link) it (this will also automatically install all dependencies):
 
 ```shell
 npm link
