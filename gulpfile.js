@@ -63,7 +63,9 @@ gulp.task('serve', ['watch'], () => {
 })
 
 gulp.task('watch', () => {
-  refresh.listen()
+  refresh.listen({
+    port: 35730
+  })
 
   gulp.watch(paths.scss, ['styles'])
   gulp.watch(paths.js, ['scripts'])

@@ -46,7 +46,8 @@
   },
   "scripts": {
     "start": "gulp serve",
-    "install": "gulp --silent"
+    "install": "gulp --silent",
+    "watch": "gulp watch"
   },
   "repository": {
     "type": "git",
