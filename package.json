@@ -5,7 +5,7 @@
   "main": "index.js",
   "private": true,
   "files": [
-    "index.js"
+    "index.js",
     "dist",
     "lib",
     "views"
