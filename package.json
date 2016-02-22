@@ -25,6 +25,7 @@
     "koa-session-mongoose": "^0.5.2",
     "koa-static": "^2.0.0",
     "mongoose": "^4.4.2",
+    "query-string": "^3.0.0",
     "sendmail": "^0.2.1"
   },
   "devDependencies": {

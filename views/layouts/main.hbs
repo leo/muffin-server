@@ -70,6 +70,10 @@
         </aside>
 
         <section id="content" class={{divide}}>
+          {{#if message}}
+            <p class="message {{message.type}}">{{message.content}}</p>
+          {{/if}}
+
           {{{@body}}}
         </section>
 

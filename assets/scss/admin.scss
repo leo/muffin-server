@@ -870,6 +870,19 @@ select {
 
   }
 
+  > .message {
+    background: #57ddff;
+    color: #fff;
+    margin: 0 0 40px;
+    padding: 15px;
+    font-size: 15px;
+    border-radius: 3px;
+
+    &.success {
+      background: #57E89B;
+    }
+  }
+
   @media (min-width: 768px) {
     padding-top: 65px;
     padding-bottom: 65px;
