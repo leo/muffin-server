@@ -4,6 +4,12 @@
   "description": "The 21st century way of building websites",
   "main": "index.js",
   "private": true,
+  "files": [
+    "index.js"
+    "dist",
+    "lib",
+    "views"
+  ],
   "dependencies": {
     "bcryptjs": "^2.3.0",
     "dotenv": "^2.0.0",
