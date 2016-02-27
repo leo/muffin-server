@@ -30,5 +30,12 @@
   "bugs": {
     "url": "https://github.com/small-cake/api/issues"
   },
-  "homepage": "http://muffin.cafe"
+  "homepage": "http://muffin.cafe",
+  "dependencies": {
+    "koa": "^1.1.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.9.1",
+    "open": "0.0.5"
+  }
 }
