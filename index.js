@@ -16,8 +16,10 @@ const log = require('./lib/etc').log
 
 app.use(compress())
 
-if (app.env === 'development') {
-  app.use(require('koa-livereload')())
+if (app.env === 'development' && !module.parent) {
+  app.use(require('koa-livereload')({
+    port: 35800
+  }))
 }
 
 process.on('uncaughtException', err => {

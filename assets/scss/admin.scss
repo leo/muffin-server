@@ -328,6 +328,8 @@ select {
       overflow-y: hidden;
       overflow-x: scroll;
       padding-top: 20px;
+      -webkit-user-select: none;
+      user-select: none;
 
       b {
         display: none;
