@@ -1,0 +1,34 @@
+{
+  "name": "muffin",
+  "version": "0.1.0",
+  "description": "The 21st century way of building websites",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/small-cake/api.git"
+  },
+  "engines": {
+    "node": "latest"
+  },
+  "keywords": [
+    "cms",
+    "content",
+    "management",
+    "system",
+    "chocolate",
+    "yummy"
+  ],
+  "greenkeeper": {
+    "emails": false
+  },
+  "author": "Leonard Lamprecht <mindrun@icloud.com> (http://leo.im)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/small-cake/api/issues"
+  },
+  "homepage": "http://muffin.cafe"
+}
