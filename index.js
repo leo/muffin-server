@@ -18,16 +18,15 @@ app.use(function *(){
   this.body = 'Hello World';
 })
 
-process.once('SIGUSR2', function () {
+process.once('SIGUSR2', () => {
   process.env.restarted = true
 })
 
-app.listen(3000, function () {
+app.listen(2000, function () {
   const port = this.address().port
-  const path = module.parent ? '' : '/admin'
-  const url = 'http://localhost:' + port + path
+  const url = 'http://localhost:' + port
 
-  console.log('Muffin is running at ' + url)
+  console.log('API is running at ' + url)
 
   if (!process.env.restarted) {
     open(url)
