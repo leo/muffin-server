@@ -60,6 +60,7 @@ input {
     padding: 0;
     margin: 0;
     position: relative;
+    cursor: pointer;
 
     &:after {
       content: '\2713';

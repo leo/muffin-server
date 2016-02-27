@@ -69,3 +69,23 @@ if (files) {
     file.addEventListener('click', openMedia)
   })
 }
+
+function toggleAll (event) {
+  const boxes = document.querySelectorAll('input[type="checkbox"]')
+
+  Array.prototype.forEach.call(boxes, function (box) {
+    if (box.classList.contains('above')) {
+      return
+    }
+
+    box.checked = this.checked ? false : true
+  }.bind(this))
+}
+
+const controllerBoxes = document.querySelectorAll('input.above')
+
+if (controllerBoxes) {
+  Array.prototype.forEach.call(controllerBoxes, box => {
+    box.addEventListener('click', toggleAll)
+  })
+}
