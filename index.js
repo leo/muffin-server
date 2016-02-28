@@ -27,7 +27,7 @@ app.use(mount('/assets', serve(process.cwd() + '/dist')))
 app.use(mount('/admin', serve(__dirname + '/dist')))
 
 router.get('/admin*', function *() {
-  yield* sendfile.call(this, './dist/index.html')
+  yield* sendfile.call(this, __dirname + '/dist/index.html')
   if (!this.status) this.throw(404)
 })
 
