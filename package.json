@@ -5,7 +5,7 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index"
+    "start": "nodemon index -i dist"
   },
   "files": [
     "dist",
