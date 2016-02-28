@@ -11,10 +11,7 @@ const db = require('./lib/db')
 const helpers = require('./lib/helpers')
 const log = require('./lib/etc').log
 
-
-
 const app = koa()
-
 const rope = db.rope
 
 process.on('SIGINT', () => {
@@ -35,10 +32,8 @@ function getRoutes (path) {
 
 router.use('/token', getRoutes('token'))
 
-// Serve frontend assets
+// Serve ember app and frontend assets
 app.use(mount('/assets', serve(process.cwd() + '/dist')))
-
-// Serve ember app
 app.use(mount('/admin', serve(__dirname + '/dist')))
 
 router.get('/admin*', function *() {
