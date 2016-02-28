@@ -5,9 +5,14 @@ const compress = require('koa-compress')
 const handlebars = require('koa-handlebars')
 const router = require('koa-router')()
 const sendfile = require('koa-sendfile')
+const bodyParser = require('koa-body')
 
 const db = require('./lib/db')
 const helpers = require('./lib/helpers')
+const log = require('./lib/etc').log
+
+const User = require('./lib/models/user')
+
 const app = koa()
 
 const rope = db.rope
@@ -19,6 +24,65 @@ process.on('SIGINT', () => {
 })
 
 app.use(compress())
+
+router.use(bodyParser({
+  multipart: true
+}))
+
+router.post('/token', function *(next) {
+  const body = this.request.body
+
+  if (body.grant_type !== 'password') {
+    this.status = 400
+    this.body = {
+      error: 'Unsupported grant type'
+    }
+    return
+  }
+
+  if (!body.username || !body.password) {
+    this.status = 400
+    this.body = {
+      error: 'User and/or password empty'
+    }
+    return
+  }
+
+  const query = User.where({ _id: body.username })
+
+  try {
+    var user = yield query.findOne()
+  } catch (err) {
+    log('Couldn\'t load user', err)
+  }
+
+  if (!user) {
+    this.status = 400
+    this.body = {
+      error: 'User doesn\'t exist'
+    }
+    return
+  }
+
+  // Compare password with the one within the DB
+  const isMatch = user.tryPassword(body.password)
+
+  if (isMatch) {
+    this.body = {
+      access_token: 'ddddd'
+    }
+
+    return
+  }
+
+  this.status = 400
+
+  this.body = {
+    error: 'Wrong password'
+  }
+
+  yield next
+})
 
 // Serve frontend assets
 app.use(mount('/assets', serve(process.cwd() + '/dist')))
