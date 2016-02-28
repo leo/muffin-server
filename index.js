@@ -2,6 +2,8 @@ const koa = require('koa')
 const static = require('koa-static')
 const mount = require('koa-mount')
 const compress = require('koa-compress')
+const handlebars = require('koa-handlebars')
+const router = require('koa-router')()
 
 const app = koa()
 
@@ -23,7 +25,15 @@ app.use(function *(){
   this.body = 'Hello World';
 })
 
-app.listen(2000, function () {
+var hbsConfig = {
+  cache: app.env !== 'development',
+  root: process.cwd() + '/views',
+  layoutsDir: '../layouts',
+  viewsDir: '/',
+  defaultLayout: 'default'
+}
+
+function listening () {
   const port = this.address().port
   const url = 'http://localhost:' + port
 
@@ -33,4 +43,27 @@ app.listen(2000, function () {
     require('open')(url)
     process.env.restarted = false
   }
-})
+}
+
+app.router = require('./lib/routes/front')
+
+app.run = (front, config) => {
+  // Allow kit to overwrite template options
+  if (config && config.render) {
+    Object.assign(hbsConfig, config.render)
+  }
+
+  // Require outer routes if run from kit
+  if (front) {
+    front.use(handlebars(hbsConfig))
+    router.use('/', front.routes())
+  }
+
+  app.use(router.routes())
+  app.use(router.allowedMethods())
+
+  app.listen(2000, listening)
+}
+
+if (!module.parent) app.run()
+module.exports = app
