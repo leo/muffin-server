@@ -1,6 +1,10 @@
 const koa = require('koa')
+const static = require('koa-static')
+const mount = require('koa-mount')
 
 const app = koa()
+
+app.use(mount('/admin', static('./dist')))
 
 // logger
 
