@@ -1,9 +1,11 @@
 const koa = require('koa')
 const static = require('koa-static')
 const mount = require('koa-mount')
+const compress = require('koa-compress')
 
 const app = koa()
 
+app.use(compress())
 app.use(mount('/admin', static('./dist')))
 
 app.use(function *(next){
@@ -25,7 +27,7 @@ app.listen(2000, function () {
   const port = this.address().port
   const url = 'http://localhost:' + port
 
-  console.log('API is running at ' + url)
+  console.log('Muffin is running at ' + url)
 
   if (!process.env.restarted && app.env === 'development') {
     require('open')(url)
