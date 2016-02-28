@@ -5,8 +5,17 @@ const compress = require('koa-compress')
 const handlebars = require('koa-handlebars')
 const router = require('koa-router')()
 
+const db = require('./lib/db')
 const helpers = require('./lib/helpers')
 const app = koa()
+
+const rope = db.rope
+
+process.on('SIGINT', () => {
+  rope.close(() => {
+    process.exit(0)
+  })
+})
 
 app.use(compress())
 
