@@ -30,6 +30,7 @@ function getRoutes (path) {
   return require('./lib/routes/' + path).routes()
 }
 
+router.use('/uploads*', getRoutes('uploads'))
 router.use('/token', getRoutes('token'))
 
 // Serve ember app and frontend assets
