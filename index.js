@@ -33,6 +33,8 @@ function getRoutes (path) {
 router.use('/uploads*', getRoutes('uploads'))
 router.use('/token', getRoutes('token'))
 
+router.use('/api', getRoutes('api'))
+
 // Serve ember app and frontend assets
 app.use(mount('/assets', serve(process.cwd() + '/dist')))
 app.use(mount('/admin', serve(__dirname + '/dist')))
