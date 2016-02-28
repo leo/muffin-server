@@ -37,7 +37,7 @@
   },
   "homepage": "http://muffin.cafe",
   "dependencies": {
-    "bcryptjs": "^2.3.0",
+    "bcrypt": "^0.8.5",
     "gridfs-stream": "^1.1.1",
     "koa": "^1.1.2",
     "koa-body": "^1.4.0",
