@@ -16,6 +16,11 @@ app.use(mount('/assets', serve(process.cwd() + '/dist')))
 // Serve ember app
 app.use(mount('/admin', serve(__dirname + '/dist')))
 
+router.get('/login', function *(next) {
+  yield next
+  this.redirect('/admin/login')
+})
+
 app.use(function *(next){
   var start = new Date
   yield next
