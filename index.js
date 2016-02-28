@@ -1,14 +1,18 @@
 const koa = require('koa')
-const static = require('koa-static')
+const serve = require('koa-static')
 const mount = require('koa-mount')
 const compress = require('koa-compress')
 const handlebars = require('koa-handlebars')
 const router = require('koa-router')()
 
 const app = koa()
-
 app.use(compress())
-app.use(mount('/admin', static('./dist')))
+
+// Serve frontend assets
+app.use(mount('/assets', serve(process.cwd() + '/dist')))
+
+// Serve ember app
+app.use(mount('/admin', serve(__dirname + '/dist')))
 
 app.use(function *(next){
   var start = new Date
