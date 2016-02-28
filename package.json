@@ -7,6 +7,11 @@
   "scripts": {
     "start": "nodemon index"
   },
+  "files": [
+    "dist",
+    "lib",
+    "index.js"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/small-cake/api.git"

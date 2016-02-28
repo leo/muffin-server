@@ -6,8 +6,6 @@ const app = koa()
 
 app.use(mount('/admin', static('./dist')))
 
-// logger
-
 app.use(function *(next){
   var start = new Date
   yield next
