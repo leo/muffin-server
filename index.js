@@ -4,6 +4,7 @@ const mount = require('koa-mount')
 const compress = require('koa-compress')
 const handlebars = require('koa-handlebars')
 const router = require('koa-router')()
+const sendfile = require('koa-sendfile')
 
 const db = require('./lib/db')
 const helpers = require('./lib/helpers')
@@ -24,6 +25,11 @@ app.use(mount('/assets', serve(process.cwd() + '/dist')))
 
 // Serve ember app
 app.use(mount('/admin', serve(__dirname + '/dist')))
+
+router.get('/admin*', function *() {
+  const stats = yield* sendfile.call(this, './dist/index.html')
+  if (!this.status) this.throw(404)
+})
 
 router.get('/login', function *(next) {
   yield next
