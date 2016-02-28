@@ -37,6 +37,7 @@
     "koa-static": "^2.0.0"
   },
   "devDependencies": {
-    "nodemon": "^1.9.1"
+    "nodemon": "^1.9.1",
+    "open": "0.0.5"
   }
 }
