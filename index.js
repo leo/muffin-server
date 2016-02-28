@@ -21,10 +21,6 @@ process.once('SIGUSR2', () => {
   process.env.restarted = true
 })
 
-app.use(function *(){
-  this.body = 'Hello World';
-})
-
 var hbsConfig = {
   cache: app.env !== 'development',
   root: process.cwd() + '/views',
