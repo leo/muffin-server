@@ -5,7 +5,9 @@ const compress = require('koa-compress')
 const handlebars = require('koa-handlebars')
 const router = require('koa-router')()
 
+const helpers = require('./lib/helpers')
 const app = koa()
+
 app.use(compress())
 
 // Serve frontend assets
@@ -30,7 +32,8 @@ var hbsConfig = {
   root: process.cwd() + '/views',
   layoutsDir: '../layouts',
   viewsDir: '/',
-  defaultLayout: 'default'
+  defaultLayout: 'default',
+  helpers
 }
 
 function listening () {
