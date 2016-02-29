@@ -38,7 +38,7 @@ You'll then be asked to enter a few details about your site and the database con
 npm link muffin
 ```
 
-And bang! You're now able to run the site based on your local development fork of muffin:
+And bang! :boom: You're now able to run the site based on your local development fork of muffin:
 
 ```bash
 npm start
