@@ -69,7 +69,9 @@ function listening () {
   const port = this.address().port
   const url = 'http://localhost:' + port
 
-  console.log('Muffin is running at ' + url)
+  if (!module.parent) {
+    console.log('Muffin is running at ' + url)
+  }
 }
 
 app.router = require('./routes/front')
