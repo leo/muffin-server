@@ -14,6 +14,7 @@ router.get('/pages', function *(next) {
     pages[page].type = 'page'
 
     delete pages[page]._id
+    delete pages[page].__v
   }
 
   console.log(pages)
