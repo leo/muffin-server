@@ -9,8 +9,10 @@
   },
   "files": [
     "dist",
+    "index.js",
     "lib",
-    "index.js"
+    "models",
+    "routes"
   ],
   "repository": {
     "type": "git",
