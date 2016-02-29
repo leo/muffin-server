@@ -56,10 +56,6 @@ app.use(function *(next){
   console.log('%s %s - %s', this.method, this.url, ms)
 })
 
-process.once('SIGUSR2', () => {
-  process.env.restarted = true
-})
-
 var hbsConfig = {
   cache: app.env !== 'development',
   root: process.cwd() + '/views',
@@ -74,11 +70,6 @@ function listening () {
   const url = 'http://localhost:' + port
 
   console.log('Muffin is running at ' + url)
-
-  if (!process.env.restarted && app.env === 'development') {
-    require('open')(url)
-    process.env.restarted = false
-  }
 }
 
 app.router = require('./routes/front')
