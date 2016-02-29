@@ -6,6 +6,14 @@ The following guideline will show you how to set up both on your local machine t
 
 If you just want to fix a misspelling or something equally small, simply click "Edit" (the small pencil) on the affected file and GitHub will automatically prepare a working copy for you. But if you'd like to add a new feature or make changes to the code, read along:
 
+## Requirements
+
+You'll need the latest version of those things to be able to contribute something to muffin. So please make sure they're updated before trying something out:
+
+- [Bower](http://bower.io/#install-bower)
+- [Ember CLI](http://ember-cli.com)
+- [PhantomJS](https://www.npmjs.com/package/phantomjs-prebuilt)
+
 ## Setup
 
 1. [Fork](https://guides.github.com/activities/forking/) the parts of the system to your GitHub account.
