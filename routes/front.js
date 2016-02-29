@@ -1,5 +1,5 @@
 const router = require('koa-router')()
-const log = require('../etc').log
+const log = require('../lib/log')
 const Page = require('../models/page')
 
 var details = {

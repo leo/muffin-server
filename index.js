@@ -9,7 +9,7 @@ const bodyParser = require('koa-body')
 
 const db = require('./lib/db')
 const helpers = require('./lib/helpers')
-const log = require('./lib/etc').log
+const log = require('./lib/log')
 
 const app = koa()
 const rope = db.rope
@@ -27,7 +27,7 @@ router.use(bodyParser({
 }))
 
 function getRoutes (path) {
-  return require('./lib/routes/' + path).routes()
+  return require('./routes/' + path).routes()
 }
 
 router.use('/uploads*', getRoutes('uploads'))
@@ -81,7 +81,7 @@ function listening () {
   }
 }
 
-app.router = require('./lib/routes/front')
+app.router = require('./routes/front')
 
 app.run = (front, config) => {
   // Allow kit to overwrite template options

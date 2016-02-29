@@ -1,4 +1,4 @@
-const mongoose = require('../db').goose
+const mongoose = require('../lib/db').goose
 
 /*
 const contentSchema = mongoose.Schema({

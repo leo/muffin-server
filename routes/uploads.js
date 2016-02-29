@@ -1,7 +1,7 @@
 const router = require('koa-router')()
 const path = require('path')
-const log = require('../etc').log
-const gfs = require('../db').fs
+const log = require('../lib/log')
+const gfs = require('../lib/db').fs
 
 router.get('/', function *(next) {
   const query = {

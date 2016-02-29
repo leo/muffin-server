@@ -1,6 +1,7 @@
-const mongoose = require('../db').goose
+const mongoose = require('../lib/db').goose
+const log = require('../lib/log')
+
 const bcrypt = require('bcrypt')
-const log = require('../etc').log
 
 const userSchema = mongoose.Schema({
   _id: String,
