@@ -1,8 +1,8 @@
 const router = require('koa-router')()
 const log = require('../lib/log')
-const User = require('../models/page')
+const Page = require('../models/page')
 
-router.post('/pages', function *(next) {
+router.get('/pages', function *(next) {
   try {
     var pages = yield Page.find()
   } catch (err) {
@@ -11,9 +11,14 @@ router.post('/pages', function *(next) {
 
   for (var page in pages) {
     pages[page] = pages[page].toObject()
+    pages[page].type = 'page'
+
+    delete pages[page]._id
   }
 
-  this.body = pages
+  console.log(pages)
+
+  this.body = { data: pages }
   yield next
 })
 
