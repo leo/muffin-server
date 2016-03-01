@@ -1,8 +1,9 @@
 const router = require('koa-router')()
+const jwt = require('koa-jwt')
+
 const log = require('../lib/log')
 const Page = require('../models/page')
 const User = require('../models/user')
-const jwt = require('koa-jwt')
 
 router.post('/token-auth', function *(next) {
   const body = this.request.body
