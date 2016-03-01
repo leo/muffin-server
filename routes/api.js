@@ -35,7 +35,9 @@ router.post('/token-auth', function *(next) {
   const isMatch = user.tryPassword(body.password)
 
   if (isMatch) {
-    const token = jwt.sign(body, process.env.SESSION_SECRET)
+    const token = jwt.sign(body, process.env.SESSION_SECRET, {
+      expiresIn: 10
+    })
 
     this.body = {
       token
@@ -53,6 +55,56 @@ router.post('/token-auth', function *(next) {
   yield next
 })
 
+router.post('/token-refresh', function *(next) {
+  const token = this.request.body.token
+
+  try {
+    const decoded = jwt.verify(token, process.env.SESSION_SECRET)
+  } catch (err) {
+    this.status = 401
+    this.body = { error: err }
+
+    return
+  }
+
+  const query = User.where({ _id: decoded.username })
+
+  try {
+    var user = yield query.findOne()
+  } catch (err) {
+    log('Couldn\'t load user', err)
+  }
+
+  if (!user) {
+    this.status = 401
+    this.body = {
+      error: 'User doesn\'t exist'
+    }
+
+    return
+  }
+
+  const isMatch = user.tryPassword(decoded.password)
+
+  if (isMatch) {
+    this.body = {
+      token: jwt.sign(decoded, process.env.SESSION_SECRET, {
+        expiresIn: 10
+      })
+    }
+
+    return
+  }
+
+  this.status = 401
+
+  this.body = {
+    error: 'Wrong password'
+  }
+
+  console.log(decoded)
+})
+
 router.get('/pages', function *(next) {
   try {
     var pages = yield Page.find()
@@ -67,8 +119,6 @@ router.get('/pages', function *(next) {
     delete pages[page]._id
     delete pages[page].__v
   }
-
-  console.log(pages)
 
   this.body = { data: pages }
   yield next
