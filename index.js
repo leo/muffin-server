@@ -40,7 +40,6 @@ function getRoutes (path) {
 }
 
 router.use('/uploads*', getRoutes('uploads'))
-router.use('/token', getRoutes('token'))
 
 router.use('/api', getRoutes('api'))
 
