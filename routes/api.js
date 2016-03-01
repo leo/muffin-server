@@ -113,15 +113,24 @@ router.get('/pages', function *(next) {
     return log('Couldn\'t load pages', err)
   }
 
-  for (var page in pages) {
-    pages[page] = pages[page].toObject()
-    pages[page].type = 'page'
+  var data = []
 
-    delete pages[page]._id
-    delete pages[page].__v
+  for (var page in pages) {
+    var attributes = pages[page].toObject()
+    var id = attributes.id
+
+    delete attributes.id
+    delete attributes._id
+    delete attributes.__v
+
+    data.push({
+      id,
+      type: 'pages',
+      attributes
+    })
   }
 
-  this.body = { data: pages }
+  this.body = { data }
   yield next
 })
 
