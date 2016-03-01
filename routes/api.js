@@ -36,7 +36,7 @@ router.post('/token-auth', function *(next) {
 
   if (isMatch) {
     const token = jwt.sign(body, process.env.SESSION_SECRET, {
-      expiresIn: 10
+      expiresIn: 300
     })
 
     this.body = {
@@ -89,7 +89,7 @@ router.post('/token-refresh', function *(next) {
   if (isMatch) {
     this.body = {
       token: jwt.sign(decoded, process.env.SESSION_SECRET, {
-        expiresIn: 10
+        expiresIn: 300
       })
     }
 
