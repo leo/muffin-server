@@ -134,4 +134,29 @@ router.get('/pages', function *(next) {
   yield next
 })
 
+router.get('/users', function *(next) {
+  try {
+    var users = yield User.find()
+  } catch (err) {
+    return log('Couldn\'t load users', err)
+  }
+
+  var data = []
+
+  for (var user in users) {
+    const details = users[user].toObject()
+
+    data.push({
+      id: details._id,
+      type: 'users',
+      attributes: {
+        email: details.email
+      }
+    })
+  }
+
+  this.body = { data }
+  yield next
+})
+
 module.exports = router
