@@ -20,6 +20,15 @@ process.on('SIGINT', () => {
   })
 })
 
+if (module.parent) {
+  require('dotenv').config({
+    path: process.cwd() + '/.env'
+  })
+} else {
+  // This is fine since it's only being used in the development env
+  process.env.SESSION_SECRET = 'random'
+}
+
 app.use(compress())
 
 router.use(bodyParser({

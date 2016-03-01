@@ -34,9 +34,7 @@ router.post('/', function *(next) {
   const isMatch = user.tryPassword(body.password)
 
   if (isMatch) {
-    const token = jwt.sign(body, 'dddddd')
-
-    console.log(token)
+    const token = jwt.sign(body, process.env.SESSION_SECRET)
 
     this.body = {
       token
