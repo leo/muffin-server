@@ -1,17 +1,10 @@
 const router = require('koa-router')()
 const log = require('../lib/log')
 const User = require('../models/user')
+const jwt = require('koa-jwt')
 
 router.post('/', function *(next) {
   const body = this.request.body
-
-  if (body.grant_type !== 'password') {
-    this.status = 400
-    this.body = {
-      error: 'Unsupported grant type'
-    }
-    return
-  }
 
   if (!body.username || !body.password) {
     this.status = 400
@@ -41,8 +34,12 @@ router.post('/', function *(next) {
   const isMatch = user.tryPassword(body.password)
 
   if (isMatch) {
+    const token = jwt.sign(body, 'dddddd')
+
+    console.log(token)
+
     this.body = {
-      access_token: 'ddddd'
+      token
     }
 
     return
