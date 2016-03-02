@@ -186,4 +186,31 @@ router.get('/users', function *(next) {
   yield next
 })
 
+router.get('/users/:id', function *(next) {
+  const query = User.where({ _id: this.params.id })
+
+  try {
+    var user = yield query.findOne()
+  } catch (err) {
+    return log('Couldn\'t load user', err)
+  }
+
+  var attributes = user.toObject()
+  var id = attributes._id
+
+  delete attributes._id
+  delete attributes.__v
+  delete attributes.password
+
+  this.body = {
+    data: {
+      id,
+      type: 'user',
+      attributes
+    }
+  }
+
+  yield next
+})
+
 module.exports = router
