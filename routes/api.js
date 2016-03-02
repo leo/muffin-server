@@ -109,30 +109,10 @@ router.post('/token-refresh', function *(next) {
 })
 
 router.get('/pages', function *(next) {
-  try {
-    var pages = yield Page.find()
-  } catch (err) {
-    return log('Couldn\'t load pages', err)
+  this.body = {
+    data: yield load.all('page')
   }
 
-  var data = []
-
-  for (var page in pages) {
-    var attributes = pages[page].toObject()
-    var id = attributes.id
-
-    delete attributes.id
-    delete attributes._id
-    delete attributes.__v
-
-    data.push({
-      id,
-      type: 'pages',
-      attributes
-    })
-  }
-
-  this.body = { data }
   yield next
 })
 
@@ -145,27 +125,10 @@ router.get('/pages/:id', function *(next) {
 })
 
 router.get('/users', function *(next) {
-  try {
-    var users = yield User.find()
-  } catch (err) {
-    return log('Couldn\'t load users', err)
+  this.body = {
+    data: yield load.all('user')
   }
 
-  var data = []
-
-  for (var user in users) {
-    const details = users[user].toObject()
-
-    data.push({
-      id: details._id,
-      type: 'users',
-      attributes: {
-        email: details.email
-      }
-    })
-  }
-
-  this.body = { data }
   yield next
 })
 
