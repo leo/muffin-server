@@ -6,6 +6,7 @@ const handlebars = require('koa-handlebars')
 const router = require('koa-router')()
 const sendfile = require('koa-sendfile')
 const bodyParser = require('koa-body')
+const jwt = require('koa-jwt')
 
 const db = require('./lib/db')
 const helpers = require('./lib/helpers')
@@ -30,6 +31,12 @@ if (module.parent) {
 }
 
 app.use(compress())
+
+router.use('/api', jwt({
+  secret: process.env.SESSION_SECRET
+}).unless({
+  path: [/token-auth/, /token-refresh/]
+}))
 
 router.use(bodyParser({
   multipart: true
