@@ -14,11 +14,18 @@ function *getOne (type, _id) {
     return log('Couldn\'t load item', err)
   }
 
+  const remove = [
+    '_id',
+    'id',
+    'password',
+    '__v'
+  ]
+
   var attributes = item.toObject()
 
-  delete attributes._id
-  delete attributes.__v
-  delete attributes.password
+  for (var property of remove) {
+    delete attributes[property]
+  }
 
   return {
     id: _id,
