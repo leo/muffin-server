@@ -108,35 +108,17 @@ router.post('/token-refresh', function *(next) {
   yield next
 })
 
-router.get('/pages', function *(next) {
-  this.body = {
-    data: yield load.all('page')
+router.get('/*/*', function *(next) {
+  const parts = this.req.url.split('/')
+  const type = parts[2].substring(0, parts[2].length - 1)
+
+  if (parts[3]) {
+    var data = yield load.one(type, parts[3])
+  } else {
+    var data = yield load.all(type)
   }
 
-  yield next
-})
-
-router.get('/pages/:id', function *(next) {
-  this.body = {
-    data: yield load.one('page', this.params.id)
-  }
-
-  yield next
-})
-
-router.get('/users', function *(next) {
-  this.body = {
-    data: yield load.all('user')
-  }
-
-  yield next
-})
-
-router.get('/users/:id', function *(next) {
-  this.body = {
-    data: yield load.one('user', this.params.id)
-  }
-
+  this.body = { data }
   yield next
 })
 
