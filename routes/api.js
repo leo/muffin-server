@@ -5,6 +5,28 @@ const log = require('../lib/log')
 const Page = require('../models/page')
 const User = require('../models/user')
 
+function *getOne (type, _id) {
+  const query = eval(type + '.where({ _id })')
+
+  try {
+    var item = yield query.findOne()
+  } catch (err) {
+    return log('Couldn\'t load item', err)
+  }
+
+  var attributes = item.toObject()
+
+  delete attributes._id
+  delete attributes.__v
+  delete attributes.password
+
+  return {
+    id: _id,
+    type: type.toLowerCase(),
+    attributes
+  }
+}
+
 router.post('/token-auth', function *(next) {
   const body = this.request.body
 
@@ -135,27 +157,8 @@ router.get('/pages', function *(next) {
 })
 
 router.get('/pages/:id', function *(next) {
-  const query = Page.where({ _id: this.params.id })
-
-  try {
-    var page = yield query.findOne()
-  } catch (err) {
-    return log('Couldn\'t load page', err)
-  }
-
-  var attributes = page.toObject()
-  var id = attributes.id
-
-  delete attributes.id
-  delete attributes._id
-  delete attributes.__v
-
   this.body = {
-    data: {
-      id,
-      type: 'page',
-      attributes
-    }
+    data: yield getOne('Page', this.params.id)
   }
 
   yield next
@@ -187,27 +190,8 @@ router.get('/users', function *(next) {
 })
 
 router.get('/users/:id', function *(next) {
-  const query = User.where({ _id: this.params.id })
-
-  try {
-    var user = yield query.findOne()
-  } catch (err) {
-    return log('Couldn\'t load user', err)
-  }
-
-  var attributes = user.toObject()
-  var id = attributes._id
-
-  delete attributes._id
-  delete attributes.__v
-  delete attributes.password
-
   this.body = {
-    data: {
-      id,
-      type: 'user',
-      attributes
-    }
+    data: yield getOne('User', this.params.id)
   }
 
   yield next
