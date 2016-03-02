@@ -105,7 +105,7 @@ router.post('/token-refresh', function *(next) {
     error: 'Wrong password'
   }
 
-  console.log(decoded)
+  yield next
 })
 
 router.get('/pages', function *(next) {
