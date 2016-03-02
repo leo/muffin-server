@@ -134,6 +134,33 @@ router.get('/pages', function *(next) {
   yield next
 })
 
+router.get('/pages/:id', function *(next) {
+  const query = Page.where({ _id: this.params.id })
+
+  try {
+    var page = yield query.findOne()
+  } catch (err) {
+    return log('Couldn\'t load page', err)
+  }
+
+  var attributes = page.toObject()
+  var id = attributes.id
+
+  delete attributes.id
+  delete attributes._id
+  delete attributes.__v
+
+  this.body = {
+    data: {
+      id,
+      type: 'page',
+      attributes
+    }
+  }
+
+  yield next
+})
+
 router.get('/users', function *(next) {
   try {
     var users = yield User.find()
