@@ -24,8 +24,6 @@ const pageSchema = mongoose.Schema({
   // content: [contentSchema]
 })
 
-// When converting the result of a query to an object,
-// the readable dates should be added
 pageSchema.set('toObject', { virtuals: true })
 
 module.exports = mongoose.model('Page', pageSchema)
