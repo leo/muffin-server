@@ -5,34 +5,7 @@ const log = require('../lib/log')
 const Page = require('../models/page')
 const User = require('../models/user')
 
-function *getOne (type, _id) {
-  const query = eval(type + '.where({ _id })')
-
-  try {
-    var item = yield query.findOne()
-  } catch (err) {
-    return log('Couldn\'t load item', err)
-  }
-
-  const remove = [
-    '_id',
-    'id',
-    'password',
-    '__v'
-  ]
-
-  var attributes = item.toObject()
-
-  for (var property of remove) {
-    delete attributes[property]
-  }
-
-  return {
-    id: _id,
-    type: type.toLowerCase(),
-    attributes
-  }
-}
+const load = require('../lib/get')
 
 router.post('/token-auth', function *(next) {
   const body = this.request.body
@@ -165,7 +138,7 @@ router.get('/pages', function *(next) {
 
 router.get('/pages/:id', function *(next) {
   this.body = {
-    data: yield getOne('Page', this.params.id)
+    data: yield load.one('page', this.params.id)
   }
 
   yield next
@@ -198,7 +171,7 @@ router.get('/users', function *(next) {
 
 router.get('/users/:id', function *(next) {
   this.body = {
-    data: yield getOne('User', this.params.id)
+    data: yield load.one('user', this.params.id)
   }
 
   yield next
