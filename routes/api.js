@@ -136,6 +136,8 @@ function detSeparator (handle) {
   return types[largest]
 }
 
+router.get('/files', require('./uploads').routes())
+
 router.post('/upload', function *(next) {
   const file = this.request.body.files.file
   const ext = path.extname(file.name)
