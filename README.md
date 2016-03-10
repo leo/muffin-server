@@ -20,6 +20,10 @@ To be able to use muffin, you'll need **the latest version** of those things. So
 
 ## Use me
 
+Please note that muffin isn't stable yet, so the commands below won't do you much. If you want to take a look at muffin in its current state, you need to read [this](https://github.com/small-cake/server/blob/master/CONTRIBUTING.md).
+
+---
+
 Please firstly make sure that your database is available. On your local machine, the easiest way to start MongoDB is by running the following command:
 
 ```bash
