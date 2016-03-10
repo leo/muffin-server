@@ -35,7 +35,7 @@ app.use(compress())
 router.use('/api', jwt({
   secret: process.env.SESSION_SECRET
 }).unless({
-  path: [/token-auth/, /token-refresh/]
+  path: [/token-auth/, /token-refresh/, /reset-password/]
 }))
 
 router.use(bodyParser({

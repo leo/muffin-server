@@ -31,7 +31,10 @@
   ],
   "greenkeeper": {
     "emails": false,
-    "ignore": ["koa-mount", "koa-sendfile"]
+    "ignore": [
+      "koa-mount",
+      "koa-sendfile"
+    ]
   },
   "author": "Leonard Lamprecht <mindrun@icloud.com> (http://leo.im)",
   "license": "MIT",
@@ -52,7 +55,8 @@
     "koa-router": "^5.4.0",
     "koa-sendfile": "^1.1.1",
     "koa-static": "^2.0.0",
-    "mongoose": "^4.4.5"
+    "mongoose": "^4.4.5",
+    "query-string": "^3.0.1"
   },
   "devDependencies": {
     "nodemon": "^1.9.1"

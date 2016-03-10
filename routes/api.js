@@ -1,14 +1,14 @@
 const router = require('koa-router')()
 const jwt = require('koa-jwt')
+const queryString = require('query-string')
 const fs = require('fs')
 const path = require('path')
 
 const log = require('../lib/log')
-const Page = require('../models/page')
-const User = require('../models/user')
-
-const load = require('../lib/get')
 const gfs = require('../lib/db').fs
+const load = require('../lib/get')
+
+const User = require('../models/user')
 
 router.post('/token-auth', function *(next) {
   const body = this.request.body
@@ -109,6 +109,41 @@ router.post('/token-refresh', function *(next) {
   }
 
   yield next
+})
+
+router.get('/reset-password', function *(next) {
+  const queries = queryString.extract(this.request.originalUrl)
+  const _id = queryString.parse(queries).name
+
+  if (!_id) {
+    this.body = {
+      error: 'No username'
+    }
+
+    return
+  }
+
+  const query = User.where({ _id })
+
+  try {
+    var user = yield query.findOne()
+  } catch (err) {
+    log('Couldn\'t load user', err)
+  }
+
+  if (!user) {
+    this.body = {
+      error: 'User doesn\'t exist'
+    }
+
+    return
+  }
+
+  console.log(_id)
+
+  this.body = {
+    success: 'LOL'
+  }
 })
 
 function detSeparator (handle) {
