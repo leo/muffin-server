@@ -55,7 +55,7 @@
     "koa-sendfile": "^1.1.1",
     "koa-static": "^2.0.0",
     "mongoose": "^4.4.8",
-    "query-string": "^3.0.2"
+    "query-string": "^3.0.3"
   },
   "devDependencies": {
     "nodemon": "^1.9.1"
