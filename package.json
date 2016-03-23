@@ -45,7 +45,7 @@
     "bcrypt": "^0.8.5",
     "dotenv": "^2.0.0",
     "gridfs-stream": "^1.1.1",
-    "koa": "^1.1.2",
+    "koa": "^1.2.0",
     "koa-body": "^1.4.0",
     "koa-compress": "^1.0.9",
     "koa-handlebars": "^0.5.7",
