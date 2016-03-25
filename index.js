@@ -73,6 +73,11 @@ app.use(function *(next){
   var start = new Date
   yield next
   var ms = new Date - start
+
+  if (this.url.split('/')[1] == 'api') {
+    return
+  }
+
   console.log('%s %s - %s', this.method, this.url, ms)
 })
 
