@@ -43,27 +43,32 @@ router.use(bodyParser({
 }))
 
 function getRoutes (path) {
+  // Retrieve routes from passed path
   return require('./routes/' + path).routes()
 }
 
+// Register media routes and API
 router.use('/uploads*', getRoutes('uploads'))
-
 router.use('/api', getRoutes('api'))
 
-// Serve ember app and frontend assets
-app.use(mount('/assets', serve(process.cwd() + '/dist')))
+// Serve assets of admin area...
 app.use(mount('/admin', serve(__dirname + '/dist')))
 
+// ...and the Ember app
 router.get('/admin*', function *() {
   yield* sendfile.call(this, __dirname + '/dist/index.html')
   if (!this.status) this.throw(404)
 })
+
+// Serve frontend assets
+app.use(mount('/assets', serve(process.cwd() + '/dist')))
 
 router.get('/login', function *(next) {
   yield next
   this.redirect('/admin/login')
 })
 
+// Log HTTP requests to console
 app.use(function *(next){
   var start = new Date
   yield next
@@ -73,6 +78,7 @@ app.use(function *(next){
 
 const frontRouter = require('./routes/front')
 
+// Enable new instance of rendering engine for front
 frontRouter.use(handlebars({
   cache: app.env !== 'development',
   root: process.cwd() + '/views',
@@ -82,6 +88,7 @@ frontRouter.use(handlebars({
   helpers
 }))
 
+// Register front routes
 router.use('/', frontRouter.routes())
 
 app.router = router
