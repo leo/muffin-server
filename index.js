@@ -71,43 +71,26 @@ app.use(function *(next){
   console.log('%s %s - %s', this.method, this.url, ms)
 })
 
-var hbsConfig = {
+const frontRouter = require('./routes/front')
+
+frontRouter.use(handlebars({
   cache: app.env !== 'development',
   root: process.cwd() + '/views',
   layoutsDir: '../layouts',
   viewsDir: '/',
   defaultLayout: 'default',
   helpers
-}
+}))
 
-function listening () {
+router.use('/', frontRouter.routes())
+
+app.router = router
+
+app.listening = function () {
   const port = this.address().port
   const url = 'http://localhost:' + port
 
-  if (!module.parent) {
-    console.log('Muffin is running at ' + url)
-  }
+  console.log('Running!')
 }
 
-app.router = require('./routes/front')
-
-app.run = (front, config) => {
-  // Allow kit to overwrite template options
-  if (config && config.render) {
-    Object.assign(hbsConfig, config.render)
-  }
-
-  // Require outer routes if run from kit
-  if (front) {
-    front.use(handlebars(hbsConfig))
-    router.use('/', front.routes())
-  }
-
-  app.use(router.routes())
-  app.use(router.allowedMethods())
-
-  app.listen(2000, listening)
-}
-
-if (!module.parent) app.run()
 module.exports = app
