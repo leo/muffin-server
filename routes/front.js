@@ -11,7 +11,7 @@ var details = {
 
 router.use(function *(next) {
   try {
-    var pages = yield Page.find()
+    var pages = yield Page.find().sort({ _id: 1 })
   } catch (err) {
     log('Couldn\'t load pages', err)
   }
