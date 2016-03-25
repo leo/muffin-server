@@ -85,12 +85,4 @@ frontRouter.use(handlebars({
 router.use('/', frontRouter.routes())
 
 app.router = router
-
-app.listening = function () {
-  const port = this.address().port
-  const url = 'http://localhost:' + port
-
-  console.log('Running!')
-}
-
 module.exports = app
