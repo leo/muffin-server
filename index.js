@@ -15,11 +15,9 @@ const log = require('./lib/log')
 const app = koa()
 const rope = db.rope
 
-process.on('SIGINT', () => {
-  rope.close(() => {
-    process.exit(0)
-  })
-})
+process.on('SIGINT', () => rope.close(() => {
+  process.exit(0)
+}))
 
 if (module.parent) {
   require('dotenv').config({
