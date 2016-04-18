@@ -2,7 +2,7 @@
   "name": "muffin",
   "version": "1.2.0",
   "description": "The 21st century way of building websites",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "start": "gulp",
     "prepublish": "gulp compile"
