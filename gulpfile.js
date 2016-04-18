@@ -3,20 +3,20 @@ const babel = require('gulp-babel')
 const cache = require('gulp-cached')
 
 const paths = [
-  'lib/**/*',
   'routes/**/*',
   'models/**/*',
+  'index.js'
 ]
 
 gulp.task('transpile', () => {
-  return gulp.src(paths.lib)
+  return gulp.src(paths)
   .pipe(cache('transpile'))
   .pipe(babel())
   .pipe(gulp.dest('dist'))
 })
 
 gulp.task('watch', () => {
-  gulp.watch(paths.lib, ['transpile'])
+  gulp.watch(paths, ['transpile'])
 })
 
 gulp.task('default', ['watch', 'transpile'])
