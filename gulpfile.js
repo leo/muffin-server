@@ -9,7 +9,7 @@ const paths = [
 ]
 
 gulp.task('transpile', () => {
-  return gulp.src(paths)
+  return gulp.src(paths, { base: '.' })
   .pipe(cache('transpile'))
   .pipe(babel())
   .pipe(gulp.dest('dist'))
