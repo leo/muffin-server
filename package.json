@@ -4,18 +4,15 @@
   "description": "The 21st century way of building websites",
   "main": "index.js",
   "scripts": {
-    "start": "gulp"
+    "start": "gulp",
+    "prepublish": "gulp compile"
   },
   "files": [
-    "dist",
-    "index.js",
-    "lib",
-    "models",
-    "routes"
+    "dist"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/small-cake/server.git"
+    "url": "git+https://github.com/muffinjs/server.git"
   },
   "engines": {
     "node": "latest"
@@ -37,7 +34,7 @@
   "author": "Leonard Lamprecht <mindrun@icloud.com> (http://leo.im)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/small-cake/server/issues"
+    "url": "https://github.com/muffinjs/server/issues"
   },
   "homepage": "http://muffin.cafe",
   "dependencies": {
@@ -57,6 +54,8 @@
     "query-string": "^4.0.2"
   },
   "devDependencies": {
-    "nodemon": "^1.9.1"
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-cached": "^1.1.0"
   }
 }
