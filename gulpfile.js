@@ -5,6 +5,7 @@ const cache = require('gulp-cached')
 const paths = [
   'routes/**/*',
   'models/**/*',
+  'lib/**/*'
   'index.js'
 ]
 
