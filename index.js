@@ -14,10 +14,9 @@ import sendfile from 'koa-sendfile'
 import bodyParser from 'koa-body'
 import jwt from 'koa-jwt'
 
-import { rope } from '../lib/db'
-import helpers from '../lib/helpers'
-import { log, isSite, exists } from '../lib/utils'
-import controller from '../lib/controller'
+import { rope } from './lib/db'
+import helpers from './lib/helpers'
+import { log, isSite, exists } from './lib/utils'
 
 const router = koaRouter()
 const app = koa()
@@ -137,8 +136,6 @@ server.listen(program.port || process.env.PORT, function () {
   const url = 'http://' + host + ':' + port
 
   console.log(chalk.blue('[muffin]') + ' ' + 'Running at ' + chalk.grey(url))
-
-  controller.emit('listening', host, port)
 
   process.stdin.resume()
   process.stdin.setEncoding('utf8')
