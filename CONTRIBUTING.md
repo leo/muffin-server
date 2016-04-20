@@ -41,7 +41,7 @@ mongod
 After that, simply use the CLI to create a new boilerplate:
 
 ```bash
-muffin new <site-name>
+muffin new <destination-path>
 ```
 
 You'll then be asked to enter a few details about your site and the database connection. After you've answered all questions, your new site will be prepared. As soon as the setup is finished, link your local version of muffin to the dependencies:
