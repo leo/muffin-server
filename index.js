@@ -99,6 +99,7 @@ app.run = function (frontRouter) {
   router.use('/', frontRouter.routes())
   router.use('/', frontRouter.allowedMethods())
 
+  // Register dashboard routes
   app.use(router.routes())
   app.use(router.allowedMethods())
 
@@ -107,6 +108,7 @@ app.run = function (frontRouter) {
     const host = 'localhost'
     const url = 'http://' + host + ':' + port
 
+    // Output message as soon as server is running
     console.log(chalk.blue('[muffin]') + ' ' + 'Running at ' + chalk.grey(url))
   })
 }
