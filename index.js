@@ -51,11 +51,11 @@ for (let route of APIroutes) {
 }
 
 // Serve assets of admin area...
-app.use(mount('/admin', serve(__dirname + '/../client')))
+app.use(mount('/admin', serve(__dirname + '/client')))
 
 // ...and the Ember app
 router.get('/admin*', function *() {
-  yield* sendfile.call(this, __dirname + '/../client/index.html')
+  yield* sendfile.call(this, __dirname + '/client/index.html')
   if (!this.status) this.throw(404)
 })
 
