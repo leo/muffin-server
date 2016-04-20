@@ -20,7 +20,11 @@ To be able to use muffin, you'll need **the latest version** of those things. So
 
 ## Use me
 
-Please firstly make sure that your database is available. On your local machine, the easiest way to start MongoDB is by running the following command:
+Please note that muffin isn't fully stable yet. There are some major features that haven't been implemented yet. But we're on it! Meanwhile you can give the beta version a try:
+
+-
+
+Firstly make sure that your database is available. On your local machine, the easiest way to start MongoDB is by running the following command:
 
 ```bash
 mongod
