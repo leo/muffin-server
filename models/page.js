@@ -1,4 +1,4 @@
-import { goose } from '../db'
+import { goose } from '../lib/db'
 
 /*
 const contentSchema = goose.Schema({

@@ -80,7 +80,7 @@ app.use(function *(next){
 })
 
 // Load front routes
-import frontRouter from '../lib/routes/front'
+import frontRouter from './routes/front'
 
 // Enable new instance of rendering engine for front
 frontRouter.use(handlebars({
@@ -92,37 +92,43 @@ frontRouter.use(handlebars({
   helpers
 }))
 
-// Register front routes
-router.use('/', frontRouter.routes())
+app.router = frontRouter
 
-app.use(router.routes())
-app.use(router.allowedMethods())
+app.run = function () {
+  // Register front routes
+  router.use('/', app.router.routes())
 
-let server = http.createServer(app.callback())
+  app.use(router.routes())
+  app.use(router.allowedMethods())
 
-server.listen(program.port || process.env.PORT, function () {
-  const port = this.address().port
-  const host = 'localhost'
-  const url = 'http://' + host + ':' + port
+  let server = http.createServer(app.callback())
 
-  console.log(chalk.blue('[muffin]') + ' ' + 'Running at ' + chalk.grey(url))
+  server.listen(program.port || process.env.PORT, function () {
+    const port = this.address().port
+    const host = 'localhost'
+    const url = 'http://' + host + ':' + port
 
-  process.stdin.resume()
-  process.stdin.setEncoding('utf8')
-  enableDestroy(server)
+    console.log(chalk.blue('[muffin]') + ' ' + 'Running at ' + chalk.grey(url))
 
-  process.stdin.on('data', data => {
-    data = (data + '').trim().toLowerCase()
+    process.stdin.resume()
+    process.stdin.setEncoding('utf8')
+    enableDestroy(server)
 
-    if (data === 'rs') {
-      server.destroy()
+    process.stdin.on('data', data => {
+      data = (data + '').trim().toLowerCase()
 
-      server = http.createServer(app.callback())
+      if (data === 'rs') {
+        server.destroy()
 
-      server.listen(program.port || process.env.PORT, () => {
-        enableDestroy(server)
-        log(chalk.green('Restarted!'))
-      })
-    }
+        server = http.createServer(app.callback())
+
+        server.listen(program.port || process.env.PORT, () => {
+          enableDestroy(server)
+          log(chalk.green('Restarted!'))
+        })
+      }
+    })
   })
-})
+}
+
+export default app

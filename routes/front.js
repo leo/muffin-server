@@ -1,5 +1,5 @@
 import koaRouter from 'koa-router'
-import { log } from '../utils'
+import { log } from '../lib/utils'
 import Page from '../models/page'
 
 const router = koaRouter()
