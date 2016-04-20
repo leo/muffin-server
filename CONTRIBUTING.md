@@ -22,9 +22,13 @@ To be able to use muffin, you'll need **the latest version** of those things. So
 4. Link it to your global module directory: `npm link`
 5. Move into the "client" repository: `cd client`
 6. Install all missing dependencies: `npm intall`
-7. After everything has been installed, run `npm start` within the same directory to tell Ember CLI to watch for file changes and rebuilt the app if necessary.
 
 That's all! :loudspeaker: :turtle:
+
+**Important:** The above steps only make sure that all the parts of muffin are installed correctly on your system. If you want the code to be re-transpiled everytime you make changes to it, you need to run the following commands as well:
+
+- Within the "server" directory, run `gulp`
+- In the directory of the client, run `npm start`
 
 ## Usage
 
