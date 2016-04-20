@@ -14,6 +14,7 @@ import jwt from 'koa-jwt'
 
 import { rope } from './lib/db'
 import helpers from './lib/helpers'
+import { log } from './lib/utils'
 
 const router = koaRouter()
 const app = koa()
@@ -123,7 +124,7 @@ app.run = function (frontRouter) {
 
         server = http.createServer(app.callback())
 
-        server.listen(program.port || process.env.PORT, () => {
+        server.listen(process.env.PORT || 2000, () => {
           enableDestroy(server)
           log(chalk.green('Restarted!'))
         })
