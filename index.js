@@ -1,7 +1,5 @@
 import koa from 'koa'
-import program from 'commander'
 import chalk from 'chalk'
-import { exec } from 'child_process'
 import enableDestroy from 'server-destroy'
 import http from 'http'
 
@@ -16,39 +14,11 @@ import jwt from 'koa-jwt'
 
 import { rope } from './lib/db'
 import helpers from './lib/helpers'
-import { log, isSite, exists } from './lib/utils'
 
 const router = koaRouter()
 const app = koa()
 
-program
-  .option('-w, --watch', 'Rebuild site if files change')
-  .option('-p, --port <port>', 'The port on which your site will be available', parseInt)
-  .parse(process.argv)
-
-if (!isSite()) {
-  log(chalk.red('No site in here!'))
-  process.exit(1)
-}
-
-// Build before serving if "dist" directory doesn't exist
-if (program.watch || !exists(process.cwd() + '/dist')) {
-  const builder = exec('muffin build -w')
-
-  builder.stdout.on('data', data => process.stdout.write(chalk.green(data)))
-  builder.stderr.on('data', data => console.error(data))
-
-  builder.on('error', err => {
-    throw err
-  })
-}
-
 app.use(compress())
-
-if (program.watch) {
-  const livereloadScript = require('koa-livereload')
-  app.use(livereloadScript())
-}
 
 router.use('/api', jwt({
   secret: process.env.SESSION_SECRET
@@ -156,10 +126,3 @@ server.listen(program.port || process.env.PORT, function () {
     }
   })
 })
-
-if (program.watch) {
-  const livereload = require('livereload')
-  const livereloadServer = livereload.createServer()
-
-  livereloadServer.watch(process.cwd() + '/dist')
-}
