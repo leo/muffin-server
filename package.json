@@ -15,7 +15,7 @@
     "url": "git+https://github.com/muffinjs/server.git"
   },
   "engines": {
-    "node": "latest"
+    "node": ">= 4.0.0"
   },
   "keywords": [
     "cms",
