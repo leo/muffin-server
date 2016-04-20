@@ -48,10 +48,12 @@ router.post('/upload', function *(next) {
     return encodeURIComponent(name + (n > 0 ? separator + n : '') + ext)
   }
 
+  let isAvailable = false
+
   do {
     // Check if filename is already in DB
     try {
-      let isAvailable = yield gfs.exist({
+      isAvailable = yield gfs.exist({
         filename: formatName(id),
         root: 'media'
       })

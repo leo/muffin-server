@@ -11,8 +11,10 @@ router.get('/', function *(next) {
     root: 'media'
   }
 
+  let isAvailable = false
+
   try {
-    let isAvailable = yield gfs.exist(query)
+    isAvailable = yield gfs.exist(query)
   } catch (err) {
     log('Not able to load file', err)
   }
@@ -38,9 +40,11 @@ router.get('/', function *(next) {
     })
   })
 
+  let meta = {}
+
   try {
     // Assign metadata to variable or throw error
-    let meta = yield metaData
+    meta = yield metaData
   } catch (err) {
     return log('Not able to get file meta', err)
   }
