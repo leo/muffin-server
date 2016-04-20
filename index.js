@@ -103,33 +103,12 @@ app.run = function (frontRouter) {
   app.use(router.routes())
   app.use(router.allowedMethods())
 
-  let server = http.createServer(app.callback())
-
-  server.listen(process.env.PORT || 2000, function () {
+  app.listen(process.env.PORT || 2000, function () {
     const port = this.address().port
     const host = 'localhost'
     const url = 'http://' + host + ':' + port
 
     console.log(chalk.blue('[muffin]') + ' ' + 'Running at ' + chalk.grey(url))
-
-    process.stdin.resume()
-    process.stdin.setEncoding('utf8')
-    enableDestroy(server)
-
-    process.stdin.on('data', data => {
-      data = (data + '').trim().toLowerCase()
-
-      if (data === 'rs') {
-        server.destroy()
-
-        server = http.createServer(app.callback())
-
-        server.listen(process.env.PORT || 2000, () => {
-          enableDestroy(server)
-          log(chalk.green('Restarted!'))
-        })
-      }
-    })
   })
 }
 
