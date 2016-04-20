@@ -38,6 +38,8 @@ router.get('*', function *(next) {
   details.site.canonical = this.request.origin
   const path = this.request.url
 
+  yield next
+
   details.pages = this.pages
   let result = false
 
@@ -50,7 +52,6 @@ router.get('*', function *(next) {
   }
 
   if (!result) {
-    yield next
     return
   }
 
@@ -58,11 +59,10 @@ router.get('*', function *(next) {
 
   if (path === '/') {
     yield this.render('index', details)
-    return next
+    return
   }
 
   yield this.render('page', details)
-  yield next
 })
 
 module.exports = router

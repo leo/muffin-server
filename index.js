@@ -94,16 +94,17 @@ frontRouter.use(handlebars({
 
 app.router = frontRouter
 
-app.run = function () {
+app.run = function (frontRouter) {
   // Register front routes
-  router.use('/', app.router.routes())
+  router.use('/', frontRouter.routes())
+  router.use('/', frontRouter.allowedMethods())
 
   app.use(router.routes())
   app.use(router.allowedMethods())
 
   let server = http.createServer(app.callback())
 
-  server.listen(program.port || process.env.PORT, function () {
+  server.listen(process.env.PORT || 2000, function () {
     const port = this.address().port
     const host = 'localhost'
     const url = 'http://' + host + ':' + port
@@ -131,4 +132,4 @@ app.run = function () {
   })
 }
 
-export default app
+module.exports = app
