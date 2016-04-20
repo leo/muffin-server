@@ -1,7 +1,7 @@
 import koaRouter from 'koa-router'
 import path from 'path'
-import { log } from '../utils'
-import { fs as gfs } from '../db'
+import { log } from '../lib/utils'
+import { fs as gfs } from '../lib/db'
 
 const router = koaRouter()
 

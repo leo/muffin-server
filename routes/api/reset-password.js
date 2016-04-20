@@ -1,7 +1,7 @@
 import { parse, extract } from 'query-string'
 import koaRouter from 'koa-router'
 import User from '../../models/user'
-import { log } from '../../utils'
+import { log } from '../../lib/utils'
 
 const router = koaRouter()
 

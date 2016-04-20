@@ -1,4 +1,4 @@
-import { goose } from '../db'
+import { goose } from '../lib/db'
 
 const gridSchema = goose.Schema({}, {
   // Fields that aren't defined in the schema SHOULD be

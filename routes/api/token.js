@@ -1,7 +1,7 @@
 import koaRouter from 'koa-router'
 import jwt from 'koa-jwt'
 import User from '../../models/user'
-import { log } from '../../utils'
+import { log } from '../../lib/utils'
 
 const router = koaRouter()
 

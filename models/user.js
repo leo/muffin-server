@@ -1,5 +1,5 @@
-import { goose } from '../db'
-import { log } from '../utils'
+import { goose } from '../lib/db'
+import { log } from '../lib/utils'
 import { hash, compareSync } from 'bcryptjs'
 
 const userSchema = goose.Schema({

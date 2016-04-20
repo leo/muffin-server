@@ -32,7 +32,7 @@ router.use(bodyParser({
 
 function getRoutes (path) {
   // Retrieve routes from passed path
-  return require('../lib/routes/' + path).routes()
+  return require('./routes/' + path).routes()
 }
 
 const APIroutes = [

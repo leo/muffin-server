@@ -1,5 +1,5 @@
 import koaRouter from 'koa-router'
-import { all, one } from '../../get'
+import { all, one } from '../../lib/get'
 
 const router = koaRouter()
 
