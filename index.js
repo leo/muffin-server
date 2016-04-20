@@ -1,6 +1,5 @@
 import koa from 'koa'
 import chalk from 'chalk'
-import enableDestroy from 'server-destroy'
 import http from 'http'
 
 import serve from 'koa-static'
