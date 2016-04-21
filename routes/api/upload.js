@@ -1,10 +1,11 @@
-import koaRouter from 'koa-router'
+import Router from 'koa-router'
 import path from 'path'
 import fs from 'fs-extra'
 import { fs as gfs } from '../../lib/db'
 import { log } from '../../lib/utils'
+import uploads from '../uploads'
 
-const router = koaRouter()
+const router = new Router()
 
 function detSeparator (handle) {
   let numbers = {}
@@ -31,16 +32,15 @@ function detSeparator (handle) {
   return types[largest]
 }
 
-router.get('/files', require('../uploads').routes())
+router.get('/files', uploads.routes())
 
-router.post('/upload', function *(next) {
-  const file = this.request.body.files.file
+router.post('/upload', async (ctx, next) => {
+  const file = ctx.request.body.files.file
   const ext = path.extname(file.name)
   const name = path.basename(file.name, ext)
 
   // Determine the most used separator in the filename
   const separator = detSeparator(name)
-
   let id = 0
 
   // Encode filename as URI string
@@ -53,7 +53,7 @@ router.post('/upload', function *(next) {
   do {
     // Check if filename is already in DB
     try {
-      isAvailable = yield gfs.exist({
+      isAvailable = await gfs.exist({
         filename: formatName(id),
         root: 'media'
       })
@@ -81,19 +81,17 @@ router.post('/upload', function *(next) {
   content.pipe(writestream)
 
   try {
-    yield new Promise(resolve => {
-      writestream.on('close', () => resolve())
-    })
+    await new Promise(resolve => writestream.on('close', () => resolve()))
   } catch (err) {
     return log('Not able to save media', err)
   }
 
-  this.body = {
+  ctx.body = {
     contentType: file.type,
     uploadDate: new Date().toJSON()
   }
 
-  yield next
+  await next()
 
   // Remove temporary file after response
   fs.unlink(file.path, function (err) {
@@ -101,4 +99,4 @@ router.post('/upload', function *(next) {
   })
 })
 
-module.exports = router
+export default router

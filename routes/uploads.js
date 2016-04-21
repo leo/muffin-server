@@ -1,9 +1,9 @@
-import KoaRouter from 'koa-router'
+import Router from 'koa-router'
 import path from 'path'
 import { log } from '../lib/utils'
 import { fs as gfs } from '../lib/db'
 
-const router = new KoaRouter()
+const router = new Router()
 
 router.get('/', async (ctx, next) => {
   const query = {

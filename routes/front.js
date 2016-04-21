@@ -1,4 +1,4 @@
-import KoaRouter from 'koa-router'
+import Router from 'koa-router'
 import views from 'koa-views'
 import path from 'path'
 import fs from 'fs'
@@ -6,7 +6,7 @@ import { log, exists, walkSync } from '../lib/utils'
 import helpers from '../lib/helpers'
 import Page from '../models/page'
 
-const router = new KoaRouter()
+const router = new Router()
 
 let details = {
   site: {

@@ -6,31 +6,32 @@ import fs from 'fs-extra'
 import serve from 'koa-static'
 import mount from 'koa-mount'
 import compress from 'koa-compress'
-import KoaRouter from 'koa-router'
+import Router from 'koa-router'
 import bodyParser from 'koa-body'
 import jwt from 'koa-jwt'
+import convert from 'koa-convert'
 
 import { rope } from './lib/db'
 import { log } from './lib/utils'
 import frontRouter from './routes/front'
 
-const router = new KoaRouter()
+const router = new Router()
 const app = new Koa()
 
 app.use(compress())
-/*
+
 router.use('/api', jwt({
   secret: process.env.SESSION_SECRET
 }).unless({
   path: [/token-auth/, /token-refresh/, /reset-password/]
-}))*/
-/*
-router.use(bodyParser({
+}))
+
+router.use(convert(bodyParser({
   multipart: true
-}))*/
+})))
 
 // Retrieve routes from passed path
-const getRoutes = (path) => require('./routes/' + path).default.routes()
+const getRouter = (path) => require('./routes/' + path).default
 
 const APIroutes = [
   'content',
@@ -40,12 +41,17 @@ const APIroutes = [
 ]
 
 // Register media routes and API
-router.use('/uploads*', getRoutes('uploads'))
+const uploadRouter = getRouter('uploads')
 
-/*
+router.use('/uploads*', uploadRouter.routes())
+router.use('/uploads*', uploadRouter.allowedMethods())
+
 for (let route of APIroutes) {
-  router.use('/api', getRoutes('api/' + route))
-}*/
+  let subRouter = getRouter('api/' + route)
+
+  router.use('/api', subRouter.routes())
+  router.use('/api', subRouter.allowedMethods())
+}
 
 // Serve assets of admin area...
 app.use(mount('/admin', serve(__dirname + '/client')))

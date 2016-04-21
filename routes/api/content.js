@@ -1,30 +1,29 @@
-import koaRouter from 'koa-router'
+import Router from 'koa-router'
 import { all, one } from '../../lib/get'
 
-const router = koaRouter()
+const router = new Router()
+const singular = (type) => type.substring(0, type.length - 1)
 
-function singular (type) {
-  return type.substring(0, type.length - 1)
-}
+router.get('/:type', async (ctx, next) => {
+  const type = ctx.params.type
 
-router.get('/:type', function *(next) {
-  const type = this.params.type
+  console.log('test')
 
-  this.body = {
-    data: yield all(singular(type))
+  ctx.body = {
+    data: await all(singular(type))
   }
 
-  yield next
+  await next
 })
 
-router.get('/(.*)/:id', function *(next) {
-  const type = this.req.url.split('/')[2]
+router.get('/(.*)/:id', async (ctx, next) => {
+  const type = ctx.req.url.split('/')[2]
 
-  this.body = {
-    data: yield one(singular(type), this.params.id)
+  ctx.body = {
+    data: await one(singular(type), this.params.id)
   }
 
-  yield next
+  await next()
 })
 
-module.exports = router
+export default router

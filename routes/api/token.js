@@ -1,18 +1,20 @@
-import koaRouter from 'koa-router'
+import Router from 'koa-router'
 import jwt from 'koa-jwt'
+import bodyParser from 'koa-body'
 import User from '../../models/user'
 import { log } from '../../lib/utils'
 
-const router = koaRouter()
+const router = new Router()
 
-router.post('/token-auth', function *(next) {
-  const body = this.request.body
+router.post('/token-auth', async (ctx, next) => {
+  const body = ctx.request.body
 
   if (!body.username || !body.password) {
-    this.status = 400
-    this.body = {
+    ctx.status = 400
+    ctx.body = {
       error: 'User and/or password empty'
     }
+
     return
   }
 
@@ -20,14 +22,15 @@ router.post('/token-auth', function *(next) {
   let user = false
 
   try {
-    user = yield query.findOne()
+    user = await query.findOne()
   } catch (err) {
     log('Couldn\'t load user', err)
   }
 
   if (!user) {
-    this.status = 400
-    this.body = {
+    ctx.status = 400
+
+    ctx.body = {
       error: 'User doesn\'t exist'
     }
 
@@ -42,31 +45,28 @@ router.post('/token-auth', function *(next) {
       expiresIn: 300
     })
 
-    this.body = {
-      token
-    }
-
+    ctx.body = { token }
     return
   }
 
-  this.status = 400
+  ctx.status = 400
 
-  this.body = {
+  ctx.body = {
     error: 'Wrong password'
   }
 
-  yield next
+  await next()
 })
 
-router.post('/token-refresh', function *(next) {
-  const token = this.request.body.token
+router.post('/token-refresh', async (ctx, next) => {
+  const token = ctx.request.body.token
   let decoded = false
 
   try {
     decoded = jwt.verify(token, process.env.SESSION_SECRET)
   } catch (err) {
-    this.status = 401
-    this.body = { error: err }
+    ctx.status = 401
+    ctx.body = { error: err }
 
     return
   }
@@ -75,14 +75,15 @@ router.post('/token-refresh', function *(next) {
   let user = false
 
   try {
-    user = yield query.findOne()
+    user = await query.findOne()
   } catch (err) {
     log('Couldn\'t load user', err)
   }
 
   if (!user) {
-    this.status = 401
-    this.body = {
+    ctx.status = 401
+
+    ctx.body = {
       error: 'User doesn\'t exist'
     }
 
@@ -92,7 +93,7 @@ router.post('/token-refresh', function *(next) {
   const isMatch = user.tryPassword(decoded.password)
 
   if (isMatch) {
-    this.body = {
+    ctx.body = {
       token: jwt.sign(decoded, process.env.SESSION_SECRET, {
         expiresIn: 300
       })
@@ -101,13 +102,13 @@ router.post('/token-refresh', function *(next) {
     return
   }
 
-  this.status = 401
+  ctx.status = 401
 
-  this.body = {
+  ctx.body = {
     error: 'Wrong password'
   }
 
-  yield next
+  await next()
 })
 
-module.exports = router
+export default router

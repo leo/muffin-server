@@ -1,16 +1,16 @@
 import { parse, extract } from 'query-string'
-import koaRouter from 'koa-router'
+import Router from 'koa-router'
 import User from '../../models/user'
 import { log } from '../../lib/utils'
 
-const router = koaRouter()
+const router = new Router()
 
-router.get('/reset-password', function *(next) {
-  const queries = extract(this.request.originalUrl)
+router.get('/reset-password', async (ctx, next) => {
+  const queries = extract(ctx.request.originalUrl)
   const _id = parse(queries).name
 
   if (!_id) {
-    this.body = {
+    ctx.body = {
       error: 'No username'
     }
 
@@ -18,26 +18,27 @@ router.get('/reset-password', function *(next) {
   }
 
   const query = User.where({ _id })
+  let user = false
 
   try {
-    var user = yield query.findOne()
+    user = await query.findOne()
   } catch (err) {
     log('Couldn\'t load user', err)
   }
 
   if (!user) {
-    this.body = {
+    ctx.body = {
       error: 'User doesn\'t exist'
     }
 
     return
   }
 
-  console.log(_id)
-
-  this.body = {
+  ctx.body = {
     success: 'LOL'
   }
+
+  await next()
 })
 
-module.exports = router
+export default router
