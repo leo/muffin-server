@@ -105,10 +105,10 @@ app.use(async (ctx, next) => {
 // Export front router
 app.router = frontRouter
 
-app.run = function () {
+app.run = function (outerRouter) {
   // Register front routes
-  router.use('/', frontRouter.routes())
-  router.use('/', frontRouter.allowedMethods())
+  router.use('/', outerRouter.routes())
+  router.use('/', outerRouter.allowedMethods())
 
   // Register dashboard routes
   app.use(router.routes())
