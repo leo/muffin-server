@@ -35,7 +35,9 @@ const getPartials = () => {
 
 router.use(views(viewDir, {
   extension: 'hbs',
-  map: { hbs: 'handlebars' }
+  map: {
+    hbs: 'handlebars'
+  }
 }))
 
 router.use(async (ctx, next) => {

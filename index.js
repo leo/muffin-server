@@ -20,7 +20,7 @@ const app = new Koa()
 const _use = app.use
 app.use = x => _use.call(app, convert(x))
 
-//app.use(compress())
+app.use(compress())
 /*
 router.use('/api', jwt({
   secret: process.env.SESSION_SECRET
