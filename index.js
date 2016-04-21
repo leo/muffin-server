@@ -102,10 +102,18 @@ app.use(async (ctx, next) => {
   console.log(chalk.blue('[muffin]') + ' %s %s - %sms', ctx.method, ctx.url, ms)
 })
 
+function listening() {
+  const port = this.address().port
+  const url = 'http://localhost:' + port
+
+  // Output message as soon as server is running
+  console.log(chalk.blue('[muffin]') + ' ' + 'Running at ' + chalk.grey(url))
+}
+
 // Export front router
 app.router = frontRouter
 
-app.run = function (outerRouter) {
+app.run = outerRouter => {
   // Register front routes
   router.use('/', outerRouter.routes())
   router.use('/', outerRouter.allowedMethods())
@@ -114,14 +122,7 @@ app.run = function (outerRouter) {
   app.use(router.routes())
   app.use(router.allowedMethods())
 
-  app.listen(process.env.PORT || 2000, function () {
-    const port = this.address().port
-    const host = 'localhost'
-    const url = 'http://' + host + ':' + port
-
-    // Output message as soon as server is running
-    console.log(chalk.blue('[muffin]') + ' ' + 'Running at ' + chalk.grey(url))
-  })
+  app.listen(process.env.PORT || 2000, listening)
 }
 
 module.exports = app
