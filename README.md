@@ -10,6 +10,8 @@ If you ask a experienced developer what he's thinking about content management s
 
 Of course it doesn't yet have those cool features which all the other cool kids on the block are showing off, but it's very ambitious and always has an open ear for feedback from all angles!
 
+**Regarding the name:** Please don't use capital letters when refering to it: `muffin` (It's fine on the beginning of a sentence, though)
+
 ## Requirements
 
 To be able to use muffin, you'll need **the latest version** of those things. So please make sure they're updated before trying out this application. After installing node.js, please also make sure to [fix your npm permissions](https://docs.npmjs.com/getting-started/fixing-npm-permissions).
