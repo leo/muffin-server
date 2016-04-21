@@ -7,8 +7,6 @@ const singular = (type) => type.substring(0, type.length - 1)
 router.get('/:type', async (ctx, next) => {
   const type = ctx.params.type
 
-  console.log('test')
-
   ctx.body = {
     data: await all(singular(type))
   }

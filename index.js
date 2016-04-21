@@ -20,11 +20,11 @@ const app = new Koa()
 
 app.use(compress())
 
-router.use('/api', jwt({
+router.use('/api', convert(jwt({
   secret: process.env.SESSION_SECRET
 }).unless({
   path: [/token-auth/, /token-refresh/, /reset-password/]
-}))
+})))
 
 router.use(convert(bodyParser({
   multipart: true
