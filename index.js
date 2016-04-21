@@ -1,12 +1,12 @@
 import Koa from 'koa'
 import chalk from 'chalk'
 import http from 'http'
+import fs from 'fs-extra'
 
 import serve from 'koa-static'
 import mount from 'koa-mount'
 import compress from 'koa-compress'
 import KoaRouter from 'koa-router'
-import sendfile from 'koa-sendfile'
 import bodyParser from 'koa-body'
 import jwt from 'koa-jwt'
 
@@ -51,12 +51,22 @@ for (let route of APIroutes) {
 // Serve assets of admin area...
 //app.use(mount('/admin', serve(__dirname + '/client')))
 
-/*
 // ...and the Ember app
-router.get('/admin*', function *() {
-  yield* sendfile.call(this, __dirname + '/client/index.html')
-  if (!this.status) this.throw(404)
-})*/
+router.get('/admin*', async (ctx, next) => {
+  let indexContent = false
+  let indexPath = __dirname + '/client/index.html'
+
+  try {
+    indexContent = fs.readFileSync(indexPath, {
+      encoding: 'utf8'
+    })
+  } catch (err) {
+    return log(err)
+  }
+
+  ctx.body = indexContent
+  await next()
+})
 
 // Serve frontend assets
 app.use(mount('/assets', serve(process.cwd() + '/dist')))
