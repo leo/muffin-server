@@ -1,30 +1,29 @@
-import koaRouter from 'koa-router'
+import KoaRouter from 'koa-router'
 import path from 'path'
 import { log } from '../lib/utils'
 import { fs as gfs } from '../lib/db'
 
-const router = koaRouter()
+const router = new KoaRouter()
 
-router.get('/', function *(next) {
+router.get('/', async (ctx, next) => {
   const query = {
-    filename: path.basename(this.request.originalUrl),
+    filename: path.basename(ctx.request.originalUrl),
     root: 'media'
   }
 
   let isAvailable = false
 
   try {
-    isAvailable = yield gfs.exist(query)
+    isAvailable = await gfs.exist(query)
   } catch (err) {
     log('Not able to load file', err)
   }
 
   if (!isAvailable) {
-    this.body = 'File doesn\'t exist!'
+    ctx.body = 'File doesn\'t exist!'
     return
   }
 
-  // Read the requested file from the DB
   const stream = gfs.createReadStream(query)
 
   stream.on('error', log)
@@ -44,22 +43,21 @@ router.get('/', function *(next) {
 
   try {
     // Assign metadata to variable or throw error
-    meta = yield metaData
+    meta = await metaData
   } catch (err) {
     return log('Not able to get file meta', err)
   }
 
   // Tell the client how to treat the data
-  this.set({
+  ctx.set({
     'Content-Type': meta.contentType,
     'Content-Length': meta.length,
     'Cache-Control': 'max-age=31536000'
   })
 
   // Send filestream to client
-  this.body = stream
-
-  yield next
+  ctx.body = stream
+  await next()
 })
 
-module.exports = router
+export default router

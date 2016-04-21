@@ -29,10 +29,8 @@ router.use(bodyParser({
   multipart: true
 }))*/
 
-function getRoutes (path) {
-  // Retrieve routes from passed path
-  //return require('./routes/' + path).routes()
-}
+// Retrieve routes from passed path
+const getRoutes = (path) => require('./routes/' + path).default.routes()
 
 const APIroutes = [
   'content',
@@ -42,14 +40,15 @@ const APIroutes = [
 ]
 
 // Register media routes and API
-//router.use('/uploads*', getRoutes('uploads'))
+router.use('/uploads*', getRoutes('uploads'))
 
+/*
 for (let route of APIroutes) {
-  //router.use('/api', getRoutes('api/' + route))
-}
+  router.use('/api', getRoutes('api/' + route))
+}*/
 
 // Serve assets of admin area...
-//app.use(mount('/admin', serve(__dirname + '/client')))
+app.use(mount('/admin', serve(__dirname + '/client')))
 
 // ...and the Ember app
 router.get('/admin*', async (ctx, next) => {
