@@ -9,16 +9,13 @@ import KoaRouter from 'koa-router'
 import sendfile from 'koa-sendfile'
 import bodyParser from 'koa-body'
 import jwt from 'koa-jwt'
-import convert from 'koa-convert'
 
 import { rope } from './lib/db'
 import { log } from './lib/utils'
+import frontRouter from './routes/front'
 
 const router = new KoaRouter()
 const app = new Koa()
-
-const _use = app.use
-app.use = x => _use.call(app, convert(x))
 
 app.use(compress())
 /*
@@ -62,13 +59,13 @@ router.get('/admin*', function *() {
 })*/
 
 // Serve frontend assets
-//app.use(mount('/assets', serve(process.cwd() + '/dist')))
-/*
-router.get('/login', function (ctx, next) {
-  console.log('test')
+app.use(mount('/assets', serve(process.cwd() + '/dist')))
+
+// Redirect users from "/login" to the Ember app login
+router.get('/login', async (ctx, next) => {
   ctx.redirect('/admin/login')
-  next()
-})*/
+  await next()
+})
 
 // Log HTTP requests to console
 app.use(async (ctx, next) => {
@@ -90,26 +87,13 @@ app.use(async (ctx, next) => {
   console.log(chalk.blue('[muffin]') + ' %s %s - %sms', ctx.method, ctx.url, ms)
 })
 
+// Export front router
+app.router = frontRouter
 
-
-
-import frontRouter from './routes/front'
-
-// Load front routes
-
-
-// Enable new instance of rendering engine for front
-
-
-//app.router = frontRouter
-
-router.use('/', frontRouter.routes())
-router.use('/', frontRouter.allowedMethods())
-
-app.run = function (frontRouter) {
+app.run = function () {
   // Register front routes
-  //router.use('/', app.router.routes())
-  //router.use('/', app.router.allowedMethods())
+  router.use('/', frontRouter.routes())
+  router.use('/', frontRouter.allowedMethods())
 
   // Register dashboard routes
   app.use(router.routes())
