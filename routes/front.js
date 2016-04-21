@@ -1,6 +1,8 @@
 import KoaRouter from 'koa-router'
 import views from 'koa-views'
-import { log } from '../lib/utils'
+import path from 'path'
+import fs from 'fs'
+import { log, exists, walkSync } from '../lib/utils'
 import helpers from '../lib/helpers'
 import Page from '../models/page'
 
@@ -13,7 +15,25 @@ let details = {
   year: new Date().getFullYear()
 }
 
-router.use(views(process.cwd() + '/views', {
+let viewDir = path.normalize(process.cwd() + '/views')
+let partialDir = path.normalize(viewDir + '/partials')
+
+const getPartials = () => {
+  let partials = {}
+
+  // fs-extra already has a walker but it's asynchronous
+  const partialFiles = walkSync(partialDir)
+
+  // Assign partials
+  for (let partial of partialFiles) {
+    let name = path.parse(partial).name
+    partials[name] = 'partials/' + name
+  }
+
+  return partials
+}
+
+router.use(views(viewDir, {
   extension: 'hbs',
   map: { hbs: 'handlebars' }
 }))
@@ -63,6 +83,13 @@ router.get('*', async (ctx, next) => {
 
   Object.assign(details, result.toObject())
   const kind = path === '/' ? 'index' : 'page'
+
+  ctx.state = {
+    helpers,
+    partials: exists(partialDir) ? getPartials() : {}
+  }
+
+  details.slug = ctx.originalUrl.split('/')[1]
 
   try {
     await ctx.render('index', details)
