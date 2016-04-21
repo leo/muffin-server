@@ -59,7 +59,7 @@
     "koa-router": "^7.0.1",
     "koa-static": "^3.0.0",
     "koa-views": "^5.0.1",
-    "mongoose": "^4.4.12",
+    "mongoose": "^4.4.13",
     "query-string": "^4.1.0"
   },
   "devDependencies": {
