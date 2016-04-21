@@ -1,8 +1,10 @@
-import koaRouter from 'koa-router'
+import KoaRouter from 'koa-router'
+import views from 'koa-views'
 import { log } from '../lib/utils'
+import helpers from '../lib/helpers'
 import Page from '../models/page'
 
-const router = koaRouter()
+const router = new KoaRouter()
 
 let details = {
   site: {
@@ -11,18 +13,24 @@ let details = {
   year: new Date().getFullYear()
 }
 
-router.use(function *(next) {
+router.use(views(process.cwd() + '/views', {
+  extension: 'hbs',
+  map: { hbs: 'handlebars' }
+}))
+
+router.use(async (ctx, next) => {
   let pages = false
 
   try {
-    pages = yield Page.find().sort({ _id: 1 })
+    pages = await Page.find().sort({ _id: 1 })
   } catch (err) {
     log('Couldn\'t load pages', err)
   }
 
   if (!pages) {
-    this.status = 500
-    this.body = 'Couldn\'t load pages'
+    ctx.status = 500
+    ctx.body = 'Couldn\'t load pages'
+
     return
   }
 
@@ -30,21 +38,19 @@ router.use(function *(next) {
     pages[page] = pages[page].toObject()
   }
 
-  this.pages = pages
-  yield next
+  ctx.pages = pages
+  await next()
 })
 
-router.get('*', function *(next) {
-  details.site.canonical = this.request.origin
-  const path = this.request.url
+router.get('*', async (ctx, next) => {
+  details.site.canonical = ctx.request.origin
+  const path = ctx.request.url
 
-  yield next
-
-  details.pages = this.pages
+  details.pages = ctx.pages
   let result = false
 
   try {
-    result = yield Page.findOne({
+    result = await Page.findOne({
       slug: path.split('/')[1]
     })
   } catch (err) {
@@ -56,13 +62,15 @@ router.get('*', function *(next) {
   }
 
   Object.assign(details, result.toObject())
+  const kind = path === '/' ? 'index' : 'page'
 
-  if (path === '/') {
-    yield this.render('index', details)
-    return
+  try {
+    await ctx.render('index', details)
+  } catch (err) {
+    return log('Not able to render ' + kind, err)
   }
 
-  yield this.render('page', details)
+  await next()
 })
 
-module.exports = router
+export default router

@@ -1,38 +1,40 @@
-import koa from 'koa'
+import Koa from 'koa'
 import chalk from 'chalk'
 import http from 'http'
 
 import serve from 'koa-static'
 import mount from 'koa-mount'
 import compress from 'koa-compress'
-import handlebars from 'koa-handlebars'
-import koaRouter from 'koa-router'
+import KoaRouter from 'koa-router'
 import sendfile from 'koa-sendfile'
 import bodyParser from 'koa-body'
 import jwt from 'koa-jwt'
+import convert from 'koa-convert'
 
 import { rope } from './lib/db'
-import helpers from './lib/helpers'
 import { log } from './lib/utils'
 
-const router = koaRouter()
-const app = koa()
+const router = new KoaRouter()
+const app = new Koa()
 
-app.use(compress())
+const _use = app.use
+app.use = x => _use.call(app, convert(x))
 
+//app.use(compress())
+/*
 router.use('/api', jwt({
   secret: process.env.SESSION_SECRET
 }).unless({
   path: [/token-auth/, /token-refresh/, /reset-password/]
-}))
-
+}))*/
+/*
 router.use(bodyParser({
   multipart: true
-}))
+}))*/
 
 function getRoutes (path) {
   // Retrieve routes from passed path
-  return require('./routes/' + path).routes()
+  //return require('./routes/' + path).routes()
 }
 
 const APIroutes = [
@@ -43,61 +45,71 @@ const APIroutes = [
 ]
 
 // Register media routes and API
-router.use('/uploads*', getRoutes('uploads'))
+//router.use('/uploads*', getRoutes('uploads'))
 
 for (let route of APIroutes) {
-  router.use('/api', getRoutes('api/' + route))
+  //router.use('/api', getRoutes('api/' + route))
 }
 
 // Serve assets of admin area...
-app.use(mount('/admin', serve(__dirname + '/client')))
+//app.use(mount('/admin', serve(__dirname + '/client')))
 
+/*
 // ...and the Ember app
 router.get('/admin*', function *() {
   yield* sendfile.call(this, __dirname + '/client/index.html')
   if (!this.status) this.throw(404)
-})
+})*/
 
 // Serve frontend assets
-app.use(mount('/assets', serve(process.cwd() + '/dist')))
-
-router.get('/login', function *(next) {
-  yield next
-  this.redirect('/admin/login')
-})
+//app.use(mount('/assets', serve(process.cwd() + '/dist')))
+/*
+router.get('/login', function (ctx, next) {
+  console.log('test')
+  ctx.redirect('/admin/login')
+  next()
+})*/
 
 // Log HTTP requests to console
-app.use(function *(next){
+app.use(async (ctx, next) => {
   let start = new Date
-  yield next
+
+  try {
+    await next()
+  } catch(err) {
+    ctx.body = { message: err.message }
+    ctx.status = err.status || 500
+  }
+
   let ms = new Date - start
 
-  if (this.url.split('/')[1] == 'api') {
+  if (ctx.url.split('/')[1] == 'api') {
     return
   }
 
-  console.log(chalk.blue('[muffin]') + ' %s %s - %sms', this.method, this.url, ms)
+  console.log(chalk.blue('[muffin]') + ' %s %s - %sms', ctx.method, ctx.url, ms)
 })
 
-// Load front routes
+
+
+
 import frontRouter from './routes/front'
 
-// Enable new instance of rendering engine for front
-frontRouter.use(handlebars({
-  cache: app.env !== 'development',
-  root: process.cwd() + '/views',
-  layoutsDir: '../layouts',
-  viewsDir: '/',
-  defaultLayout: 'default',
-  helpers
-}))
+// Load front routes
 
-app.router = frontRouter
+
+// Enable new instance of rendering engine for front
+
+
+//app.router = frontRouter
+
+router.use('/', frontRouter.routes())
+router.use('/', frontRouter.allowedMethods())
 
 app.run = function (frontRouter) {
   // Register front routes
-  router.use('/', frontRouter.routes())
-  router.use('/', frontRouter.allowedMethods())
+  //router.use('/', app.router.routes())
+  //router.use('/', app.router.allowedMethods())
 
   // Register dashboard routes
   app.use(router.routes())
