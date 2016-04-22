@@ -1,8 +1,8 @@
-import Koa from 'koa'
 import chalk from 'chalk'
 import http from 'http'
 import fs from 'fs-extra'
 
+import Koa from 'koa'
 import serve from 'koa-static'
 import mount from 'koa-mount'
 import compress from 'koa-compress'
@@ -14,9 +14,13 @@ import convert from 'koa-convert'
 import { rope } from './lib/db'
 import { log } from './lib/utils'
 import frontRouter from './routes/front'
+import Config from './lib/config'
 
 const router = new Router()
 const app = new Koa()
+
+// Loads .env and puts variables into process.env
+const envFile = new Config()
 
 app.use(compress())
 
@@ -122,7 +126,7 @@ app.run = outerRouter => {
   app.use(router.routes())
   app.use(router.allowedMethods())
 
-  app.listen(process.env.PORT || 2000, listening)
+  app.listen(process.env.PORT, listening)
 }
 
 module.exports = app
