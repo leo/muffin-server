@@ -47,8 +47,3 @@ That's all! :loudspeaker: :turtle:
 ## Contribute
 
 To help us with development, please read [this](CONTRIBUTING.md).
-
-## Naming conventions
-
-1. Except on the beginning of a sentence, please don't use capital letters when refering to muffin.
-2. Plugins should be named like this: "muffin-plugin-name". Please make sure to keep `plugin-name` as short as possible (this will make refering to your plugin in articles and in speech much easier).
