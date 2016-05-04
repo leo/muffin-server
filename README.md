@@ -16,7 +16,7 @@ To be able to use muffin, you'll need **the latest version** of those things. So
 
 - [Node.js](https://nodejs.org/en/)
 - [MongoDB](https://www.mongodb.org)
-- [Muffin's command line utility](https://www.npmjs.com/package/muffin-cli)
+- [Muffin's CLI](https://npmjs.com/muffin-cli)
 
 ## Usage
 
