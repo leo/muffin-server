@@ -18,31 +18,9 @@ To be able to use muffin, you'll need **the latest version** of those things. So
 - [MongoDB](https://www.mongodb.org)
 - [Muffin's command line utility](https://www.npmjs.com/package/muffin-cli)
 
-## Use me
+## Usage
 
-Please note that muffin isn't fully stable yet. There are some major features that haven't been implemented yet. But we're on it! Meanwhile you can give the beta version a try:
-
--
-
-Firstly make sure that your database is available. On your local machine, the easiest way to start MongoDB is by running the following command:
-
-```bash
-mongod
-```
-
-After that, simply use our neat CLI (which you've already installed previously) to generate a new boilerplate within the specified directory:
-
-```bash
-muffin new <destination-path>
-```
-
-You'll then be asked to enter a few details about your site and the database connection. After you've answered all questions, your new site will be prepared. As soon as the setup is finished, use the following command to run muffin:
-
-```bash
-npm start
-```
-
-That's all! :loudspeaker: :turtle:
+If you want to build a new site using muffin, follow [these steps](http://muffin.cafe/guide/get-started).
 
 ## Contribute
 
