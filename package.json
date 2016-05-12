@@ -21,7 +21,7 @@
   },
   "repository": "muffinjs/server",
   "engines": {
-    "node": ">= 4.0.0"
+    "node": ">= 4.4.4"
   },
   "keywords": [
     "cms",
@@ -31,7 +31,10 @@
     "chocolate"
   ],
   "greenkeeper": {
-    "emails": false
+    "emails": false,
+    "ignore": [
+      "babel-preset-es2015-node"
+    ]
   },
   "author": "Leonard Lamprecht <mindrun@icloud.com> (http://leo.im)",
   "license": "MIT",
