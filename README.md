@@ -16,4 +16,4 @@ If you want to build a new site using muffin, follow [these steps](http://muffin
 
 ## Contribute
 
-To help us with development, please read [this](CONTRIBUTING.md).
+To help us with development, please read [this](.github/CONTRIBUTING.md).
