@@ -19,10 +19,7 @@
       "syntax-async-functions"
     ]
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/muffinjs/server.git"
-  },
+  "repository": "muffinjs/server",
   "engines": {
     "node": ">= 4.0.0"
   },
