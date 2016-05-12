@@ -16,8 +16,4 @@ gulp.task('transpile', () => {
   .pipe(gulp.dest('dist'))
 })
 
-gulp.task('watch', () => {
-  gulp.watch(paths, ['transpile'])
-})
-
-gulp.task('default', ['watch', 'transpile'])
+gulp.task('default', () => gulp.watch(paths, ['transpile']))
