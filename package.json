@@ -5,11 +5,16 @@
   "main": "dist/index.js",
   "scripts": {
     "start": "gulp",
-    "prepublish": "gulp transpile"
+    "prepublish": "gulp transpile",
+    "test": "eslint lib/**"
   },
   "files": [
     "dist"
   ],
+  "eslintConfig": {
+    "extends": "default",
+    "parser": "babel-eslint"
+  },
   "babel": {
     "presets": [
       "es2015-node"
@@ -62,9 +67,12 @@
     "query-string": "^4.1.0"
   },
   "devDependencies": {
+    "babel-eslint": "^6.0.4",
     "babel-plugin-syntax-async-functions": "^6.8.0",
     "babel-plugin-transform-async-to-generator": "^6.8.0",
     "babel-preset-es2015-node": "^4.0.2",
+    "eslint": "^2.10.2",
+    "eslint-config-default": "^0.1.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-cached": "^1.1.0"
