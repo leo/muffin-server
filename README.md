@@ -4,7 +4,7 @@
   </a>
 </p>
 
-# muffin
+# muffin [![Build Status](https://travis-ci.org/muffinjs/server.svg?branch=master)](https://travis-ci.org/muffinjs/server)
 
 If you ask a experienced developer what he's thinking about content management systems, he'll probably tell you that he doesn't like them since they're bloated, overkill and slow as hell. Muffin would like to change that.
 
