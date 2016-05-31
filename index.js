@@ -129,4 +129,4 @@ app.run = outerRouter => {
   app.listen(process.env.PORT, listening)
 }
 
-module.exports = app
+export default app
