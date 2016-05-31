@@ -1,6 +1,6 @@
 # Contribute
 
-Muffin currently consists of two parts: The [Ember app](https://github.com/muffinjs/client) that runs in the user's browser and the server-side [API](https://github.com/muffinjs/server) that supplies the data and processes your website's templates and contents.
+Muffin currently consists of two parts: The [Ember app](https://github.com/muffin/client) that runs in the user's browser and the server-side [API](https://github.com/muffin/server) that supplies the data and processes your website's templates and contents.
 
 The following guideline will show you how to set up both on your local machine to be able to start contributing code. But before you do anything, please make sure that your npm permissions are [fixed](https://docs.npmjs.com/getting-started/fixing-npm-permissions).
 
@@ -16,8 +16,8 @@ To be able to use muffin, you'll need **the latest version** of those things. So
 
 ### Setup
 
-1. Make sure that the CLI is installed on your local device (it doesn't matter if you've installed it [through npm](https://www.npmjs.com/package/muffin-cli) or built it from the source using [these steps](https://github.com/muffinjs/cli#contribute))
-2. Fork this repository and [the client](https://github.com/muffinjs/client) to your GitHub account and then [clone](https://guides.github.com/activities/forking/#clone) both to your device. While doing so, make sure they're both on the same directory level.
+1. Make sure that the CLI is installed on your local device (it doesn't matter if you've installed it [through npm](https://www.npmjs.com/package/muffin-cli) or built it from the source using [these steps](https://github.com/muffin/cli#contribute))
+2. Fork this repository and [the client](https://github.com/muffin/client) to your GitHub account and then [clone](https://guides.github.com/activities/forking/#clone) both to your device. While doing so, make sure they're both on the same directory level.
 3. Move into the directory that contains the API: `cd server`
 4. Link it to your global module directory: `npm link`
 5. Move into the "client" repository: `cd client`

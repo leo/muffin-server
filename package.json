@@ -24,7 +24,7 @@
       "syntax-async-functions"
     ]
   },
-  "repository": "muffinjs/server",
+  "repository": "muffin/server",
   "engines": {
     "node": ">= 4.4.4"
   },
@@ -44,7 +44,7 @@
   "author": "Leonard Lamprecht <mindrun@icloud.com> (http://leo.im)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/muffinjs/server/issues"
+    "url": "https://github.com/muffin/server/issues"
   },
   "homepage": "http://muffin.cafe",
   "dependencies": {
