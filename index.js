@@ -12,7 +12,7 @@ import jwt from 'koa-jwt'
 import convert from 'koa-convert'
 
 import { rope } from './utils/db'
-import { log } from './utils/utils'
+import { log } from './utils'
 import frontRouter from './routes/front'
 import Config from './utils/config'
 
