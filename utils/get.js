@@ -16,7 +16,7 @@ let models = ['page', 'user', 'file']
 
 for (let model of models) {
   // Load models and add them to the "models" object
-  models[model] = require('../models/' + model).default
+  models[model] = require('../models/' + model)
 }
 
 export async function one (type, _id) {

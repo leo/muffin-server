@@ -35,7 +35,7 @@ router.use(convert(bodyParser({
 })))
 
 // Retrieve routes from passed path
-const getRouter = (path) => require('./routes/' + path).default
+const getRouter = (path) => require('./routes/' + path)
 
 const APIroutes = [
   'content',
