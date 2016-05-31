@@ -7,7 +7,7 @@ class Config {
     this.envFile = process.cwd() + '/.env'
 
     this.config = {
-      port: 4000,
+      port: 3000,
       db: {
         host: 'localhost',
         user: 'admin',
