@@ -11,6 +11,8 @@ mongoose.connect('mongodb://' + dbHost + '/' + dbName, {
   pass: process.env.DB_PASSWORD
 })
 
+mongoose.Promise = require('es6-promise').Promise;
+
 const connection = mongoose.connection
 
 connection.on('error', function (info) {
